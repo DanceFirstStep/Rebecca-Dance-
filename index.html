@@ -1331,7 +1331,7 @@
             color: var(--primary-blue);
             margin-bottom: 10px;
             padding-bottom: 4px;
-            font-size: 1.3rem;
+            font-size: 1.6rem; /* Increased for better readability */
             letter-spacing: 0.3px;
             border-bottom: 2px solid rgba(44, 90, 160, 0.1);
             display: inline-block;
@@ -1344,7 +1344,7 @@
             justify-content: space-between;
             margin-bottom: 6px;
             line-height: 1.5;
-            font-size: 1rem;
+            font-size: 1.1rem; /* Slightly increased */
             background: rgba(44, 90, 160, 0.01);
             padding: 6px 12px;
             border-radius: 8px;
@@ -1358,7 +1358,7 @@
             font-weight: 600;
             min-width: 95px;
             color: var(--text-dark);
-            font-size: 0.95rem;
+            font-size: 1.05rem; /* Increased */
         }
 
         .class-name {
@@ -1366,7 +1366,7 @@
             padding-left: 15px;
             color: var(--text-medium);
             font-weight: 400;
-            font-size: 0.95rem;
+            font-size: 1.05rem; /* Increased */
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -1401,7 +1401,7 @@
             padding: 2px 8px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Increased */
         }
         .salsa-text {
             color: var(--salsa);
@@ -1484,16 +1484,30 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
+        /* Month promo styling */
+        .month-promo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d43f3f; /* Red */
+            margin-right: 10px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 700px) {
             .link-card {
                 flex-direction: column;
                 align-items: flex-start;
             }
             .schedule-day-header {
-                font-size: 1.2rem;
+                font-size: 1.4rem; /* Adjusted for mobile */
             }
             .class-time, .class-name {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+            .month-promo {
+                font-size: 1.6rem;
             }
         }
         
@@ -1912,6 +1926,123 @@
         }
         .reviews-action-btn.leave-review:hover {
             background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+        }
+        
+        /* Private Lesson Section Styles */
+        .private-lesson-toggle-container {
+            text-align: center;
+            margin: 30px 0 10px;
+        }
+        .private-lesson-toggle-btn {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            border-radius: 28px;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.5px;
+            min-height: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .private-lesson-toggle-btn i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .private-lesson-toggle-btn.active i {
+            transform: rotate(180deg);
+        }
+        .private-lesson-toggle-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+        }
+        .private-lesson-section {
+            background: #f8fafc;
+            border-radius: 18px;
+            padding: 32px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #dde3ed;
+            position: relative;
+            overflow: hidden;
+            max-height: 800px;
+            opacity: 1;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.4s ease, 
+                        padding 0.4s ease, 
+                        margin 0.4s ease, 
+                        border 0.3s ease;
+        }
+        .private-lesson-section.hidden {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border: none;
+            visibility: hidden;
+        }
+        .private-lesson-intro {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        .private-lesson-days {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .private-lesson-day {
+            background: white;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            border-radius: 40px;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+        }
+        .private-lesson-day:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(44,90,160,0.15);
+        }
+        .private-lesson-actions {
+            text-align: center;
+        }
+        .private-lesson-close-btn {
+            background: #e2e8f0;
+            color: var(--dark-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 28px;
+            padding: 12px 36px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 52px;
+        }
+        .private-lesson-close-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(44,90,160,0.1);
         }
         
         .video-toggle-container {
@@ -2511,11 +2642,11 @@
             }
             
             .schedule-day-header {
-                font-size: 1.2rem;
+                font-size: 1.4rem; /* Adjusted for mobile */
             }
             
             .class-time, .class-name {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
             
             .tiktok-video-feed {
@@ -2760,11 +2891,11 @@
             }
             
             .schedule-day-header {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             
             .class-time, .class-name {
-                font-size: 0.85rem;
+                font-size: 0.95rem;
             }
             
             .cta-header {
@@ -2823,6 +2954,18 @@
             .review-text {
                 font-size: 0.95rem;
                 padding: 0 20px;
+            }
+            
+            .private-lesson-section {
+                padding: 24px 16px;
+            }
+            .private-lesson-section.hidden {
+                padding: 0;
+            }
+            .private-lesson-day {
+                padding: 10px 20px;
+                font-size: 1rem;
+                min-width: 120px;
             }
             
             .top-nav-buttons {
@@ -3057,7 +3200,6 @@
                    rel="noopener">
                     <span>117 Old City Philly – Noche de bachata and cumbia Thursday</span>
                 </a>
-                <!-- Updated Buena Vista pill with new event link -->
                 <a href="https://www.facebook.com/share/1AWmNno2FJ/" 
                    class="welcome-cta-pill pill-saturday" 
                    target="_blank" 
@@ -3164,6 +3306,8 @@
                                     </a>
                                 </div>
                             </div>
+                            <!-- Month promo added next to Facebook icon -->
+                            <span class="month-promo" id="stardust-month-promo">March</span>
                             <div class="location-icons">
                                 <a href="https://www.facebook.com/share/16jfEPvQbw/?mibextid=wwXIfr" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Stardust Ballroom on Facebook" aria-label="Stardust Ballroom Facebook Page">
                                     <i class="fab fa-facebook-f"></i>
@@ -3307,7 +3451,6 @@
                     </div>
                 </div>
 
-                <!-- Updated Buena Vista card with new event link -->
                 <div class="link-card buenavista" 
                      data-studio="Buena Vista Restaurant" 
                      id="buenavista-card">
@@ -3322,7 +3465,6 @@
                                 </div>
                             </div>
                             <div class="location-icons">
-                                <!-- Updated Facebook icon link -->
                                 <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Buena Vista Facebook Event" aria-label="Facebook Event">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
@@ -3357,11 +3499,29 @@
                             <i class="fas fa-dj"></i> Special DJ every 2nd and 4th Saturday — Salsa · Bachata · Merengue
                         </div>
 
-                        <!-- Updated CTA link -->
                         <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+
+            <!-- NEW: Private Lesson Booking Section (collapsible) -->
+            <div class="private-lesson-toggle-container">
+                <button class="private-lesson-toggle-btn" id="private-lesson-toggle"><i class="fas fa-chevron-down"></i> Book a Private Lesson</button>
+            </div>
+            
+            <div class="private-lesson-section section-animate hidden" id="private-lesson-section">
+                <h2 class="section-title" id="private-lesson-title">Private Lessons</h2>
+                <p class="private-lesson-intro" id="private-lesson-intro">Available days: Sunday, Thursday, Friday, Saturday. Click a day to register via our form.</p>
+                <div class="private-lesson-days">
+                    <button class="private-lesson-day" data-day="Sunday">Sunday</button>
+                    <button class="private-lesson-day" data-day="Thursday">Thursday</button>
+                    <button class="private-lesson-day" data-day="Friday">Friday</button>
+                    <button class="private-lesson-day" data-day="Saturday">Saturday</button>
+                </div>
+                <div class="private-lesson-actions">
+                    <button class="private-lesson-close-btn" id="private-lesson-close">Close</button>
                 </div>
             </div>
             
@@ -3648,7 +3808,7 @@
     </div>
 
     <script>
-        // (script unchanged - all existing functionality preserved)
+        // (existing script unchanged, with additions for private lesson toggle and translations)
         document.addEventListener('DOMContentLoaded', function() {
             const logo = document.querySelector('.logo');
             let clickCount = 0;
@@ -3942,6 +4102,41 @@
                     dateText.textContent = now.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', options);
                 }
                 
+                // New function to update month promo on Stardust card
+                function updateMonthPromo() {
+                    const now = new Date();
+                    const currentYear = now.getFullYear();
+                    const currentMonth = now.getMonth(); // 0-11
+                    const currentDate = now.getDate();
+                    
+                    // Calculate last Sunday of current month
+                    const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                    let lastSundayDate = lastDayOfMonth;
+                    const lastDayOfMonthWeekday = new Date(currentYear, currentMonth, lastDayOfMonth).getDay();
+                    // Sunday is 0, Monday 1, ..., Saturday 6
+                    // If last day is Sunday (0), then lastSundayDate = lastDayOfMonth
+                    // Else, subtract the number of days after last Sunday
+                    if (lastDayOfMonthWeekday !== 0) {
+                        lastSundayDate = lastDayOfMonth - lastDayOfMonthWeekday;
+                    }
+                    
+                    const isLastSunday = (currentDate === lastSundayDate);
+                    
+                    let monthToShow;
+                    if (isLastSunday) {
+                        // Show next month
+                        monthToShow = new Date(currentYear, currentMonth + 1, 1).toLocaleDateString('en-US', { month: 'long' });
+                    } else {
+                        // Show current month
+                        monthToShow = now.toLocaleDateString('en-US', { month: 'long' });
+                    }
+                    
+                    const promoElement = document.getElementById('stardust-month-promo');
+                    if (promoElement) {
+                        promoElement.textContent = monthToShow;
+                    }
+                }
+
                 const languageToggle = document.getElementById('language-toggle');
                 const languageButtons = languageToggle.querySelectorAll('.lang-btn');
                 let currentLanguage = 'en';
@@ -3973,7 +4168,12 @@
                         contactTitleText: "Professional Inquiries",
                         contactSubtitle: "Bookings and partnerships",
                         copyright: "© 2025 Rebecca & Daniel | Professional Dance Instruction",
-                        quote: "dancing is the hidden language of the soul"
+                        quote: "dancing is the hidden language of the soul",
+                        // New translations for private lesson section
+                        privateLessonToggle: "Book a Private Lesson",
+                        privateLessonTitle: "Private Lessons",
+                        privateLessonIntro: "Available days: Sunday, Thursday, Friday, Saturday. Click a day to register via our form.",
+                        privateLessonClose: "Close"
                     },
                     es: {
                         mainTitle: "Rebecca & Daniel",
@@ -4001,7 +4201,12 @@
                         contactTitleText: "Consultas Profesionales",
                         contactSubtitle: "Reservas y colaboraciones",
                         copyright: "© 2025 Rebecca & Daniel | Instrucción Profesional de Baile",
-                        quote: "El baile es la poesía del pie"
+                        quote: "El baile es la poesía del pie",
+                        // New translations for private lesson section
+                        privateLessonToggle: "Reservar Clase Privada",
+                        privateLessonTitle: "Clases Privadas",
+                        privateLessonIntro: "Días disponibles: domingo, jueves, viernes, sábado. Haz clic en un día para registrarte a través de nuestro formulario.",
+                        privateLessonClose: "Cerrar"
                     }
                 };
                 
@@ -4045,6 +4250,21 @@
                     document.getElementById('contact-subtitle').textContent = langData.contactSubtitle;
                     document.getElementById('copyright').textContent = langData.copyright;
                     document.getElementById('quote').textContent = langData.quote;
+                    
+                    // Update private lesson section text
+                    const toggleBtn = document.getElementById('private-lesson-toggle');
+                    if (toggleBtn) {
+                        const icon = toggleBtn.querySelector('i');
+                        toggleBtn.innerHTML = ''; // clear
+                        toggleBtn.appendChild(icon);
+                        toggleBtn.append(' ' + langData.privateLessonToggle);
+                    }
+                    const titleEl = document.getElementById('private-lesson-title');
+                    if (titleEl) titleEl.textContent = langData.privateLessonTitle;
+                    const introEl = document.getElementById('private-lesson-intro');
+                    if (introEl) introEl.textContent = langData.privateLessonIntro;
+                    const closeBtn = document.getElementById('private-lesson-close');
+                    if (closeBtn) closeBtn.textContent = langData.privateLessonClose;
                     
                     updateCurrentDate(lang);
                     
@@ -4814,6 +5034,43 @@
                     });
                 }
 
+                // NEW: Private Lesson Toggle and Day Buttons
+                function initPrivateLessonToggle() {
+                    const toggleBtn = document.getElementById('private-lesson-toggle');
+                    const section = document.getElementById('private-lesson-section');
+                    const closeBtn = document.getElementById('private-lesson-close');
+                    const dayButtons = document.querySelectorAll('.private-lesson-day');
+                    const chevron = toggleBtn.querySelector('i');
+
+                    // Toggle open/close
+                    toggleBtn.addEventListener('click', () => {
+                        const isHidden = section.classList.contains('hidden');
+                        section.classList.toggle('hidden');
+                        toggleBtn.classList.toggle('active', !isHidden);
+                        chevron.className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+                        if (!isHidden) {
+                            setTimeout(() => {
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        }
+                    });
+
+                    closeBtn.addEventListener('click', () => {
+                        section.classList.add('hidden');
+                        toggleBtn.classList.remove('active');
+                        chevron.className = 'fas fa-chevron-down';
+                    });
+
+                    // Day buttons: open registration form in new tab
+                    const registrationLink = 'https://forms.gle/tT9wLLevJEjF1iez9'; // same as used elsewhere
+                    dayButtons.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            window.open(registrationLink, '_blank');
+                            // Optional: you could add a small note, but we just open the form
+                        });
+                    });
+                }
+
                 const showVideoBtn = document.getElementById('show-video-btn');
                 const closeVideoBtn = document.getElementById('close-video-btn');
                 const videoSection = document.getElementById('video-library');
@@ -4834,17 +5091,20 @@
                     initSectionAnimations();
                     updateCTASection();
                     updateScheduleDisplay();
+                    updateMonthPromo(); // <-- update month promo
                     initReviewsCarousel();
                     initNavButtons();
                     initNavScrollBehavior();
                     initVideoLibrary();
                     initReviewsToggle();
+                    initPrivateLessonToggle(); // <-- initialize new private lesson section
                     
                     window.addEventListener('scroll', setActiveSection);
                     
                     setInterval(() => {
                         updateCTASection();
                         updateScheduleDisplay();
+                        updateMonthPromo(); // Update monthly promo on interval (e.g., if day changes)
                     }, 60000);
                 }
 
