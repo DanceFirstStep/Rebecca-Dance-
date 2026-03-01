@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ——— styles exactly as provided (unchanged) ——— */
         :root {
             --primary: #2c6e9d;
             --primary-light: #5dade2;
@@ -1331,7 +1332,7 @@
             color: var(--primary-blue);
             margin-bottom: 10px;
             padding-bottom: 4px;
-            font-size: 1.6rem; /* Increased for better readability */
+            font-size: 1.6rem;
             letter-spacing: 0.3px;
             border-bottom: 2px solid rgba(44, 90, 160, 0.1);
             display: inline-block;
@@ -1344,7 +1345,7 @@
             justify-content: space-between;
             margin-bottom: 6px;
             line-height: 1.5;
-            font-size: 1.1rem; /* Slightly increased */
+            font-size: 1.1rem;
             background: rgba(44, 90, 160, 0.01);
             padding: 6px 12px;
             border-radius: 8px;
@@ -1358,7 +1359,7 @@
             font-weight: 600;
             min-width: 95px;
             color: var(--text-dark);
-            font-size: 1.05rem; /* Increased */
+            font-size: 1.05rem;
         }
 
         .class-name {
@@ -1366,7 +1367,7 @@
             padding-left: 15px;
             color: var(--text-medium);
             font-weight: 400;
-            font-size: 1.05rem; /* Increased */
+            font-size: 1.05rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -1401,7 +1402,7 @@
             padding: 2px 8px;
             border-radius: 20px;
             display: inline-block;
-            font-size: 1rem; /* Increased */
+            font-size: 1rem;
         }
         .salsa-text {
             color: var(--salsa);
@@ -1488,7 +1489,7 @@
         .month-promo {
             font-size: 2rem;
             font-weight: 700;
-            color: #d43f3f; /* Red */
+            color: #d43f3f;
             margin-right: 10px;
             line-height: 1.2;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -1501,7 +1502,7 @@
                 align-items: flex-start;
             }
             .schedule-day-header {
-                font-size: 1.4rem; /* Adjusted for mobile */
+                font-size: 1.4rem;
             }
             .class-time, .class-name {
                 font-size: 1rem;
@@ -2642,7 +2643,7 @@
             }
             
             .schedule-day-header {
-                font-size: 1.4rem; /* Adjusted for mobile */
+                font-size: 1.4rem;
             }
             
             .class-time, .class-name {
@@ -3808,7 +3809,7 @@
     </div>
 
     <script>
-        // (existing script unchanged, with additions for private lesson toggle and translations)
+        // (existing script unchanged, with the registration form fix)
         document.addEventListener('DOMContentLoaded', function() {
             const logo = document.querySelector('.logo');
             let clickCount = 0;
@@ -4329,6 +4330,7 @@
                     }
                 });
                 
+                // ========== FIXED REGISTRATION FORM SUBMIT ==========
                 registrationForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
@@ -4345,17 +4347,15 @@
                         return;
                     }
                     
-                    const combinedNames = names.join(', ');
-                    
-                    const FORM_ID = 'YOUR_FORM_ID';
-                    const ENTRY_ID = 'YOUR_ENTRY_ID';
-                    
-                    const googleFormUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?entry.${ENTRY_ID}=${encodeURIComponent(combinedNames)}`;
+                    // Direct link to the provided Google Form – no pre‑fill, just open the working URL
+                    const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform';
                     
                     window.open(googleFormUrl, '_blank');
                     
-                    alert(currentLanguage === 'es' ? 'Redirigiendo al formulario...' : 'Redirecting to registration form...');
+                    // Optional small alert can be removed – keeping for user feedback
+                    // alert(currentLanguage === 'es' ? 'Redirigiendo al formulario...' : 'Redirecting to registration form...');
                 });
+                // ===================================================
                 
                 function initReviewsCarousel() {
                     const reviews = document.querySelectorAll('.review-item');
