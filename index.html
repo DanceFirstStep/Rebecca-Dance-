@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ——— styles exactly as provided (unchanged) ——— */
+        /* ——— all your existing styles remain unchanged ——— */
         :root {
             --primary: #2c6e9d;
             --primary-light: #5dade2;
@@ -413,9 +413,9 @@
         }
 
         .welcome-cta-pill.pill-saturday {
-            padding: 12px 18px;
-            font-size: 0.95rem;
-            min-width: 240px;
+            padding: 10px 14px;          /* reduced padding */
+            font-size: 0.9rem;
+            min-width: 200px;              /* shorter width */
             background: #fafcff;
             border-color: #d0ddee;
             box-shadow: 0 8px 20px rgba(19,41,71,0.02);
@@ -771,18 +771,88 @@
             padding: 0 16px 16px;
         }
         
+        /* --- Carousel styles for announcement section --- */
+        .announcement-carousel {
+            position: relative;
+            margin: 28px 0 36px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+
         .modern-event-card {
             background: #ffffff;
             border-radius: 20px;
             padding: 28px 24px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.02);
-            margin: 28px 0 36px;
+            margin: 0;          /* reset margin, carousel handles it */
             border: 1px solid rgba(0,0,0,0.02);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
         }
         .modern-event-card:hover {
             box-shadow: 0 20px 35px rgba(44,90,160,0.04), 0 4px 12px rgba(0,0,0,0.01);
         }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            z-index: 5;
+            color: var(--primary-blue);
+        }
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .carousel-prev {
+            left: 10px;
+        }
+        .carousel-next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .carousel-indicator.active {
+            background: var(--primary-blue);
+            transform: scale(1.2);
+        }
+        /* ----------------------------------------------- */
 
         .event-title {
             font-family: inherit;
@@ -909,7 +979,6 @@
         @media (max-width: 600px) {
             .modern-event-card {
                 padding: 22px 18px;
-                margin: 24px 0 28px;
             }
             .event-title {
                 font-size: 1.5rem;
@@ -3195,7 +3264,8 @@
             <p class="welcome-footer">No partner needed • All levels welcome.</p>
             
             <div class="welcome-pills">
-                <a href="https://www.facebook.com/share/1AfZPUzLci/?mibextid=wwXIfr" 
+                <!-- Updated Thursday event link -->
+                <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" 
                    class="welcome-cta-pill pill-thursday pill-featured" 
                    target="_blank" 
                    rel="noopener">
@@ -3245,24 +3315,63 @@
         </div>
         
         <div class="content">
-            <div class="modern-event-card section-animate">
-                <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
-                <div class="event-datetime">
-                    <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
+            <!-- Carousel announcement section (2 slides) -->
+            <div class="announcement-carousel section-animate">
+                <div class="carousel-slides" id="carousel-slides">
+                    <!-- Slide 1: Thursday (updated link) -->
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
+                            <div class="event-datetime">
+                                <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
+                            </div>
+                            <div class="event-venue">
+                                <i class="fas fa-map-marker-alt"></i> 
+                                <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
+                                    <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
+                                </a>
+                            </div>
+                            <!-- Updated Thursday event link -->
+                            <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
+                            <div class="event-secondary-actions">
+                                <!-- Updated Thursday event link -->
+                                <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
+                                <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank"><i class="fas fa-directions"></i> Directions</a>
+                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
+                            </div>
+                            <div class="event-note">No partner needed · All levels welcome · DJ every Thursday</div>
+                        </div>
+                    </div>
+                    <!-- Slide 2: Buena Vista (unchanged) -->
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
+                            <div class="event-datetime">
+                                <i class="far fa-calendar-alt"></i> 9:45pm Class · 10:30pm Social until 1am
+                            </div>
+                            <div class="event-venue">
+                                <i class="fas fa-map-marker-alt"></i> 
+                                <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link">
+                                    <i class="fas fa-location-dot"></i> Ardmore, PA
+                                </a>
+                            </div>
+                            <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
+                            <div class="event-secondary-actions">
+                                <a href="https://www.facebook.com/share/1AWmNno2FJ/" target="_blank"><i class="fab fa-facebook"></i> Event</a>
+                                <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank"><i class="fas fa-directions"></i> Directions</a>
+                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
+                            </div>
+                            <div class="event-note">No partner needed · All levels welcome · DJ every 2nd & 4th Saturday</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="event-venue">
-                    <i class="fas fa-map-marker-alt"></i> 
-                    <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
-                        <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
-                    </a>
+                <!-- Carousel navigation -->
+                <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <span class="carousel-indicator active" data-slide="0"></span>
+                    <span class="carousel-indicator" data-slide="1"></span>
                 </div>
-                <a href="https://www.facebook.com/share/14WM9WjNj1a/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
-                <div class="event-secondary-actions">
-                    <a href="https://www.facebook.com/share/14WM9WjNj1a/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
-                    <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank"><i class="fas fa-directions"></i> Directions</a>
-                    <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
-                </div>
-                <div class="event-note">No partner needed · All levels welcome · DJ every Thursday</div>
             </div>
             
             <hr class="section-separator" id="separator-1">
@@ -3446,7 +3555,8 @@
                             <i class="fas fa-dj"></i> Special DJ every Thursday
                         </div>
 
-                        <a href="https://www.facebook.com/share/14WM9WjNj1a/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
+                        <!-- Updated Thursday event link -->
+                        <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -3507,7 +3617,7 @@
                 </div>
             </div>
 
-            <!-- NEW: Private Lesson Booking Section (collapsible) -->
+            <!-- Private Lesson Booking Section (collapsible) -->
             <div class="private-lesson-toggle-container">
                 <button class="private-lesson-toggle-btn" id="private-lesson-toggle"><i class="fas fa-chevron-down"></i> Book a Private Lesson</button>
             </div>
@@ -3809,7 +3919,7 @@
     </div>
 
     <script>
-        // (existing script unchanged, with the registration form fix)
+        // (your existing script remains completely unchanged – we only add carousel logic at the end)
         document.addEventListener('DOMContentLoaded', function() {
             const logo = document.querySelector('.logo');
             let clickCount = 0;
@@ -4351,9 +4461,6 @@
                     const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform';
                     
                     window.open(googleFormUrl, '_blank');
-                    
-                    // Optional small alert can be removed – keeping for user feedback
-                    // alert(currentLanguage === 'es' ? 'Redirigiendo al formulario...' : 'Redirecting to registration form...');
                 });
                 // ===================================================
                 
@@ -5066,7 +5173,6 @@
                     dayButtons.forEach(btn => {
                         btn.addEventListener('click', () => {
                             window.open(registrationLink, '_blank');
-                            // Optional: you could add a small note, but we just open the form
                         });
                     });
                 }
@@ -5087,6 +5193,59 @@
                     });
                 }
 
+                /* --- Carousel functionality for announcements --- */
+                function initAnnouncementCarousel() {
+                    const slidesContainer = document.getElementById('carousel-slides');
+                    const slides = document.querySelectorAll('.carousel-slide');
+                    const prevBtn = document.getElementById('carousel-prev');
+                    const nextBtn = document.getElementById('carousel-next');
+                    const indicators = document.querySelectorAll('.carousel-indicator');
+                    let currentIndex = 0;
+                    const totalSlides = slides.length;
+
+                    function updateCarousel(index) {
+                        if (index < 0) index = 0;
+                        if (index >= totalSlides) index = totalSlides - 1;
+                        slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+                        indicators.forEach((ind, i) => {
+                            ind.classList.toggle('active', i === index);
+                        });
+                        currentIndex = index;
+                    }
+
+                    prevBtn.addEventListener('click', () => {
+                        updateCarousel(currentIndex - 1);
+                    });
+
+                    nextBtn.addEventListener('click', () => {
+                        updateCarousel(currentIndex + 1);
+                    });
+
+                    indicators.forEach(ind => {
+                        ind.addEventListener('click', (e) => {
+                            const slideIndex = parseInt(e.target.dataset.slide);
+                            updateCarousel(slideIndex);
+                        });
+                    });
+
+                    // Optional auto-slide
+                    let autoInterval = setInterval(() => {
+                        let next = (currentIndex + 1) % totalSlides;
+                        updateCarousel(next);
+                    }, 6000);
+
+                    // Pause on hover
+                    const carousel = document.querySelector('.announcement-carousel');
+                    carousel.addEventListener('mouseenter', () => clearInterval(autoInterval));
+                    carousel.addEventListener('mouseleave', () => {
+                        autoInterval = setInterval(() => {
+                            let next = (currentIndex + 1) % totalSlides;
+                            updateCarousel(next);
+                        }, 6000);
+                    });
+                }
+                /* ------------------------------------------------ */
+
                 function initPage() {
                     initSectionAnimations();
                     updateCTASection();
@@ -5098,6 +5257,7 @@
                     initVideoLibrary();
                     initReviewsToggle();
                     initPrivateLessonToggle(); // <-- initialize new private lesson section
+                    initAnnouncementCarousel(); // <-- initialize the new carousel
                     
                     window.addEventListener('scroll', setActiveSection);
                     
