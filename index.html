@@ -95,7 +95,7 @@
         
         .section-title {
             font-family: inherit;
-            scroll-margin-top: 80px;
+            scroll-margin-top: 90px;
         }
         
         body.no-scroll {
@@ -413,9 +413,9 @@
         }
 
         .welcome-cta-pill.pill-saturday {
-            padding: 10px 14px;          /* reduced padding */
+            padding: 10px 14px;
             font-size: 0.9rem;
-            min-width: 200px;              /* shorter width */
+            min-width: 200px;
             background: #fafcff;
             border-color: #d0ddee;
             box-shadow: 0 8px 20px rgba(19,41,71,0.02);
@@ -794,7 +794,7 @@
             border-radius: 20px;
             padding: 28px 24px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.02);
-            margin: 0;          /* reset margin, carousel handles it */
+            margin: 0;
             border: 1px solid rgba(0,0,0,0.02);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: 100%;
@@ -1373,17 +1373,18 @@
             background: #34a853;
         }
 
+        /* Simplified schedule badge – less pill-like */
         .schedule-badge {
-            background: rgba(44, 90, 160, 0.05);
+            border-radius: 4px;
+            background: transparent;
+            border: 1px solid rgba(44, 90, 160, 0.2);
             color: var(--dark-blue);
             font-size: 0.8rem;
             font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 4px 10px;
+            letter-spacing: 0.3px;
             display: inline-block;
             margin-bottom: 18px;
-            letter-spacing: 0.3px;
-            border: 1px solid rgba(44, 90, 160, 0.1);
         }
 
         .schedule-list {
@@ -1446,7 +1447,7 @@
         .class-badge {
             display: inline-block;
             padding: 3px 10px;
-            border-radius: 14px;
+            border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.3px;
@@ -1563,6 +1564,25 @@
             line-height: 1.2;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
             letter-spacing: 1px;
+        }
+
+        /* New promo line in Stardust card */
+        .program-promo {
+            background: #f0f7fa;
+            border-left: 4px solid var(--primary-blue);
+            padding: 12px 16px;
+            margin: 16px 0 8px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .program-promo i {
+            font-size: 1.4rem;
+            color: #d4af37;
         }
 
         @media (max-width: 700px) {
@@ -3403,6 +3423,7 @@
             <h3 class="section-title" id="schedule-title">Class Schedule</h3>
             
             <div class="links-grid stagger-children section-animate" id="schedule-grid">
+                <!-- STARDUST CARD – updated schedule and promo -->
                 <div class="link-card stardust next-class-highlight" 
                      data-studio="Stardust Ballroom" 
                      id="stardust-card">
@@ -3416,7 +3437,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <!-- Month promo added next to Facebook icon -->
                             <span class="month-promo" id="stardust-month-promo">March</span>
                             <div class="location-icons">
                                 <a href="https://www.facebook.com/share/16jfEPvQbw/?mibextid=wwXIfr" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Stardust Ballroom on Facebook" aria-label="Stardust Ballroom Facebook Page">
@@ -3428,18 +3448,36 @@
                         <div class="schedule-badge">🔥 New 4‑Week Cycle · Thu & Sun</div>
                         
                         <div class="schedule-list">
+                            <!-- Thursday: only two classes -->
                             <div class="schedule-day-group" data-day="Thursday">
                                 <div class="schedule-day-header">Thursday</div>
                                 <div class="schedule-class">
                                     <span class="class-time">7:00pm</span>
                                     <span class="class-name">
-                                        <span class="salsa-text">Salsa Intro</span>
+                                        <span class="salsa-text">Salsa</span> & <span class="bachata-text">Bachata</span> Intro
                                     </span>
                                 </div>
                                 <div class="schedule-class">
                                     <span class="class-time">8:00pm</span>
                                     <span class="class-name">
                                         <span class="bachata-text">Bachata Sensual</span>
+                                    </span>
+                                </div>
+                                <!-- no elite on Thursday -->
+                            </div>
+                            <!-- Sunday: three classes (added elite at 9pm) -->
+                            <div class="schedule-day-group" data-day="Sunday">
+                                <div class="schedule-day-header">Sunday</div>
+                                <div class="schedule-class">
+                                    <span class="class-time">7:00pm</span>
+                                    <span class="class-name">
+                                        <span class="salsa-text">Salsa</span> & <span class="bachata-text">Bachata</span> Intro
+                                    </span>
+                                </div>
+                                <div class="schedule-class">
+                                    <span class="class-time">8:00pm</span>
+                                    <span class="class-name">
+                                        <span class="bachata-text">Advance Beginner Bachata</span>
                                     </span>
                                 </div>
                                 <div class="schedule-class">
@@ -3449,21 +3487,12 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="schedule-day-group" data-day="Sunday">
-                                <div class="schedule-day-header">Sunday</div>
-                                <div class="schedule-class">
-                                    <span class="class-time">7:00pm</span>
-                                    <span class="class-name">
-                                        <span class="salsa-text">Salsa</span> & <span class="bachata-text">Bachata Intro</span>
-                                    </span>
-                                </div>
-                                <div class="schedule-class">
-                                    <span class="class-time">8:00pm</span>
-                                    <span class="class-name">
-                                        <span class="bachata-text">Advance Beginner Bachata</span>
-                                    </span>
-                                </div>
-                            </div>
+                        </div>
+
+                        <!-- New promo line for 4‑week program -->
+                        <div class="program-promo">
+                            <i class="fas fa-star"></i>
+                            <span><strong>4‑Week Program:</strong> No partner needed, walk‑ins welcome!</span>
                         </div>
                         
                         <a href="https://forms.gle/tT9wLLevJEjF1iez9" class="card-cta" target="_blank">
@@ -4900,28 +4929,30 @@
                 }
                 
                 const classSchedule = [
+                    // Updated Thursday: no elite, endTime 2100
                     { 
                         day: "Thursday", 
                         dayIndex: 4,
                         studio: "Stardust Ballroom",
                         classes: [
-                            "7:00pm Intro to Salsa",
-                            "8:00pm Bachata Sensual",
-                            "9:00pm Bachata Elite"
+                            "7:00pm Intro to Salsa & Bachata",
+                            "8:00pm Bachata Sensual"
                         ],
                         locationId: "stardust-card",
-                        endTime: 2200
+                        endTime: 2100
                     },
+                    // Updated Sunday: added elite, endTime 2200
                     { 
                         day: "Sunday", 
                         dayIndex: 0,
                         studio: "Stardust Ballroom",
                         classes: [
                             "7:00pm Intro to Salsa & Bachata",
-                            "8:00pm Advance Beginner Bachata"
+                            "8:00pm Advance Beginner Bachata",
+                            "9:00pm Bachata Elite"
                         ],
                         locationId: "stardust-card",
-                        endTime: 2100
+                        endTime: 2200
                     },
                     { 
                         day: "Saturday", 
