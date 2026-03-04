@@ -542,7 +542,7 @@
         
         .top-nav-buttons {
             position: fixed;
-            top: 20px;
+            top: 12px;                    /* moved higher from 20px to 12px */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -3103,7 +3103,7 @@
             .top-nav-buttons {
                 padding: 8px 12px;
                 gap: 6px;
-                top: 12px;
+                top: 12px;            /* keep same higher position on mobile */
             }
             
             .nav-btn {
@@ -3264,12 +3264,12 @@
         /* ----- BOTTOM SHARE BUTTON STYLES (right‑aligned) ----- */
         .bottom-share-container {
             position: fixed;
-            bottom: 30px;
-            right: 20px;          /* moved to the right */
-            left: auto;            /* override left:0 */
+            bottom: 20px;             /* moved lower from 30px to 20px */
+            right: 20px;
+            left: auto;
             display: flex;
             flex-direction: column;
-            align-items: flex-end; /* align children to the right */
+            align-items: flex-end;
             pointer-events: none;
             z-index: 1000;
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s;
@@ -3349,6 +3349,7 @@
     </style>
 </head>
 <body class="welcome-active no-scroll">
+    <!-- (the rest of the HTML body remains completely unchanged) -->
     <div id="welcome-array">
         <div class="welcome-content">
             <h1 class="welcome-title">Rebecca & Daniel</h1>
@@ -3412,14 +3413,15 @@
             <p class="welcome-footer">No partner needed • All levels welcome.</p>
             
             <div class="welcome-pills">
-                <!-- Updated Thursday event link (both pills now use the same new link as requested) -->
+                <!-- Old City Thursday link (unchanged) -->
                 <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" 
                    class="welcome-cta-pill pill-thursday pill-featured" 
                    target="_blank" 
                    rel="noopener">
                     <span>117 Old City Philly – Noche de bachata and cumbia Thursday</span>
                 </a>
-                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" 
+                <!-- Buena Vista Saturday link (UPDATED) -->
+                <a href="https://facebook.com/events/s/salsa-on-the-main-line-latin-d/926893510091883/" 
                    class="welcome-cta-pill pill-saturday" 
                    target="_blank" 
                    rel="noopener">
@@ -3463,10 +3465,10 @@
         </div>
         
         <div class="content">
-            <!-- Carousel announcement section (2 slides) – both event links updated -->
+            <!-- Carousel announcement section (2 slides) – Buena Vista slide updated -->
             <div class="announcement-carousel section-animate">
                 <div class="carousel-slides" id="carousel-slides">
-                    <!-- Slide 1: Thursday (updated link) -->
+                    <!-- Slide 1: Thursday (unchanged) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
@@ -3487,7 +3489,7 @@
                             <div class="event-note">No partner needed · All levels welcome · DJ every Thursday</div>
                         </div>
                     </div>
-                    <!-- Slide 2: Buena Vista (updated link) -->
+                    <!-- Slide 2: Buena Vista (UPDATED) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
@@ -3499,9 +3501,9 @@
                                     <i class="fas fa-location-dot"></i> Ardmore, PA
                                 </a>
                             </div>
-                            <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
+                            <a href="https://facebook.com/events/s/salsa-on-the-main-line-latin-d/926893510091883/" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
                             <div class="event-secondary-actions">
-                                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
+                                <a href="https://facebook.com/events/s/salsa-on-the-main-line-latin-d/926893510091883/" target="_blank"><i class="fab fa-facebook"></i> Event</a>
                                 <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank"><i class="fas fa-directions"></i> Directions</a>
                                 <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
                             </div>
@@ -3704,7 +3706,7 @@
                             <i class="fas fa-dj"></i> Special DJ every Thursday
                         </div>
 
-                        <!-- Updated Thursday event link -->
+                        <!-- Old City event link (unchanged) -->
                         <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
@@ -3725,8 +3727,8 @@
                                 </div>
                             </div>
                             <div class="location-icons">
-                                <!-- Updated Buena Vista event link (both location icon and card‑cta use the new link) -->
-                                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Buena Vista Facebook Event" aria-label="Facebook Event">
+                                <!-- Buena Vista Facebook event link (UPDATED) -->
+                                <a href="https://facebook.com/events/s/salsa-on-the-main-line-latin-d/926893510091883/" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Buena Vista Facebook Event" aria-label="Facebook Event">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" class="location-icon maps-icon" target="_blank" rel="noopener" title="Open in Google Maps" aria-label="Google Maps">
@@ -3760,7 +3762,8 @@
                             <i class="fas fa-dj"></i> Special DJ every 2nd and 4th Saturday — Salsa · Bachata · Merengue
                         </div>
 
-                        <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
+                        <!-- Buena Vista event link (UPDATED) -->
+                        <a href="https://facebook.com/events/s/salsa-on-the-main-line-latin-d/926893510091883/" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
