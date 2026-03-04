@@ -3316,45 +3316,10 @@
         .share-main-btn:hover i {
             transform: scale(1.1);
         }
+        /* Hide bubbles for single-click share */
         .share-bubbles {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            pointer-events: auto;
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
-            transform-origin: bottom right; /* expand from right */
+            display: none;
         }
-        .share-bubbles.active {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .share-bubble {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.8);
-            pointer-events: auto;
-        }
-        .share-bubble:hover {
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 15px 30px rgba(44,90,160,0.2);
-        }
-        .share-bubble.messenger { background: #0084ff; }
-        .share-bubble.instagram { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); }
-        .share-bubble.whatsapp { background: #25D366; }
-        .share-bubble.email { background: #7f8c8d; }
-        .share-bubble.sms { background: #3498db; }
 
         /* mobile adjustments */
         @media (max-width: 550px) {
@@ -3364,11 +3329,6 @@
             .share-main-btn {
                 padding: 12px 24px;
                 min-width: 180px;
-            }
-            .share-bubble {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
             }
         }
 
@@ -3452,14 +3412,14 @@
             <p class="welcome-footer">No partner needed • All levels welcome.</p>
             
             <div class="welcome-pills">
-                <!-- Updated Thursday event link -->
-                <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" 
+                <!-- Updated Thursday event link (both pills now use the same new link as requested) -->
+                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" 
                    class="welcome-cta-pill pill-thursday pill-featured" 
                    target="_blank" 
                    rel="noopener">
                     <span>117 Old City Philly – Noche de bachata and cumbia Thursday</span>
                 </a>
-                <a href="https://www.facebook.com/share/1AWmNno2FJ/" 
+                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" 
                    class="welcome-cta-pill pill-saturday" 
                    target="_blank" 
                    rel="noopener">
@@ -3503,10 +3463,10 @@
         </div>
         
         <div class="content">
-            <!-- Carousel announcement section (2 slides) – refined: single icon per address, buttons moved lower, card more readable -->
+            <!-- Carousel announcement section (2 slides) – both event links updated -->
             <div class="announcement-carousel section-animate">
                 <div class="carousel-slides" id="carousel-slides">
-                    <!-- Slide 1: Thursday (updated link, double icon removed) -->
+                    <!-- Slide 1: Thursday (updated link) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
@@ -3514,21 +3474,20 @@
                                 <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
                             </div>
                             <div class="event-venue">
-                                <!-- Only one icon now: inside the address-link -->
                                 <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
                                     <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
                                 </a>
                             </div>
-                            <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
+                            <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
                             <div class="event-secondary-actions">
-                                <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
+                                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
                                 <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank"><i class="fas fa-directions"></i> Directions</a>
                                 <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
                             </div>
                             <div class="event-note">No partner needed · All levels welcome · DJ every Thursday</div>
                         </div>
                     </div>
-                    <!-- Slide 2: Buena Vista (double icon removed) -->
+                    <!-- Slide 2: Buena Vista (updated link) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
@@ -3540,9 +3499,9 @@
                                     <i class="fas fa-location-dot"></i> Ardmore, PA
                                 </a>
                             </div>
-                            <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
+                            <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
                             <div class="event-secondary-actions">
-                                <a href="https://www.facebook.com/share/1AWmNno2FJ/" target="_blank"><i class="fab fa-facebook"></i> Event</a>
+                                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
                                 <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank"><i class="fas fa-directions"></i> Directions</a>
                                 <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
                             </div>
@@ -3550,7 +3509,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Carousel navigation – buttons repositioned lower (see CSS) -->
                 <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-indicators" id="carousel-indicators">
@@ -3588,7 +3546,7 @@
             <h3 class="section-title" id="schedule-title">Class Schedule</h3>
             
             <div class="links-grid stagger-children section-animate" id="schedule-grid">
-                <!-- STARDUST CARD – updated schedule (4‑week banner removed, class badges added, distinct colors) -->
+                <!-- STARDUST CARD – unchanged aside from links not affected -->
                 <div class="link-card stardust next-class-highlight" 
                      data-studio="Stardust Ballroom" 
                      id="stardust-card">
@@ -3610,10 +3568,7 @@
                             </div>
                         </div>
                         
-                        <!-- 4‑week banner removed – instead we use a subtle badge inside class name and a promo line below -->
-                        
                         <div class="schedule-list">
-                            <!-- Thursday: only two classes -->
                             <div class="schedule-day-group" data-day="Thursday">
                                 <div class="schedule-day-header">Thursday</div>
                                 <div class="schedule-class">
@@ -3629,9 +3584,7 @@
                                         <span class="bachata-sensual">Bachata Sensual</span>
                                     </span>
                                 </div>
-                                <!-- no elite on Thursday -->
                             </div>
-                            <!-- Sunday: three classes (added elite at 9pm) -->
                             <div class="schedule-day-group" data-day="Sunday">
                                 <div class="schedule-day-header">Sunday</div>
                                 <div class="schedule-class">
@@ -3656,7 +3609,6 @@
                             </div>
                         </div>
 
-                        <!-- New promo line for 4‑week program (clean integration) -->
                         <div class="program-promo">
                             <i class="fas fa-star"></i>
                             <span><strong>4‑Week Program:</strong> No partner needed, walk‑ins welcome!</span>
@@ -3717,6 +3669,7 @@
                                 </div>
                             </div>
                             <div class="location-icons">
+                                <!-- studio Facebook page (unchanged) -->
                                 <a href="https://www.facebook.com/share/14XAaCAStJV/?mibextid=wwXIfr" class="location-icon facebook-icon" target="_blank" rel="noopener" title="117 Old City Philly on Facebook" aria-label="Facebook">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
@@ -3752,7 +3705,7 @@
                         </div>
 
                         <!-- Updated Thursday event link -->
-                        <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
+                        <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -3772,7 +3725,8 @@
                                 </div>
                             </div>
                             <div class="location-icons">
-                                <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Buena Vista Facebook Event" aria-label="Facebook Event">
+                                <!-- Updated Buena Vista event link (both location icon and card‑cta use the new link) -->
+                                <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="location-icon facebook-icon" target="_blank" rel="noopener" title="Buena Vista Facebook Event" aria-label="Facebook Event">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" class="location-icon maps-icon" target="_blank" rel="noopener" title="Open in Google Maps" aria-label="Google Maps">
@@ -3806,7 +3760,7 @@
                             <i class="fas fa-dj"></i> Special DJ every 2nd and 4th Saturday — Salsa · Bachata · Merengue
                         </div>
 
-                        <a href="https://www.facebook.com/share/1AWmNno2FJ/" class="card-cta" target="_blank" rel="noopener">
+                        <a href="https://www.facebook.com/share/1C4kbSTivs/?mibextid=wwXIfr" class="card-cta" target="_blank" rel="noopener">
                             Event Info <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -4114,7 +4068,7 @@
         </div>
     </div>
 
-    <!-- BOTTOM SHARE BUTTON (right‑aligned) -->
+    <!-- BOTTOM SHARE BUTTON (right‑aligned) – single click share -->
     <div class="bottom-share-container" id="bottomShareContainer">
         <div class="share-bubbles" id="shareBubbles">
             <a href="#" class="share-bubble messenger" data-share="messenger"><i class="fab fa-facebook-messenger"></i></a>
@@ -4129,7 +4083,7 @@
     </div>
 
     <script>
-        // (your existing script remains completely unchanged – only the HTML/CSS modifications above reflect the requested changes)
+        // (your existing script remains completely unchanged – only the share button behavior has been modified for single‑click)
         document.addEventListener('DOMContentLoaded', function() {
             const logo = document.querySelector('.logo');
             let clickCount = 0;
@@ -5458,22 +5412,31 @@
                 }
                 /* ------------------------------------------------ */
 
-                // ---------- SHARE BUTTON FUNCTIONALITY (unchanged) ----------
+                // ---------- SHARE BUTTON FUNCTIONALITY (single‑click) ----------
                 function initShareButton() {
-                    const shareContainer = document.getElementById('bottomShareContainer');
                     const shareBtn = document.getElementById('shareMainBtn');
-                    const bubbles = document.getElementById('shareBubbles');
+                    const shareContainer = document.getElementById('bottomShareContainer');
                     
-                    // Toggle bubbles on main button click
+                    // Single‑click share: use Web Share API if available, else copy link
                     shareBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
                         e.stopPropagation();
-                        bubbles.classList.toggle('active');
-                    });
-
-                    // Close bubbles when clicking outside
-                    document.addEventListener('click', (e) => {
-                        if (!shareContainer.contains(e.target)) {
-                            bubbles.classList.remove('active');
+                        
+                        const shareData = {
+                            title: 'Rebecca & Daniel Dance Classes',
+                            text: 'Check out Rebecca & Daniel\'s dance classes!',
+                            url: window.location.href,
+                        };
+                        
+                        if (navigator.share) {
+                            navigator.share(shareData).catch(console.error);
+                        } else {
+                            // Fallback: copy link to clipboard
+                            navigator.clipboard.writeText(window.location.href).then(() => {
+                                alert('Link copied to clipboard!');
+                            }).catch(() => {
+                                alert('Unable to copy link. Please copy manually: ' + window.location.href);
+                            });
                         }
                     });
 
@@ -5491,42 +5454,6 @@
                         }
                         lastScrollTop = scrollTop;
                     });
-
-                    // Share actions
-                    const pageUrl = encodeURIComponent(window.location.href);
-                    const shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
-                    const fullMessage = shareText + pageUrl;
-
-                    const shareLinks = {
-                        messenger: `https://www.facebook.com/dialog/send?link=${pageUrl}&app_id=87741124305&redirect_uri=${pageUrl}`,
-                        instagram: '#', // will handle via clipboard
-                        whatsapp: `https://api.whatsapp.com/send?text=${fullMessage}`,
-                        email: `mailto:?subject=Check%20out%20Rebecca%20%26%20Daniel's%20dance%20classes&body=${fullMessage}`,
-                        sms: `sms:?body=${fullMessage}`
-                    };
-
-                    document.querySelectorAll('.share-bubble').forEach(bubble => {
-                        bubble.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const platform = bubble.dataset.share;
-                            
-                            if (platform === 'instagram') {
-                                // Copy link to clipboard
-                                navigator.clipboard.writeText(window.location.href).then(() => {
-                                    alert('Link copied to clipboard! Share it on Instagram.');
-                                }).catch(() => {
-                                    alert('Could not copy link. Please copy manually: ' + window.location.href);
-                                });
-                                bubbles.classList.remove('active');
-                                return;
-                            }
-                            
-                            if (shareLinks[platform]) {
-                                window.open(shareLinks[platform], '_blank');
-                            }
-                            bubbles.classList.remove('active');
-                        });
-                    });
                 }
                 // ------------------------------------------------
 
@@ -5542,7 +5469,7 @@
                     initReviewsToggle();
                     initPrivateLessonToggle(); // <-- initialize new private lesson section
                     initAnnouncementCarousel(); // <-- initialize the new carousel
-                    initShareButton(); // <-- initialize share button
+                    initShareButton(); // <-- initialize share button (single‑click)
                     
                     window.addEventListener('scroll', setActiveSection);
                     
