@@ -771,7 +771,7 @@
             padding: 0 16px 16px;
         }
         
-        /* --- Carousel styles for announcement section --- */
+        /* --- Carousel styles for announcement section (refined) --- */
         .announcement-carousel {
             position: relative;
             margin: 28px 0 36px;
@@ -792,12 +792,14 @@
         .modern-event-card {
             background: #ffffff;
             border-radius: 20px;
-            padding: 28px 24px;
+            padding: 28px 24px 70px; /* extra bottom padding for buttons */
             box-shadow: 0 12px 30px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.02);
             margin: 0;
             border: 1px solid rgba(0,0,0,0.02);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: 100%;
+            min-height: 380px; /* ensures consistent space for buttons */
+            position: relative;
         }
         .modern-event-card:hover {
             box-shadow: 0 20px 35px rgba(44,90,160,0.04), 0 4px 12px rgba(0,0,0,0.01);
@@ -805,39 +807,44 @@
 
         .carousel-btn {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: auto;
+            bottom: 25px; /* moved lower, away from text */
+            transform: none;
             background: rgba(255,255,255,0.9);
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
             transition: all 0.2s;
             z-index: 5;
             color: var(--primary-blue);
+            backdrop-filter: blur(4px);
         }
         .carousel-btn:hover {
             background: white;
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         .carousel-prev {
-            left: 10px;
+            left: 15px;
         }
         .carousel-next {
-            right: 10px;
+            right: 15px;
         }
 
         .carousel-indicators {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 5;
         }
         .carousel-indicator {
             width: 10px;
@@ -881,35 +888,33 @@
             font-size: 1.2rem;
         }
 
+        /* refined address link: more prominent, single icon */
         .address-link {
             color: var(--primary-blue);
-            font-weight: 500;
+            font-weight: 600; /* slightly bolder */
             text-decoration: none;
             border-bottom: 1.5px solid rgba(44, 90, 160, 0.2);
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(44, 90, 160, 0.02);
-            padding: 2px 8px 2px 4px;
-            border-radius: 30px;
+            background: rgba(44, 90, 160, 0.04);
+            padding: 6px 14px 6px 10px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.01);
         }
         .address-link i {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--primary-blue);
-            background: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.9);
             border-radius: 50%;
             padding: 4px;
         }
         .address-link:hover {
-            background: rgba(44, 90, 160, 0.06);
+            background: rgba(44, 90, 160, 0.08);
             border-bottom-color: var(--primary-blue);
             transform: translateY(-1px);
-        }
-
-        .event-venue .address-link {
-            font-size: 1.1rem;
-            padding: 4px 12px 4px 8px;
         }
 
         .event-cta-primary {
@@ -978,7 +983,8 @@
 
         @media (max-width: 600px) {
             .modern-event-card {
-                padding: 22px 18px;
+                padding: 22px 18px 70px;
+                min-height: 420px; /* more space on mobile */
             }
             .event-title {
                 font-size: 1.5rem;
@@ -998,6 +1004,11 @@
             }
             .event-secondary-actions {
                 gap: 20px;
+            }
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
             }
         }
         
@@ -3250,16 +3261,16 @@
             opacity: 0.5;
         }
 
-        /* ----- NEW BOTTOM SHARE BUTTON STYLES ----- */
+        /* ----- BOTTOM SHARE BUTTON STYLES (right‑aligned) ----- */
         .bottom-share-container {
             position: fixed;
             bottom: 30px;
-            left: 0;
-            right: 0;
+            right: 20px;          /* moved to the right */
+            left: auto;            /* override left:0 */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            pointer-events: none; /* allow clicks to pass through container, but children can have pointer-events auto */
+            align-items: flex-end; /* align children to the right */
+            pointer-events: none;
             z-index: 1000;
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s;
             transform: translateY(0);
@@ -3313,7 +3324,7 @@
             transform: scale(0);
             opacity: 0;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
-            transform-origin: bottom center;
+            transform-origin: bottom right; /* expand from right */
         }
         .share-bubbles.active {
             transform: scale(1);
@@ -3359,6 +3370,21 @@
                 height: 50px;
                 font-size: 1.5rem;
             }
+        }
+
+        /* --- increased contrast for better readability --- */
+        :root {
+            --text-medium: #0f172a;   /* darker than #1e293b */
+            --text-light: #1e293b;     /* darker than #334155 */
+            --dark: #030712;            /* slightly darker */
+            --border: #e0e7ef;          /* slightly darker than #eef2f6 */
+        }
+        /* keep body background light */
+        body {
+            color: var(--text-medium);
+        }
+        .link-title, .instructor-name, .event-title, .section-title {
+            color: #0b1f33;             /* slightly darker */
         }
     </style>
 </head>
@@ -3477,10 +3503,10 @@
         </div>
         
         <div class="content">
-            <!-- Carousel announcement section (2 slides) -->
+            <!-- Carousel announcement section (2 slides) – refined: single icon per address, buttons moved lower, card more readable -->
             <div class="announcement-carousel section-animate">
                 <div class="carousel-slides" id="carousel-slides">
-                    <!-- Slide 1: Thursday (updated link) -->
+                    <!-- Slide 1: Thursday (updated link, double icon removed) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
@@ -3488,15 +3514,13 @@
                                 <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
                             </div>
                             <div class="event-venue">
-                                <i class="fas fa-map-marker-alt"></i> 
+                                <!-- Only one icon now: inside the address-link -->
                                 <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
                                     <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
                                 </a>
                             </div>
-                            <!-- Updated Thursday event link -->
                             <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN THE EVENT</a>
                             <div class="event-secondary-actions">
-                                <!-- Updated Thursday event link -->
                                 <a href="https://www.facebook.com/share/1HM55YZTQo/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i> Event</a>
                                 <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank"><i class="fas fa-directions"></i> Directions</a>
                                 <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Calendar</a>
@@ -3504,7 +3528,7 @@
                             <div class="event-note">No partner needed · All levels welcome · DJ every Thursday</div>
                         </div>
                     </div>
-                    <!-- Slide 2: Buena Vista (unchanged) -->
+                    <!-- Slide 2: Buena Vista (double icon removed) -->
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
@@ -3512,7 +3536,6 @@
                                 <i class="far fa-calendar-alt"></i> 9:45pm Class · 10:30pm Social until 1am
                             </div>
                             <div class="event-venue">
-                                <i class="fas fa-map-marker-alt"></i> 
                                 <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link">
                                     <i class="fas fa-location-dot"></i> Ardmore, PA
                                 </a>
@@ -3527,7 +3550,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Carousel navigation -->
+                <!-- Carousel navigation – buttons repositioned lower (see CSS) -->
                 <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-indicators" id="carousel-indicators">
@@ -4091,7 +4114,7 @@
         </div>
     </div>
 
-    <!-- NEW BOTTOM SHARE BUTTON -->
+    <!-- BOTTOM SHARE BUTTON (right‑aligned) -->
     <div class="bottom-share-container" id="bottomShareContainer">
         <div class="share-bubbles" id="shareBubbles">
             <a href="#" class="share-bubble messenger" data-share="messenger"><i class="fab fa-facebook-messenger"></i></a>
@@ -5435,7 +5458,7 @@
                 }
                 /* ------------------------------------------------ */
 
-                // ---------- NEW SHARE BUTTON FUNCTIONALITY ----------
+                // ---------- SHARE BUTTON FUNCTIONALITY (unchanged) ----------
                 function initShareButton() {
                     const shareContainer = document.getElementById('bottomShareContainer');
                     const shareBtn = document.getElementById('shareMainBtn');
