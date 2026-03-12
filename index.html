@@ -3433,6 +3433,7 @@
             display: flex;
             gap: 15px;
             justify-content: flex-end;
+            flex-wrap: wrap; /* allow wrap on very small screens */
         }
         .share-bubble {
             width: 60px;
@@ -3459,6 +3460,20 @@
         .share-bubble.whatsapp { background: #25D366; }
         .share-bubble.email { background: #7f8c8d; }
         .share-bubble.sms { background: #3498db; }
+        /* new copy link bubble */
+        .share-bubble.copy-link { background: #6c757d; }
+
+        /* adjust spacing on smaller screens */
+        @media (max-width: 550px) {
+            .share-row {
+                gap: 8px;
+            }
+            .share-bubble {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+            }
+        }
 
         .share-actions-row {
             display: flex;
@@ -4240,6 +4255,8 @@
                 <a href="#" class="share-bubble whatsapp" data-share="whatsapp"><i class="fab fa-whatsapp"></i></a>
                 <a href="#" class="share-bubble email" data-share="email"><i class="fas fa-envelope"></i></a>
                 <a href="#" class="share-bubble sms" data-share="sms"><i class="fas fa-comment"></i></a>
+                <!-- New copy link bubble -->
+                <a href="#" class="share-bubble copy-link" data-share="copy"><i class="fas fa-link"></i></a>
             </div>
         </div>
         <div class="share-actions-row">
@@ -4381,7 +4398,7 @@
             function initMainPage() {
                 if (mainInitialized) return;
                 mainInitialized = true;
-                // all original init functions (unchanged)
+                // all original init functions (unchanged) – we add only the new copy handler inside initShareButton
                 function initSectionAnimations() {
                     const animatedSections = document.querySelectorAll('.section-animate');
                     const animatedSeparators = document.querySelectorAll('.section-separator');
@@ -4800,11 +4817,32 @@
                     const pageUrl = encodeURIComponent(window.location.href);
                     const shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
                     const fullMessage = shareText + pageUrl;
-                    const shareLinks = { messenger: `https://www.facebook.com/dialog/send?link=${pageUrl}&app_id=87741124305&redirect_uri=${pageUrl}`, instagram: '#', whatsapp: `https://api.whatsapp.com/send?text=${fullMessage}`, email: `mailto:?subject=Check%20out%20Rebecca%20%26%20Daniel's%20dance%20classes&body=${fullMessage}`, sms: `sms:?body=${fullMessage}` };
+                    // static link for copy bubble (provided URL)
+                    const COPY_LINK = "https://dancefirststep.github.io/Rebecca-Dance-/";
+                    const shareLinks = { 
+                        messenger: `https://www.facebook.com/dialog/send?link=${pageUrl}&app_id=87741124305&redirect_uri=${pageUrl}`, 
+                        instagram: '#', 
+                        whatsapp: `https://api.whatsapp.com/send?text=${fullMessage}`, 
+                        email: `mailto:?subject=Check%20out%20Rebecca%20%26%20Daniel's%20dance%20classes&body=${fullMessage}`, 
+                        sms: `sms:?body=${fullMessage}` 
+                    };
                     document.querySelectorAll('.share-bubble').forEach(bubble => {
                         bubble.addEventListener('click', (e) => {
                             e.preventDefault();
                             const platform = bubble.dataset.share;
+                            // handle copy link separately
+                            if (platform === 'copy') {
+                                navigator.clipboard.writeText(COPY_LINK).then(() => {
+                                    alert('Link copied to clipboard! Share it anywhere.');
+                                }).catch(() => {
+                                    alert('Could not copy link. Please copy manually: ' + COPY_LINK);
+                                });
+                                // close bubbles
+                                bubbles.classList.remove('active');
+                                reviewBubble.classList.remove('active');
+                                shareBtn.classList.remove('active');
+                                return;
+                            }
                             if (platform === 'instagram') {
                                 navigator.clipboard.writeText(window.location.href).then(() => { alert('Link copied to clipboard! Share it on Instagram.'); }).catch(() => { alert('Could not copy link. Please copy manually: ' + window.location.href); });
                                 bubbles.classList.remove('active');
@@ -4962,7 +5000,7 @@
                     initReviewsToggle();
                     initPrivateLessonToggle();
                     initAnnouncementCarousel();
-                    initShareButton();
+                    initShareButton(); // this now includes copy link handler
                     window.addEventListener('scroll', setActiveSection);
                     setInterval(() => { updateCTASection(); updateScheduleDisplay(); updateMonthPromo(); }, 60000);
                 }
