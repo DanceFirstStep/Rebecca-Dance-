@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ---------- root & base (unchanged) ---------- */
         :root {
             --primary: #2c6e9d;
             --primary-light: #5dade2;
@@ -50,7 +51,6 @@
             --intro-bg: #e0f2e9;
             --oldcity-bg: linear-gradient(135deg, #b14a4a, #8b3a3a);
             
-            /* Consistent button sizing */
             --btn-height-primary: 56px;
             --btn-height-secondary: 52px;
             --btn-height-small: 44px;
@@ -183,14 +183,71 @@
             font-family: 'Inter', sans-serif;
         }
         
+        /* NEW: two‑row layout for icons */
         .apps-container {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: stretch;
             gap: 20px;
             margin-bottom: 12px;
         }
+        .first-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+        .second-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
+        .center-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;                /* same gap as between icons */
+            grid-column: 2 / 3;
+        }
+        .skip-inline {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #2a405c;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+            border: 1px solid rgba(44,90,160,0.05);
+            min-height: 40px;
+            grid-column: 3 / 4;
+            justify-self: end;         /* align to the right within its column */
+            margin-left: 0;            /* remove any previous margin */
+        }
+        .skip-inline i {
+            font-size: 0.85rem;
+            color: #4f6f8f;
+            transition: transform 0.2s;
+        }
+        .skip-inline:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(44,90,160,0.06);
+        }
+        .skip-inline:hover i {
+            transform: translateX(3px);
+        }
         
+        /* all icon styles remain exactly the same */
         .app-icon {
             width: 110px;
             height: 110px;
@@ -401,12 +458,12 @@
             display: inline-block;
             background: #ffffff;
             border-radius: 28px;
-            padding: 14px 24px;  /* refined */
+            padding: 14px 24px;
             box-shadow: 0 10px 28px rgba(19,41,71,0.03);
             border: 1px solid rgba(19,41,71,0.08);
             color: #0f2a44;
             font-weight: 600;
-            font-size: 1rem;      /* refined */
+            font-size: 1rem;
             text-decoration: none;
             transition: transform 0.12s, box-shadow 0.3s, background 0.2s, border-color 0.2s;
             transform: translateZ(0);
@@ -415,7 +472,7 @@
             text-align: center;
             line-height: 1.5;
             letter-spacing: 0.02em;
-            min-height: 54px;      /* refined */
+            min-height: 54px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -428,7 +485,7 @@
         }
 
         .welcome-cta-pill.pill-featured {
-            min-width: 320px;       /* refined */
+            min-width: 320px;
             background: #e6f2ff;
             border-color: #99bbee;
             color: #0a1e33;
@@ -453,46 +510,86 @@
             box-shadow: 0 16px 36px rgba(19,41,71,0.06);
             transform: translateY(-3px);
         }
-
-        @media (max-width: 700px) {
-            .welcome-cta-pill.pill-featured {
-                min-width: 280px;
-            }
-            .welcome-pills {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-            .welcome-cta-pill {
-                width: 100%;
-                max-width: 400px;
-            }
+        
+        .review-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            color: #2d3f5e;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(44,90,160,0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.2s;
+            border: 2px solid #ffd700;
+            pointer-events: none;
+            min-height: 36px;
+            cursor: pointer;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: left center;
         }
-
-        @media (max-width: 650px) {
-            .welcome-pills {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-            .welcome-cta-pill {
-                min-width: 260px;
-                padding: 12px 20px;   /* refined */
-                font-size: 0.95rem;    /* refined */
-            }
-            .welcome-cta-pill.pill-saturday {
-                padding: 12px 18px;
-                font-size: 0.95rem;
-                min-width: 240px;
-            }
-            .welcome-social-prompt {
-                font-size: 1rem;
-            }
-            .welcome-pills-heading {
-                font-size: 1.8rem;
-            }
+        .review-bubble i {
+            font-size: 1rem;
+            color: #2c5aa0;
+        }
+        .review-bubble.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .review-bubble.active:hover {
+            transform: translateY(-4px) scale(1.02);
         }
         
+        .share-main-btn {
+            background: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1e2f40;
+            box-shadow: 0 8px 20px rgba(44,90,160,0.06);
+            cursor: pointer;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            justify-content: center;
+            border: 1px solid rgba(44,90,160,0.1);
+            line-height: 1.5;
+            min-height: 42px;
+        }
+        .share-main-btn i {
+            font-size: 1.1rem;
+            color: #2c5aa0;
+            transition: transform 0.3s;
+        }
+        .share-main-btn:hover {
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(44,90,160,0.08);
+        }
+        .share-main-btn:hover i {
+            transform: scale(1.1);
+        }
+        .share-main-btn.active {
+            background: #f0f5ff;
+            color: #1a2b3c;
+            border: 1px solid rgba(44,90,160,0.2);
+        }
+        .share-main-btn.active i {
+            color: #2c5aa0;
+        }
+        
+        /* all the remaining original CSS (unchanged) */
         .section-animate {
             opacity: 0;
             transform: translateY(30px);
@@ -576,7 +673,7 @@
             background: transparent;
             border: none;
             border-radius: 12px;
-            padding: 10px 18px;       /* refined */
+            padding: 10px 18px;
             font-size: 1rem;
             font-weight: 500;
             color: var(--primary-blue);
@@ -588,7 +685,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(44, 90, 160, 0.02);
-            min-height: 48px;          /* consistent */
+            min-height: 48px;
         }
         
         .nav-btn::before {
@@ -924,20 +1021,20 @@
             background: #1e3a5f;
             color: white;
             text-align: center;
-            padding: 12px 20px;       /* refined */
+            padding: 12px 20px;
             border-radius: 14px;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
-            font-size: 1.1rem;        /* refined */
+            font-size: 1.1rem;
             border: none;
             transition: background 0.15s ease, transform 0.1s;
             margin: 20px 0 12px;
             line-height: 1.3;
             box-shadow: 0 4px 8px rgba(0,0,0,0.02);
             cursor: pointer;
-            min-height: 52px;          /* refined */
+            min-height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1237,9 +1334,9 @@
         }
         
         .cta-action {
-            font-size: 1.2rem;          /* refined */
+            font-size: 1.2rem;
             font-weight: 600;
-            padding: 12px 20px;          /* refined */
+            padding: 12px 20px;
             background: var(--gradient-blue);
             color: white;
             border-radius: 28px;
@@ -1250,7 +1347,7 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            min-height: 56px;            /* refined */
+            min-height: 56px;
             text-decoration: none;
             border: none;
             line-height: 1.5;
@@ -1550,7 +1647,7 @@
             color: white;
             font-weight: 500;
             font-size: 1rem;
-            padding: 10px 20px;        /* refined */
+            padding: 10px 20px;
             border-radius: 24px;
             border: none;
             margin-top: 20px;
@@ -1559,7 +1656,7 @@
             cursor: pointer;
             align-self: flex-start;
             box-shadow: 0 4px 10px rgba(44, 90, 160, 0.1);
-            min-height: 48px;           /* refined */
+            min-height: 48px;
         }
 
         .card-cta i {
@@ -1754,8 +1851,8 @@
             color: #fff;
             border: none;
             border-radius: 14px;
-            padding: 14px 20px;        /* refined */
-            font-size: 1.1rem;          /* refined */
+            padding: 14px 20px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
@@ -1770,7 +1867,7 @@
             text-decoration: none;
             text-align: center;
             line-height: 1.5;
-            min-height: 56px;           /* refined */
+            min-height: 56px;
         }
         
         .submit-btn:hover {
@@ -1795,7 +1892,7 @@
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             min-width: 110px;
-            min-height: 44px;            /* consistent small */
+            min-height: 44px;
             line-height: 1.5;
             font-weight: 500;
         }
@@ -1894,15 +1991,15 @@
             color: white;
             border: none;
             border-radius: 28px;
-            padding: 12px 32px;          /* refined */
-            font-size: 1.1rem;            /* refined */
+            padding: 12px 32px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
             letter-spacing: 0.5px;
-            min-height: 56px;             /* refined */
+            min-height: 56px;
             display: inline-flex;
             align-items: center;
             gap: 12px;
@@ -2042,7 +2139,7 @@
             text-decoration: none;
             display: inline-block;
             line-height: 1.5;
-            min-height: 52px;           /* refined */
+            min-height: 52px;
         }
         .reviews-action-btn:hover {
             background: var(--primary-blue);
@@ -2067,15 +2164,15 @@
             color: white;
             border: none;
             border-radius: 28px;
-            padding: 12px 32px;          /* refined */
-            font-size: 1.1rem;            /* refined */
+            padding: 12px 32px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
             letter-spacing: 0.5px;
-            min-height: 56px;             /* refined */
+            min-height: 56px;
             display: inline-flex;
             align-items: center;
             gap: 12px;
@@ -2138,14 +2235,14 @@
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
             border-radius: 40px;
-            padding: 12px 24px;          /* refined */
-            font-size: 1.1rem;            /* refined */
+            padding: 12px 24px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 130px;             /* refined */
+            min-width: 130px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-            min-height: 52px;              /* refined */
+            min-height: 52px;
         }
         .private-lesson-day:hover {
             background: var(--primary-blue);
@@ -2161,12 +2258,12 @@
             color: var(--dark-blue);
             border: 2px solid var(--primary-blue);
             border-radius: 28px;
-            padding: 12px 30px;          /* refined */
-            font-size: 1rem;              /* refined */
+            padding: 12px 30px;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: 52px;             /* refined */
+            min-height: 52px;
         }
         .private-lesson-close-btn:hover {
             background: var(--primary-blue);
@@ -2184,15 +2281,15 @@
             color: white;
             border: none;
             border-radius: 28px;
-            padding: 12px 32px;          /* refined */
-            font-size: 1.1rem;            /* refined */
+            padding: 12px 32px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
             letter-spacing: 0.5px;
-            min-height: 56px;             /* refined */
+            min-height: 56px;
             display: inline-flex;
             align-items: center;
             gap: 12px;
@@ -2228,12 +2325,12 @@
             color: var(--dark-blue);
             border: 2px solid var(--primary-blue);
             border-radius: 28px;
-            padding: 12px 32px;          /* refined */
-            font-size: 1rem;              /* refined */
+            padding: 12px 32px;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: 52px;             /* refined */
+            min-height: 52px;
         }
         .video-close-btn:hover {
             background: var(--primary-blue);
@@ -2516,7 +2613,7 @@
             overflow: hidden;
             z-index: 1;
             line-height: 1.5;
-            min-height: 48px;            /* consistent */
+            min-height: 48px;
         }
         
         .category-btn::before {
@@ -2874,12 +2971,12 @@
             }
             
             .welcome-content {
-                padding: 24px 16px;
+                padding: 40px 16px 24px;
                 max-width: 100%;
             }
             
             .welcome-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 margin-bottom: 12px;
             }
             
@@ -2917,6 +3014,12 @@
                 font-size: 10px;
             }
             
+            .skip-inline {
+                padding: 4px 12px;
+                font-size: 0.85rem;
+                min-height: 34px;
+            }
+            
             .welcome-pills-heading {
                 font-size: 1.8rem;
             }
@@ -2924,6 +3027,29 @@
             .welcome-pills-subheading {
                 font-size: 1rem;
                 margin-top: 16px;
+            }
+            
+            .share-main-btn {
+                padding: 6px 12px;
+                min-width: 130px;
+                font-size: 0.85rem;
+                min-height: 38px;
+            }
+            .share-bubble {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+            }
+            .share-row {
+                gap: 10px;
+            }
+            .review-bubble {
+                padding: 4px 10px;
+                min-height: 34px;
+                font-size: 0.85rem;
+            }
+            .review-bubble i {
+                font-size: 0.95rem;
             }
             
             .instructors-grid {
@@ -3336,109 +3462,48 @@
             pointer-events: none;
         }
 
-        .review-bubble {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            color: #333;
-            border-radius: 40px;
-            padding: 10px 24px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            text-decoration: none;
-            box-shadow: 0 8px 20px rgba(44,90,160,0.15);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.2s;
-            border: 2px solid #ffd700;
-            pointer-events: none;
-            min-height: 52px;
-            cursor: pointer;
-            transform: scale(0);
-            opacity: 0;
-            transform-origin: left center;
-        }
-        .review-bubble.active {
-            transform: scale(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .review-bubble i {
-            font-size: 1.4rem;
-            color: inherit;
-        }
-        .review-bubble:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(44,90,160,0.25);
-        }
-        .review-bubble.active:hover {
-            transform: translateY(-8px) scale(1.05);
-        }
-
         .share-main-btn {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(44, 90, 160, 0.2);
-            border-radius: 40px;
-            padding: 14px 30px;
-            font-size: 1.1rem;
+            border: 1px solid rgba(44, 90, 160, 0.1);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
             font-weight: 500;
-            color: var(--dark-blue);
-            box-shadow: var(--shadow-md);
+            color: #1e2f40;
+            box-shadow: 0 8px 20px rgba(44,90,160,0.06);
             cursor: pointer;
             pointer-events: auto;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             transition: all 0.3s ease;
-            min-width: 200px;
+            min-width: 150px;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(44,90,160,0.1);
             line-height: 1.5;
-            min-height: 56px;
+            min-height: 42px;
         }
         .share-main-btn i {
-            font-size: 1.3rem;
-            color: var(--primary-blue);
+            font-size: 1.1rem;
+            color: #2c5aa0;
             transition: transform 0.3s;
         }
         .share-main-btn:hover {
             background: white;
             transform: scale(1.02);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 12px 24px rgba(44,90,160,0.08);
         }
         .share-main-btn:hover i {
             transform: scale(1.1);
         }
         .share-main-btn.active {
-            background: var(--gradient-blue);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.5);
+            background: #f0f5ff;
+            color: #1a2b3c;
+            border: 1px solid rgba(44,90,160,0.2);
         }
         .share-main-btn.active i {
-            color: white;
-        }
-
-        @media (max-width: 550px) {
-            .share-main-btn span {
-                font-size: 1rem;
-            }
-            .share-main-btn {
-                padding: 12px 24px;
-                min-width: 180px;
-            }
-            .share-bubble {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-            .review-bubble {
-                padding: 8px 20px;
-                font-size: 1rem;
-                min-height: 48px;
-            }
-            .review-bubble i {
-                font-size: 1.2rem;
-            }
+            color: #2c5aa0;
         }
 
         :root {
@@ -3461,59 +3526,71 @@
             <h1 class="welcome-title">Rebecca & Daniel</h1>
             <p class="welcome-social-prompt">Follow us for dance tips & social nights</p>
             
+            <!-- restructured apps container with two rows -->
             <div class="apps-container">
-                <a href="https://www.facebook.com/share/1D9jtpvP1x/?mibextid=wwXIfr" 
-                   class="app-icon facebook" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Facebook page">
-                    <i class="fab fa-facebook"></i>
-                    <span>Facebook</span>
-                </a>
-                
-                <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" 
-                   class="app-icon instagram" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Instagram profile">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-                
-                <a href="#" 
-                   class="app-icon calendar" 
-                   id="welcome-calendar-icon"
-                   aria-label="Class schedule">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Schedule</span>
-                </a>
-                
-                <a href="https://forms.gle/tT9wLLevJEjF1iez9" 
-                   class="app-icon register" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Registration form">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Register</span>
-                </a>
-                
-                <a href="https://venmo.com/code?user_id=2575920015605760344&created=1750346816" 
-                   class="app-icon venmo" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Venmo payment">
-                    <i class="fab fa-vimeo-v"></i>
-                    <span>Venmo</span>
-                </a>
+                <!-- first row: first four icons (unchanged) -->
+                <div class="first-row">
+                    <a href="https://www.facebook.com/share/1D9jtpvP1x/?mibextid=wwXIfr" 
+                       class="app-icon facebook" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Facebook page">
+                        <i class="fab fa-facebook"></i>
+                        <span>Facebook</span>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" 
+                       class="app-icon instagram" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Instagram profile">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    
+                    <a href="#" 
+                       class="app-icon calendar" 
+                       id="welcome-calendar-icon"
+                       aria-label="Class schedule">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Schedule</span>
+                    </a>
+                    
+                    <a href="https://forms.gle/tT9wLLevJEjF1iez9" 
+                       class="app-icon register" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Registration form">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Register</span>
+                    </a>
+                </div>
 
-                <a href="https://cash.app/$RebeccaRoseBachata" 
-                   class="app-icon cash-app" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Cash App payment">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span>Cash App</span>
-                </a>
+                <!-- second row: Venmo, Cash App (centered) + skip button on the right -->
+                <div class="second-row">
+                    <div class="center-group">
+                        <a href="https://venmo.com/code?user_id=2575920015605760344&created=1750346816" 
+                           class="app-icon venmo" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Venmo payment">
+                            <i class="fab fa-vimeo-v"></i>
+                            <span>Venmo</span>
+                        </a>
+
+                        <a href="https://cash.app/$RebeccaRoseBachata" 
+                           class="app-icon cash-app" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Cash App payment">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Cash App</span>
+                        </a>
+                    </div>
+
+                    <!-- skip button in the third grid column, aligned to the right -->
+                    <button id="welcome-skip-btn" class="skip-inline"><i class="fas fa-chevron-right"></i> Skip</button>
+                </div>
             </div>
 
             <h2 class="welcome-pills-heading">Join our dance community</h2>
@@ -3538,6 +3615,7 @@
     </div>
 
     <div class="container" style="opacity: 0;">
+        <!-- the entire main content remains exactly as in the original (unchanged) -->
         <div class="header-container">
             <div class="top-nav-buttons" id="nav-buttons">
                 <button class="nav-btn" id="btn-social">
@@ -3571,54 +3649,8 @@
         </div>
         
         <div class="content">
-            <h2 class="section-title" style="margin-bottom: 20px;">Our Next Social Event</h2>
-            
-            <div class="announcement-carousel section-animate">
-                <div class="carousel-slides" id="carousel-slides">
-                    <div class="carousel-slide">
-                        <div class="modern-event-card">
-                            <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
-                            <div class="event-datetime">
-                                <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
-                            </div>
-                            <div class="event-venue">
-                                <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
-                                    <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
-                                </a>
-                            </div>
-                            <a href="https://www.facebook.com/share/1bVtRiuUK4/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN EVENT</a>
-                            <div class="event-footer-minimal">
-                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Add to Calendar</a>
-                                <span><i class="fas fa-user-friends"></i> No partner needed</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="modern-event-card">
-                            <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
-                            <div class="event-datetime">
-                                <i class="far fa-calendar-alt"></i> 9:45pm Class · 10:30pm Social until 1am
-                            </div>
-                            <div class="event-venue">
-                                <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link">
-                                    <i class="fas fa-location-dot"></i> Ardmore, PA
-                                </a>
-                            </div>
-                            <a href="https://www.facebook.com/share/1CDHw34hsK/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN EVENT</a>
-                            <div class="event-footer-minimal">
-                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Add to Calendar</a>
-                                <span><i class="fas fa-user-friends"></i> No partner needed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-indicators" id="carousel-indicators">
-                    <span class="carousel-indicator active" data-slide="0"></span>
-                    <span class="carousel-indicator" data-slide="1"></span>
-                </div>
-            </div>
+            <!-- ========== REMOVED: Original carousel location ========== -->
+            <!-- The "Our Next Social Event" carousel has been moved below -->
             
             <hr class="section-separator" id="separator-1">
             
@@ -4042,6 +4074,57 @@
                 </div>
             </div>
             
+            <!-- ========== MOVED CAROUSEL: Now right after social media cards ========== -->
+            <h2 class="section-title" style="margin-bottom: 20px;">Our Next Social Event</h2>
+            
+            <div class="announcement-carousel section-animate">
+                <div class="carousel-slides" id="carousel-slides">
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3>
+                            <div class="event-datetime">
+                                <i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am
+                            </div>
+                            <div class="event-venue">
+                                <a href="https://maps.app.goo.gl/?q=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link">
+                                    <i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia
+                                </a>
+                            </div>
+                            <a href="https://www.facebook.com/share/1bVtRiuUK4/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN EVENT</a>
+                            <div class="event-footer-minimal">
+                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Add to Calendar</a>
+                                <span><i class="fas fa-user-friends"></i> No partner needed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">Buena Vista Restaurant – Salsa & Bachata 2nd & 4th Saturday</h3>
+                            <div class="event-datetime">
+                                <i class="far fa-calendar-alt"></i> 9:45pm Class · 10:30pm Social until 1am
+                            </div>
+                            <div class="event-venue">
+                                <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link">
+                                    <i class="fas fa-location-dot"></i> Ardmore, PA
+                                </a>
+                            </div>
+                            <a href="https://www.facebook.com/share/1CDHw34hsK/?mibextid=wwXIfr" class="event-cta-primary" target="_blank">JOIN EVENT</a>
+                            <div class="event-footer-minimal">
+                                <a href="#" class="add-calendar"><i class="far fa-calendar-plus"></i> Add to Calendar</a>
+                                <span><i class="fas fa-user-friends"></i> No partner needed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <span class="carousel-indicator active" data-slide="0"></span>
+                    <span class="carousel-indicator" data-slide="1"></span>
+                </div>
+            </div>
+            <!-- ========== END MOVED CAROUSEL ========== -->
+            
             <hr class="section-separator" id="separator-2">
 
             <div class="video-toggle-container">
@@ -4192,6 +4275,16 @@
             const body = document.body;
             let mainInitialized = false;
             let autoDismissTimeout = setTimeout(fadeOutWelcomeArray, 9000);
+            
+            // skip button functionality (now inside second row)
+            const skipBtn = document.getElementById('welcome-skip-btn');
+            if (skipBtn) {
+                skipBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    fadeOutWelcomeArray();
+                });
+            }
+            
             welcomeArray.addEventListener('click', function(e) {
                 const target = e.target;
                 const dismissClasses = ['welcome-array', 'welcome-content', 'welcome-title', 'welcome-subtitle', 'welcome-footer', 'welcome-social', 'welcome-pills'];
@@ -4287,6 +4380,7 @@
             function initMainPage() {
                 if (mainInitialized) return;
                 mainInitialized = true;
+                // all original init functions (unchanged)
                 function initSectionAnimations() {
                     const animatedSections = document.querySelectorAll('.section-animate');
                     const animatedSeparators = document.querySelectorAll('.section-separator');
