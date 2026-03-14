@@ -3547,7 +3547,7 @@
             <h1 class="welcome-title">Rebecca & Daniel</h1>
             <p class="welcome-social-prompt">Follow us for dance tips & social nights</p>
             
-            <!-- first row: unchanged (Facebook, Instagram, Calendar, Register) -->
+            <!-- first row: unchanged (Facebook, Instagram, Calendar, Register) with updated registration link -->
             <div class="apps-row">
                 <a href="https://www.facebook.com/share/1D9jtpvP1x/?mibextid=wwXIfr" 
                    class="app-icon facebook" 
@@ -3575,7 +3575,8 @@
                     <span>Schedule</span>
                 </a>
                 
-                <a href="https://forms.gle/tT9wLLevJEjF1iez9" 
+                <!-- UPDATED REGISTRATION LINK -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform?fbclid=IwZnRzaAQigu9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe6h3O89CPXn_gMBPhKD3zw3nvguo3S1aLiAU8pQhQ0D97Ja5qv5CjVZ9imWw_aem_-CH17BEf75Lhl0Jqjn6yOg" 
                    class="app-icon register" 
                    target="_blank" 
                    rel="noopener noreferrer"
@@ -3585,11 +3586,12 @@
                 </a>
             </div>
             
-            <!-- second row: Venmo + Cash App centered, skip button on the right -->
+            <!-- second row: Venmo (UPDATED) + Cash App centered, skip button on the right -->
             <div class="apps-row second-row">
                 <div class="second-row-left"></div>
                 <div class="second-row-icons">
-                    <a href="https://venmo.com/code?user_id=2575920015605760344&created=1750346816" 
+                    <!-- UPDATED VENMO LINK (opens app directly) -->
+                    <a href="https://account.venmo.com/u/Rebecca_Rose_Bachata" 
                        class="app-icon venmo" 
                        target="_blank" 
                        rel="noopener noreferrer"
@@ -3631,7 +3633,7 @@
     </div>
 
     <div class="container" style="opacity: 0;">
-        <!-- everything inside the container stays exactly as originally provided (unchanged) except schedule title and banner label already updated in CSS -->
+        <!-- everything inside the container stays exactly as originally provided except URLs updated -->
         <div class="header-container">
             <div class="top-nav-buttons" id="nav-buttons">
                 <button class="nav-btn" id="btn-social">
@@ -3687,7 +3689,8 @@
                     7:00pm Intro to Salsa & Bachata | 8:00pm Bachata Sensual
                 </div>
                 
-                <a href="https://forms.gle/tT9wLLevJEjF1iez9" target="_blank" class="cta-action" id="register-cta">
+                <!-- UPDATED REGISTRATION LINK -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform?fbclid=IwZnRzaAQigu9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe6h3O89CPXn_gMBPhKD3zw3nvguo3S1aLiAU8pQhQ0D97Ja5qv5CjVZ9imWw_aem_-CH17BEf75Lhl0Jqjn6yOg" target="_blank" class="cta-action" id="register-cta">
                     <span id="register-cta-text">Register</span>
                 </a>
             </div>
@@ -3765,7 +3768,8 @@
                             <span><strong>4‑Week Program:</strong> No partner needed, walk‑ins welcome!</span>
                         </div>
                         
-                        <a href="https://forms.gle/tT9wLLevJEjF1iez9" class="card-cta" target="_blank">
+                        <!-- UPDATED REGISTRATION LINK -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform?fbclid=IwZnRzaAQigu9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe6h3O89CPXn_gMBPhKD3zw3nvguo3S1aLiAU8pQhQ0D97Ja5qv5CjVZ9imWw_aem_-CH17BEf75Lhl0Jqjn6yOg" class="card-cta" target="_blank">
                             Register <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -4187,7 +4191,8 @@
             
             <h2 class="section-title" id="payment-title">Payment Options</h2>
             <div class="links-grid stagger-children section-animate">
-                <a href="https://venmo.com/code?user_id=2575920015605760344&created=1750346816" class="link-card venmo" target="_blank">
+                <!-- UPDATED VENMO LINK (opens app directly) -->
+                <a href="https://account.venmo.com/u/Rebecca_Rose_Bachata" class="link-card venmo" target="_blank">
                     <div class="link-icon">
                         <i class="fab fa-vimeo-v"></i>
                     </div>
@@ -4584,6 +4589,7 @@
                         alert(currentLanguage === 'es' ? 'Por favor ingresa al menos un nombre' : 'Please enter at least one name');
                         return;
                     }
+                    // already the correct long registration link
                     window.open('https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform', '_blank');
                 });
                 function initReviewsCarousel() {
@@ -4780,7 +4786,8 @@
                         toggleBtn.classList.remove('active');
                         chevron.className = 'fas fa-chevron-down';
                     });
-                    const registrationLink = 'https://forms.gle/tT9wLLevJEjF1iez9';
+                    // UPDATED registration link inside private lesson day buttons
+                    const registrationLink = 'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform?fbclid=IwZnRzaAQigu9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEe6h3O89CPXn_gMBPhKD3zw3nvguo3S1aLiAU8pQhQ0D97Ja5qv5CjVZ9imWw_aem_-CH17BEf75Lhl0Jqjn6yOg';
                     dayButtons.forEach(btn => { btn.addEventListener('click', () => { window.open(registrationLink, '_blank'); }); });
                 }
                 const showVideoBtn = document.getElementById('show-video-btn');
