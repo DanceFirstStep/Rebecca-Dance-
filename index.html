@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ----- all original styles remain exactly the same (nothing removed) ----- */
+        /* ----- all original styles remain (nothing removed) ----- */
         :root {
             --primary: #2c6e9d;
             --primary-light: #5dade2;
@@ -183,7 +183,6 @@
             font-family: 'Inter', sans-serif;
         }
         
-        /* --- new row structure (first line unchanged, second line with centered icons & skip on right) --- */
         .apps-row {
             display: flex;
             flex-wrap: wrap;
@@ -211,7 +210,6 @@
             flex: 0 auto;
             justify-content: center;
         }
-        /* ===== UPDATED SKIP BUTTON: clean, professional, blended ===== */
         #welcome-skip-btn {
             flex: 1;
             text-align: right;
@@ -251,7 +249,6 @@
             color: #5f6b8a;
         }
         
-        /* original .app-icon styles remain untouched */
         .app-icon {
             width: 110px;
             height: 110px;
@@ -434,7 +431,6 @@
         .app-icon.venmo.loaded { animation-delay: 0.6s; }
         .app-icon.cash-app.loaded { animation-delay: 0.75s; }
         
-        /* all other original styles (from .welcome-pills-heading to footer) remain exactly as in the provided file, no changes */
         .welcome-pills-heading {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.8rem, 6vw, 2.5rem);
@@ -1372,6 +1368,7 @@
             100% { transform: scale(1); }
         }
         
+        /* ========== IMPROVED SCHEDULE CARD DESIGN ========== */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -1381,24 +1378,25 @@
 
         .link-card {
             background: #ffffff;
-            border-radius: 20px;
-            padding: 28px 24px;
-            border: 1px solid rgba(44, 90, 160, 0.06);
+            border-radius: 28px; /* more rounded */
+            padding: 28px 26px;
+            border: 1px solid rgba(44, 90, 160, 0.08);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: visible;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 10px 25px -8px rgba(0,20,40,0.1), 0 2px 6px rgba(0,0,0,0.02);
             text-decoration: none !important;
             min-height: auto;
+            backdrop-filter: blur(2px);
         }
 
         .link-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(44, 90, 160, 0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px rgba(44, 90, 160, 0.15);
+            border-color: rgba(44, 90, 160, 0.2);
         }
 
         .link-card.stardust,
@@ -1422,6 +1420,7 @@
             align-items: flex-start;
             margin-bottom: 16px;
             flex-wrap: wrap;
+            gap: 12px;
         }
 
         .studio-name-address {
@@ -1429,9 +1428,9 @@
         }
 
         .link-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             color: var(--dark-blue);
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -1489,38 +1488,43 @@
         }
 
         .schedule-badge {
-            border-radius: 4px;
-            background: transparent;
-            border: 1px solid rgba(44, 90, 160, 0.2);
+            border-radius: 30px; /* pill shape */
+            background: #f0f7fa;
+            border: none;
             color: var(--dark-blue);
             font-size: 0.85rem;
-            font-weight: 500;
-            padding: 4px 10px;
+            font-weight: 600;
+            padding: 6px 16px;
             letter-spacing: 0.3px;
             display: inline-block;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .schedule-list {
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .schedule-day-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             page-break-inside: avoid;
             break-inside: avoid;
+            background: #fafcff;
+            padding: 14px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(44, 90, 160, 0.04);
         }
 
         .schedule-day-header {
             font-weight: 700;
             color: var(--primary-blue);
-            margin-bottom: 10px;
-            padding-bottom: 4px;
-            font-size: 1.8rem;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            font-size: 1.6rem;
             letter-spacing: 0.3px;
             border-bottom: 2px solid rgba(44, 90, 160, 0.1);
             display: inline-block;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .schedule-class {
@@ -1529,21 +1533,30 @@
             justify-content: space-between;
             margin-bottom: 8px;
             line-height: 1.6;
-            font-size: 1.15rem;
-            background: rgba(44, 90, 160, 0.01);
-            padding: 6px 12px;
-            border-radius: 8px;
-            transition: background 0.2s;
+            font-size: 1.1rem;
+            background: #ffffff;
+            padding: 10px 16px;
+            border-radius: 14px;
+            transition: background 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(44, 90, 160, 0.02);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.01);
         }
         .schedule-class:hover {
-            background: rgba(44, 90, 160, 0.03);
+            background: #f5faff;
+            border-color: rgba(44, 90, 160, 0.1);
+            box-shadow: 0 4px 10px rgba(44,90,160,0.02);
         }
 
         .class-time {
             font-weight: 600;
-            min-width: 95px;
+            min-width: 90px;
             color: var(--text-dark);
             font-size: 1.1rem;
+            background: #eef3fc;
+            padding: 4px 12px;
+            border-radius: 30px;
+            text-align: center;
+            letter-spacing: 0.2px;
         }
 
         .class-name {
@@ -1560,9 +1573,9 @@
 
         .class-badge {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.3px;
             text-transform: uppercase;
@@ -1570,6 +1583,7 @@
             color: #1e293b;
             margin-left: 6px;
             white-space: nowrap;
+            border: 1px solid transparent;
         }
         .badge-intro {
             background: #d1fae5;
@@ -1584,10 +1598,11 @@
 
         .salsa-text, .bachata-text {
             font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 20px;
+            padding: 2px 12px;
+            border-radius: 30px;
             display: inline-block;
             font-size: 1rem;
+            background: rgba(177, 74, 74, 0.05);
         }
         .salsa-text {
             color: var(--salsa);
@@ -1602,8 +1617,8 @@
             color: #9b59b6;
             font-weight: 600;
             background: rgba(155, 89, 182, 0.05);
-            padding: 2px 8px;
-            border-radius: 20px;
+            padding: 2px 12px;
+            border-radius: 30px;
             display: inline-block;
             font-size: 1rem;
         }
@@ -1611,8 +1626,8 @@
             color: #16a085;
             font-weight: 600;
             background: rgba(22, 160, 133, 0.05);
-            padding: 2px 8px;
-            border-radius: 20px;
+            padding: 2px 12px;
+            border-radius: 30px;
             display: inline-block;
             font-size: 1rem;
         }
@@ -1620,8 +1635,8 @@
             color: #e67e22;
             font-weight: 600;
             background: rgba(230, 126, 34, 0.05);
-            padding: 2px 8px;
-            border-radius: 20px;
+            padding: 2px 12px;
+            border-radius: 30px;
             display: inline-block;
             font-size: 1rem;
         }
@@ -1630,10 +1645,10 @@
             background: rgba(212, 63, 63, 0.05);
             color: var(--new-red);
             font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 30px;
             display: inline-block;
-            margin-top: 16px;
+            margin-top: 20px;
             font-size: 0.95rem;
             border: 1px solid rgba(212, 63, 63, 0.15);
             box-shadow: 0 2px 8px rgba(212, 63, 63, 0.02);
@@ -1646,20 +1661,20 @@
         .card-cta {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: var(--gradient-blue);
             color: white;
             font-weight: 500;
             font-size: 1rem;
-            padding: 10px 20px;
-            border-radius: 24px;
+            padding: 12px 26px;
+            border-radius: 40px;
             border: none;
-            margin-top: 20px;
+            margin-top: 24px;
             text-decoration: none;
             transition: all 0.2s ease;
             cursor: pointer;
             align-self: flex-start;
-            box-shadow: 0 4px 10px rgba(44, 90, 160, 0.1);
+            box-shadow: 0 6px 14px rgba(44, 90, 160, 0.15);
             min-height: 48px;
         }
 
@@ -1670,8 +1685,8 @@
 
         .card-cta:hover {
             background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(44, 90, 160, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(44, 90, 160, 0.2);
         }
 
         .card-cta:hover i {
@@ -1680,11 +1695,10 @@
 
         .link-card.next-class-highlight {
             border: 2px solid var(--primary-blue);
-            background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            box-shadow: 0 12px 30px rgba(44, 90, 160, 0.08);
+            background: linear-gradient(145deg, #ffffff, #f4faff);
+            box-shadow: 0 15px 35px -8px rgba(44, 90, 160, 0.2);
             position: relative;
         }
-        /* ===== CHANGED: "Next Class" → "Today" ===== */
         .link-card.next-class-highlight::after {
             content: "Today";
             position: absolute;
@@ -1692,12 +1706,12 @@
             right: 20px;
             background: var(--primary-blue);
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            padding: 4px 14px;
-            border-radius: 24px;
+            padding: 6px 18px;
+            border-radius: 40px;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 12px rgba(44,90,160,0.15);
         }
 
         .month-promo {
@@ -1708,14 +1722,17 @@
             line-height: 1.2;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
             letter-spacing: 1px;
+            background: rgba(212,63,63,0.05);
+            padding: 4px 12px;
+            border-radius: 40px;
         }
 
         .program-promo {
             background: #f0f7fa;
             border-left: 4px solid var(--primary-blue);
-            padding: 12px 16px;
-            margin: 16px 0 8px;
-            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 20px 0 8px;
+            border-radius: 20px;
             font-size: 1rem;
             color: var(--dark-blue);
             display: flex;
@@ -1732,6 +1749,7 @@
             .link-card {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 22px 18px;
             }
             .schedule-day-header {
                 font-size: 1.5rem;
@@ -1741,6 +1759,14 @@
             }
             .month-promo {
                 font-size: 1.6rem;
+            }
+            .schedule-day-group {
+                padding: 10px 12px;
+            }
+            .class-time {
+                min-width: 80px;
+                font-size: 1rem;
+                padding: 3px 8px;
             }
         }
         
@@ -3751,7 +3777,8 @@
                                 <div class="schedule-class">
                                     <span class="class-time">8:00pm</span>
                                     <span class="class-name">
-                                        <span class="bachata-advance">Advance Beginner Bachata</span>
+                                        <!-- CHANGED: from "Advance Beginner Bachata" to "Advanced Beginner Salsa" with salsa styling -->
+                                        <span class="salsa-text">Advanced Beginner Salsa</span>
                                     </span>
                                 </div>
                                 <div class="schedule-class">
@@ -4648,9 +4675,10 @@
                         lastScrollTop = scrollTop;
                     });
                 }
+                // ===== UPDATED classSchedule: changed Sunday 8:00pm from "Advance Beginner Bachata" to "Advanced Beginner Salsa" =====
                 const classSchedule = [
                     { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom", classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Bachata Sensual"], locationId: "stardust-card", endTime: 2100 },
-                    { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom", classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advance Beginner Bachata", "9:00pm Bachata Elite"], locationId: "stardust-card", endTime: 2200 },
+                    { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom", classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa", "9:00pm Bachata Elite"], locationId: "stardust-card", endTime: 2200 },
                     { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio", classes: ["4:00pm Salsa", "5:00pm Bachata"], locationId: "estilo-card", endTime: 1800 },
                     { day: "Thursday", dayIndex: 4, studio: "Old City Philly", classes: ["9:45pm Bachata/Cumbia Class", "10:30pm Bachata · Cumbia · Salsa & more"], locationId: "oldcity-card", endTime: 2330 },
                     { day: "Saturday", dayIndex: 6, studio: "Buena Vista Restaurant, Ardmore", classes: ["9:45pm Bachata/Salsa Class", "10:30pm Social Dancing until 1am"], locationId: "buenavista-card", endTime: 2400 }
