@@ -552,9 +552,6 @@
             line-height: 1.5;
             min-height: 42px;
         }
-        .share-main-btn.hidden {
-            display: none;
-        }
         .share-main-btn i {
             font-size: 1.1rem;
             color: #2c5aa0;
@@ -2983,9 +2980,6 @@
             line-height: 1.5;
             min-height: 42px;
         }
-        .share-main-btn.hidden {
-            display: none;
-        }
         .share-main-btn i {
             font-size: 1.1rem;
             color: #2c5aa0;
@@ -3346,27 +3340,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const shareMainBtn = document.getElementById('shareMainBtn');
-            if (shareMainBtn) {
-                shareMainBtn.classList.add('hidden');
-                const firstScheduleCard = document.getElementById('stardust-card');
-                if (firstScheduleCard) {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                shareMainBtn.classList.remove('hidden');
-                                observer.disconnect();
-                            }
-                        });
-                    }, { threshold: 0.5 });
-                    observer.observe(firstScheduleCard);
-                    if (firstScheduleCard.getBoundingClientRect().top < window.innerHeight - 100) {
-                        shareMainBtn.classList.remove('hidden');
-                        observer.disconnect();
-                    }
-                }
-            }
-
             const logo = document.querySelector('.logo');
             let clickCount = 0, clickTimer = null;
             const WHATSAPP_LINK = 'https://chat.whatsapp.com/IRz7E4pKaZaJKA53HWQIPB?mode=gi_t';
