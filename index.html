@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        /* ─── CSS (unchanged) ─── */
+        /* ===== all existing styles remain unchanged ===== */
         :root {
             --primary-blue: #2c5aa0;
             --secondary-blue: #4a7bc1;
@@ -1280,7 +1280,6 @@
             }
         }
 
-        /* ─── LINKS GRID ─── */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -4208,26 +4207,31 @@
 
     <script>
         (function() {
+            // ─── FIX: Facebook in-app browser link handling ───
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
             }
 
+            // shared helper to open app or web — FIXED for Facebook browser
             function openAppOrWeb(webUrl, appType) {
                 var userAgent = navigator.userAgent.toLowerCase();
                 var isIOS = /iphone|ipad|ipod/.test(userAgent);
                 var isAndroid = /android/.test(userAgent);
+                var isFB = isFacebookInAppBrowser();
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
-                // --- FIX: Facebook links in Facebook browser should navigate directly ---
+                // ─── FACEBOOK: special handling ───
                 if (appType === 'facebook') {
-                    // If we're inside the Facebook in-app browser, just navigate directly
-                    // to the web URL — the fb:// scheme fails inside Facebook's own browser.
-                    if (isFacebookInAppBrowser()) {
+                    if (isFB) {
+                        // In Facebook in-app browser: navigate directly within the web view.
+                        // This opens the event page correctly because Facebook's web view
+                        // can render Facebook URLs natively.
                         window.location.href = webUrl;
                         return;
                     }
+                    // For Instagram browser and other apps: use fb:// scheme to open Facebook app
                     schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
                 } else if (appType === 'instagram') {
                     var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
@@ -4248,15 +4252,13 @@
 
                 if (!schemeUrl) return;
 
-                // Standard app‑scheme launch with iframe fallback
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 document.body.appendChild(iframe);
                 var timeout = setTimeout(function() {
                     if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                    if (appType !== 'facebook' || !isFacebookInAppBrowser()) {
-                        window.open(fallbackUrl, '_blank');
-                    }
+                    // fallback: open web URL if app doesn't respond
+                    window.open(fallbackUrl, '_blank');
                 }, 800);
                 iframe.src = schemeUrl;
                 iframe.onload = function() {
@@ -4268,6 +4270,7 @@
                 }
             }
 
+            // ─── setup deep links with the fixed openAppOrWeb ───
             function setupDeepLinks() {
                 var appLinks = document.querySelectorAll('[data-app]');
                 appLinks.forEach(function(link) {
@@ -4279,14 +4282,18 @@
                         if (!originalHref || originalHref === '#') {
                             if (appType === 'facebook') originalHref =
                                 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr';
-                            else if (appType === 'instagram') originalHref = 'https://www.instagram.com/rebecca_bachata/';
-                            else if (appType === 'venmo') originalHref = 'https://account.venmo.com/u/Rebecca_Rose_Bachata';
-                            else if (appType === 'cashapp') originalHref = 'https://cash.app/$RebeccaRoseBachata';
+                            else if (appType === 'instagram') originalHref =
+                                'https://www.instagram.com/rebecca_bachata/';
+                            else if (appType === 'venmo') originalHref =
+                                'https://account.venmo.com/u/Rebecca_Rose_Bachata';
+                            else if (appType === 'cashapp') originalHref =
+                                'https://cash.app/$RebeccaRoseBachata';
                             else originalHref = 'https://';
                         }
                         link.addEventListener('click', function(e) {
                             if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                .preventDefault(); return; }
+                                    .preventDefault();
+                                return; }
                             e.preventDefault();
                             openAppOrWeb(originalHref, appType);
                         });
@@ -4299,7 +4306,8 @@
                                     'https://'))));
                         link.addEventListener('click', function(e) {
                             if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                .preventDefault(); return; }
+                                    .preventDefault();
+                                return; }
                             e.preventDefault();
                             openAppOrWeb(fakeHref, appType);
                         });
@@ -4312,6 +4320,7 @@
             observer.observe(document.body, { childList: true, subtree: true });
         })();
 
+        // ─── the rest of the original script (main page init, welcome, etc.) ───
         document.addEventListener('DOMContentLoaded', function() {
             let paymentModalOpen = false;
             window.paymentModalOpen = false;
@@ -4374,41 +4383,13 @@
             function handlePaymentSelect(type) {
                 const webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
                 const appType = type === 'venmo' ? 'venmo' : 'cashapp';
-                openAppOrWeb(webUrl, appType);
-                fadeOutWelcomeArray();
-            }
-
-            function openAppOrWeb(webUrl, appType) {
-                var userAgent = navigator.userAgent.toLowerCase();
-                var isIOS = /iphone|ipad|ipod/.test(userAgent);
-                var schemeUrl = null;
-                var fallbackUrl = webUrl;
-                if (appType === 'venmo') {
-                    var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
-                    var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
-                    schemeUrl = 'venmo://pay?recipients=' + handle;
-                } else if (appType === 'cashapp') {
-                    var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
-                    var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
-                    schemeUrl = 'cashapp://$' + tag;
+                // use the fixed openAppOrWeb from the outer scope
+                if (typeof openAppOrWeb === 'function') {
+                    openAppOrWeb(webUrl, appType);
                 } else {
                     window.open(webUrl, '_blank');
-                    return;
                 }
-                if (!schemeUrl) return;
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-                var timeout = setTimeout(function() {
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                    window.open(fallbackUrl, '_blank');
-                }, 800);
-                iframe.src = schemeUrl;
-                iframe.onload = function() {
-                    clearTimeout(timeout);
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                };
-                if (isIOS) window.location.href = schemeUrl;
+                fadeOutWelcomeArray();
             }
 
             const logo = document.querySelector('.logo');
@@ -5324,6 +5305,5 @@
             }
         });
     </script>
-
 </body>
 </html>
