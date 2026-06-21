@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
+        /* ─── CSS (unchanged) ─── */
         :root {
             --primary-blue: #2c5aa0;
             --secondary-blue: #4a7bc1;
@@ -3833,7 +3834,6 @@
             }
         }
 
-        /* ─── extra polish for cards ─── */
         .link-card .link-text .schedule-list .schedule-day-group:last-child {
             margin-bottom: 0;
         }
@@ -3846,7 +3846,6 @@
             margin-left: 0;
         }
 
-        /* ensure consistent spacing in schedule rows */
         .schedule-class .class-name .salsa-text,
         .schedule-class .class-name .bachata-text,
         .schedule-class .class-name .bachata-sensual,
@@ -4221,12 +4220,15 @@
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
+                // --- FIX: Facebook links in Facebook browser should navigate directly ---
                 if (appType === 'facebook') {
-                    schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+                    // If we're inside the Facebook in-app browser, just navigate directly
+                    // to the web URL — the fb:// scheme fails inside Facebook's own browser.
                     if (isFacebookInAppBrowser()) {
-                        window.location.href = schemeUrl;
+                        window.location.href = webUrl;
                         return;
                     }
+                    schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
                 } else if (appType === 'instagram') {
                     var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
                     var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
@@ -4246,6 +4248,7 @@
 
                 if (!schemeUrl) return;
 
+                // Standard app‑scheme launch with iframe fallback
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 document.body.appendChild(iframe);
