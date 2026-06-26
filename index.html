@@ -473,6 +473,7 @@
             text-align: center;
             backdrop-filter: blur(2px);
             cursor: pointer;
+            position: relative;
         }
 
         .welcome-cta-pill:hover {
@@ -503,6 +504,58 @@
             letter-spacing: 0.02em;
         }
 
+        /* ─── refined "next" indicator: subtle dot instead of "Up Next" badge ─── */
+        .welcome-cta-pill.next-event {
+            border: 2px solid var(--primary-blue);
+            background: linear-gradient(145deg, #f4faff, var(--white));
+            box-shadow: 0 8px 24px rgba(44, 90, 160, 0.12);
+            padding-right: var(--space-10);
+        }
+
+        .welcome-cta-pill .next-dot {
+            position: absolute;
+            right: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.15);
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50%) scale(1.3);
+                opacity: 0.7;
+            }
+        }
+
+        /* ─── "BaiLe Inolvidable" badge ─── */
+        .baile-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: var(--white);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: var(--space-2);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        /* rest of original styles */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -1315,22 +1368,20 @@
             border: 2px solid var(--primary-blue);
             background: linear-gradient(145deg, var(--white), #f4faff);
             box-shadow: 0 18px 35px -8px rgba(44, 90, 160, 0.15);
+            position: relative;
         }
 
-        .next-class-badge {
+        /* ─── subtle "next" indicator on cards: a small vertical accent bar ─── */
+        .link-card.next-class-highlight::before {
+            content: '';
             position: absolute;
-            top: -12px;
-            right: var(--space-5);
+            left: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 5px;
             background: var(--primary-blue);
-            color: var(--white);
-            font-size: var(--font-xs);
-            font-weight: 700;
-            padding: var(--space-2) var(--space-5);
-            border-radius: var(--radius-pill);
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            z-index: 5;
-            white-space: nowrap;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            box-shadow: 0 0 12px rgba(44, 90, 160, 0.2);
         }
 
         .link-text {
@@ -3551,6 +3602,7 @@
                 padding: var(--space-3) var(--space-4);
                 border-radius: var(--radius-lg);
                 gap: var(--space-1) var(--space-2);
+                padding-right: var(--space-8);
             }
             .welcome-cta-pill .pill-main {
                 font-size: var(--font-sm);
@@ -3558,6 +3610,11 @@
             .welcome-cta-pill .pill-styles {
                 font-size: var(--font-xs);
                 opacity: 0.45;
+            }
+            .welcome-cta-pill .next-dot {
+                right: var(--space-3);
+                width: 8px;
+                height: 8px;
             }
             .modern-event-card {
                 padding: var(--space-5) var(--space-4) var(--space-6);
@@ -3729,12 +3786,18 @@
                 padding: var(--space-2) var(--space-3);
                 min-height: 48px;
                 border-radius: var(--radius-md);
+                padding-right: var(--space-6);
             }
             .welcome-cta-pill .pill-main {
                 font-size: var(--font-xs);
             }
             .welcome-cta-pill .pill-styles {
                 font-size: var(--font-xs);
+            }
+            .welcome-cta-pill .next-dot {
+                right: var(--space-2);
+                width: 6px;
+                height: 6px;
             }
             .top-nav-buttons {
                 padding: var(--space-1) var(--space-2);
@@ -3919,20 +3982,21 @@
 
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
-                <div class="welcome-pills">
-                    <a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook">
+                <div class="welcome-pills" id="welcome-pills-container">
+                    <!-- Pills are ordered dynamically by the script below -->
+                    <a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
                         <span class="pill-main">Old City Philly Thu • 9:45pm Lesson • 10:30pm Social</span>
                         <span class="pill-styles">Bachata • Cumbia • Salsa</span>
                     </a>
-                    <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="welcome-cta-pill" data-app="facebook">
+                    <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-main">Ardmore Salsa Nights (2nd &amp; 4th Sat) • 9:15pm Lesson • 10:00pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
                     </a>
-                    <a href="https://www.facebook.com/share/18yCxjQArB/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook">
-                        <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social</span>
+                    <a href="https://www.facebook.com/share/18yCxjQArB/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
+                        <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://www.facebook.com/share/1GRBTGn9Js/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook">
+                    <a href="https://www.facebook.com/share/1GRBTGn9Js/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4206,121 +4270,111 @@
     </div>
 
     <script>
-        (function() {
-            // ─── FIX: Facebook in-app browser link handling ───
-            function isFacebookInAppBrowser() {
-                var ua = navigator.userAgent || navigator.vendor || window.opera;
-                return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
-            }
+        // ─── FIX: Facebook in-app browser link handling ───
+        function isFacebookInAppBrowser() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
+        }
 
-            // shared helper to open app or web — FIXED for Facebook browser
-            function openAppOrWeb(webUrl, appType) {
-                var userAgent = navigator.userAgent.toLowerCase();
-                var isIOS = /iphone|ipad|ipod/.test(userAgent);
-                var isAndroid = /android/.test(userAgent);
-                var isFB = isFacebookInAppBrowser();
-                var schemeUrl = null;
-                var fallbackUrl = webUrl;
+        function openAppOrWeb(webUrl, appType) {
+            var userAgent = navigator.userAgent.toLowerCase();
+            var isIOS = /iphone|ipad|ipod/.test(userAgent);
+            var isAndroid = /android/.test(userAgent);
+            var isFB = isFacebookInAppBrowser();
+            var schemeUrl = null;
+            var fallbackUrl = webUrl;
 
-                // ─── FACEBOOK: special handling ───
-                if (appType === 'facebook') {
-                    if (isFB) {
-                        // In Facebook in-app browser: navigate directly within the web view.
-                        // This opens the event page correctly because Facebook's web view
-                        // can render Facebook URLs natively.
-                        window.location.href = webUrl;
-                        return;
-                    }
-                    // For Instagram browser and other apps: use fb:// scheme to open Facebook app
-                    schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
-                } else if (appType === 'instagram') {
-                    var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
-                    var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
-                    schemeUrl = 'instagram://user?username=' + username;
-                } else if (appType === 'venmo') {
-                    var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
-                    var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
-                    schemeUrl = 'venmo://pay?recipients=' + handle;
-                } else if (appType === 'cashapp') {
-                    var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
-                    var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
-                    schemeUrl = 'cashapp://$' + tag;
-                } else {
-                    window.open(webUrl, '_blank');
+            if (appType === 'facebook') {
+                if (isFB) {
+                    window.location.href = webUrl;
                     return;
                 }
-
-                if (!schemeUrl) return;
-
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-                var timeout = setTimeout(function() {
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                    // fallback: open web URL if app doesn't respond
-                    window.open(fallbackUrl, '_blank');
-                }, 800);
-                iframe.src = schemeUrl;
-                iframe.onload = function() {
-                    clearTimeout(timeout);
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                };
-                if (isIOS) {
-                    window.location.href = schemeUrl;
-                }
+                schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+            } else if (appType === 'instagram') {
+                var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
+                var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
+                schemeUrl = 'instagram://user?username=' + username;
+            } else if (appType === 'venmo') {
+                var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
+                var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
+                schemeUrl = 'venmo://pay?recipients=' + handle;
+            } else if (appType === 'cashapp') {
+                var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
+                var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
+                schemeUrl = 'cashapp://$' + tag;
+            } else {
+                window.open(webUrl, '_blank');
+                return;
             }
 
-            // ─── setup deep links with the fixed openAppOrWeb ───
-            function setupDeepLinks() {
-                var appLinks = document.querySelectorAll('[data-app]');
-                appLinks.forEach(function(link) {
-                    var appType = link.getAttribute('data-app');
-                    if (!appType) return;
-                    if (link.tagName === 'A' && !link.hasAttribute('data-app-processed')) {
-                        link.setAttribute('data-app-processed', 'true');
-                        var originalHref = link.getAttribute('href');
-                        if (!originalHref || originalHref === '#') {
-                            if (appType === 'facebook') originalHref =
-                                'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr';
-                            else if (appType === 'instagram') originalHref =
-                                'https://www.instagram.com/rebecca_bachata/';
-                            else if (appType === 'venmo') originalHref =
-                                'https://account.venmo.com/u/Rebecca_Rose_Bachata';
-                            else if (appType === 'cashapp') originalHref =
-                                'https://cash.app/$RebeccaRoseBachata';
-                            else originalHref = 'https://';
-                        }
-                        link.addEventListener('click', function(e) {
-                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                    .preventDefault();
-                                return; }
-                            e.preventDefault();
-                            openAppOrWeb(originalHref, appType);
-                        });
-                    } else if (link.tagName !== 'A') {
-                        var fakeHref = (appType === 'facebook' ?
-                            'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr' :
-                            (appType === 'instagram' ? 'https://www.instagram.com/rebecca_bachata/' :
-                                (appType === 'venmo' ? 'https://account.venmo.com/u/Rebecca_Rose_Bachata' :
-                                    (appType === 'cashapp' ? 'https://cash.app/$RebeccaRoseBachata' :
-                                    'https://'))));
-                        link.addEventListener('click', function(e) {
-                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                    .preventDefault();
-                                return; }
-                            e.preventDefault();
-                            openAppOrWeb(fakeHref, appType);
-                        });
+            if (!schemeUrl) return;
+
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            var timeout = setTimeout(function() {
+                if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
+                window.open(fallbackUrl, '_blank');
+            }, 800);
+            iframe.src = schemeUrl;
+            iframe.onload = function() {
+                clearTimeout(timeout);
+                if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
+            };
+            if (isIOS) {
+                window.location.href = schemeUrl;
+            }
+        }
+
+        function setupDeepLinks() {
+            var appLinks = document.querySelectorAll('[data-app]');
+            appLinks.forEach(function(link) {
+                var appType = link.getAttribute('data-app');
+                if (!appType) return;
+                if (link.tagName === 'A' && !link.hasAttribute('data-app-processed')) {
+                    link.setAttribute('data-app-processed', 'true');
+                    var originalHref = link.getAttribute('href');
+                    if (!originalHref || originalHref === '#') {
+                        if (appType === 'facebook') originalHref =
+                            'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr';
+                        else if (appType === 'instagram') originalHref =
+                            'https://www.instagram.com/rebecca_bachata/';
+                        else if (appType === 'venmo') originalHref =
+                            'https://account.venmo.com/u/Rebecca_Rose_Bachata';
+                        else if (appType === 'cashapp') originalHref =
+                            'https://cash.app/$RebeccaRoseBachata';
+                        else originalHref = 'https://';
                     }
-                });
-            }
+                    link.addEventListener('click', function(e) {
+                        if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
+                                .preventDefault();
+                            return; }
+                        e.preventDefault();
+                        openAppOrWeb(originalHref, appType);
+                    });
+                } else if (link.tagName !== 'A') {
+                    var fakeHref = (appType === 'facebook' ?
+                        'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr' :
+                        (appType === 'instagram' ? 'https://www.instagram.com/rebecca_bachata/' :
+                            (appType === 'venmo' ? 'https://account.venmo.com/u/Rebecca_Rose_Bachata' :
+                                (appType === 'cashapp' ? 'https://cash.app/$RebeccaRoseBachata' :
+                                'https://'))));
+                    link.addEventListener('click', function(e) {
+                        if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
+                                .preventDefault();
+                            return; }
+                        e.preventDefault();
+                        openAppOrWeb(fakeHref, appType);
+                    });
+                }
+            });
+        }
 
-            document.addEventListener('DOMContentLoaded', setupDeepLinks);
-            var observer = new MutationObserver(function() { setupDeepLinks(); });
-            observer.observe(document.body, { childList: true, subtree: true });
-        })();
+        document.addEventListener('DOMContentLoaded', setupDeepLinks);
+        var observer = new MutationObserver(function() { setupDeepLinks(); });
+        observer.observe(document.body, { childList: true, subtree: true });
 
-        // ─── the rest of the original script (main page init, welcome, etc.) ───
+        // ─── main script ───
         document.addEventListener('DOMContentLoaded', function() {
             let paymentModalOpen = false;
             window.paymentModalOpen = false;
@@ -4383,7 +4437,6 @@
             function handlePaymentSelect(type) {
                 const webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
                 const appType = type === 'venmo' ? 'venmo' : 'cashapp';
-                // use the fixed openAppOrWeb from the outer scope
                 if (typeof openAppOrWeb === 'function') {
                     openAppOrWeb(webUrl, appType);
                 } else {
@@ -4502,9 +4555,139 @@
 
             restartAutoDismiss();
 
+            // ─── EVENT PILL ROTATION BY DATE ───
+            function getNextOccurrence(dayName, weekPattern) {
+                // dayName: 'Thu', 'Wed', 'Fri', 'Sat'
+                // weekPattern: 'every', '1st&3rd', '2nd&4th'
+                const now = new Date();
+                const dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+                const targetDay = dayMap[dayName];
+                if (targetDay === undefined) return null;
+
+                let candidate = new Date(now);
+                candidate.setHours(0, 0, 0, 0);
+
+                // Move to the next occurrence of the target day
+                const currentDay = candidate.getDay();
+                let daysToAdd = targetDay - currentDay;
+                if (daysToAdd <= 0) daysToAdd += 7;
+                candidate.setDate(candidate.getDate() + daysToAdd);
+
+                // If 'every', just return this date
+                if (weekPattern === 'every') {
+                    // If the candidate is today but we've already passed the event time, go to next week
+                    const nowH = now.getHours() * 100 + now.getMinutes();
+                    if (daysToAdd === 0 && nowH >= 2200) {
+                        candidate.setDate(candidate.getDate() + 7);
+                    }
+                    return candidate;
+                }
+
+                // For week patterns: find the next occurrence that matches the pattern
+                // We need to check if the candidate's week number in the month matches
+                const getWeekOfMonth = (date) => {
+                    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+                    return Math.ceil((date.getDate() + firstDay) / 7);
+                };
+
+                // Check up to 4 weeks out
+                for (let i = 0; i < 4; i++) {
+                    const checkDate = new Date(candidate);
+                    checkDate.setDate(candidate.getDate() + i * 7);
+                    if (checkDate < now) continue;
+                    const week = getWeekOfMonth(checkDate);
+                    let matches = false;
+                    if (weekPattern === '1st&3rd') {
+                        matches = (week === 1 || week === 3);
+                    } else if (weekPattern === '2nd&4th') {
+                        matches = (week === 2 || week === 4);
+                    } else if (weekPattern === '1st') {
+                        matches = (week === 1);
+                    } else if (weekPattern === '2nd') {
+                        matches = (week === 2);
+                    } else if (weekPattern === '3rd') {
+                        matches = (week === 3);
+                    } else if (weekPattern === '4th') {
+                        matches = (week === 4);
+                    }
+                    if (matches) {
+                        // If it's today but we've passed the event time, go to next occurrence
+                        const nowH = now.getHours() * 100 + now.getMinutes();
+                        if (i === 0 && daysToAdd === 0 && nowH >= 2100) {
+                            continue;
+                        }
+                        return checkDate;
+                    }
+                }
+
+                // Fallback: return the base candidate
+                return candidate;
+            }
+
+            function parseEventKey(key) {
+                // Returns { dayName, weekPattern, label }
+                const map = {
+                    'oldcity': { day: 'Thu', pattern: 'every', label: 'Old City Philly' },
+                    'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
+                    'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Inés' },
+                    'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
+                };
+                return map[key] || null;
+            }
+
+            function sortEventPills() {
+                const container = document.getElementById('welcome-pills-container');
+                if (!container) return;
+                const pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
+                if (pills.length === 0) return;
+
+                // Remove existing "next-dot" elements and "next-event" class
+                document.querySelectorAll('.next-dot').forEach(el => el.remove());
+                pills.forEach(p => p.classList.remove('next-event'));
+
+                // Build array with next occurrence dates
+                const withDates = pills.map(pill => {
+                    const key = pill.getAttribute('data-event-key');
+                    if (!key) return { pill, date: null, key };
+                    const info = parseEventKey(key);
+                    if (!info) return { pill, date: null, key };
+                    const date = getNextOccurrence(info.day, info.pattern);
+                    return { pill, date, key, info };
+                });
+
+                // Filter out null dates and sort
+                const valid = withDates.filter(item => item.date !== null);
+                valid.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+                // Reorder pills in DOM
+                const orderedPills = valid.map(item => item.pill);
+                // Append any pills that didn't have a date (fallback at the end)
+                const unprocessed = withDates.filter(item => item.date === null).map(item => item.pill);
+                orderedPills.push(...unprocessed);
+
+                // Remove all pills from container and re-append in order
+                while (container.firstChild) container.removeChild(container.firstChild);
+                orderedPills.forEach(p => container.appendChild(p));
+
+                // Add a subtle "next" indicator (dot) to the first pill
+                if (orderedPills.length > 0) {
+                    const first = orderedPills[0];
+                    first.classList.add('next-event');
+                    const dot = document.createElement('span');
+                    dot.className = 'next-dot';
+                    dot.setAttribute('aria-label', 'Next event');
+                    first.appendChild(dot);
+                }
+            }
+
+            // ─── the rest of the main page initialization ───
             function initMainPage() {
                 if (mainInitialized) return;
                 mainInitialized = true;
+
+                // Sort event pills by date
+                sortEventPills();
+
                 const navBar = document.getElementById('nav-buttons');
                 const dateSection = document.querySelector('.date-section');
                 if (navBar && dateSection) {
@@ -4943,10 +5126,9 @@
                 }
 
                 function updateDynamicBadge() {
+                    // Remove old "next-class-highlight" class (we use a subtle left border now)
                     const cards = document.querySelectorAll('.link-card');
                     cards.forEach(c => {
-                        const existing = c.querySelector('.next-class-badge');
-                        if (existing) existing.remove();
                         c.classList.remove('next-class-highlight');
                     });
                     let bestCard = null;
@@ -4960,13 +5142,7 @@
                     }
                     if (bestCard) {
                         bestCard.classList.add('next-class-highlight');
-                        let badge = bestCard.querySelector('.next-class-badge');
-                        if (!badge) {
-                            badge = document.createElement('span');
-                            badge.className = 'next-class-badge';
-                            bestCard.appendChild(badge);
-                        }
-                        badge.textContent = getBadgeText(bestDays);
+                        // No text badge — just the left border accent
                     }
                 }
 
@@ -5301,7 +5477,13 @@
                     updateCTASection();
                     updateScheduleDisplay();
                     updateMonthPromo();
+                    sortEventPills();
                 }, 60000);
+
+                // Also re-sort event pills whenever the day changes (every hour)
+                setInterval(() => {
+                    sortEventPills();
+                }, 3600000);
             }
         });
     </script>
