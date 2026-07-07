@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        /* ===== all existing styles remain unchanged ===== */
         :root {
             --primary-blue: #2c5aa0;
             --secondary-blue: #4a7bc1;
@@ -504,40 +503,28 @@
             letter-spacing: 0.02em;
         }
 
-        /* ─── refined "next" indicator: subtle dot instead of "Up Next" badge ─── */
         .welcome-cta-pill.next-event {
             border: 2px solid var(--primary-blue);
             background: linear-gradient(145deg, #f4faff, var(--white));
             box-shadow: 0 8px 24px rgba(44, 90, 160, 0.12);
-            padding-right: var(--space-10);
         }
 
-        .welcome-cta-pill .next-dot {
+        .welcome-cta-pill .up-next-badge {
             position: absolute;
+            top: -12px;
             right: var(--space-4);
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
             background: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.15);
-            animation: pulse-dot 2s infinite ease-in-out;
+            color: var(--white);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            padding: var(--space-1) var(--space-4);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
+            white-space: nowrap;
         }
 
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                transform: translateY(-50%) scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-50%) scale(1.3);
-                opacity: 0.7;
-            }
-        }
-
-        /* ─── "BaiLe Inolvidable" badge ─── */
         .baile-badge {
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
@@ -555,7 +542,6 @@
             line-height: 1.6;
         }
 
-        /* rest of original styles */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -1368,20 +1354,22 @@
             border: 2px solid var(--primary-blue);
             background: linear-gradient(145deg, var(--white), #f4faff);
             box-shadow: 0 18px 35px -8px rgba(44, 90, 160, 0.15);
-            position: relative;
         }
 
-        /* ─── subtle "next" indicator on cards: a small vertical accent bar ─── */
-        .link-card.next-class-highlight::before {
-            content: '';
+        .next-class-badge {
             position: absolute;
-            left: 0;
-            top: 20%;
-            bottom: 20%;
-            width: 5px;
+            top: -12px;
+            right: var(--space-5);
             background: var(--primary-blue);
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            box-shadow: 0 0 12px rgba(44, 90, 160, 0.2);
+            color: var(--white);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            padding: var(--space-2) var(--space-5);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            z-index: 5;
+            white-space: nowrap;
         }
 
         .link-text {
@@ -3602,7 +3590,6 @@
                 padding: var(--space-3) var(--space-4);
                 border-radius: var(--radius-lg);
                 gap: var(--space-1) var(--space-2);
-                padding-right: var(--space-8);
             }
             .welcome-cta-pill .pill-main {
                 font-size: var(--font-sm);
@@ -3610,11 +3597,6 @@
             .welcome-cta-pill .pill-styles {
                 font-size: var(--font-xs);
                 opacity: 0.45;
-            }
-            .welcome-cta-pill .next-dot {
-                right: var(--space-3);
-                width: 8px;
-                height: 8px;
             }
             .modern-event-card {
                 padding: var(--space-5) var(--space-4) var(--space-6);
@@ -3786,18 +3768,12 @@
                 padding: var(--space-2) var(--space-3);
                 min-height: 48px;
                 border-radius: var(--radius-md);
-                padding-right: var(--space-6);
             }
             .welcome-cta-pill .pill-main {
                 font-size: var(--font-xs);
             }
             .welcome-cta-pill .pill-styles {
                 font-size: var(--font-xs);
-            }
-            .welcome-cta-pill .next-dot {
-                right: var(--space-2);
-                width: 6px;
-                height: 6px;
             }
             .top-nav-buttons {
                 padding: var(--space-1) var(--space-2);
@@ -3983,8 +3959,7 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
-                    <!-- Pills are ordered dynamically by the script below -->
-                    <a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
+                    <a href="https://www.facebook.com/share/1DJzspLfEo/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
                         <span class="pill-main">Old City Philly Thu • 9:45pm Lesson • 10:30pm Social</span>
                         <span class="pill-styles">Bachata • Cumbia • Salsa</span>
                     </a>
@@ -3996,7 +3971,7 @@
                         <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://www.facebook.com/share/1GRBTGn9Js/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://www.facebook.com/share/1DytbahssR/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4270,7 +4245,6 @@
     </div>
 
     <script>
-        // ─── FIX: Facebook in-app browser link handling ───
         function isFacebookInAppBrowser() {
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
@@ -4374,7 +4348,6 @@
         var observer = new MutationObserver(function() { setupDeepLinks(); });
         observer.observe(document.body, { childList: true, subtree: true });
 
-        // ─── main script ───
         document.addEventListener('DOMContentLoaded', function() {
             let paymentModalOpen = false;
             window.paymentModalOpen = false;
@@ -4555,10 +4528,7 @@
 
             restartAutoDismiss();
 
-            // ─── EVENT PILL ROTATION BY DATE ───
             function getNextOccurrence(dayName, weekPattern) {
-                // dayName: 'Thu', 'Wed', 'Fri', 'Sat'
-                // weekPattern: 'every', '1st&3rd', '2nd&4th'
                 const now = new Date();
                 const dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
                 const targetDay = dayMap[dayName];
@@ -4567,15 +4537,12 @@
                 let candidate = new Date(now);
                 candidate.setHours(0, 0, 0, 0);
 
-                // Move to the next occurrence of the target day
                 const currentDay = candidate.getDay();
                 let daysToAdd = targetDay - currentDay;
                 if (daysToAdd <= 0) daysToAdd += 7;
                 candidate.setDate(candidate.getDate() + daysToAdd);
 
-                // If 'every', just return this date
                 if (weekPattern === 'every') {
-                    // If the candidate is today but we've already passed the event time, go to next week
                     const nowH = now.getHours() * 100 + now.getMinutes();
                     if (daysToAdd === 0 && nowH >= 2200) {
                         candidate.setDate(candidate.getDate() + 7);
@@ -4583,14 +4550,11 @@
                     return candidate;
                 }
 
-                // For week patterns: find the next occurrence that matches the pattern
-                // We need to check if the candidate's week number in the month matches
                 const getWeekOfMonth = (date) => {
                     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
                     return Math.ceil((date.getDate() + firstDay) / 7);
                 };
 
-                // Check up to 4 weeks out
                 for (let i = 0; i < 4; i++) {
                     const checkDate = new Date(candidate);
                     checkDate.setDate(candidate.getDate() + i * 7);
@@ -4611,7 +4575,6 @@
                         matches = (week === 4);
                     }
                     if (matches) {
-                        // If it's today but we've passed the event time, go to next occurrence
                         const nowH = now.getHours() * 100 + now.getMinutes();
                         if (i === 0 && daysToAdd === 0 && nowH >= 2100) {
                             continue;
@@ -4619,13 +4582,10 @@
                         return checkDate;
                     }
                 }
-
-                // Fallback: return the base candidate
                 return candidate;
             }
 
             function parseEventKey(key) {
-                // Returns { dayName, weekPattern, label }
                 const map = {
                     'oldcity': { day: 'Thu', pattern: 'every', label: 'Old City Philly' },
                     'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
@@ -4641,11 +4601,9 @@
                 const pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
                 if (pills.length === 0) return;
 
-                // Remove existing "next-dot" elements and "next-event" class
-                document.querySelectorAll('.next-dot').forEach(el => el.remove());
+                document.querySelectorAll('.up-next-badge').forEach(el => el.remove());
                 pills.forEach(p => p.classList.remove('next-event'));
 
-                // Build array with next occurrence dates
                 const withDates = pills.map(pill => {
                     const key = pill.getAttribute('data-event-key');
                     if (!key) return { pill, date: null, key };
@@ -4655,37 +4613,30 @@
                     return { pill, date, key, info };
                 });
 
-                // Filter out null dates and sort
                 const valid = withDates.filter(item => item.date !== null);
                 valid.sort((a, b) => a.date.getTime() - b.date.getTime());
 
-                // Reorder pills in DOM
                 const orderedPills = valid.map(item => item.pill);
-                // Append any pills that didn't have a date (fallback at the end)
                 const unprocessed = withDates.filter(item => item.date === null).map(item => item.pill);
                 orderedPills.push(...unprocessed);
 
-                // Remove all pills from container and re-append in order
                 while (container.firstChild) container.removeChild(container.firstChild);
                 orderedPills.forEach(p => container.appendChild(p));
 
-                // Add a subtle "next" indicator (dot) to the first pill
                 if (orderedPills.length > 0) {
                     const first = orderedPills[0];
                     first.classList.add('next-event');
-                    const dot = document.createElement('span');
-                    dot.className = 'next-dot';
-                    dot.setAttribute('aria-label', 'Next event');
-                    first.appendChild(dot);
+                    const badge = document.createElement('span');
+                    badge.className = 'up-next-badge';
+                    badge.textContent = '⬆ Up Next';
+                    first.appendChild(badge);
                 }
             }
 
-            // ─── the rest of the main page initialization ───
             function initMainPage() {
                 if (mainInitialized) return;
                 mainInitialized = true;
 
-                // Sort event pills by date
                 sortEventPills();
 
                 const navBar = document.getElementById('nav-buttons');
@@ -5126,9 +5077,10 @@
                 }
 
                 function updateDynamicBadge() {
-                    // Remove old "next-class-highlight" class (we use a subtle left border now)
                     const cards = document.querySelectorAll('.link-card');
                     cards.forEach(c => {
+                        const existing = c.querySelector('.next-class-badge');
+                        if (existing) existing.remove();
                         c.classList.remove('next-class-highlight');
                     });
                     let bestCard = null;
@@ -5142,7 +5094,13 @@
                     }
                     if (bestCard) {
                         bestCard.classList.add('next-class-highlight');
-                        // No text badge — just the left border accent
+                        let badge = bestCard.querySelector('.next-class-badge');
+                        if (!badge) {
+                            badge = document.createElement('span');
+                            badge.className = 'next-class-badge';
+                            bestCard.appendChild(badge);
+                        }
+                        badge.textContent = getBadgeText(bestDays);
                     }
                 }
 
@@ -5480,7 +5438,6 @@
                     sortEventPills();
                 }, 60000);
 
-                // Also re-sort event pills whenever the day changes (every hour)
                 setInterval(() => {
                     sortEventPills();
                 }, 3600000);
