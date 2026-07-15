@@ -523,6 +523,16 @@
             text-transform: uppercase;
             box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
             white-space: nowrap;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .welcome-cta-pill .up-next-badge.today-badge {
+            background: #e67e22;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
+        }
+        .welcome-cta-pill .up-next-badge.day-name-badge {
+            background: var(--primary-blue);
         }
 
         .baile-badge {
@@ -3903,6 +3913,18 @@
                 padding: var(--space-1) var(--space-3);
             }
         }
+
+        .welcome-cta-pill .up-next-badge.today-badge {
+            background: #e67e22;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
+        }
+        .welcome-cta-pill .up-next-badge.day-name-badge {
+            background: var(--primary-blue);
+        }
+        .welcome-cta-pill .up-next-badge.up-next-badge {
+            background: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
+        }
     </style>
 </head>
 <body class="welcome-active no-scroll">
@@ -3959,7 +3981,7 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
-                    <a href="https://www.facebook.com/share/1DJzspLfEo/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
+                    <a href="https://facebook.com/events/s/noche-de-baile-ft-djmx/1717085946277013/" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
                         <span class="pill-main">Old City Philly Thu • 9:45pm Lesson • 10:30pm Social</span>
                         <span class="pill-styles">Bachata • Cumbia • Salsa</span>
                     </a>
@@ -3967,11 +3989,11 @@
                         <span class="pill-main">Ardmore Salsa Nights (2nd &amp; 4th Sat) • 9:15pm Lesson • 10:00pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
                     </a>
-                    <a href="https://www.facebook.com/share/18yCxjQArB/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
+                    <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
                         <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://www.facebook.com/share/1DytbahssR/?mibextid=wwXIfr" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://facebook.com/events/s/salsa-en-blanco-at-sor-ynez/1294583906080939/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4544,7 +4566,7 @@
 
                 if (weekPattern === 'every') {
                     const nowH = now.getHours() * 100 + now.getMinutes();
-                    if (daysToAdd === 0 && nowH >= 2200) {
+                    if (daysToAdd === 0 && nowH >= 2300) {
                         candidate.setDate(candidate.getDate() + 7);
                     }
                     return candidate;
@@ -4576,12 +4598,13 @@
                     }
                     if (matches) {
                         const nowH = now.getHours() * 100 + now.getMinutes();
-                        if (i === 0 && daysToAdd === 0 && nowH >= 2100) {
+                        if (i === 0 && daysToAdd === 0 && nowH >= 2300) {
                             continue;
                         }
                         return checkDate;
                     }
                 }
+
                 return candidate;
             }
 
@@ -4593,6 +4616,15 @@
                     'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
                 };
                 return map[key] || null;
+            }
+
+            function getBadgeTextForPill(daysUntil) {
+                if (daysUntil === 0) return 'Today';
+                if (daysUntil === 1) return 'Tomorrow';
+                const now = new Date();
+                const target = new Date();
+                target.setDate(now.getDate() + daysUntil);
+                return target.toLocaleDateString('en-US', { weekday: 'short' });
             }
 
             function sortEventPills() {
@@ -4626,9 +4658,37 @@
                 if (orderedPills.length > 0) {
                     const first = orderedPills[0];
                     first.classList.add('next-event');
+
+                    const key = first.getAttribute('data-event-key');
+                    let daysUntil = 7;
+                    if (key) {
+                        const info = parseEventKey(key);
+                        if (info) {
+                            const date = getNextOccurrence(info.day, info.pattern);
+                            if (date) {
+                                const now = new Date();
+                                now.setHours(0, 0, 0, 0);
+                                const diffTime = date.getTime() - now.getTime();
+                                daysUntil = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                if (daysUntil < 0) daysUntil = 0;
+                            }
+                        }
+                    }
+
                     const badge = document.createElement('span');
                     badge.className = 'up-next-badge';
-                    badge.textContent = '⬆ Up Next';
+
+                    const badgeText = getBadgeTextForPill(daysUntil);
+                    badge.textContent = badgeText;
+
+                    if (badgeText === 'Today') {
+                        badge.classList.add('today-badge');
+                    } else if (badgeText === 'Tomorrow' || badgeText === 'Up Next') {
+                        badge.classList.add('up-next-badge');
+                    } else {
+                        badge.classList.add('day-name-badge');
+                    }
+
                     first.appendChild(badge);
                 }
             }
