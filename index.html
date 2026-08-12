@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Rebecca & Daniel | Professional Dance Instruction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -22,12 +22,16 @@
             --lighter-bg: #eaf0fa;
             --border-light: #eef2f6;
             --border-medium: #dde3ed;
-            --shadow-sm: 0 4px 12px rgba(44, 90, 160, 0.04);
-            --shadow-md: 0 8px 24px rgba(44, 90, 160, 0.06);
-            --shadow-lg: 0 16px 40px rgba(44, 90, 160, 0.08);
-            --shadow-xl: 0 24px 56px rgba(44, 90, 160, 0.10);
+            --shadow-sm: 0 4px 14px rgba(44, 90, 160, 0.05);
+            --shadow-md: 0 8px 28px rgba(44, 90, 160, 0.07);
+            --shadow-lg: 0 16px 44px rgba(44, 90, 160, 0.09);
+            --shadow-xl: 0 24px 60px rgba(44, 90, 160, 0.11);
             --gradient-blue: linear-gradient(135deg, #2c5aa0, #4a7bc1);
             --gradient-dark: linear-gradient(135deg, #1a3a6c, #2c5aa0);
+            --gradient-warm: linear-gradient(135deg, #f59e0b, #d97706);
+            --gradient-cycle: linear-gradient(135deg, #0f766e, #14b8a6);
+            --gradient-card: linear-gradient(145deg, #ffffff, #f8faff);
+            --gradient-card-hover: linear-gradient(145deg, #ffffff, #f0f6ff);
             --space-1: 4px;
             --space-2: 8px;
             --space-3: 12px;
@@ -42,36 +46,46 @@
             --space-12: 48px;
             --space-14: 56px;
             --space-16: 64px;
-            --font-xs: 0.75rem;
-            --font-sm: 0.875rem;
-            --font-base: 1rem;
-            --font-md: 1.125rem;
-            --font-lg: 1.25rem;
-            --font-xl: 1.5rem;
-            --font-2xl: 1.75rem;
-            --font-3xl: 2rem;
-            --font-4xl: 2.5rem;
-            --font-5xl: 3rem;
-            --font-6xl: 3.5rem;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            --radius-2xl: 24px;
-            --radius-3xl: 28px;
-            --radius-4xl: 32px;
+
+            --font-xs: 0.8rem;
+            --font-sm: 0.95rem;
+            --font-base: 1.2rem;
+            --font-md: 1.35rem;
+            --font-lg: 1.6rem;
+            --font-xl: 1.85rem;
+            --font-2xl: 2.1rem;
+            --font-3xl: 2.6rem;
+            --font-4xl: 3.1rem;
+            --font-5xl: 3.7rem;
+            --font-6xl: 4.3rem;
+
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --radius-xl: 22px;
+            --radius-2xl: 26px;
+            --radius-3xl: 30px;
+            --radius-4xl: 36px;
             --radius-pill: 60px;
             --radius-full: 9999px;
-            --btn-height: 56px;
-            --btn-height-sm: 48px;
-            --btn-pad-x: 28px;
-            --btn-pad-x-sm: 20px;
+
+            --btn-height-lg: 62px;
+            --btn-height-md: 54px;
+            --btn-height-sm: 46px;
+            --btn-pad-x-lg: 38px;
+            --btn-pad-x-md: 28px;
+            --btn-pad-x-sm: 22px;
+            --btn-font-lg: 1.1rem;
+            --btn-font-md: 1rem;
+            --btn-font-sm: 0.9rem;
             --btn-radius: var(--radius-pill);
-            --card-padding: var(--space-8);
+
+            --card-padding: var(--space-7);
             --card-radius: var(--radius-3xl);
             --card-shadow: var(--shadow-md);
             --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition: 0.3s var(--ease);
+            --scroll-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
         * {
@@ -82,14 +96,17 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-size: var(--font-base);
-            line-height: 1.7;
+            line-height: 1.75;
             color: var(--text-medium);
-            background: linear-gradient(135deg, #f0f5fc, #e6edf7);
+            background: linear-gradient(145deg, #f0f5fc, #e6edf7);
             min-height: 100vh;
             padding: var(--space-5) var(--space-6) var(--space-8);
             -webkit-font-smoothing: antialiased;
@@ -98,7 +115,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
         }
 
         h1,
@@ -135,7 +152,30 @@
         .section-title {
             font-weight: 800;
             letter-spacing: -0.01em;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 110px;
+            font-size: clamp(var(--font-2xl), 4.2vw, var(--font-4xl));
+            transition: opacity 0.4s ease;
+            margin: var(--space-12) 0 var(--space-6);
+            text-align: center;
+            position: relative;
+            display: block;
+            width: 100%;
+            color: var(--dark-blue);
+            padding-bottom: var(--space-5);
+            line-height: 1.3;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-blue);
+            border-radius: var(--radius-sm);
+            opacity: 0.7;
         }
 
         body.no-scroll {
@@ -147,9 +187,9 @@
             max-width: 1200px;
             background: var(--white);
             border-radius: var(--radius-4xl);
-            padding: var(--space-7) var(--space-10) var(--space-12);
+            padding: var(--space-8) var(--space-10) var(--space-12);
             box-shadow: var(--shadow-xl);
-            border: 1px solid rgba(44, 90, 160, 0.05);
+            border: 1px solid rgba(44, 90, 160, 0.04);
             transition: filter 0.5s ease, opacity 0.5s ease;
             position: relative;
             z-index: 10;
@@ -162,8 +202,8 @@
             width: 100%;
             height: 100%;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -193,16 +233,16 @@
         }
 
         .welcome-title {
-            font-size: clamp(2.6rem, 7vw, 4rem);
+            font-size: clamp(3.2rem, 7vw, 4.6rem);
             font-weight: 800;
             color: var(--dark);
             margin-bottom: var(--space-5);
             letter-spacing: -0.02em;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .welcome-social-prompt {
-            font-size: var(--font-lg);
+            font-size: var(--font-xl);
             color: #1e2f40;
             margin-bottom: var(--space-8);
             font-weight: 400;
@@ -258,7 +298,7 @@
             transition: opacity 0.2s ease, color 0.2s ease;
             letter-spacing: 0.2px;
             line-height: 1.4;
-            min-height: 40px;
+            min-height: 44px;
             margin-left: auto;
             align-self: center;
             justify-content: flex-end;
@@ -280,8 +320,8 @@
         }
 
         .app-icon {
-            width: 120px;
-            height: 120px;
+            width: 124px;
+            height: 124px;
             border-radius: var(--radius-3xl);
             display: flex;
             flex-direction: column;
@@ -298,12 +338,12 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.94));
             backdrop-filter: blur(20px);
             border: 2px solid transparent;
-            min-width: 56px;
-            min-height: 56px;
+            min-width: 60px;
+            min-height: 60px;
         }
 
         .app-icon:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
         .app-icon::before {
@@ -324,7 +364,7 @@
         }
 
         .app-icon i {
-            font-size: 48px;
+            font-size: 50px;
             margin-bottom: var(--space-3);
             z-index: 2;
             position: relative;
@@ -435,7 +475,7 @@
         }
 
         .welcome-pills-subheading {
-            font-size: var(--font-lg);
+            font-size: var(--font-md);
             color: #1f3a57;
             margin-top: var(--space-6);
             font-weight: 400;
@@ -459,7 +499,7 @@
             background: var(--white);
             border-radius: var(--radius-xl);
             padding: var(--space-4) var(--space-7);
-            min-height: 68px;
+            min-height: 72px;
             width: 100%;
             max-width: 720px;
             box-shadow: 0 2px 8px rgba(44, 90, 160, 0.03), 0 0 0 1px rgba(44, 90, 160, 0.04);
@@ -501,6 +541,34 @@
             opacity: 0.5;
             display: inline;
             letter-spacing: 0.02em;
+        }
+
+        .welcome-cta-pill .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(44, 90, 160, 0.10);
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: var(--font-xs);
+            padding: 0 var(--space-3);
+            border-radius: var(--radius-pill);
+            line-height: 2;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            border: 1px solid rgba(44, 90, 160, 0.06);
+            text-transform: lowercase;
+        }
+
+        .welcome-cta-pill .pill-badge.next-week-badge {
+            background: rgba(44, 90, 160, 0.08);
+            color: var(--primary-blue);
+        }
+
+        .welcome-cta-pill .pill-badge.this-week-badge {
+            background: rgba(44, 90, 160, 0.15);
+            color: var(--dark-blue);
+            border-color: rgba(44, 90, 160, 0.15);
         }
 
         .welcome-cta-pill.next-event {
@@ -639,7 +707,7 @@
             color: var(--dark);
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 70px;
+            min-height: 74px;
         }
 
         .payment-option-btn i {
@@ -693,7 +761,7 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
             border: 1px solid rgba(44, 90, 160, 0.12);
             pointer-events: none;
-            min-height: 42px;
+            min-height: 46px;
             cursor: pointer;
             transform: scale(0);
             opacity: 0;
@@ -731,10 +799,10 @@
             align-items: center;
             gap: var(--space-2);
             transition: all 0.3s ease;
-            min-width: 160px;
+            min-width: 170px;
             justify-content: center;
             line-height: 1.5;
-            min-height: 46px;
+            min-height: 50px;
         }
 
         .share-main-btn i {
@@ -773,12 +841,14 @@
         .section-separator {
             height: 2px;
             width: 80%;
-            margin: var(--space-14) auto;
-            background: linear-gradient(90deg, transparent, rgba(44, 90, 160, 0.12), transparent);
+            max-width: 400px;
+            margin: var(--space-12) auto;
+            background: linear-gradient(90deg, transparent, rgba(44, 90, 160, 0.10), transparent);
             border: none;
             opacity: 0;
             transform: scaleX(0.3);
             transition: all 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .section-separator.visible {
@@ -790,6 +860,7 @@
             opacity: 0;
             transform: translateY(15px);
             transition: all 0.4s ease-out;
+            will-change: transform, opacity;
         }
 
         .stagger-children.visible>* {
@@ -901,67 +972,42 @@
         }
 
         h1#main-title {
-            font-size: clamp(2.6rem, 7vw, 3.8rem);
+            font-size: clamp(3rem, 6.5vw, 4.2rem);
             font-weight: 800;
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-4);
             letter-spacing: 0.5px;
             color: var(--dark);
             position: relative;
             display: inline-block;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .tagline {
-            font-size: clamp(var(--font-md), 2.5vw, var(--font-xl));
+            font-size: clamp(var(--font-md), 2.2vw, var(--font-xl));
             font-weight: 400;
             color: var(--text-medium);
-            margin: var(--space-5) auto 0;
+            margin: var(--space-4) auto 0;
             max-width: 750px;
             line-height: 1.7;
         }
 
         .divider {
             height: 4px;
-            width: 120px;
+            width: 100px;
             background: var(--gradient-blue);
             border-radius: var(--radius-sm);
-            margin: var(--space-6) auto;
-            opacity: 0.7;
-        }
-
-        .section-title {
-            font-size: clamp(var(--font-3xl), 4.5vw, var(--font-5xl));
-            font-weight: 800;
-            margin: var(--space-12) 0 var(--space-7);
-            text-align: center;
-            position: relative;
-            display: block;
-            width: 100%;
-            color: var(--dark-blue);
-            padding-bottom: var(--space-5);
-            scroll-margin-top: 100px;
-            line-height: 1.3;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 4px;
-            background: var(--gradient-blue);
-            border-radius: var(--radius-sm);
-            opacity: 0.8;
+            margin: var(--space-5) auto;
+            opacity: 0.6;
         }
 
         .content {
-            padding: 0 var(--space-2) var(--space-4);
+            padding: 0 var(--space-1) var(--space-3);
         }
 
         .top-nav-buttons {
-            transition: opacity 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.35s ease, transform 0.25s ease;
+            transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                visibility 0.55s ease,
+                transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(16px);
             border-radius: var(--radius-3xl);
@@ -977,6 +1023,7 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            will-change: transform, opacity, visibility;
         }
 
         .top-nav-buttons::-webkit-scrollbar {
@@ -1025,7 +1072,10 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translateX(-50%) translateY(-8px);
+            transform: translateX(-50%) translateY(-18px) scale(0.97);
+            transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                visibility 0.55s ease,
+                transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .nav-btn {
@@ -1043,7 +1093,7 @@
             gap: var(--space-2);
             position: relative;
             overflow: hidden;
-            min-height: 46px;
+            min-height: 50px;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -1088,7 +1138,7 @@
         }
 
         .community-moved-section {
-            margin: var(--space-7) auto var(--space-10);
+            margin: var(--space-6) auto var(--space-10);
             text-align: center;
         }
 
@@ -1109,7 +1159,7 @@
             box-shadow: 0 6px 14px rgba(44, 90, 160, 0.08);
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             line-height: 1.5;
-            min-height: 38px;
+            min-height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1180,8 +1230,8 @@
         }
 
         .share-bubble {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(8px);
@@ -1230,25 +1280,11 @@
             pointer-events: none;
         }
 
-        .date-section {
-            text-align: right;
-            margin: 0 0 var(--space-7) auto;
-            padding: var(--space-2) var(--space-5);
-            background: rgba(44, 90, 160, 0.04);
-            border-radius: var(--radius-pill);
-            display: inline-block;
-            clear: both;
-            color: var(--text-medium);
-            font-weight: 500;
-            font-size: var(--font-sm);
-            line-height: 1.4;
-        }
-
         .class-cta-container {
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            background: linear-gradient(145deg, #f0f9ff, #e0f2fe);
             border-radius: var(--radius-3xl);
-            padding: var(--space-9) var(--space-11);
-            margin: var(--space-9) 0 var(--space-11);
+            padding: var(--space-9) var(--space-10);
+            margin: var(--space-8) 0 var(--space-10);
             display: flex;
             flex-direction: column;
             color: var(--dark);
@@ -1257,17 +1293,17 @@
             border: 1px solid #dbeafe;
             position: relative;
             overflow: hidden;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 110px;
         }
 
         .cta-header {
             font-size: var(--font-xl);
             font-weight: 600;
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-4);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-5);
+            gap: var(--space-4);
             color: var(--primary-blue);
             line-height: 1.4;
             flex-wrap: wrap;
@@ -1289,20 +1325,21 @@
         }
 
         .cta-action {
-            font-size: var(--font-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
-            padding: var(--space-3) var(--space-6);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
             background: var(--gradient-blue);
             color: var(--white);
-            border-radius: var(--radius-pill);
+            border-radius: var(--btn-radius);
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 8px 22px rgba(44, 90, 160, 0.1);
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: var(--space-3);
-            min-height: var(--btn-height);
             text-decoration: none;
             border: none;
             line-height: 1.5;
@@ -1333,85 +1370,59 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: var(--space-8);
-            margin: var(--space-11) 0;
+            margin: var(--space-8) 0 var(--space-10);
         }
 
         .link-card {
-            background: var(--white);
-            border-radius: var(--radius-4xl);
-            padding: var(--space-7) var(--space-7) var(--space-8);
+            background: var(--gradient-card);
+            border-radius: var(--radius-3xl);
+            padding: 0;
             border: 1px solid rgba(44, 90, 160, 0.06);
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             cursor: default;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 24px rgba(0, 20, 40, 0.04);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.03);
             text-decoration: none;
             min-height: auto;
-            backdrop-filter: blur(2px);
             line-height: 1.5;
         }
 
         .link-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -8px rgba(44, 90, 160, 0.10);
-            border-color: rgba(44, 90, 160, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -8px rgba(44, 90, 160, 0.12);
+            border-color: rgba(44, 90, 160, 0.15);
+            background: var(--gradient-card-hover);
         }
 
-        .link-card.next-class-highlight {
-            border: 2px solid var(--primary-blue);
-            background: linear-gradient(145deg, var(--white), #f4faff);
-            box-shadow: 0 18px 35px -8px rgba(44, 90, 160, 0.15);
-        }
-
-        .next-class-badge {
-            position: absolute;
-            top: -12px;
-            right: var(--space-5);
-            background: var(--primary-blue);
-            color: var(--white);
-            font-size: var(--font-xs);
-            font-weight: 700;
-            padding: var(--space-2) var(--space-5);
-            border-radius: var(--radius-pill);
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            z-index: 5;
-            white-space: nowrap;
-        }
-
-        .link-text {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .studio-info {
+        .link-card .card-header {
+            padding: var(--space-6) var(--space-7) var(--space-4);
+            background: linear-gradient(145deg, #f8fbff, #f0f6fe);
+            border-bottom: 1px solid rgba(44, 90, 160, 0.06);
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: var(--space-5);
-            gap: var(--space-3);
+            gap: var(--space-4);
             flex-wrap: wrap;
         }
 
-        .studio-name-address {
+        .link-card .card-header .studio-name-address {
             flex: 1;
             min-width: 0;
         }
 
-        .link-title {
-            font-size: var(--font-2xl);
+        .link-card .link-title {
+            font-size: var(--font-xl);
             font-weight: 800;
-            margin-bottom: var(--space-2);
             color: var(--dark-blue);
             letter-spacing: -0.02em;
             line-height: 1.2;
+            margin-bottom: var(--space-2);
         }
 
-        .link-subtitle {
+        .link-card .link-subtitle {
             font-size: var(--font-sm);
             color: var(--text-light);
             line-height: 1.6;
@@ -1419,141 +1430,171 @@
             word-break: break-word;
         }
 
-        .link-subtitle a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            border-bottom: 1px dotted rgba(44, 90, 160, 0.3);
-            transition: border-color 0.2s;
-        }
-
-        .link-subtitle a:hover {
-            border-bottom-color: var(--primary-blue);
-        }
-
-        .address-link {
+        .link-card .address-link {
             color: var(--primary-blue);
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 2px solid rgba(44, 90, 160, 0.2);
+            border-bottom: 2px solid rgba(44, 90, 160, 0.15);
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
             background: rgba(44, 90, 160, 0.04);
-            padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
+            padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
             border-radius: var(--radius-pill);
-            font-size: var(--font-sm);
+            font-size: var(--font-xs);
             word-break: break-word;
         }
 
-        .address-link i {
-            font-size: var(--font-md);
+        .link-card .address-link i {
+            font-size: var(--font-sm);
             color: var(--primary-blue);
             background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
             padding: var(--space-1);
         }
 
-        .address-link:hover {
-            background: rgba(44, 90, 160, 0.08);
+        .link-card .address-link:hover {
+            background: rgba(44, 90, 160, 0.10);
             border-bottom-color: var(--primary-blue);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
-        .location-icons {
+        .link-card .location-icons {
             display: flex;
             gap: var(--space-2);
             flex-shrink: 0;
-            margin-top: var(--space-1);
+            align-items: center;
         }
 
-        .location-icon {
+        .link-card .location-icon {
             width: 42px;
             height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: var(--font-md);
+            font-size: var(--font-base);
             color: var(--white);
-            transition: transform 0.2s ease, background 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             min-width: 42px;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
         }
 
-        .location-icon:hover {
-            transform: scale(1.08);
+        .link-card .location-icon:hover {
+            transform: scale(1.10);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
         }
 
-        .facebook-icon {
+        .link-card .facebook-icon {
             background: #3b5998;
         }
-        .maps-icon {
+        .link-card .maps-icon {
             background: #34a853;
         }
 
-        .month-promo {
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: #d43f3f;
-            margin-right: var(--space-2);
-            line-height: 1.2;
-            background: rgba(212, 63, 63, 0.06);
-            padding: var(--space-1) var(--space-3);
+        .link-card .cycle-badge-wrap {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+            padding: var(--space-2) var(--space-4);
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.06), rgba(20, 184, 166, 0.10));
             border-radius: var(--radius-pill);
-            flex-shrink: 0;
+            border: 1px solid rgba(15, 118, 110, 0.12);
+            width: fit-content;
         }
 
-        .schedule-badge {
+        .link-card .cycle-badge-wrap .cycle-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-cycle);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.2);
+        }
+
+        .link-card .cycle-badge-wrap .cycle-text {
+            font-weight: 700;
+            font-size: var(--font-sm);
+            color: #0f766e;
+            letter-spacing: -0.01em;
+        }
+
+        .link-card .cycle-badge-wrap .cycle-text strong {
+            font-weight: 800;
+            color: #0d5e57;
+        }
+
+        .link-card .cycle-badge-wrap .cycle-sub {
+            font-weight: 400;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-left: var(--space-1);
+        }
+
+        .link-card .card-body {
+            padding: var(--space-5) var(--space-7) var(--space-6);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-card .schedule-badge {
             border-radius: var(--radius-pill);
             background: #f0f7fa;
             border: none;
             color: var(--dark-blue);
             font-size: var(--font-xs);
             font-weight: 700;
-            padding: var(--space-2) var(--space-5);
+            padding: var(--space-1) var(--space-5);
             letter-spacing: 0.3px;
             display: inline-block;
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-4);
+            align-self: flex-start;
         }
 
-        .schedule-list {
-            margin-top: var(--space-2);
+        .link-card .schedule-list {
             display: flex;
             flex-direction: column;
             gap: var(--space-4);
         }
 
-        .schedule-day-group {
+        .link-card .schedule-day-group {
             page-break-inside: avoid;
             break-inside: avoid;
-            background: var(--white);
-            padding: var(--space-4) var(--space-5);
+            background: rgba(255, 255, 255, 0.6);
+            padding: var(--space-3) var(--space-4);
             border-radius: var(--radius-2xl);
-            border: 1px solid rgba(44, 90, 160, 0.05);
+            border: 1px solid rgba(44, 90, 160, 0.04);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.01);
             transition: all 0.2s ease;
         }
 
-        .schedule-day-group:hover {
-            background: #fafcff;
+        .link-card .schedule-day-group:hover {
+            background: rgba(255, 255, 255, 0.9);
             border-color: rgba(44, 90, 160, 0.08);
         }
 
-        .schedule-day-header {
+        .link-card .schedule-day-header {
             font-weight: 800;
             color: #1f4a7a;
             margin-bottom: var(--space-3);
             padding-bottom: var(--space-2);
-            font-size: var(--font-lg);
+            font-size: var(--font-md);
             letter-spacing: -0.2px;
             border-bottom: 2px solid #e2edf7;
             display: inline-block;
             line-height: 1.2;
         }
 
-        .schedule-class {
+        .link-card .schedule-class {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1567,21 +1608,21 @@
             border: 1px solid transparent;
             gap: var(--space-2);
             flex-wrap: wrap;
-            min-height: 44px;
+            min-height: 46px;
         }
 
-        .schedule-class:last-child {
+        .link-card .schedule-class:last-child {
             margin-bottom: 0;
         }
 
-        .schedule-class:hover {
+        .link-card .schedule-class:hover {
             background: #f5faff;
             border-color: rgba(44, 90, 160, 0.08);
         }
 
-        .class-time {
+        .link-card .class-time {
             font-weight: 700;
-            min-width: 80px;
+            min-width: 78px;
             color: #1e3a5f;
             font-size: var(--font-xs);
             background: #e9f2fa;
@@ -1592,7 +1633,7 @@
             flex-shrink: 0;
         }
 
-        .class-name {
+        .link-card .class-name {
             flex: 1;
             color: #1e293b;
             font-weight: 600;
@@ -1605,8 +1646,9 @@
             padding-left: var(--space-2);
         }
 
-        .class-badge {
-            display: inline-block;
+        .link-card .class-badge {
+            display: inline-flex;
+            align-items: center;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
             font-size: var(--font-xs);
@@ -1618,40 +1660,41 @@
             white-space: nowrap;
         }
 
-        .badge-intro {
+        .link-card .badge-intro {
             background: #d9f0e3;
             color: #0b5e42;
         }
-        .badge-new {
+        .link-card .badge-new {
             background: #ffe2e2;
             color: #b91c1c;
         }
-        .badge-cycle {
-            background: linear-gradient(135deg, #2c5aa0, #4a7bc1);
+        .link-card .badge-cycle {
+            background: var(--gradient-cycle);
             color: var(--white);
             border: none;
             font-weight: 700;
             padding: var(--space-1) var(--space-3);
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.2);
         }
 
-        .salsa-text,
-        .bachata-text {
+        .link-card .salsa-text,
+        .link-card .bachata-text {
             font-weight: 700;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
             display: inline-block;
             font-size: var(--font-xs);
         }
-        .salsa-text {
+        .link-card .salsa-text {
             color: #b14a4a;
             background: rgba(177, 74, 74, 0.08);
         }
-        .bachata-text {
+        .link-card .bachata-text {
             color: var(--primary-blue);
             background: rgba(44, 90, 160, 0.08);
         }
 
-        .bachata-sensual {
+        .link-card .bachata-sensual {
             color: #9b59b6;
             font-weight: 700;
             background: rgba(155, 89, 182, 0.08);
@@ -1659,7 +1702,7 @@
             border-radius: var(--radius-pill);
             display: inline-block;
         }
-        .bachata-advance {
+        .link-card .bachata-advance {
             color: #16a085;
             font-weight: 700;
             background: rgba(22, 160, 133, 0.08);
@@ -1667,7 +1710,7 @@
             border-radius: var(--radius-pill);
             display: inline-block;
         }
-        .bachata-elite {
+        .link-card .bachata-elite {
             color: #e67e22;
             font-weight: 700;
             background: rgba(230, 126, 34, 0.08);
@@ -1676,81 +1719,101 @@
             display: inline-block;
         }
 
-        .special-note {
+        .link-card .special-note {
             background: rgba(212, 63, 63, 0.04);
             color: #d43f3f;
             font-weight: 500;
             padding: var(--space-3) var(--space-5);
             border-radius: var(--radius-pill);
             display: inline-block;
-            margin-top: var(--space-5);
+            margin-top: var(--space-4);
             font-size: var(--font-sm);
             border: 1px solid rgba(212, 63, 63, 0.12);
+            align-self: flex-start;
         }
 
-        .special-note i {
+        .link-card .special-note i {
             margin-right: var(--space-2);
             color: #d43f3f;
         }
 
-        .cycle-message {
-            font-size: var(--font-sm);
-            color: var(--dark-blue);
-            margin: var(--space-3) 0 var(--space-2);
-            padding: var(--space-2) 0;
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            border-bottom: 1px dashed rgba(44, 90, 160, 0.15);
-            padding-bottom: var(--space-2);
+        .link-card .month-promo {
+            font-size: var(--font-xl);
+            font-weight: 800;
+            color: #d43f3f;
+            line-height: 1.2;
+            background: rgba(212, 63, 63, 0.06);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            flex-shrink: 0;
+            letter-spacing: 0.3px;
         }
 
-        .cycle-message i {
-            font-size: var(--font-md);
-            color: var(--primary-blue);
-            opacity: 0.8;
-        }
-
-        .card-cta {
+        .link-card .card-cta {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-2);
             background: var(--gradient-blue);
             color: var(--white);
             font-weight: 700;
-            font-size: var(--font-base);
-            padding: var(--space-3) var(--space-7);
-            border-radius: var(--radius-pill);
+            font-size: var(--btn-font-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            padding: 0 var(--btn-pad-x-md);
+            border-radius: var(--btn-radius);
             border: none;
-            margin-top: var(--space-6);
+            margin-top: var(--space-5);
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             align-self: flex-start;
             box-shadow: 0 6px 14px rgba(44, 90, 160, 0.10);
-            min-height: var(--btn-height-sm);
+            line-height: 1.5;
         }
 
-        .card-cta i {
+        .link-card .card-cta i {
             font-size: var(--font-sm);
-            transition: transform 0.2s;
+            transition: transform 0.25s ease;
         }
 
-        .card-cta:hover {
+        .link-card .card-cta:hover {
             background: var(--gradient-dark);
             transform: translateY(-3px);
-            box-shadow: 0 12px 22px rgba(44, 90, 160, 0.18);
+            box-shadow: 0 12px 24px rgba(44, 90, 160, 0.18);
         }
 
-        .card-cta:hover i {
-            transform: translateX(5px);
+        .link-card .card-cta:hover i {
+            transform: translateX(6px);
+        }
+
+        .link-card.next-class-highlight {
+            border: 2px solid var(--primary-blue);
+            background: linear-gradient(145deg, #f8fcff, #f0f6fe);
+            box-shadow: 0 18px 40px -8px rgba(44, 90, 160, 0.15);
+        }
+
+        .link-card .next-class-badge {
+            position: absolute;
+            top: -12px;
+            right: var(--space-5);
+            background: var(--gradient-warm);
+            color: var(--white);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            padding: var(--space-1) var(--space-5);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+            z-index: 5;
+            white-space: nowrap;
         }
 
         .instructors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-9);
-            margin: var(--space-11) 0;
+            gap: var(--space-8);
+            margin: var(--space-8) 0 var(--space-10);
         }
 
         .instructor-card {
@@ -1769,7 +1832,7 @@
         }
 
         .instructor-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(44, 90, 160, 0.25);
         }
@@ -1828,7 +1891,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
-            min-height: 60px;
+            min-height: 64px;
         }
 
         .social-link-item:hover {
@@ -1839,8 +1902,8 @@
         }
 
         .social-link-icon {
-            width: 42px;
-            height: 42px;
+            width: 46px;
+            height: 46px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
@@ -1892,14 +1955,15 @@
 
         .announcement-carousel {
             position: relative;
-            margin: var(--space-8) 0 var(--space-12);
+            margin: var(--space-6) 0 var(--space-10);
             overflow: hidden;
             border-radius: var(--radius-3xl);
         }
 
         .carousel-slides {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
         .carousel-slide {
@@ -1910,7 +1974,7 @@
         .modern-event-card {
             background: var(--white);
             border-radius: var(--radius-3xl);
-            padding: var(--space-9) var(--space-8) var(--space-10);
+            padding: var(--space-8) var(--space-8) var(--space-9);
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.02);
             margin: 0;
             border: 1px solid rgba(0, 0, 0, 0.02);
@@ -1934,8 +1998,8 @@
             background: rgba(255, 255, 255, 0.9);
             border: none;
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             font-size: var(--font-lg);
             display: flex;
             align-items: center;
@@ -1971,8 +2035,8 @@
         }
 
         .carousel-indicator {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #cbd5e1;
             border: none;
@@ -1988,7 +2052,7 @@
         .event-title {
             font-size: var(--font-2xl);
             font-weight: 800;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-5);
             color: #1a2b3c;
             line-height: 1.3;
             letter-spacing: -0.01em;
@@ -2014,26 +2078,26 @@
         }
 
         .event-cta-primary {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             background: #1e3a5f;
             color: var(--white);
             text-align: center;
-            padding: var(--space-3) var(--space-5);
-            border-radius: var(--radius-pill);
+            padding: 0 var(--space-5);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            border-radius: var(--btn-radius);
             font-weight: 700;
             letter-spacing: 1.2px;
             text-transform: uppercase;
             text-decoration: none;
-            font-size: var(--font-md);
+            font-size: var(--btn-font-md);
             border: none;
             transition: background 0.15s ease, transform 0.1s;
-            margin: var(--space-6) 0 var(--space-3);
+            margin: var(--space-5) 0 var(--space-3);
             line-height: 1.3;
-            min-height: var(--btn-height);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .event-cta-primary:hover {
@@ -2074,8 +2138,8 @@
         .registration-form {
             background: #fdfdfd;
             border-radius: var(--radius-3xl);
-            padding: var(--space-10) var(--space-10);
-            margin: var(--space-11) 0 var(--space-10);
+            padding: var(--space-9) var(--space-9);
+            margin: var(--space-8) 0 var(--space-10);
             border: 1px solid #e6eefc;
             box-shadow: var(--shadow-md);
             position: relative;
@@ -2085,11 +2149,11 @@
         .form-title {
             font-size: var(--font-3xl);
             font-weight: 800;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-5);
             color: var(--dark);
             text-align: center;
             position: relative;
-            padding-bottom: var(--space-5);
+            padding-bottom: var(--space-4);
             letter-spacing: 0.6px;
             line-height: 1.3;
         }
@@ -2100,16 +2164,16 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 90px;
+            width: 80px;
             height: 4px;
             background: var(--gradient-blue);
             border-radius: var(--radius-sm);
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .partner-notice {
             text-align: center;
-            margin-bottom: var(--space-8);
+            margin-bottom: var(--space-7);
             color: var(--text-medium);
             font-size: var(--font-md);
             font-weight: 400;
@@ -2118,14 +2182,14 @@
         }
 
         .form-group {
-            margin-bottom: var(--space-7);
+            margin-bottom: var(--space-6);
             text-align: left;
             position: relative;
         }
 
         .form-input {
             width: 100%;
-            padding: var(--space-5) var(--space-6);
+            padding: var(--space-4) var(--space-5);
             border-radius: var(--radius-xl);
             border: 1px solid var(--border-medium);
             background: var(--white);
@@ -2154,7 +2218,7 @@
 
         .form-select {
             width: 100%;
-            padding: var(--space-5) var(--space-6);
+            padding: var(--space-4) var(--space-5);
             border-radius: var(--radius-xl);
             border: 1px solid var(--border-medium);
             background: var(--white);
@@ -2163,7 +2227,7 @@
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232c5aa0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right var(--space-6) center;
+            background-position: right var(--space-5) center;
             background-size: 24px;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             -webkit-appearance: none;
@@ -2182,24 +2246,27 @@
             background: var(--gradient-blue);
             color: var(--white);
             border: none;
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-6);
-            font-size: var(--font-md);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-top: var(--space-7);
+            margin-top: var(--space-6);
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             letter-spacing: 0.6px;
-            box-shadow: 0 10px 24px rgba(44, 90, 160, 0.1);
+            box-shadow: 0 10px 24px rgba(44, 90, 160, 0.10);
             border: 1px solid rgba(0, 0, 0, 0.01);
             text-decoration: none;
             text-align: center;
             line-height: 1.5;
-            min-height: var(--btn-height);
         }
 
         .submit-btn:hover {
@@ -2208,7 +2275,7 @@
         }
 
         .participant-form-group {
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
             position: relative;
         }
 
@@ -2216,12 +2283,12 @@
             display: flex;
             justify-content: flex-end;
             gap: var(--space-3);
-            margin: var(--space-3) 0 var(--space-6);
+            margin: var(--space-3) 0 var(--space-5);
         }
 
         .participant-btn {
-            width: 50px;
-            height: 50px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2254,9 +2321,9 @@
         .participant-fields {
             background: rgba(240, 247, 255, 0.4);
             border-radius: var(--radius-xl);
-            padding: var(--space-5);
+            padding: var(--space-4);
             border: 1px solid rgba(44, 90, 160, 0.06);
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -2274,25 +2341,27 @@
 
         .reviews-header {
             text-align: center;
-            margin: var(--space-11) 0 var(--space-5);
+            margin: var(--space-8) 0 var(--space-4);
         }
 
         .reviews-toggle-btn {
             background: var(--gradient-blue);
             color: var(--white);
             border: none;
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-9);
-            font-size: var(--font-md);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             letter-spacing: 0.5px;
-            min-height: var(--btn-height);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-3);
         }
 
@@ -2314,8 +2383,8 @@
         .reviews-section {
             background: #f8fafc;
             border-radius: var(--radius-3xl);
-            padding: var(--space-9);
-            margin: var(--space-11) 0;
+            padding: var(--space-8);
+            margin: var(--space-6) 0 var(--space-10);
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-medium);
             position: relative;
@@ -2341,7 +2410,7 @@
             max-width: 850px;
             margin: 0 auto;
             position: relative;
-            height: 260px;
+            height: 280px;
             overflow: hidden;
         }
 
@@ -2352,7 +2421,7 @@
             width: 100%;
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
-            padding: var(--space-4);
+            padding: var(--space-3);
         }
 
         .review-item.active {
@@ -2364,9 +2433,9 @@
             font-style: italic;
             color: var(--text-medium);
             line-height: 1.7;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-5);
             position: relative;
-            padding: 0 var(--space-10);
+            padding: 0 var(--space-8);
             text-align: center;
         }
 
@@ -2399,7 +2468,7 @@
         .review-stars {
             color: #f59e0b;
             font-size: var(--font-xl);
-            margin: var(--space-4) 0;
+            margin: var(--space-3) 0;
             letter-spacing: 4px;
             text-align: center;
         }
@@ -2408,7 +2477,7 @@
             display: flex;
             justify-content: center;
             gap: var(--space-3);
-            margin-top: var(--space-6);
+            margin-top: var(--space-5);
         }
 
         .review-indicator {
@@ -2428,24 +2497,28 @@
         .reviews-actions {
             display: flex;
             justify-content: center;
-            gap: var(--space-6);
-            margin-top: var(--space-7);
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+            flex-wrap: wrap;
         }
 
         .reviews-action-btn {
             background: transparent;
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-8);
-            font-size: var(--font-base);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             line-height: 1.5;
-            min-height: var(--btn-height-sm);
         }
 
         .reviews-action-btn:hover {
@@ -2466,25 +2539,27 @@
 
         .private-lesson-toggle-container {
             text-align: center;
-            margin: var(--space-9) 0 var(--space-3);
+            margin: var(--space-6) 0 var(--space-3);
         }
 
         .private-lesson-toggle-btn {
             background: var(--gradient-blue);
             color: var(--white);
             border: none;
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-9);
-            font-size: var(--font-md);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             letter-spacing: 0.5px;
-            min-height: var(--btn-height);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-3);
         }
 
@@ -2506,8 +2581,8 @@
         .private-lesson-section {
             background: #f8fafc;
             border-radius: var(--radius-3xl);
-            padding: var(--space-9);
-            margin: var(--space-11) 0;
+            padding: var(--space-8);
+            margin: var(--space-6) 0 var(--space-10);
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-medium);
             position: relative;
@@ -2531,7 +2606,7 @@
 
         .private-lesson-intro {
             text-align: center;
-            margin-bottom: var(--space-7);
+            margin-bottom: var(--space-6);
             font-size: var(--font-md);
             color: var(--text-medium);
             line-height: 1.7;
@@ -2542,22 +2617,26 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: var(--space-4);
-            margin-bottom: var(--space-9);
+            margin-bottom: var(--space-7);
         }
 
         .private-lesson-day {
             background: var(--white);
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-7);
-            font-size: var(--font-base);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             min-width: 130px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-            min-height: var(--btn-height-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .private-lesson-day:hover {
@@ -2575,13 +2654,17 @@
             background: #e2e8f0;
             color: var(--dark-blue);
             border: 2px solid var(--primary-blue);
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-8);
-            font-size: var(--font-sm);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: var(--btn-height-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .private-lesson-close-btn:hover {
@@ -2593,25 +2676,27 @@
 
         .video-toggle-container {
             text-align: center;
-            margin: var(--space-9) 0 var(--space-3);
+            margin: var(--space-6) 0 var(--space-3);
         }
 
         .video-toggle-btn {
             background: var(--gradient-blue);
             color: var(--white);
             border: none;
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-9);
-            font-size: var(--font-md);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             letter-spacing: 0.5px;
-            min-height: var(--btn-height);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-3);
         }
 
@@ -2626,7 +2711,7 @@
         }
 
         .video-library-section {
-            margin: var(--space-11) 0;
+            margin: var(--space-6) 0 var(--space-10);
             position: relative;
             max-height: 1400px;
             opacity: 1;
@@ -2643,20 +2728,24 @@
 
         .video-close-container {
             text-align: center;
-            margin: var(--space-11) 0 var(--space-4);
+            margin: var(--space-8) 0 var(--space-3);
         }
 
         .video-close-btn {
             background: #e2e8f0;
             color: var(--dark-blue);
             border: 2px solid var(--primary-blue);
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-9);
-            font-size: var(--font-sm);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: var(--btn-height-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .video-close-btn:hover {
@@ -2668,7 +2757,7 @@
 
         .video-header {
             text-align: center;
-            margin-bottom: var(--space-9);
+            margin-bottom: var(--space-7);
             position: relative;
         }
 
@@ -2692,7 +2781,7 @@
             height: 4px;
             background: var(--gradient-blue);
             border-radius: var(--radius-sm);
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .video-subtitle {
@@ -2705,8 +2794,8 @@
 
         .tiktok-video-feed {
             position: relative;
-            height: 75vh;
-            max-height: 700px;
+            height: 70vh;
+            max-height: 650px;
             overflow: hidden;
             border-radius: var(--radius-3xl);
             background: #000;
@@ -2741,7 +2830,8 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
         .video-item {
@@ -2833,7 +2923,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: var(--space-8);
+            padding: var(--space-7);
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
             color: var(--white);
             z-index: 10;
@@ -2894,8 +2984,8 @@
             color: var(--white);
             border: none;
             border-radius: 50%;
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2913,7 +3003,7 @@
 
         .video-indicators {
             position: absolute;
-            bottom: var(--space-6);
+            bottom: var(--space-5);
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -2922,8 +3012,8 @@
         }
 
         .video-indicator {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             border: none;
@@ -2941,15 +3031,17 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: var(--space-3);
-            margin-bottom: var(--space-9);
+            margin-bottom: var(--space-7);
         }
 
         .category-btn {
             background: transparent;
             border: 1px solid rgba(44, 90, 160, 0.2);
-            border-radius: var(--radius-pill);
-            padding: var(--space-2) var(--space-6);
-            font-size: var(--font-sm);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-sm);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             font-weight: 600;
             color: var(--dark-blue);
             cursor: pointer;
@@ -2958,7 +3050,9 @@
             overflow: hidden;
             z-index: 1;
             line-height: 1.5;
-            min-height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .category-btn::before {
@@ -2994,25 +3088,27 @@
 
         .video-cta {
             text-align: center;
-            margin-top: var(--space-11);
+            margin-top: var(--space-8);
         }
 
         .video-cta-button {
             background: var(--gradient-blue);
             color: var(--white);
             border: none;
-            border-radius: var(--radius-pill);
-            padding: var(--space-3) var(--space-9);
-            font-size: var(--font-md);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-md);
+            min-height: var(--btn-height-md);
+            font-size: var(--btn-font-md);
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 10px 22px rgba(44, 90, 160, 0.12);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-2);
             line-height: 1.5;
-            min-height: var(--btn-height);
         }
 
         .video-cta-button:hover {
@@ -3075,7 +3171,7 @@
         }
 
         .language-toggle {
-            margin: var(--space-7) auto 0;
+            margin: var(--space-6) auto 0;
             display: flex;
             justify-content: center;
             gap: var(--space-4);
@@ -3084,16 +3180,20 @@
         .lang-btn {
             background: transparent;
             border: 1px solid var(--border-medium);
-            border-radius: var(--radius-pill);
-            padding: var(--space-2) var(--space-6);
-            font-size: var(--font-sm);
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-sm);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
             color: var(--text-light);
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             min-width: 110px;
-            min-height: 46px;
             line-height: 1.5;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .lang-btn.active {
@@ -3109,8 +3209,8 @@
 
         footer {
             text-align: center;
-            margin-top: var(--space-12);
-            padding-top: var(--space-8);
+            margin-top: var(--space-10);
+            padding-top: var(--space-7);
             border-top: 1px solid #e6eefc;
             color: var(--text-medium);
         }
@@ -3123,26 +3223,26 @@
 
         #copyright {
             font-weight: 500;
-            margin-top: var(--space-5);
+            margin-top: var(--space-4);
         }
 
         #quote {
             font-style: italic;
             color: var(--text-light);
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-4);
         }
 
         .signature-container {
             width: 320px;
             height: 2px;
             background: linear-gradient(to right, transparent, var(--primary-blue), transparent);
-            margin: var(--space-6) auto;
-            opacity: 0.5;
+            margin: var(--space-5) auto;
+            opacity: 0.4;
         }
 
         @media (max-width: 1000px) {
             .instructors-grid {
-                gap: var(--space-7);
+                gap: var(--space-6);
             }
             .instructor-card {
                 padding: var(--space-6) var(--space-5);
@@ -3151,20 +3251,20 @@
                 gap: var(--space-6);
             }
             .app-icon {
-                width: 110px;
-                height: 110px;
+                width: 114px;
+                height: 114px;
             }
             .app-icon i {
-                font-size: 44px;
+                font-size: 46px;
             }
             .app-icon.facebook,
             .app-icon.instagram {
-                width: 120px;
-                height: 120px;
+                width: 124px;
+                height: 124px;
             }
             .app-icon.facebook i,
             .app-icon.instagram i {
-                font-size: 48px;
+                font-size: 50px;
             }
         }
 
@@ -3174,7 +3274,7 @@
             }
             .instructors-grid {
                 grid-template-columns: 1fr;
-                gap: var(--space-6);
+                gap: var(--space-5);
             }
             .instructor-name {
                 font-size: var(--font-2xl);
@@ -3187,7 +3287,7 @@
             }
             .section-title {
                 font-size: var(--font-3xl);
-                margin: var(--space-11) 0 var(--space-6);
+                margin: var(--space-10) 0 var(--space-5);
             }
             .cta-header {
                 font-size: var(--font-lg);
@@ -3197,39 +3297,46 @@
                 padding: var(--space-3) var(--space-4);
             }
             .cta-action {
-                font-size: var(--font-base);
-                padding: var(--space-3) var(--space-5);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
             }
             .registration-form {
-                padding: var(--space-8) var(--space-6);
+                padding: var(--space-7) var(--space-5);
             }
             .form-title {
                 font-size: var(--font-3xl);
             }
             .form-input,
             .form-select {
-                padding: var(--space-4) var(--space-5);
+                padding: var(--space-3) var(--space-4);
                 font-size: var(--font-sm);
             }
             .submit-btn {
-                padding: var(--space-3) var(--space-5);
-                font-size: var(--font-base);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
             }
-            .link-card {
-                padding: var(--space-6) var(--space-5);
+            .link-card .card-header,
+            .link-card .card-body {
+                padding-left: var(--space-5);
+                padding-right: var(--space-5);
             }
-            .schedule-day-header {
+            .link-card .link-title {
                 font-size: var(--font-xl);
             }
-            .class-time,
-            .class-name {
+            .link-card .schedule-day-header {
+                font-size: var(--font-xl);
+            }
+            .link-card .class-time,
+            .link-card .class-name {
                 font-size: var(--font-sm);
             }
             .tiktok-video-feed {
-                height: 65vh;
-                max-height: 550px;
+                height: 60vh;
+                max-height: 500px;
             }
             .video-title {
                 font-size: var(--font-2xl);
@@ -3238,7 +3345,7 @@
                 font-size: var(--font-sm);
             }
             .video-info-overlay {
-                padding: var(--space-6);
+                padding: var(--space-5);
             }
             .video-item-title {
                 font-size: var(--font-md);
@@ -3247,23 +3354,23 @@
                 font-size: var(--font-4xl);
             }
             .app-icon {
-                width: 100px;
-                height: 100px;
+                width: 104px;
+                height: 104px;
             }
             .app-icon.facebook,
             .app-icon.instagram {
-                width: 110px;
-                height: 110px;
+                width: 114px;
+                height: 114px;
             }
             .app-icon i {
-                font-size: 38px;
+                font-size: 40px;
             }
             .app-icon.facebook i,
             .app-icon.instagram i {
-                font-size: 44px;
+                font-size: 46px;
             }
             .modern-event-card {
-                padding: var(--space-7) var(--space-6) var(--space-8);
+                padding: var(--space-6) var(--space-5) var(--space-7);
                 min-height: 360px;
             }
             .event-title {
@@ -3271,6 +3378,40 @@
             }
             .links-grid {
                 grid-template-columns: 1fr;
+                gap: var(--space-5);
+            }
+            .link-card .card-cta {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .reviews-toggle-btn,
+            .private-lesson-toggle-btn,
+            .video-toggle-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .private-lesson-day {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 110px;
+            }
+            .reviews-action-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .event-cta-primary {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
             }
         }
 
@@ -3279,26 +3420,26 @@
                 gap: var(--space-4);
             }
             .app-icon {
-                width: 90px;
-                height: 90px;
+                width: 94px;
+                height: 94px;
             }
             .app-icon.facebook,
             .app-icon.instagram {
-                width: 100px;
-                height: 100px;
+                width: 104px;
+                height: 104px;
             }
             .app-icon i {
-                font-size: 34px;
+                font-size: 36px;
             }
             .app-icon.facebook i,
             .app-icon.instagram i {
-                font-size: 38px;
+                font-size: 40px;
             }
             .app-icon span {
                 font-size: 11px;
             }
             .welcome-cta-pill {
-                min-height: 60px;
+                min-height: 64px;
                 padding: var(--space-3) var(--space-5);
                 font-size: var(--font-sm);
             }
@@ -3315,20 +3456,20 @@
             .nav-btn {
                 padding: var(--space-2) var(--space-3);
                 font-size: var(--font-sm);
-                min-height: 42px;
+                min-height: 46px;
             }
             .nav-btn i {
                 font-size: var(--font-md);
             }
-            .schedule-class {
+            .link-card .schedule-class {
                 padding: var(--space-2) var(--space-3);
                 flex-wrap: wrap;
             }
-            .class-time {
+            .link-card .class-time {
                 min-width: 70px;
                 font-size: var(--font-xs);
             }
-            .class-name {
+            .link-card .class-name {
                 font-size: var(--font-xs);
                 min-width: 120px;
                 padding-left: 0;
@@ -3338,17 +3479,17 @@
         @media (max-width: 550px) {
             body {
                 font-size: var(--font-sm);
-                padding: var(--space-4) var(--space-4) var(--space-7);
+                padding: var(--space-3) var(--space-3) var(--space-6);
             }
             .container {
-                padding: var(--space-5) var(--space-4) var(--space-9);
+                padding: var(--space-4) var(--space-3) var(--space-8);
                 border-radius: var(--radius-2xl);
             }
             #welcome-array {
                 backdrop-filter: blur(8px);
             }
             .welcome-content {
-                padding: var(--space-8) var(--space-3) var(--space-5);
+                padding: var(--space-7) var(--space-2) var(--space-4);
                 max-width: 100%;
             }
             .welcome-title {
@@ -3357,24 +3498,24 @@
             }
             .welcome-social-prompt {
                 font-size: var(--font-sm);
-                margin-bottom: var(--space-5);
+                margin-bottom: var(--space-4);
             }
             .apps-row {
-                gap: var(--space-3);
+                gap: var(--space-2);
             }
             .app-icon {
-                width: 80px;
-                height: 80px;
+                width: 78px;
+                height: 78px;
                 border-radius: var(--radius-2xl);
             }
             .app-icon.facebook,
             .app-icon.instagram {
-                width: 88px;
-                height: 88px;
+                width: 86px;
+                height: 86px;
             }
             .app-icon i {
                 font-size: 30px;
-                margin-bottom: var(--space-2);
+                margin-bottom: var(--space-1);
             }
             .app-icon.facebook i,
             .app-icon.instagram i {
@@ -3386,24 +3527,24 @@
             #welcome-skip-btn {
                 padding: var(--space-1) var(--space-2);
                 font-size: var(--font-xs);
-                min-height: 34px;
+                min-height: 38px;
             }
             .welcome-pills-heading {
                 font-size: var(--font-2xl);
             }
             .welcome-pills-subheading {
                 font-size: var(--font-sm);
-                margin-top: var(--space-4);
+                margin-top: var(--space-3);
             }
             .share-main-btn {
                 padding: var(--space-2) var(--space-4);
                 min-width: 140px;
                 font-size: var(--font-xs);
-                min-height: 42px;
+                min-height: 44px;
             }
             .share-bubble {
-                width: 52px;
-                height: 52px;
+                width: 50px;
+                height: 50px;
                 font-size: var(--font-xl);
             }
             .share-row {
@@ -3418,10 +3559,10 @@
                 font-size: var(--font-sm);
             }
             .instructors-grid {
-                gap: var(--space-5);
+                gap: var(--space-4);
             }
             .instructor-card {
-                padding: var(--space-5) var(--space-4);
+                padding: var(--space-4) var(--space-3);
             }
             .instructor-name {
                 font-size: var(--font-2xl);
@@ -3436,8 +3577,8 @@
             .social-link-icon {
                 width: 38px;
                 height: 38px;
-                margin-right: var(--space-3);
-                font-size: var(--font-lg);
+                margin-right: var(--space-2);
+                font-size: var(--font-md);
             }
             .social-link-platform {
                 font-size: var(--font-sm);
@@ -3446,54 +3587,76 @@
                 font-size: var(--font-xs);
             }
             .logo-container {
-                width: 160px;
-                height: 160px;
-            }
-            .logo {
                 width: 140px;
                 height: 140px;
             }
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
             .logo i {
-                font-size: 64px;
+                font-size: 56px;
             }
             h1#main-title {
                 font-size: var(--font-3xl);
-                margin-bottom: var(--space-3);
+                margin-bottom: var(--space-2);
             }
             .tagline {
                 font-size: var(--font-sm);
-                margin-top: var(--space-3);
+                margin-top: var(--space-2);
             }
             .divider {
-                margin: var(--space-5) auto;
-                width: 90px;
+                margin: var(--space-4) auto;
+                width: 80px;
             }
             .section-title {
                 font-size: var(--font-2xl);
-                margin: var(--space-9) 0 var(--space-5);
+                margin: var(--space-8) 0 var(--space-4);
+                padding-bottom: var(--space-3);
             }
             .section-title::after {
-                width: 70px;
+                width: 60px;
             }
-            .link-card {
-                padding: var(--space-5) var(--space-4);
-            }
-            .studio-info {
+            .link-card .card-header {
+                padding: var(--space-4) var(--space-3) var(--space-3);
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .link-title {
+            .link-card .card-body {
+                padding: var(--space-4) var(--space-3) var(--space-5);
+            }
+            .link-card .link-title {
                 font-size: var(--font-xl);
             }
-            .link-subtitle {
+            .link-card .link-subtitle {
                 font-size: var(--font-xs);
             }
-            .schedule-day-header {
+            .link-card .cycle-badge-wrap {
+                padding: var(--space-1) var(--space-3);
+                gap: var(--space-2);
+            }
+            .link-card .cycle-badge-wrap .cycle-text {
+                font-size: var(--font-xs);
+            }
+            .link-card .cycle-badge-wrap .cycle-icon {
+                width: 22px;
+                height: 22px;
+                font-size: 0.6rem;
+            }
+            .link-card .schedule-day-header {
                 font-size: var(--font-lg);
             }
-            .class-time,
-            .class-name {
+            .link-card .class-time,
+            .link-card .class-name {
                 font-size: var(--font-xs);
+            }
+            .link-card .card-cta {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                width: 100%;
+                justify-content: center;
             }
             .cta-header {
                 flex-direction: column;
@@ -3508,14 +3671,10 @@
                 padding: var(--space-2) var(--space-3);
             }
             .cta-action {
-                font-size: var(--font-sm);
-                padding: var(--space-3) var(--space-4);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
-            }
-            .date-section {
-                margin: 0 0 var(--space-5) auto;
-                padding: var(--space-1) var(--space-3);
-                font-size: var(--font-xs);
+                padding: 0 var(--btn-pad-x-sm);
             }
             .form-title {
                 font-size: var(--font-2xl);
@@ -3525,34 +3684,36 @@
             }
             .form-input,
             .form-select {
-                padding: var(--space-3) var(--space-4);
+                padding: var(--space-3) var(--space-3);
                 font-size: var(--font-sm);
                 min-height: 56px;
             }
             .submit-btn {
-                font-size: var(--font-sm);
-                padding: var(--space-3) var(--space-4);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
             }
             .reviews-section {
-                padding: var(--space-6) var(--space-4);
+                padding: var(--space-5) var(--space-3);
             }
             .review-text {
                 font-size: var(--font-sm);
-                padding: 0 var(--space-4);
+                padding: 0 var(--space-3);
             }
             .private-lesson-section {
-                padding: var(--space-6) var(--space-4);
+                padding: var(--space-5) var(--space-3);
             }
             .private-lesson-day {
-                padding: var(--space-2) var(--space-5);
-                font-size: var(--font-sm);
-                min-width: 110px;
-                min-height: 50px;
+                padding: 0 var(--btn-pad-x-sm);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                min-width: 90px;
             }
             .tiktok-video-feed {
-                height: 50vh;
-                max-height: 450px;
+                height: 45vh;
+                max-height: 400px;
             }
             .video-title {
                 font-size: var(--font-xl);
@@ -3561,12 +3722,12 @@
                 font-size: var(--font-xs);
             }
             .play-button {
-                width: 64px;
-                height: 64px;
+                width: 60px;
+                height: 60px;
                 font-size: var(--font-2xl);
             }
             .video-info-overlay {
-                padding: var(--space-4);
+                padding: var(--space-3);
             }
             .video-item-title {
                 font-size: var(--font-sm);
@@ -3580,9 +3741,10 @@
                 gap: var(--space-2);
             }
             .category-btn {
-                padding: var(--space-2) var(--space-4);
-                font-size: var(--font-xs);
-                min-height: 44px;
+                padding: 0 var(--btn-pad-x-sm);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
             }
             .reviews-actions {
                 flex-direction: column;
@@ -3593,11 +3755,14 @@
                 width: 100%;
                 max-width: 240px;
                 text-align: center;
-                min-height: 50px;
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                font-size: var(--btn-font-sm);
             }
             .welcome-cta-pill {
                 min-height: 54px;
-                padding: var(--space-3) var(--space-4);
+                padding: var(--space-2) var(--space-3);
                 border-radius: var(--radius-lg);
                 gap: var(--space-1) var(--space-2);
             }
@@ -3608,13 +3773,18 @@
                 font-size: var(--font-xs);
                 opacity: 0.45;
             }
+            .welcome-cta-pill .pill-badge {
+                font-size: 9px;
+                padding: 0 var(--space-2);
+                line-height: 1.8;
+            }
             .modern-event-card {
-                padding: var(--space-5) var(--space-4) var(--space-6);
-                min-height: 340px;
+                padding: var(--space-4) var(--space-3) var(--space-5);
+                min-height: 320px;
             }
             .event-title {
                 font-size: var(--font-lg);
-                margin-bottom: var(--space-4);
+                margin-bottom: var(--space-3);
             }
             .event-datetime,
             .event-venue {
@@ -3622,17 +3792,18 @@
                 margin-bottom: var(--space-3);
             }
             .event-cta-primary {
-                padding: var(--space-2) var(--space-4);
-                font-size: var(--font-sm);
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
             }
             .carousel-btn {
                 width: 44px;
                 height: 44px;
-                bottom: var(--space-4);
+                bottom: var(--space-3);
             }
             .top-nav-buttons {
-                padding: var(--space-2) var(--space-2);
+                padding: var(--space-1) var(--space-2);
                 gap: var(--space-1);
                 border-radius: var(--radius-xl);
                 justify-content: center;
@@ -3665,7 +3836,7 @@
                 text-align: center;
             }
             .top-nav-buttons.nav-floating {
-                padding: var(--space-1) var(--space-3);
+                padding: var(--space-1) var(--space-2);
                 gap: var(--space-1);
             }
             .top-nav-buttons.nav-floating .nav-btn {
@@ -3681,101 +3852,121 @@
                 font-size: var(--font-xs);
             }
             .bottom-share-container {
-                right: var(--space-3);
+                right: var(--space-2);
                 bottom: var(--space-2);
             }
             .share-actions-row {
-                gap: var(--space-4);
+                gap: var(--space-3);
             }
             .links-grid {
                 grid-template-columns: 1fr;
-                gap: var(--space-5);
+                gap: var(--space-4);
             }
-            .schedule-day-group {
-                padding: var(--space-3) var(--space-3);
+            .link-card .schedule-day-group {
+                padding: var(--space-3) var(--space-2);
             }
-            .schedule-class {
-                padding: var(--space-2) var(--space-2);
+            .link-card .schedule-class {
+                padding: var(--space-1) var(--space-2);
                 min-height: 40px;
             }
-            .class-time {
-                min-width: 60px;
+            .link-card .class-time {
+                min-width: 56px;
                 font-size: 10px;
                 padding: var(--space-1) var(--space-2);
             }
-            .class-name {
-                font-size: 11px;
-                min-width: 100px;
+            .link-card .class-name {
+                font-size: 10px;
+                min-width: 90px;
                 gap: var(--space-1);
             }
-            .class-badge {
-                font-size: 9px;
+            .link-card .class-badge {
+                font-size: 8px;
                 padding: var(--space-1) var(--space-2);
             }
-            .month-promo {
+            .link-card .month-promo {
                 font-size: var(--font-xl);
                 padding: var(--space-1) var(--space-2);
             }
-            .location-icon {
-                width: 36px;
-                height: 36px;
-                min-width: 36px;
+            .link-card .location-icon {
+                width: 38px;
+                height: 38px;
+                min-width: 38px;
                 font-size: var(--font-sm);
             }
-            .location-icons {
+            .link-card .location-icons {
                 gap: var(--space-1);
             }
-            .address-link {
+            .link-card .address-link {
                 font-size: var(--font-xs);
-                padding: var(--space-1) var(--space-3);
+                padding: var(--space-1) var(--space-2);
             }
-            .card-cta {
-                font-size: var(--font-sm);
-                padding: var(--space-2) var(--space-5);
-                min-height: 44px;
-                margin-top: var(--space-4);
+            .link-card .special-note {
+                font-size: var(--font-xs);
+                padding: var(--space-2) var(--space-3);
+            }
+            .reviews-toggle-btn,
+            .private-lesson-toggle-btn,
+            .video-toggle-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .private-lesson-close-btn,
+            .video-close-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .lang-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 80px;
             }
             @media (max-height: 500px) and (orientation: landscape) {
                 .apps-row {
                     flex-direction: row;
-                    gap: var(--space-3);
+                    gap: var(--space-2);
                 }
                 .app-icon {
-                    width: 70px;
-                    height: 70px;
+                    width: 68px;
+                    height: 68px;
                 }
                 .app-icon i {
-                    font-size: 28px;
+                    font-size: 26px;
                 }
             }
         }
 
         @media (max-width: 400px) {
             .apps-row {
-                gap: var(--space-2);
+                gap: var(--space-1);
             }
             .app-icon {
-                width: 68px;
-                height: 68px;
+                width: 66px;
+                height: 66px;
             }
             .app-icon.facebook,
             .app-icon.instagram {
-                width: 76px;
-                height: 76px;
+                width: 74px;
+                height: 74px;
             }
             .app-icon i {
-                font-size: 26px;
+                font-size: 24px;
                 margin-bottom: var(--space-1);
             }
             .app-icon.facebook i,
             .app-icon.instagram i {
-                font-size: 30px;
+                font-size: 28px;
             }
             .app-icon span {
-                font-size: 8px;
+                font-size: 7px;
             }
             .welcome-cta-pill {
-                padding: var(--space-2) var(--space-3);
+                padding: var(--space-2) var(--space-2);
                 min-height: 48px;
                 border-radius: var(--radius-md);
             }
@@ -3785,8 +3976,13 @@
             .welcome-cta-pill .pill-styles {
                 font-size: var(--font-xs);
             }
+            .welcome-cta-pill .pill-badge {
+                font-size: 8px;
+                padding: 0 var(--space-1);
+                line-height: 1.6;
+            }
             .top-nav-buttons {
-                padding: var(--space-1) var(--space-2);
+                padding: var(--space-1) var(--space-1);
                 gap: var(--space-1);
                 border-radius: var(--radius-md);
             }
@@ -3804,7 +4000,7 @@
                 font-size: var(--font-xs);
             }
             .top-nav-buttons.nav-floating {
-                padding: var(--space-1) var(--space-2);
+                padding: var(--space-1) var(--space-1);
                 gap: var(--space-1);
             }
             .top-nav-buttons.nav-floating .nav-btn {
@@ -3846,7 +4042,7 @@
         }
 
         .welcome-call-action {
-            margin-top: var(--space-6);
+            margin-top: var(--space-5);
             font-size: var(--font-sm);
             color: #6c7e94;
             display: flex;
@@ -3882,33 +4078,33 @@
             }
         }
 
-        .link-card .link-text .schedule-list .schedule-day-group:last-child {
+        .link-card .card-body .schedule-list .schedule-day-group:last-child {
             margin-bottom: 0;
         }
 
-        .link-card .link-text .schedule-list .schedule-day-group .schedule-class:last-child {
+        .link-card .card-body .schedule-list .schedule-day-group .schedule-class:last-child {
             margin-bottom: 0;
         }
 
-        .link-card .link-text .schedule-list .schedule-day-group .schedule-class .class-name .class-badge {
+        .link-card .card-body .schedule-list .schedule-day-group .schedule-class .class-name .class-badge {
             margin-left: 0;
         }
 
-        .schedule-class .class-name .salsa-text,
-        .schedule-class .class-name .bachata-text,
-        .schedule-class .class-name .bachata-sensual,
-        .schedule-class .class-name .bachata-advance,
-        .schedule-class .class-name .bachata-elite {
+        .link-card .schedule-class .class-name .salsa-text,
+        .link-card .schedule-class .class-name .bachata-text,
+        .link-card .schedule-class .class-name .bachata-sensual,
+        .link-card .schedule-class .class-name .bachata-advance,
+        .link-card .schedule-class .class-name .bachata-elite {
             font-size: 10px;
             padding: var(--space-1) var(--space-2);
         }
 
         @media (min-width: 551px) {
-            .schedule-class .class-name .salsa-text,
-            .schedule-class .class-name .bachata-text,
-            .schedule-class .class-name .bachata-sensual,
-            .schedule-class .class-name .bachata-advance,
-            .schedule-class .class-name .bachata-elite {
+            .link-card .schedule-class .class-name .salsa-text,
+            .link-card .schedule-class .class-name .bachata-text,
+            .link-card .schedule-class .class-name .bachata-sensual,
+            .link-card .schedule-class .class-name .bachata-advance,
+            .link-card .schedule-class .class-name .bachata-elite {
                 font-size: var(--font-xs);
                 padding: var(--space-1) var(--space-3);
             }
@@ -3925,9 +4121,59 @@
             background: var(--primary-blue);
             box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
         }
+
+        .link-card.oldcity {
+            display: none !important;
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-blue);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s ease-out;
+            border-radius: 0 2px 2px 0;
+            will-change: width;
+        }
+
+        @media (max-width: 550px) {
+            .scroll-progress {
+                height: 2px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(44, 90, 160, 0.04);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(44, 90, 160, 0.25);
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(44, 90, 160, 0.4);
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(44, 90, 160, 0.25) rgba(44, 90, 160, 0.04);
+        }
     </style>
 </head>
 <body class="welcome-active no-scroll">
+
+    <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
     <div id="welcome-array">
         <div class="welcome-content">
@@ -3971,7 +4217,7 @@
 
         <div class="content">
 
-            <div class="top-nav-buttons" id="nav-buttons">
+            <div class="top-nav-buttons nav-static" id="nav-buttons">
                 <button class="nav-btn" id="btn-social"><i class="fas fa-users"></i> <span>Social</span></button>
                 <button class="nav-btn" id="btn-schedule"><i class="fas fa-calendar-alt"></i> <span>Schedule</span></button>
                 <button class="nav-btn" id="btn-events"><i class="fas fa-calendar-day"></i> <span>Events</span></button>
@@ -3981,10 +4227,6 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
-                    <a href="https://facebook.com/events/s/noche-de-baile-ft-djmx/1717085946277013/" class="welcome-cta-pill" data-app="facebook" data-event-key="oldcity">
-                        <span class="pill-main">Old City Philly Thu • 9:45pm Lesson • 10:30pm Social</span>
-                        <span class="pill-styles">Bachata • Cumbia • Salsa</span>
-                    </a>
                     <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-main">Ardmore Salsa Nights (2nd &amp; 4th Sat) • 9:15pm Lesson • 10:00pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
@@ -3993,7 +4235,7 @@
                         <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://facebook.com/events/s/salsa-en-blanco-at-sor-ynez/1294583906080939/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4002,10 +4244,6 @@
             </div>
 
             <hr class="section-separator" id="separator-1">
-
-            <div class="date-section section-animate delay-1" id="current-date-discreet">
-                <strong id="today-label">Today is:</strong> <span id="date-text"></span>
-            </div>
 
             <h2 class="section-title" id="upcoming-title">Join Our Next Class</h2>
             <div id="class-cta" class="class-cta-container section-animate">
@@ -4024,16 +4262,25 @@
             <div class="links-grid stagger-children section-animate" id="schedule-grid">
 
                 <div class="link-card stardust" data-studio="Stardust Ballroom" id="stardust-card">
-                    <div class="link-text">
-                        <div class="studio-info">
-                            <div class="studio-name-address">
-                                <div class="link-title">Stardust Ballroom</div>
-                                <div class="link-subtitle"><a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="address-link"><i class="fas fa-map-pin"></i> 363 W Browning Rd, Bellmawr, NJ</a></div>
-                                <div class="cycle-message"><i class="fas fa-calendar-week"></i><span><strong>4‑Week Cycle</strong> — Learn in one month! No partner needed, walk‑ins welcome.</span></div>
+                    <div class="card-header">
+                        <div class="studio-name-address">
+                            <div class="link-title">Stardust Ballroom</div>
+                            <div class="link-subtitle">
+                                <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="address-link"><i class="fas fa-map-pin"></i> 363 W Browning Rd, Bellmawr, NJ</a>
                             </div>
-                            <span class="month-promo" id="stardust-month-promo">March</span>
-                            <div class="location-icons"><a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a></div>
+                            <div class="cycle-badge-wrap">
+                                <span class="cycle-icon"><i class="fas fa-sync-alt"></i></span>
+                                <span class="cycle-text"><strong>4‑Week Cycle</strong> <span class="cycle-sub">— Learn in one month! No partner needed, walk‑ins welcome.</span></span>
+                            </div>
                         </div>
+                        <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
+                            <span class="month-promo" id="stardust-month-promo">March</span>
+                            <div class="location-icons">
+                                <a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <div class="schedule-list">
                             <div class="schedule-day-group" data-day="Thursday">
                                 <div class="schedule-day-header">Thursday</div>
@@ -4052,13 +4299,15 @@
                 </div>
 
                 <div class="link-card estilo" data-studio="Estilo Dance Studio" id="estilo-card">
-                    <div class="link-text">
-                        <div class="studio-info">
-                            <div class="studio-name-address">
-                                <div class="link-title">Estilo Dance Studio</div>
-                                <div class="link-subtitle"><a href="https://www.google.com/maps/search/?api=1&query=Estilo+Dance+Studio+Fishtown+Philadelphia" target="_blank" rel="noopener" class="address-link"><i class="fas fa-location-dot"></i> Fishtown, Philadelphia</a></div>
+                    <div class="card-header">
+                        <div class="studio-name-address">
+                            <div class="link-title">Estilo Dance Studio</div>
+                            <div class="link-subtitle">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Estilo+Dance+Studio+Fishtown+Philadelphia" target="_blank" rel="noopener" class="address-link"><i class="fas fa-location-dot"></i> Fishtown, Philadelphia</a>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-body">
                         <div class="schedule-list">
                             <div class="schedule-day-group" data-day="Saturday">
                                 <div class="schedule-day-header">Saturday</div>
@@ -4069,55 +4318,6 @@
                     </div>
                 </div>
 
-                <div class="link-card oldcity" data-studio="Old City Philly" id="oldcity-card">
-                    <div class="link-text">
-                        <div class="studio-info">
-                            <div class="studio-name-address">
-                                <div class="link-title">117 Old City Philly</div>
-                                <div class="link-subtitle"><a href="https://www.google.com/maps/search/?api=1&query=117+Chestnut+Street+Philadelphia" target="_blank" rel="noopener" class="address-link"><i class="fas fa-map-pin"></i> 117 Chestnut Street, Philadelphia</a></div>
-                            </div>
-                            <div class="location-icons">
-                                <a href="https://www.facebook.com/share/14XAaCAStJV/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://www.google.com/maps/search/?api=1&query=117+Chestnut+Street+Philadelphia" class="location-icon maps-icon" target="_blank" rel="noopener"><i class="fas fa-map-marked-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="schedule-badge">Thursdays: Noche de bachata y cumbia</div>
-                        <div class="schedule-list">
-                            <div class="schedule-day-group" data-day="Thursday">
-                                <div class="schedule-day-header">Thursday</div>
-                                <div class="schedule-class"><span class="class-time">9:45pm</span><span class="class-name"><span class="bachata-text">Bachata/Cumbia Class</span><span class="class-badge badge-new">NEW</span></span></div>
-                                <div class="schedule-class"><span class="class-time">10:30pm</span><span class="class-name"><span class="salsa-text">Bachata · Cumbia · Salsa &amp; more</span></span></div>
-                            </div>
-                        </div>
-                        <div class="special-note"><i class="fas fa-dj"></i> Special DJ every Thursday</div>
-                        <a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="card-cta" data-app="facebook">Event Info <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="link-card buenavista" data-studio="Buena Vista Restaurant" id="buenavista-card">
-                    <div class="link-text">
-                        <div class="studio-info">
-                            <div class="studio-name-address">
-                                <div class="link-title">Buena Vista Restaurant</div>
-                                <div class="link-subtitle"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" rel="noopener" class="address-link"><i class="fas fa-map-pin"></i> Ardmore, PA</a></div>
-                            </div>
-                            <div class="location-icons">
-                                <a href="https://www.facebook.com/share/1CDHw34hsK/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" class="location-icon maps-icon" target="_blank" rel="noopener"><i class="fas fa-map-marked-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="schedule-badge">Every 2nd &amp; 4th Saturday</div>
-                        <div class="schedule-list">
-                            <div class="schedule-day-group" data-day="Saturday">
-                                <div class="schedule-day-header">Saturday</div>
-                                <div class="schedule-class"><span class="class-time">9:45pm</span><span class="class-name"><span class="salsa-text">Bachata/Salsa Class</span><span class="class-badge badge-new">CLASS</span></span></div>
-                                <div class="schedule-class"><span class="class-time">10:30pm</span><span class="class-name"><span class="bachata-text">Social Dancing until 1am</span></span></div>
-                            </div>
-                        </div>
-                        <div class="special-note"><i class="fas fa-dj"></i> Special DJ every 2nd and 4th Saturday — Salsa · Bachata · Merengue</div>
-                        <a href="https://www.facebook.com/share/1CDHw34hsK/" class="card-cta" data-app="facebook">Event Info <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
             </div>
 
             <div class="private-lesson-toggle-container">
@@ -4192,15 +4392,44 @@
                 </div>
             </div>
 
-            <h2 class="section-title" style="margin-bottom: var(--space-6);">Our Next Social Event</h2>
+            <h2 class="section-title" style="margin-bottom: var(--space-6);">Our Next Social Events</h2>
             <div class="announcement-carousel section-animate" id="events-carousel">
                 <div class="carousel-slides" id="carousel-slides">
-                    <div class="carousel-slide"><div class="modern-event-card"><h3 class="event-title">117 Old City Philly – Noche de Bachata Cumbia Thursdays</h3><div class="event-datetime"><i class="far fa-calendar-alt"></i> Every Thursday: 9:45pm Class · 10:30pm Social until 1am</div><div class="event-venue"><a href="https://www.google.com/maps/search/?api=1&query=117+Chestnut+Street+Philadelphia" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> 117 Chestnut Street, Philadelphia</a></div><a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="event-cta-primary" data-app="facebook">JOIN EVENT</a><div class="event-footer-minimal"><a href="https://www.facebook.com/share/1BHmvRTEiZ/?mibextid=wwXIfr" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div></div></div>
-                    <div class="carousel-slide"><div class="modern-event-card"><h3 class="event-title">Buena Vista Restaurant – Salsa &amp; Bachata 2nd &amp; 4th Saturday</h3><div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:45pm Class · 10:30pm Social until 1am</div><div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Ardmore, PA</a></div><a href="https://www.facebook.com/share/1CDHw34hsK/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a><div class="event-footer-minimal"><a href="https://www.facebook.com/share/1CDHw34hsK/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div></div></div>
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Social until 1am</div>
+                            <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
+                            <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">Sor Inés – BaiLe Inolvidable • 1st &amp; 3rd Wednesday</h3>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Social</div>
+                            <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Inés, Philadelphia</a></div>
+                            <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="modern-event-card">
+                            <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Social</div>
+                            <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
+                            <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                        </div>
+                    </div>
                 </div>
                 <button class="carousel-btn carousel-prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-btn carousel-next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-indicators" id="carousel-indicators"><span class="carousel-indicator active" data-slide="0"></span><span class="carousel-indicator" data-slide="1"></span></div>
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <span class="carousel-indicator active" data-slide="0"></span>
+                    <span class="carousel-indicator" data-slide="1"></span>
+                    <span class="carousel-indicator" data-slide="2"></span>
+                </div>
             </div>
 
             <hr class="section-separator" id="separator-2">
@@ -4371,6 +4600,17 @@
         observer.observe(document.body, { childList: true, subtree: true });
 
         document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('scrollProgress');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                }, { passive: true });
+            }
+
             let paymentModalOpen = false;
             window.paymentModalOpen = false;
             let autoDismissTimer = null;
@@ -4545,7 +4785,7 @@
             }
             if (signinBtn) {
                 updateSigninVisibility();
-                window.addEventListener('scroll', updateSigninVisibility);
+                window.addEventListener('scroll', updateSigninVisibility, { passive: true });
             }
 
             restartAutoDismiss();
@@ -4556,75 +4796,56 @@
                 const targetDay = dayMap[dayName];
                 if (targetDay === undefined) return null;
 
-                let candidate = new Date(now);
-                candidate.setHours(0, 0, 0, 0);
-
-                const currentDay = candidate.getDay();
-                let daysToAdd = targetDay - currentDay;
-                if (daysToAdd <= 0) daysToAdd += 7;
-                candidate.setDate(candidate.getDate() + daysToAdd);
-
+                let weekNumbers = [];
                 if (weekPattern === 'every') {
-                    const nowH = now.getHours() * 100 + now.getMinutes();
-                    if (daysToAdd === 0 && nowH >= 2300) {
-                        candidate.setDate(candidate.getDate() + 7);
-                    }
-                    return candidate;
+                    weekNumbers = [1, 2, 3, 4, 5];
+                } else if (weekPattern === '1st&3rd') {
+                    weekNumbers = [1, 3];
+                } else if (weekPattern === '2nd&4th') {
+                    weekNumbers = [2, 4];
+                } else if (weekPattern === '1st') {
+                    weekNumbers = [1];
+                } else if (weekPattern === '2nd') {
+                    weekNumbers = [2];
+                } else if (weekPattern === '3rd') {
+                    weekNumbers = [3];
+                } else if (weekPattern === '4th') {
+                    weekNumbers = [4];
+                } else {
+                    weekNumbers = [1, 2, 3, 4, 5];
                 }
 
-                const getWeekOfMonth = (date) => {
-                    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-                    return Math.ceil((date.getDate() + firstDay) / 7);
-                };
-
-                for (let i = 0; i < 4; i++) {
-                    const checkDate = new Date(candidate);
-                    checkDate.setDate(candidate.getDate() + i * 7);
-                    if (checkDate < now) continue;
-                    const week = getWeekOfMonth(checkDate);
-                    let matches = false;
-                    if (weekPattern === '1st&3rd') {
-                        matches = (week === 1 || week === 3);
-                    } else if (weekPattern === '2nd&4th') {
-                        matches = (week === 2 || week === 4);
-                    } else if (weekPattern === '1st') {
-                        matches = (week === 1);
-                    } else if (weekPattern === '2nd') {
-                        matches = (week === 2);
-                    } else if (weekPattern === '3rd') {
-                        matches = (week === 3);
-                    } else if (weekPattern === '4th') {
-                        matches = (week === 4);
-                    }
-                    if (matches) {
-                        const nowH = now.getHours() * 100 + now.getMinutes();
-                        if (i === 0 && daysToAdd === 0 && nowH >= 2300) {
-                            continue;
+                for (let monthOffset = 0; monthOffset < 6; monthOffset++) {
+                    const year = now.getFullYear() + Math.floor((now.getMonth() + monthOffset) / 12);
+                    const month = (now.getMonth() + monthOffset) % 12;
+                    const firstDay = new Date(year, month, 1);
+                    const lastDay = new Date(year, month + 1, 0);
+                    const occurrences = [];
+                    for (let d = 1; d <= lastDay.getDate(); d++) {
+                        const date = new Date(year, month, d);
+                        if (date.getDay() === targetDay) {
+                            occurrences.push(date);
                         }
-                        return checkDate;
+                    }
+                    const filtered = occurrences.filter((date, index) => {
+                        return weekNumbers.includes(index + 1);
+                    });
+                    for (const date of filtered) {
+                        if (date >= now) {
+                            return date;
+                        }
                     }
                 }
-
-                return candidate;
+                return null;
             }
 
             function parseEventKey(key) {
                 const map = {
-                    'oldcity': { day: 'Thu', pattern: 'every', label: 'Old City Philly' },
                     'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
                     'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Inés' },
                     'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
                 };
                 return map[key] || null;
-            }
-
-            function getBadgeTextForPill(daysUntil) {
-                if (daysUntil === 0) return 'Today';
-                if (daysUntil === 1) return 'Tomorrow';
-                const now = new Date();
-                const target = new Date();
-                target.setDate(now.getDate() + daysUntil);
-                return target.toLocaleDateString('en-US', { weekday: 'short' });
             }
 
             function sortEventPills() {
@@ -4634,13 +4855,17 @@
                 if (pills.length === 0) return;
 
                 document.querySelectorAll('.up-next-badge').forEach(el => el.remove());
+                document.querySelectorAll('.pill-badge').forEach(el => el.remove());
                 pills.forEach(p => p.classList.remove('next-event'));
+
+                const now = new Date();
+                now.setHours(0, 0, 0, 0);
 
                 const withDates = pills.map(pill => {
                     const key = pill.getAttribute('data-event-key');
-                    if (!key) return { pill, date: null, key };
+                    if (!key) return { pill, date: null, key, info: null };
                     const info = parseEventKey(key);
-                    if (!info) return { pill, date: null, key };
+                    if (!info) return { pill, date: null, key, info: null };
                     const date = getNextOccurrence(info.day, info.pattern);
                     return { pill, date, key, info };
                 });
@@ -4648,48 +4873,112 @@
                 const valid = withDates.filter(item => item.date !== null);
                 valid.sort((a, b) => a.date.getTime() - b.date.getTime());
 
-                const orderedPills = valid.map(item => item.pill);
                 const unprocessed = withDates.filter(item => item.date === null).map(item => item.pill);
+                const orderedPills = valid.map(item => item.pill);
                 orderedPills.push(...unprocessed);
 
                 while (container.firstChild) container.removeChild(container.firstChild);
                 orderedPills.forEach(p => container.appendChild(p));
 
-                if (orderedPills.length > 0) {
-                    const first = orderedPills[0];
-                    first.classList.add('next-event');
+                const orderedData = valid.map(item => {
+                    const daysUntil = Math.ceil((item.date.getTime() - now.getTime()) / (1000 * 60 * 60 *
+                    24));
+                    return { ...item, daysUntil };
+                });
 
-                    const key = first.getAttribute('data-event-key');
-                    let daysUntil = 7;
+                const nextEvent = orderedData.length > 0 ? orderedData[0] : null;
+
+                orderedPills.forEach((pill, index) => {
+                    const key = pill.getAttribute('data-event-key');
+                    let daysUntil = 999;
+                    let isPast = false;
+
                     if (key) {
                         const info = parseEventKey(key);
                         if (info) {
                             const date = getNextOccurrence(info.day, info.pattern);
                             if (date) {
-                                const now = new Date();
-                                now.setHours(0, 0, 0, 0);
-                                const diffTime = date.getTime() - now.getTime();
-                                daysUntil = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                const dateCopy = new Date(date);
+                                dateCopy.setHours(0, 0, 0, 0);
+                                daysUntil = Math.ceil((dateCopy.getTime() - now.getTime()) / (1000 * 60 *
+                                60 * 24));
                                 if (daysUntil < 0) daysUntil = 0;
+
+                                if (info.pattern === '1st&3rd' && info.day === 'Wed') {
+                                    const currentMonth = now.getMonth();
+                                    const currentYear = now.getFullYear();
+                                    const firstWed = new Date(currentYear, currentMonth, 1);
+                                    while (firstWed.getDay() !== 3) firstWed.setDate(firstWed.getDate() +
+                                    1);
+                                    const thirdWed = new Date(firstWed);
+                                    thirdWed.setDate(firstWed.getDate() + 14);
+                                    if (now > firstWed && now < thirdWed) {
+                                        isPast = true;
+                                    }
+                                }
                             }
                         }
                     }
 
-                    const badge = document.createElement('span');
-                    badge.className = 'up-next-badge';
-
-                    const badgeText = getBadgeTextForPill(daysUntil);
-                    badge.textContent = badgeText;
-
-                    if (badgeText === 'Today') {
-                        badge.classList.add('today-badge');
-                    } else if (badgeText === 'Tomorrow' || badgeText === 'Up Next') {
-                        badge.classList.add('up-next-badge');
-                    } else {
-                        badge.classList.add('day-name-badge');
+                    const stylesEl = pill.querySelector('.pill-styles');
+                    if (stylesEl) {
+                        const stylesText = stylesEl.textContent;
+                        if (stylesText && stylesText.trim()) {
+                            stylesEl.style.display = 'inline';
+                        }
                     }
 
-                    first.appendChild(badge);
+                    let badge = pill.querySelector('.pill-badge');
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'pill-badge';
+                        const mainSpan = pill.querySelector('.pill-main');
+                        if (mainSpan) {
+                            mainSpan.before(badge);
+                            const spacer = document.createTextNode(' ');
+                            badge.after(spacer);
+                        } else {
+                            pill.appendChild(badge);
+                        }
+                    }
+
+                    if (nextEvent && pill === nextEvent.pill) {
+                        pill.classList.add('next-event');
+                        badge.textContent = 'this week';
+                        badge.className = 'pill-badge this-week-badge';
+                    } else if (isPast) {
+                        badge.textContent = 'next week';
+                        badge.className = 'pill-badge next-week-badge';
+                    } else if (daysUntil >= 0 && daysUntil <= 6) {
+                        badge.textContent = 'this week';
+                        badge.className = 'pill-badge this-week-badge';
+                    } else if (daysUntil >= 7) {
+                        badge.textContent = 'next week';
+                        badge.className = 'pill-badge next-week-badge';
+                    } else {
+                        badge.textContent = 'next week';
+                        badge.className = 'pill-badge next-week-badge';
+                    }
+
+                    if (nextEvent && pill === nextEvent.pill) {
+                        const existingUpBadge = pill.querySelector('.up-next-badge');
+                        if (existingUpBadge) existingUpBadge.remove();
+                        const upBadge = document.createElement('span');
+                        upBadge.className = 'up-next-badge';
+                        upBadge.textContent = 'this week';
+                        pill.appendChild(upBadge);
+                    }
+                });
+
+                if (nextEvent) {
+                    const nextPill = nextEvent.pill;
+                    const existingBadge = nextPill.querySelector('.up-next-badge');
+                    if (!existingBadge) {
+                        const badge = document.createElement('span');
+                        badge.className = 'up-next-badge';
+                        badge.textContent = 'this week';
+                        nextPill.appendChild(badge);
+                    }
                 }
             }
 
@@ -4700,9 +4989,9 @@
                 sortEventPills();
 
                 const navBar = document.getElementById('nav-buttons');
-                const dateSection = document.querySelector('.date-section');
-                if (navBar && dateSection) {
-                    dateSection.parentNode.insertBefore(navBar, dateSection);
+                const scheduleTitleEl = document.getElementById('schedule-title');
+                if (navBar && scheduleTitleEl) {
+                    scheduleTitleEl.parentNode.insertBefore(navBar, scheduleTitleEl);
                     navBar.classList.add('nav-static');
                     navBar.classList.remove('nav-floating', 'nav-hidden');
                 }
@@ -4710,7 +4999,14 @@
                 let lastScrollPos = 0;
                 let ticking = false;
                 let enableHideBehavior = false;
-                const scheduleTitleEl = document.getElementById('schedule-title');
+                let navRAF = null;
+
+                function getStardustHideThreshold() {
+                    const card = document.getElementById('stardust-card');
+                    if (!card) return 450;
+                    const rect = card.getBoundingClientRect();
+                    return rect.top + window.scrollY;
+                }
 
                 function shouldEnableHide() {
                     if (!scheduleTitleEl) return true;
@@ -4723,6 +5019,7 @@
                     const scrollY = window.scrollY;
                     const direction = scrollY > lastScrollPos ? 'down' : 'up';
                     lastScrollPos = scrollY;
+
                     if (!shouldEnableHide()) {
                         navBar.classList.add('nav-static');
                         navBar.classList.remove('nav-floating', 'nav-hidden');
@@ -4730,12 +5027,16 @@
                         return;
                     }
                     enableHideBehavior = true;
+
                     if (scrollY <= 8) {
                         navBar.classList.add('nav-static');
                         navBar.classList.remove('nav-floating', 'nav-hidden');
                         return;
                     }
-                    if (direction === 'down' && scrollY > 65) {
+
+                    const hideThreshold = getStardustHideThreshold();
+
+                    if (direction === 'down' && scrollY > hideThreshold) {
                         if (!navBar.classList.contains('nav-hidden')) {
                             navBar.classList.add('nav-hidden');
                             navBar.classList.remove('nav-floating', 'nav-static');
@@ -4751,15 +5052,22 @@
                         }
                     }
                 }
-                window.addEventListener('scroll', () => {
+
+                function handleScroll() {
                     if (!ticking) {
-                        requestAnimationFrame(() => { updateMenuBar();
-                            ticking = false; });
+                        if (navRAF) cancelAnimationFrame(navRAF);
+                        navRAF = requestAnimationFrame(() => {
+                            updateMenuBar();
+                            ticking = false;
+                            navRAF = null;
+                        });
                         ticking = true;
                     }
-                });
+                }
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
                 updateMenuBar();
-                window.addEventListener('resize', () => updateMenuBar());
+                window.addEventListener('resize', () => updateMenuBar(), { passive: true });
 
                 function initSectionAnimations() {
                     const animatedSections = document.querySelectorAll('.section-animate');
@@ -4780,19 +5088,13 @@
                     window.addEventListener('scroll', () => {
                         if (!scrollTimeout) scrollTimeout = setTimeout(() => { scrollTimeout = null;
                             handleScrollAnimation(); }, 50);
-                    });
+                    }, { passive: true });
                     setTimeout(() => {
                         animatedSections.forEach(s => { if (isElementInViewport(s)) s.classList.add(
                             'visible'); });
                         animatedSeparators.forEach(s => { if (isElementInViewport(s)) s.classList.add(
                             'visible'); });
                     }, 300);
-                }
-
-                function updateCurrentDate(lang) {
-                    const now = new Date();
-                    document.getElementById('date-text').textContent = now.toLocaleDateString(lang === 'es' ?
-                        'es-ES' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                 }
 
                 function updateMonthPromo() {
@@ -4820,7 +5122,6 @@
                         connectTitle: "Get Weekly Dance Tips, Reels & Class Updates",
                         rebeccaTitle: "Rebecca Bachata",
                         danielTitle: "Daniel Palacios",
-                        todayLabel: "Today is:",
                         upcomingTitle: "Join Our Next Class",
                         registerCta: "Register",
                         scheduleTitle: "Class Schedule by location",
@@ -4850,7 +5151,6 @@
                         connectTitle: "Obtén consejos de baile semanales, Reels y actualizaciones de clases",
                         rebeccaTitle: "Rebecca Bachata",
                         danielTitle: "Daniel Palacios",
-                        todayLabel: "Hoy es:",
                         upcomingTitle: "Únete a Nuestra Próxima Clase",
                         registerCta: "Registrarse",
                         scheduleTitle: "Horario de Clases por ubicación",
@@ -4887,7 +5187,6 @@
                     document.getElementById('connect-title').textContent = ld.connectTitle;
                     document.getElementById('rebecca-title').textContent = ld.rebeccaTitle;
                     document.getElementById('daniel-title').textContent = ld.danielTitle;
-                    document.getElementById('today-label').textContent = ld.todayLabel;
                     document.getElementById('upcoming-title').textContent = ld.upcomingTitle;
                     document.getElementById('register-cta-text').textContent = ld.registerCta;
                     document.getElementById('schedule-title').textContent = ld.scheduleTitle;
@@ -4921,14 +5220,12 @@
                     if (pIntro) pIntro.textContent = ld.privateLessonIntro;
                     const closeBtn = document.getElementById('private-lesson-close');
                     if (closeBtn) closeBtn.textContent = ld.privateLessonClose;
-                    updateCurrentDate(lang);
                     currentLanguage = lang;
                     localStorage.setItem('language', lang);
                 }
                 languageButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
                 const savedLang = localStorage.getItem('language');
                 if (savedLang) setLanguage(savedLang);
-                else updateCurrentDate('en');
 
                 const participantContainer = document.getElementById('participant-container');
                 const addBtn = document.getElementById('add-participant');
@@ -5034,23 +5331,18 @@
                     });
                     if (cur) document.getElementById(cur.btn).classList.add('active-section');
                 }
-                const classSchedule = [{ day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
+
+                const classSchedule = [
+                    { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
-                        locationId: "stardust-card", endTime: 2100
-                    },
+                        locationId: "stardust-card", endTime: 2100 },
                     { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Bachata Advanced Beginner",
                             "9:00pm Bachata Elite"
                         ], locationId: "stardust-card", endTime: 2200 },
                     { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio",
                         classes: ["4:00pm Salsa", "5:00pm Bachata"], locationId: "estilo-card",
-                        endTime: 1800 },
-                    { day: "Thursday", dayIndex: 4, studio: "Old City Philly",
-                        classes: ["9:45pm Bachata/Cumbia Class", "10:30pm Bachata · Cumbia · Salsa & more"],
-                        locationId: "oldcity-card", endTime: 2330 },
-                    { day: "Saturday", dayIndex: 6, studio: "Buena Vista Restaurant, Ardmore",
-                        classes: ["9:45pm Bachata/Salsa Class", "10:30pm Social Dancing until 1am"],
-                        locationId: "buenavista-card", endTime: 2400 }
+                        endTime: 1800 }
                 ];
 
                 function getDaysUntil(dayIndex, endTime) {
@@ -5079,14 +5371,9 @@
                 }
 
                 function getBadgeText(daysUntil) {
-                    if (daysUntil === 0) return "Today";
+                    if (daysUntil === 0) return "Tonight";
                     if (daysUntil === 1) return "Tomorrow";
-                    if (daysUntil >= 2 && daysUntil <= 3) {
-                        const now = new Date();
-                        const target = new Date();
-                        target.setDate(now.getDate() + daysUntil);
-                        return target.toLocaleDateString('en-US', { weekday: 'long' });
-                    }
+                    if (daysUntil >= 2 && daysUntil <= 6) return "This Week";
                     return "Next Class";
                 }
 
@@ -5313,7 +5600,7 @@
                         if (st > lastScroll && st > 50) container.classList.add('share-hidden');
                         else container.classList.remove('share-hidden');
                         lastScroll = st;
-                    });
+                    }, { passive: true });
                     const pageUrl = encodeURIComponent(window.location.href);
                     const shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
                     const fullMsg = shareText + pageUrl;
@@ -5490,7 +5777,7 @@
                 initPrivateLessonToggle();
                 initAnnouncementCarousel();
                 initShareButton();
-                window.addEventListener('scroll', setActiveSection);
+                window.addEventListener('scroll', setActiveSection, { passive: true });
                 setInterval(() => {
                     updateCTASection();
                     updateScheduleDisplay();
