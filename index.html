@@ -155,7 +155,7 @@
             scroll-margin-top: 110px;
             font-size: clamp(var(--font-2xl), 4.2vw, var(--font-4xl));
             transition: opacity 0.4s ease;
-            margin: var(--space-12) 0 var(--space-6);
+            margin: var(--space-10) 0 var(--space-6);
             text-align: center;
             position: relative;
             display: block;
@@ -842,7 +842,7 @@
             height: 2px;
             width: 80%;
             max-width: 400px;
-            margin: var(--space-12) auto;
+            margin: var(--space-10) auto;
             background: linear-gradient(90deg, transparent, rgba(44, 90, 160, 0.10), transparent);
             border: none;
             opacity: 0;
@@ -886,7 +886,7 @@
 
         .header-container {
             text-align: center;
-            margin-bottom: var(--space-8);
+            margin-bottom: var(--space-6);
             position: relative;
             padding-top: var(--space-2);
         }
@@ -895,7 +895,7 @@
             position: relative;
             width: 200px;
             height: 200px;
-            margin: 0 auto var(--space-6);
+            margin: 0 auto var(--space-5);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -972,21 +972,46 @@
         }
 
         h1#main-title {
-            font-size: clamp(3rem, 6.5vw, 4.2rem);
+            font-family: 'Playfair Display', serif !important;
+            font-size: clamp(3.2rem, 7vw, 4.6rem);
             font-weight: 800;
-            margin-bottom: var(--space-4);
-            letter-spacing: 0.5px;
             color: var(--dark);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
             position: relative;
             display: inline-block;
-            line-height: 1.15;
+            white-space: nowrap;
+            max-width: 100%;
+        }
+
+        @media (max-width: 650px) {
+            h1#main-title {
+                font-size: clamp(2.6rem, 6vw, 3.6rem);
+                white-space: nowrap;
+                letter-spacing: -0.01em;
+            }
+        }
+        @media (max-width: 480px) {
+            h1#main-title {
+                font-size: clamp(2rem, 5.5vw, 2.8rem);
+                white-space: nowrap;
+                letter-spacing: -0.01em;
+            }
+        }
+        @media (max-width: 380px) {
+            h1#main-title {
+                font-size: clamp(1.6rem, 5vw, 2.2rem);
+                white-space: nowrap;
+                letter-spacing: -0.01em;
+            }
         }
 
         .tagline {
             font-size: clamp(var(--font-md), 2.2vw, var(--font-xl));
             font-weight: 400;
             color: var(--text-medium);
-            margin: var(--space-4) auto 0;
+            margin: var(--space-2) auto 0;
             max-width: 750px;
             line-height: 1.7;
         }
@@ -996,7 +1021,7 @@
             width: 100px;
             background: var(--gradient-blue);
             border-radius: var(--radius-sm);
-            margin: var(--space-5) auto;
+            margin: var(--space-2) auto;
             opacity: 0.6;
         }
 
@@ -3280,7 +3305,8 @@
                 font-size: var(--font-2xl);
             }
             h1#main-title {
-                font-size: var(--font-4xl);
+                font-size: clamp(2.6rem, 6vw, 3.6rem);
+                white-space: nowrap;
             }
             .tagline {
                 font-size: var(--font-md);
@@ -3598,15 +3624,15 @@
                 font-size: 56px;
             }
             h1#main-title {
-                font-size: var(--font-3xl);
-                margin-bottom: var(--space-2);
+                font-size: clamp(2rem, 5.5vw, 2.8rem);
+                white-space: nowrap;
             }
             .tagline {
                 font-size: var(--font-sm);
                 margin-top: var(--space-2);
             }
             .divider {
-                margin: var(--space-4) auto;
+                margin: var(--space-2) auto;
                 width: 80px;
             }
             .section-title {
@@ -4199,7 +4225,7 @@
         </div>
     </div>
 
-    <div class="signin-corner-btn" id="signinCornerBtn">Sign in</div>
+    <div class="signin-corner-btn" id="signinCornerBtn">Check in</div>
 
     <div class="container" style="opacity: 0;">
 
@@ -4227,15 +4253,15 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
-                    <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
+                    <a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-main">Ardmore Salsa Nights (2nd &amp; 4th Sat) • 9:15pm Lesson • 10:00pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
                     </a>
-                    <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
+                    <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
                         <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4400,8 +4426,8 @@
                             <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Social until 1am</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
-                            <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/2079408446342292/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
@@ -4409,8 +4435,8 @@
                             <h3 class="event-title">Sor Inés – BaiLe Inolvidable • 1st &amp; 3rd Wednesday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Inés, Philadelphia</a></div>
-                            <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez-/1772819594065391/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
@@ -4418,8 +4444,8 @@
                             <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
-                            <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez/1470084765136495/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                 </div>
