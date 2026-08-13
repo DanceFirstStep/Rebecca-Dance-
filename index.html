@@ -47,17 +47,17 @@
             --space-14: 56px;
             --space-16: 64px;
 
-            --font-xs: 0.8rem;
-            --font-sm: 0.95rem;
-            --font-base: 1.2rem;
-            --font-md: 1.35rem;
-            --font-lg: 1.6rem;
-            --font-xl: 1.85rem;
-            --font-2xl: 2.1rem;
-            --font-3xl: 2.6rem;
-            --font-4xl: 3.1rem;
-            --font-5xl: 3.7rem;
-            --font-6xl: 4.3rem;
+            --font-xs: 0.75rem;
+            --font-sm: 0.875rem;
+            --font-base: 1rem;
+            --font-md: 1.125rem;
+            --font-lg: 1.25rem;
+            --font-xl: 1.5rem;
+            --font-2xl: 1.75rem;
+            --font-3xl: 2.25rem;
+            --font-4xl: 2.75rem;
+            --font-5xl: 3.25rem;
+            --font-6xl: 3.75rem;
 
             --radius-sm: 10px;
             --radius-md: 14px;
@@ -86,6 +86,14 @@
             --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition: 0.3s var(--ease);
             --scroll-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+            --icon-size-lg: 116px;
+            --icon-size-base: 100px;
+            --icon-size-sm: 100px;
+            --icon-font-lg: 38px;
+            --icon-font-base: 30px;
+            --icon-label-lg: 15px;
+            --icon-label-base: 13px;
         }
 
         * {
@@ -201,7 +209,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: radial-gradient(ellipse at 30% 20%, #f8fcff, #e8f0fa 70%, #dce6f2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 9999;
@@ -210,7 +218,7 @@
             align-items: center;
             transition: opacity 0.5s ease-out;
             pointer-events: all;
-            background-image: radial-gradient(circle at 10% 30%, rgba(255, 255, 255, 0.95), #f5faff);
+            box-shadow: inset 0 0 120px rgba(44, 90, 160, 0.03);
         }
 
         #welcome-array.hidden {
@@ -233,12 +241,13 @@
         }
 
         .welcome-title {
-            font-size: clamp(3.2rem, 7vw, 4.6rem);
+            font-size: clamp(3.4rem, 7.5vw, 4.8rem);
             font-weight: 800;
             color: var(--dark);
             margin-bottom: var(--space-5);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             line-height: 1.15;
+            text-shadow: 0 2px 20px rgba(44, 90, 160, 0.06), 0 1px 4px rgba(255, 255, 255, 0.5);
         }
 
         .welcome-social-prompt {
@@ -246,7 +255,9 @@
             color: #1e2f40;
             margin-bottom: var(--space-8);
             font-weight: 400;
-            letter-spacing: 0.01em;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+            opacity: 0.85;
         }
 
         .apps-row {
@@ -254,7 +265,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: var(--space-6);
+            gap: var(--space-4);
             margin-bottom: var(--space-4);
         }
 
@@ -275,7 +286,7 @@
 
         .second-row-icons {
             display: flex;
-            gap: var(--space-6);
+            gap: var(--space-4);
             flex: 0 auto;
             justify-content: center;
         }
@@ -320,9 +331,9 @@
         }
 
         .app-icon {
-            width: 124px;
-            height: 124px;
-            border-radius: var(--radius-3xl);
+            width: var(--icon-size-base);
+            height: var(--icon-size-base);
+            border-radius: 17px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -330,16 +341,17 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.05), 0 0 0 2px rgba(255, 255, 255, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.6);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: all;
             opacity: 0;
-            transform: translateY(30px) scale(0.9);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.94));
-            backdrop-filter: blur(20px);
-            border: 2px solid transparent;
+            transform: translateY(30px) scale(0.92);
+            background: var(--white);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid transparent;
             min-width: 60px;
             min-height: 60px;
+            padding: var(--space-2) var(--space-1);
         }
 
         .app-icon:active {
@@ -352,49 +364,75 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
             z-index: 3;
+            opacity: 0.5;
         }
 
         .app-icon.loaded {
             opacity: 1;
             transform: translateY(0) scale(1);
-            animation: attention-arrival 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: attention-arrival 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .app-icon i {
-            font-size: 50px;
-            margin-bottom: var(--space-3);
+            font-size: var(--icon-font-base);
+            margin-bottom: var(--space-2);
             z-index: 2;
             position: relative;
             transition: transform 0.3s ease;
+            line-height: 1;
         }
 
         .app-icon span {
-            font-size: 15px;
+            font-size: var(--icon-label-base);
             font-weight: 600;
             z-index: 2;
             position: relative;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-transform: uppercase;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
-            color: #0f1f30;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+            color: #0b1a2b;
+            line-height: 1.3;
+            text-align: center;
+            max-width: 94%;
+            font-weight: 650;
         }
 
         .app-icon:hover {
-            transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 28px 40px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(255, 255, 255, 0.95), inset 0 2px 0 rgba(255, 255, 255, 0.8);
-            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06), 0 0 0 2px rgba(255, 255, 255, 0.92), inset 0 2px 0 rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .app-icon:hover i {
-            transform: scale(1.12);
+            transform: scale(1.08);
+        }
+
+        .app-icon.facebook,
+        .app-icon.instagram {
+            width: var(--icon-size-lg);
+            height: var(--icon-size-lg);
+            border-radius: 19px;
+        }
+
+        .app-icon.facebook i,
+        .app-icon.instagram i {
+            font-size: var(--icon-font-lg);
+            margin-bottom: var(--space-2);
+        }
+
+        .app-icon.facebook span,
+        .app-icon.instagram span {
+            font-size: var(--icon-label-lg);
+            font-weight: 650;
+            letter-spacing: 0.3px;
         }
 
         .app-icon.facebook {
-            background: linear-gradient(135deg, rgba(24, 119, 242, 0.12), rgba(59, 89, 152, 0.08));
-            border: 2px solid rgba(24, 119, 242, 0.25);
+            background: linear-gradient(145deg, rgba(24, 119, 242, 0.08), rgba(59, 89, 152, 0.04));
+            border-color: rgba(24, 119, 242, 0.15);
         }
         .app-icon.facebook i {
             color: #1877f2;
@@ -404,8 +442,8 @@
         }
 
         .app-icon.instagram {
-            background: linear-gradient(135deg, rgba(225, 48, 108, 0.12), rgba(193, 53, 132, 0.08));
-            border: 2px solid rgba(225, 48, 108, 0.25);
+            background: linear-gradient(145deg, rgba(225, 48, 108, 0.08), rgba(193, 53, 132, 0.04));
+            border-color: rgba(225, 48, 108, 0.15);
         }
         .app-icon.instagram i {
             background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
@@ -415,11 +453,13 @@
         }
         .app-icon.instagram span {
             color: #a1296e;
+            text-transform: none;
+            font-weight: 500;
         }
 
         .app-icon.pay {
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.12), rgba(27, 94, 32, 0.08));
-            border: 2px solid rgba(76, 175, 80, 0.25);
+            background: linear-gradient(145deg, rgba(46, 125, 50, 0.08), rgba(27, 94, 32, 0.04));
+            border-color: rgba(76, 175, 80, 0.15);
         }
         .app-icon.pay i {
             color: #2e7d32;
@@ -429,19 +469,21 @@
         }
 
         .app-icon.calendar {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.12), rgba(142, 68, 173, 0.08));
-            border: 2px solid rgba(155, 89, 182, 0.25);
+            background: linear-gradient(145deg, rgba(155, 89, 182, 0.08), rgba(142, 68, 173, 0.04));
+            border-color: rgba(155, 89, 182, 0.15);
         }
         .app-icon.calendar i {
             color: #9b59b6;
         }
         .app-icon.calendar span {
             color: #6f3c8a;
+            font-size: var(--icon-label-base);
+            letter-spacing: 0.2px;
         }
 
         .app-icon.register {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.12), rgba(46, 125, 50, 0.08));
-            border: 2px solid rgba(76, 175, 80, 0.25);
+            background: linear-gradient(145deg, rgba(76, 175, 80, 0.08), rgba(46, 125, 50, 0.04));
+            border-color: rgba(76, 175, 80, 0.15);
         }
         .app-icon.register i {
             color: #4CAF50;
@@ -450,20 +492,46 @@
             color: #2b6e2f;
         }
 
+        .app-icon.djmx {
+            width: var(--icon-size-base);
+            height: var(--icon-size-base);
+            border-radius: 17px;
+            background: linear-gradient(145deg, rgba(225, 48, 108, 0.06), rgba(193, 53, 132, 0.03));
+            border-color: rgba(225, 48, 108, 0.12);
+        }
+        .app-icon.djmx i {
+            font-size: var(--icon-font-base);
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .app-icon.djmx span {
+            color: #a1296e;
+            font-size: var(--icon-label-base);
+            text-transform: none;
+            letter-spacing: 0.1px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
         .app-icon.facebook.loaded {
             animation-delay: 0s;
         }
         .app-icon.instagram.loaded {
-            animation-delay: 0.15s;
+            animation-delay: 0.10s;
         }
         .app-icon.calendar.loaded {
-            animation-delay: 0.3s;
+            animation-delay: 0.20s;
         }
-        .app-icon.register.loaded {
-            animation-delay: 0.45s;
+        .app-icon.djmx.loaded {
+            animation-delay: 0.30s;
         }
         .app-icon.pay.loaded {
-            animation-delay: 0.6s;
+            animation-delay: 0.40s;
+        }
+        .app-icon.register.loaded {
+            animation-delay: 0.50s;
         }
 
         .welcome-pills-heading {
@@ -479,6 +547,8 @@
             color: #1f3a57;
             margin-top: var(--space-6);
             font-weight: 400;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
         }
 
         .welcome-pills {
@@ -3275,25 +3345,18 @@
             .links-grid {
                 gap: var(--space-6);
             }
-            .app-icon {
-                width: 114px;
-                height: 114px;
-            }
-            .app-icon i {
-                font-size: 46px;
-            }
-            .app-icon.facebook,
-            .app-icon.instagram {
-                width: 124px;
-                height: 124px;
-            }
-            .app-icon.facebook i,
-            .app-icon.instagram i {
-                font-size: 50px;
-            }
         }
 
         @media (max-width: 850px) {
+            :root {
+                --icon-size-lg: 108px;
+                --icon-size-base: 92px;
+                --icon-size-sm: 92px;
+                --icon-font-lg: 34px;
+                --icon-font-base: 28px;
+                --icon-label-lg: 13px;
+                --icon-label-base: 11px;
+            }
             .container {
                 padding: var(--space-6) var(--space-6) var(--space-10);
             }
@@ -3379,21 +3442,8 @@
             .welcome-title {
                 font-size: var(--font-4xl);
             }
-            .app-icon {
-                width: 104px;
-                height: 104px;
-            }
-            .app-icon.facebook,
-            .app-icon.instagram {
-                width: 114px;
-                height: 114px;
-            }
-            .app-icon i {
-                font-size: 40px;
-            }
-            .app-icon.facebook i,
-            .app-icon.instagram i {
-                font-size: 46px;
+            .apps-row {
+                gap: var(--space-3);
             }
             .modern-event-card {
                 padding: var(--space-6) var(--space-5) var(--space-7);
@@ -3442,27 +3492,17 @@
         }
 
         @media (max-width: 650px) {
+            :root {
+                --icon-size-lg: 96px;
+                --icon-size-base: 80px;
+                --icon-size-sm: 80px;
+                --icon-font-lg: 30px;
+                --icon-font-base: 24px;
+                --icon-label-lg: 12px;
+                --icon-label-base: 10px;
+            }
             .apps-row {
-                gap: var(--space-4);
-            }
-            .app-icon {
-                width: 94px;
-                height: 94px;
-            }
-            .app-icon.facebook,
-            .app-icon.instagram {
-                width: 104px;
-                height: 104px;
-            }
-            .app-icon i {
-                font-size: 36px;
-            }
-            .app-icon.facebook i,
-            .app-icon.instagram i {
-                font-size: 40px;
-            }
-            .app-icon span {
-                font-size: 11px;
+                gap: var(--space-2);
             }
             .welcome-cta-pill {
                 min-height: 64px;
@@ -3503,6 +3543,15 @@
         }
 
         @media (max-width: 550px) {
+            :root {
+                --icon-size-lg: 84px;
+                --icon-size-base: 70px;
+                --icon-size-sm: 70px;
+                --icon-font-lg: 26px;
+                --icon-font-base: 20px;
+                --icon-label-lg: 11px;
+                --icon-label-base: 9px;
+            }
             body {
                 font-size: var(--font-sm);
                 padding: var(--space-3) var(--space-3) var(--space-6);
@@ -3527,28 +3576,17 @@
                 margin-bottom: var(--space-4);
             }
             .apps-row {
-                gap: var(--space-2);
+                gap: var(--space-1);
             }
-            .app-icon {
-                width: 78px;
-                height: 78px;
-                border-radius: var(--radius-2xl);
+            .app-icon.djmx {
+                width: var(--icon-size-base);
+                height: var(--icon-size-base);
             }
-            .app-icon.facebook,
-            .app-icon.instagram {
-                width: 86px;
-                height: 86px;
+            .app-icon.djmx i {
+                font-size: var(--icon-font-base);
             }
-            .app-icon i {
-                font-size: 30px;
-                margin-bottom: var(--space-1);
-            }
-            .app-icon.facebook i,
-            .app-icon.instagram i {
-                font-size: 34px;
-            }
-            .app-icon span {
-                font-size: 9px;
+            .app-icon.djmx span {
+                font-size: var(--icon-label-base);
             }
             #welcome-skip-btn {
                 padding: var(--space-1) var(--space-2);
@@ -3958,38 +3996,34 @@
                     gap: var(--space-2);
                 }
                 .app-icon {
-                    width: 68px;
-                    height: 68px;
+                    width: var(--icon-size-sm);
+                    height: var(--icon-size-sm);
                 }
                 .app-icon i {
-                    font-size: 26px;
+                    font-size: var(--icon-font-base);
+                }
+                .app-icon.djmx {
+                    width: var(--icon-size-sm);
+                    height: var(--icon-size-sm);
+                }
+                .app-icon.djmx i {
+                    font-size: var(--icon-font-base);
                 }
             }
         }
 
         @media (max-width: 400px) {
+            :root {
+                --icon-size-lg: 76px;
+                --icon-size-base: 64px;
+                --icon-size-sm: 64px;
+                --icon-font-lg: 22px;
+                --icon-font-base: 18px;
+                --icon-label-lg: 10px;
+                --icon-label-base: 8px;
+            }
             .apps-row {
                 gap: var(--space-1);
-            }
-            .app-icon {
-                width: 66px;
-                height: 66px;
-            }
-            .app-icon.facebook,
-            .app-icon.instagram {
-                width: 74px;
-                height: 74px;
-            }
-            .app-icon i {
-                font-size: 24px;
-                margin-bottom: var(--space-1);
-            }
-            .app-icon.facebook i,
-            .app-icon.instagram i {
-                font-size: 28px;
-            }
-            .app-icon span {
-                font-size: 7px;
             }
             .welcome-cta-pill {
                 padding: var(--space-2) var(--space-2);
@@ -4096,7 +4130,7 @@
         @keyframes attention-arrival {
             0% {
                 opacity: 0;
-                transform: translateY(30px) scale(0.9);
+                transform: translateY(30px) scale(0.92);
             }
             100% {
                 opacity: 1;
@@ -4207,14 +4241,15 @@
             <p class="welcome-social-prompt">Follow us for dance tips &amp; social nights</p>
             <div class="apps-row">
                 <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="app-icon facebook" data-app="facebook"><i class="fab fa-facebook"></i><span>Facebook</span></a>
-                <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="app-icon instagram" data-app="instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-                <a href="#" class="app-icon calendar" id="welcome-calendar-icon"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="app-icon register"><i class="fas fa-clipboard-list"></i><span>Register</span></a>
+                <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="app-icon instagram" data-app="instagram"><i class="fab fa-instagram"></i><span>Instagram<br>Rebecca_bachata</span></a>
+                <a href="#" class="app-icon calendar" id="welcome-calendar-icon"><i class="fas fa-calendar-alt"></i><span>Class Schedule</span></a>
+                <a href="https://www.instagram.com/djmxphilly?igsh=MWhjNnh6dm56NjUzMA==" class="app-icon djmx" data-app="instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i><span>Instagram<br>dj mx</span></a>
             </div>
             <div class="apps-row second-row">
                 <div class="second-row-left"></div>
                 <div class="second-row-icons">
                     <a href="#" class="app-icon pay" id="pay-icon"><i class="fas fa-credit-card"></i><span>Pay</span></a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="app-icon register"><i class="fas fa-clipboard-list"></i><span>Register</span></a>
                 </div>
                 <button id="welcome-skip-btn" class="skip-inline"><i class="fas fa-chevron-right"></i> Skip</button>
             </div>
