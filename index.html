@@ -686,14 +686,14 @@
             border: 1px solid rgba(44, 90, 160, 0.06);
             text-transform: lowercase;
         }
-        .welcome-cta-pill .pill-badge.next-week-badge {
-            background: rgba(44, 90, 160, 0.08);
-            color: var(--primary-blue);
-        }
         .welcome-cta-pill .pill-badge.this-week-badge {
             background: rgba(44, 90, 160, 0.15);
             color: var(--dark-blue);
             border-color: rgba(44, 90, 160, 0.15);
+        }
+        .welcome-cta-pill .pill-badge.next-week-badge {
+            background: rgba(44, 90, 160, 0.08);
+            color: var(--primary-blue);
         }
         .welcome-cta-pill.next-event {
             border: 2px solid var(--primary-blue);
@@ -1063,7 +1063,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* ─── REDESIGNED CALL-TO-ACTION CARD ─── */
         .class-cta-container {
             border-radius: var(--radius-3xl);
             padding: var(--space-10) var(--space-10) var(--space-10);
@@ -1156,7 +1155,6 @@
             opacity: 0.4;
         }
 
-        /* ─── NEW: Next Class Day Display ─── */
         .cta-next-day {
             display: flex;
             align-items: center;
@@ -1223,7 +1221,6 @@
             }
         }
 
-        /* class rows */
         .cta-class-list {
             display: flex;
             flex-direction: column;
@@ -1378,7 +1375,6 @@
             border-bottom-color: var(--primary-blue);
         }
 
-        /* ─── MODERN PAYMENT CARDS ─── */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1441,7 +1437,6 @@
             color: var(--primary-blue);
         }
 
-        /* ─── OTHER STYLES (preserved) ─── */
         .link-card .card-header {
             padding: var(--space-6) var(--space-7) var(--space-4);
             background: linear-gradient(145deg, #f8fbff, #f0f6fe);
@@ -4348,7 +4343,6 @@
 
             <h2 class="section-title" id="upcoming-title">Join Our Next Class</h2>
 
-            <!-- ─── REDESIGNED CALL-TO-ACTION CARD ─── -->
             <div id="class-cta" class="class-cta-container section-animate">
                 <span class="cta-badge">New 4-Week Course</span>
 
@@ -4356,7 +4350,6 @@
                     Start Dancing <span class="highlight">in 4 Weeks</span>
                 </div>
 
-                <!-- ─── NEW: Next Class Day Display ─── -->
                 <div class="cta-next-day" id="cta-next-day">
                     <span class="cta-next-day-icon"><i class="fas fa-calendar-check"></i></span>
                     <span class="cta-next-day-label">Next Class:</span>
@@ -4631,1366 +4624,1439 @@
     </div>
 
     <script>
-        function isFacebookInAppBrowser() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
-        }
+        (function() {
+            'use strict';
 
-        function openAppOrWeb(webUrl, appType) {
-            var userAgent = navigator.userAgent.toLowerCase();
-            var isIOS = /iphone|ipad|ipod/.test(userAgent);
-            var isAndroid = /android/.test(userAgent);
-            var isFB = isFacebookInAppBrowser();
-            var schemeUrl = null;
-            var fallbackUrl = webUrl;
-
-            if (appType === 'facebook') {
-                if (isFB) { window.location.href = webUrl; return; }
-                schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
-            } else if (appType === 'instagram') {
-                var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
-                var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
-                schemeUrl = 'instagram://user?username=' + username;
-            } else if (appType === 'venmo') {
-                var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
-                var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
-                schemeUrl = 'venmo://pay?recipients=' + handle;
-            } else if (appType === 'cashapp') {
-                var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
-                var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
-                schemeUrl = 'cashapp://$' + tag;
-            } else {
-                window.open(webUrl, '_blank');
-                return;
+            // ----- UTILITY -----
+            function isFacebookInAppBrowser() {
+                var ua = navigator.userAgent || navigator.vendor || window.opera;
+                return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
             }
 
-            if (!schemeUrl) return;
+            function openAppOrWeb(webUrl, appType) {
+                var userAgent = navigator.userAgent.toLowerCase();
+                var isIOS = /iphone|ipad|ipod/.test(userAgent);
+                var isAndroid = /android/.test(userAgent);
+                var isFB = isFacebookInAppBrowser();
+                var schemeUrl = null;
+                var fallbackUrl = webUrl;
 
-            var iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            var timeout = setTimeout(function() {
-                if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                window.open(fallbackUrl, '_blank');
-            }, 800);
-            iframe.src = schemeUrl;
-            iframe.onload = function() {
-                clearTimeout(timeout);
-                if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-            };
-            if (isIOS) {
-                window.location.href = schemeUrl;
-            }
-        }
-
-        function setupDeepLinks() {
-            var appLinks = document.querySelectorAll('[data-app]');
-            appLinks.forEach(function(link) {
-                var appType = link.getAttribute('data-app');
-                if (!appType) return;
-                if (link.tagName === 'A' && !link.hasAttribute('data-app-processed')) {
-                    link.setAttribute('data-app-processed', 'true');
-                    var originalHref = link.getAttribute('href');
-                    if (!originalHref || originalHref === '#') {
-                        if (appType === 'facebook') originalHref = 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr';
-                        else if (appType === 'instagram') originalHref = 'https://www.instagram.com/rebecca_bachata/';
-                        else if (appType === 'venmo') originalHref = 'https://account.venmo.com/u/Rebecca_Rose_Bachata';
-                        else if (appType === 'cashapp') originalHref = 'https://cash.app/$RebeccaRoseBachata';
-                        else originalHref = 'https://';
-                    }
-                    link.addEventListener('click', function(e) {
-                        if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e.preventDefault(); return; }
-                        e.preventDefault();
-                        openAppOrWeb(originalHref, appType);
-                    });
-                } else if (link.tagName !== 'A') {
-                    var fakeHref = (appType === 'facebook' ? 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr' :
-                        (appType === 'instagram' ? 'https://www.instagram.com/rebecca_bachata/' :
-                            (appType === 'venmo' ? 'https://account.venmo.com/u/Rebecca_Rose_Bachata' :
-                                (appType === 'cashapp' ? 'https://cash.app/$RebeccaRoseBachata' : 'https://'))));
-                    link.addEventListener('click', function(e) {
-                        if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e.preventDefault(); return; }
-                        e.preventDefault();
-                        openAppOrWeb(fakeHref, appType);
-                    });
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', setupDeepLinks);
-        var observer = new MutationObserver(function() { setupDeepLinks(); });
-        observer.observe(document.body, { childList: true, subtree: true });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const progressBar = document.getElementById('scrollProgress');
-            if (progressBar) {
-                window.addEventListener('scroll', function() {
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-                    progressBar.style.width = Math.min(progress, 100) + '%';
-                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
-                }, { passive: true });
-            }
-
-            let paymentModalOpen = false;
-            window.paymentModalOpen = false;
-            let autoDismissTimer = null;
-            const welcomeArray = document.getElementById('welcome-array');
-            const mainContainer = document.querySelector('.container');
-            const body = document.body;
-            let mainInitialized = false;
-            const VENMO_URL = 'https://account.venmo.com/u/Rebecca_Rose_Bachata';
-            const CASHAPP_URL = 'https://cash.app/$RebeccaRoseBachata';
-
-            function cancelAutoDismiss() { if (autoDismissTimer) { clearTimeout(autoDismissTimer);
-                    autoDismissTimer = null; } }
-
-            function restartAutoDismiss() { cancelAutoDismiss();
-                autoDismissTimer = setTimeout(fadeOutWelcomeArray, 9000); }
-
-            function fadeOutWelcomeArray(callback) {
-                cancelAutoDismiss();
-                if (paymentModalOpen) closePaymentModal();
-                welcomeArray.classList.add('hidden');
-                body.classList.remove('welcome-active');
-                setTimeout(() => {
-                    mainContainer.style.opacity = '1';
-                    welcomeArray.style.display = 'none';
-                    initMainPage();
-                    setTimeout(() => body.classList.remove('no-scroll'), 1000);
-                    if (callback) callback();
-                }, 500);
-            }
-
-            function showPaymentModal() {
-                if (document.querySelector('.payment-modal-overlay')) return;
-                cancelAutoDismiss();
-                paymentModalOpen = true;
-                window.paymentModalOpen = true;
-                const modalOverlay = document.createElement('div');
-                modalOverlay.className = 'payment-modal-overlay';
-                modalOverlay.innerHTML =
-                    `<div class="payment-modal-card"><button class="payment-modal-close">&times;</button><div class="payment-modal-title">Select payment</div><div class="payment-modal-sub"></div><div class="payment-options"><button class="payment-option-btn venmo-opt"><i class="fab fa-vimeo-v"></i> Venmo</button><button class="payment-option-btn cashapp-opt"><i class="fas fa-dollar-sign"></i> Cash App</button></div></div>`;
-                document.body.appendChild(modalOverlay);
-                const closeBtn = modalOverlay.querySelector('.payment-modal-close');
-                const venmoBtn = modalOverlay.querySelector('.venmo-opt');
-                const cashBtn = modalOverlay.querySelector('.cashapp-opt');
-                closeBtn.addEventListener('click', () => { closePaymentModal();
-                    restartAutoDismiss(); });
-                venmoBtn.addEventListener('click', () => { handlePaymentSelect('venmo'); });
-                cashBtn.addEventListener('click', () => { handlePaymentSelect('cashapp'); });
-                modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) { closePaymentModal();
-                        restartAutoDismiss(); } });
-            }
-
-            function closePaymentModal() {
-                const modal = document.querySelector('.payment-modal-overlay');
-                if (modal) modal.remove();
-                paymentModalOpen = false;
-                window.paymentModalOpen = false;
-            }
-
-            function handlePaymentSelect(type) {
-                const webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
-                const appType = type === 'venmo' ? 'venmo' : 'cashapp';
-                if (typeof openAppOrWeb === 'function') {
-                    openAppOrWeb(webUrl, appType);
+                if (appType === 'facebook') {
+                    if (isFB) { window.location.href = webUrl; return; }
+                    schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+                } else if (appType === 'instagram') {
+                    var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
+                    var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
+                    schemeUrl = 'instagram://user?username=' + username;
+                } else if (appType === 'venmo') {
+                    var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
+                    var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
+                    schemeUrl = 'venmo://pay?recipients=' + handle;
+                } else if (appType === 'cashapp') {
+                    var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
+                    var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
+                    schemeUrl = 'cashapp://$' + tag;
                 } else {
                     window.open(webUrl, '_blank');
-                }
-                fadeOutWelcomeArray();
-            }
-
-            const logo = document.querySelector('.logo');
-            let clickCount = 0,
-                clickTimer = null;
-            const WHATSAPP_LINK = 'https://chat.whatsapp.com/IRz7E4pKaZaJKA53HWQIPB?mode=gi_t';
-            if (logo) {
-                logo.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    clickCount++;
-                    if (clickTimer) clearTimeout(clickTimer);
-                    clickTimer = setTimeout(() => { clickCount = 0; }, 500);
-                    if (clickCount === 3) { clearTimeout(clickTimer);
-                        clickCount = 0;
-                        window.open(WHATSAPP_LINK, '_blank'); }
-                });
-            }
-
-            const skipBtn = document.getElementById('welcome-skip-btn');
-            if (skipBtn) skipBtn.addEventListener('click', (e) => { e.stopPropagation(); if (paymentModalOpen) return;
-                fadeOutWelcomeArray(); });
-            welcomeArray.addEventListener('click', (e) => {
-                const target = e.target;
-                if (paymentModalOpen) return;
-                if (target === welcomeArray || target.classList.contains('welcome-content') || target.classList
-                    .contains('welcome-title') || target.classList.contains('welcome-social-prompt') || target
-                    .tagName === 'P') fadeOutWelcomeArray();
-            });
-
-            const payIcon = document.getElementById('pay-icon');
-            if (payIcon) payIcon.addEventListener('click', (e) => { e.preventDefault();
-                showPaymentModal(); });
-
-            const appIcons = document.querySelectorAll('.app-icon');
-            appIcons.forEach((icon, idx) => { setTimeout(() => icon.classList.add('loaded'), idx * 150); });
-
-            let touchStartY = 0,
-                touchEndY = 0,
-                touchStartTime = 0,
-                touchActive = false,
-                touchMoved = false,
-                swipeHoldTimer = null;
-            const SWIPE_THRESHOLD = 50,
-                HOLD_DELAY = 1000;
-            welcomeArray.addEventListener('touchstart', (e) => {
-                if (paymentModalOpen) return;
-                touchStartY = e.touches[0].clientY;
-                touchStartTime = Date.now();
-                touchActive = true;
-                touchMoved = false;
-                if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
-            }, { passive: false });
-            welcomeArray.addEventListener('touchmove', (e) => {
-                if (!touchActive || paymentModalOpen) return;
-                const moveY = e.touches[0].clientY;
-                if (Math.abs(moveY - touchStartY) > SWIPE_THRESHOLD) {
-                    touchMoved = true;
-                    if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
-                    swipeHoldTimer = setTimeout(() => {
-                        if (touchActive && touchMoved && !paymentModalOpen) fadeOutWelcomeArray();
-                    }, HOLD_DELAY);
-                }
-                e.preventDefault();
-            }, { passive: false });
-            welcomeArray.addEventListener('touchend', (e) => {
-                touchEndY = e.changedTouches[0].clientY;
-                touchActive = false;
-                if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
-                if (Math.abs(touchEndY - touchStartY) > SWIPE_THRESHOLD && (Date.now() - touchStartTime) < 300 &&
-                    !paymentModalOpen) fadeOutWelcomeArray();
-            });
-
-            let lastScrollTime = 0,
-                scrollCount = 0;
-            welcomeArray.addEventListener('wheel', (e) => {
-                if (paymentModalOpen) return;
-                const now = Date.now();
-                if (Math.abs(e.deltaY) > 50) {
-                    if (now - lastScrollTime < 500) {
-                        scrollCount++;
-                        if (scrollCount >= 2) fadeOutWelcomeArray();
-                    } else scrollCount = 1;
-                    lastScrollTime = now;
-                    setTimeout(() => { scrollCount = 0; }, 500);
-                }
-            });
-
-            const calendarIcon = document.getElementById('welcome-calendar-icon');
-            if (calendarIcon) calendarIcon.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (paymentModalOpen) return;
-                fadeOutWelcomeArray(() => document.getElementById('schedule-title').scrollIntoView({ behavior: 'smooth',
-                    block: 'start' }));
-            });
-
-            const signinBtn = document.getElementById('signinCornerBtn');
-            if (signinBtn) signinBtn.addEventListener('click', () => window.open('https://forms.gle/1VptpwmGA2VdSvB6A',
-                '_blank'));
-
-            function updateSigninVisibility() {
-                if (!signinBtn) return;
-                const atTop = window.scrollY <= 10;
-                if (atTop) signinBtn.classList.remove('hidden');
-                else signinBtn.classList.add('hidden');
-            }
-            if (signinBtn) {
-                updateSigninVisibility();
-                window.addEventListener('scroll', updateSigninVisibility, { passive: true });
-            }
-
-            restartAutoDismiss();
-
-            const classSchedule = [
-                { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
-                    classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
-                    locationId: "stardust-card", endTime: 2100 },
-                { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom",
-                    classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Bachata Advanced Beginner",
-                        "9:00pm Bachata Elite"
-                    ], locationId: "stardust-card", endTime: 2200 },
-                { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio",
-                    classes: ["4:00pm Salsa", "5:00pm Bachata"], locationId: "estilo-card",
-                    endTime: 1800 }
-            ];
-
-            function getDaysUntil(dayIndex, endTime) {
-                const now = new Date();
-                const curDay = now.getDay();
-                const curTime = now.getHours() * 100 + now.getMinutes();
-                let days = dayIndex - curDay;
-                if (days < 0) days += 7;
-                if (days === 0 && curTime >= endTime) days = 7;
-                return days;
-            }
-
-            function getNextStardustClassInfoWithDays() {
-                const stardustClasses = classSchedule.filter(s => s.studio === "Stardust Ballroom");
-                let best = null;
-                let bestDays = 8;
-                for (let s of stardustClasses) {
-                    let days = getDaysUntil(s.dayIndex, s.endTime);
-                    if (days < bestDays) {
-                        bestDays = days;
-                        best = s;
-                    }
-                }
-                if (!best) best = stardustClasses[0];
-                let daysUntil = getDaysUntil(best.dayIndex, best.endTime);
-                return { daysUntil, ...best };
-            }
-
-            function getNextClassInfoWithDays() {
-                let best = null;
-                let bestDays = 8;
-                for (let s of classSchedule) {
-                    let days = getDaysUntil(s.dayIndex, s.endTime);
-                    if (days < bestDays) {
-                        bestDays = days;
-                        best = s;
-                    }
-                }
-                if (!best) best = classSchedule[0];
-                let daysUntil = getDaysUntil(best.dayIndex, best.endTime);
-                return { daysUntil, ...best };
-            }
-
-            function updateCTASection() {
-                const next = getNextStardustClassInfoWithDays();
-                const classList = document.getElementById('cta-class-list');
-                if (!classList) return;
-                const rows = classList.querySelectorAll('.cta-class-row');
-                if (rows.length < 2) return;
-                const classes = next.classes || [];
-                const firstClass = classes[0] || "7:00pm Intro to Salsa & Bachata";
-                const secondClass = classes[1] || "8:00pm Advanced Beginner";
-
-                const time1 = firstClass.split(' ')[0] || "7:00";
-                const time2 = secondClass.split(' ')[0] || "8:00";
-                const name1 = firstClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Salsa & Bachata Intro";
-                const name2 = secondClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Advanced Beginner";
-
-                const timeEl1 = rows[0].querySelector('.cta-class-time');
-                const nameEl1 = rows[0].querySelector('.cta-class-name');
-                const timeEl2 = rows[1].querySelector('.cta-class-time');
-                const nameEl2 = rows[1].querySelector('.cta-class-name');
-                const levelBadge = rows[1].querySelector('.cta-class-level');
-
-                if (timeEl1) timeEl1.textContent = time1;
-                if (nameEl1) nameEl1.textContent = name1;
-                if (timeEl2) timeEl2.textContent = time2;
-                if (nameEl2) nameEl2.textContent = name2;
-
-                if (levelBadge) {
-                    let badgeText = 'Salsa / Bachata';
-                    let badgeClass = 'advanced';
-                    if (secondClass.includes('Salsa') && !secondClass.includes('Bachata')) {
-                        badgeText = 'Salsa';
-                        badgeClass = 'salsa-level';
-                    } else if (secondClass.includes('Bachata') && !secondClass.includes('Salsa')) {
-                        badgeText = 'Bachata';
-                        badgeClass = 'bachata-level';
-                    } else if (secondClass.includes('Salsa') && secondClass.includes('Bachata')) {
-                        badgeText = 'Salsa / Bachata';
-                        badgeClass = 'advanced';
-                    } else {
-                        badgeText = 'Salsa / Bachata';
-                        badgeClass = 'advanced';
-                    }
-                    levelBadge.textContent = badgeText;
-                    levelBadge.className = 'cta-class-level ' + badgeClass;
+                    return;
                 }
 
-                const ctaBadge = document.querySelector('.cta-badge');
-                if (ctaBadge) {
-                    const d = next.daysUntil;
-                    if (d === 0) ctaBadge.textContent = 'Tonight';
-                    else if (d === 1) ctaBadge.textContent = 'Tomorrow';
-                    else if (d >= 2 && d <= 6) ctaBadge.textContent = 'This Week';
-                    else ctaBadge.textContent = 'Upcoming Class';
-                }
+                if (!schemeUrl) return;
 
-                // ─── UPDATE NEXT CLASS DAY DISPLAY ───
-                const dayNameEl = document.getElementById('cta-day-name');
-                if (dayNameEl && next && next.day) {
-                    dayNameEl.textContent = next.day;
-                }
-            }
-
-            function getBadgeText(daysUntil) {
-                if (daysUntil === 0) return "Tonight";
-                if (daysUntil === 1) return "Tomorrow";
-                if (daysUntil >= 2 && daysUntil <= 6) return "This Week";
-                return "Next Class";
-            }
-
-            function updateDynamicBadge() {
-                const cards = document.querySelectorAll('.link-card');
-                cards.forEach(c => {
-                    const existing = c.querySelector('.next-class-badge');
-                    if (existing) existing.remove();
-                    c.classList.remove('next-class-highlight');
-                });
-                let bestCard = null;
-                let bestDays = 8;
-                for (let s of classSchedule) {
-                    let days = getDaysUntil(s.dayIndex, s.endTime);
-                    if (days < bestDays) {
-                        bestDays = days;
-                        bestCard = document.getElementById(s.locationId);
-                    }
-                }
-                if (bestCard) {
-                    bestCard.classList.add('next-class-highlight');
-                    let badge = bestCard.querySelector('.next-class-badge');
-                    if (!badge) {
-                        badge = document.createElement('span');
-                        badge.className = 'next-class-badge';
-                        bestCard.appendChild(badge);
-                    }
-                    badge.textContent = getBadgeText(bestDays);
-                }
-            }
-
-            function reorderDayGroupsInCards() {
-                const now = new Date();
-                const curDayName = now.toLocaleDateString('en-US', { weekday: 'long' });
-                document.querySelectorAll('.link-card').forEach(card => {
-                    const list = card.querySelector('.schedule-list');
-                    if (!list) return;
-                    const groups = Array.from(list.querySelectorAll('.schedule-day-group'));
-                    if (groups.length > 1) {
-                        const todayIdx = groups.findIndex(g => g.dataset.day === curDayName);
-                        if (todayIdx > 0) {
-                            const todayGroup = groups[todayIdx];
-                            todayGroup.remove();
-                            list.insertBefore(todayGroup, list.firstChild);
-                        }
-                    }
-                });
-            }
-
-            function updateScheduleDisplay() {
-                const now = new Date();
-                const curDay = now.getDay();
-                const curTime = now.getHours() * 100 + now.getMinutes();
-                const map = {};
-                classSchedule.forEach(s => {
-                    let daysUntil = getDaysUntil(s.dayIndex, s.endTime);
-                    if (!map[s.locationId] || daysUntil < map[s.locationId].daysUntil) map[s
-                    .locationId] = { daysUntil, schedule: s };
-                });
-                const sorted = Object.values(map).sort((a, b) => a.daysUntil - b.daysUntil);
-                const grid = document.getElementById('schedule-grid');
-                const cards = Array.from(grid.children);
-                const ordered = sorted.map(s => cards.find(c => c.id === s.schedule.locationId));
-                while (grid.firstChild) grid.removeChild(grid.firstChild);
-                ordered.forEach(c => { if (c) grid.appendChild(c); });
-                reorderDayGroupsInCards();
-                updateDynamicBadge();
-            }
-
-            function updateMonthPromo() {
-                const now = new Date();
-                const y = now.getFullYear(),
-                    m = now.getMonth(),
-                    d = now.getDate();
-                const lastDay = new Date(y, m + 1, 0).getDate();
-                let lastSun = lastDay;
-                if (new Date(y, m, lastDay).getDay() !== 0) lastSun = lastDay - new Date(y, m, lastDay).getDay();
-                const isLastSunday = d === lastSun;
-                let monthToShow = isLastSunday ? new Date(y, m + 1, 1).toLocaleDateString('en-US', { month: 'long' }) :
-                    now.toLocaleDateString('en-US', { month: 'long' });
-                const promo = document.getElementById('stardust-month-promo');
-                if (promo) promo.textContent = monthToShow;
-            }
-
-            function sortEventPills() {
-                const container = document.getElementById('welcome-pills-container');
-                if (!container) return;
-                const pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
-                if (pills.length === 0) return;
-                document.querySelectorAll('.up-next-badge').forEach(el => el.remove());
-                document.querySelectorAll('.pill-badge').forEach(el => el.remove());
-                pills.forEach(p => { p.classList.remove('next-event');
-                    p.classList.remove('second-event-highlight'); });
-
-                const now = new Date();
-                now.setHours(0, 0, 0, 0);
-
-                function parseEventKey(key) {
-                    const map = {
-                        'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
-                        'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Inés' },
-                        'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
-                    };
-                    return map[key] || null;
-                }
-
-                function getNextOccurrence(dayName, weekPattern) {
-                    const dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
-                    const targetDay = dayMap[dayName];
-                    if (targetDay === undefined) return null;
-                    let weekNumbers = [];
-                    if (weekPattern === 'every') weekNumbers = [1, 2, 3, 4, 5];
-                    else if (weekPattern === '1st&3rd') weekNumbers = [1, 3];
-                    else if (weekPattern === '2nd&4th') weekNumbers = [2, 4];
-                    else if (weekPattern === '1st') weekNumbers = [1];
-                    else if (weekPattern === '2nd') weekNumbers = [2];
-                    else if (weekPattern === '3rd') weekNumbers = [3];
-                    else if (weekPattern === '4th') weekNumbers = [4];
-                    else weekNumbers = [1, 2, 3, 4, 5];
-
-                    for (let monthOffset = 0; monthOffset < 6; monthOffset++) {
-                        const year = now.getFullYear() + Math.floor((now.getMonth() + monthOffset) / 12);
-                        const month = (now.getMonth() + monthOffset) % 12;
-                        const lastDay = new Date(year, month + 1, 0);
-                        const occurrences = [];
-                        for (let d = 1; d <= lastDay.getDate(); d++) {
-                            const date = new Date(year, month, d);
-                            if (date.getDay() === targetDay) occurrences.push(date);
-                        }
-                        const filtered = occurrences.filter((date, index) => weekNumbers.includes(index + 1));
-                        for (const date of filtered) {
-                            if (date >= now) return date;
-                        }
-                    }
-                    return null;
-                }
-
-                const withDates = pills.map(pill => {
-                    const key = pill.getAttribute('data-event-key');
-                    if (!key) return { pill, date: null, key, info: null };
-                    const info = parseEventKey(key);
-                    if (!info) return { pill, date: null, key, info: null };
-                    const date = getNextOccurrence(info.day, info.pattern);
-                    return { pill, date, key, info };
-                });
-
-                const valid = withDates.filter(item => item.date !== null);
-                valid.sort((a, b) => a.date.getTime() - b.date.getTime());
-
-                const unprocessed = withDates.filter(item => item.date === null).map(item => item.pill);
-                const orderedPills = valid.map(item => item.pill);
-                orderedPills.push(...unprocessed);
-
-                while (container.firstChild) container.removeChild(container.firstChild);
-                orderedPills.forEach(p => container.appendChild(p));
-
-                const orderedData = valid.map(item => {
-                    const daysUntil = Math.ceil((item.date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-                    return { ...item, daysUntil };
-                });
-
-                const nextEvent = orderedData.length > 0 ? orderedData[0] : null;
-                const secondEvent = orderedData.length > 1 ? orderedData[1] : null;
-                const firstDate = nextEvent ? nextEvent.date : null;
-
-                orderedPills.forEach((pill, index) => {
-                    const key = pill.getAttribute('data-event-key');
-                    let daysUntil = 999;
-                    let isPast = false;
-                    if (key) {
-                        const info = parseEventKey(key);
-                        if (info) {
-                            const date = getNextOccurrence(info.day, info.pattern);
-                            if (date) {
-                                const dateCopy = new Date(date);
-                                dateCopy.setHours(0, 0, 0, 0);
-                                daysUntil = Math.ceil((dateCopy.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-                                if (daysUntil < 0) daysUntil = 0;
-                                if (info.pattern === '1st&3rd' && info.day === 'Wed') {
-                                    const currentMonth = now.getMonth();
-                                    const currentYear = now.getFullYear();
-                                    const firstWed = new Date(currentYear, currentMonth, 1);
-                                    while (firstWed.getDay() !== 3) firstWed.setDate(firstWed.getDate() + 1);
-                                    const thirdWed = new Date(firstWed);
-                                    thirdWed.setDate(firstWed.getDate() + 14);
-                                    if (now > firstWed && now < thirdWed) isPast = true;
-                                }
-                            }
-                        }
-                    }
-
-                    const stylesEl = pill.querySelector('.pill-styles');
-                    if (stylesEl) {
-                        const stylesText = stylesEl.textContent;
-                        if (stylesText && stylesText.trim()) stylesEl.style.display = 'inline';
-                    }
-
-                    let badge = pill.querySelector('.pill-badge');
-                    if (!badge) {
-                        badge = document.createElement('span');
-                        badge.className = 'pill-badge';
-                        const mainSpan = pill.querySelector('.pill-main');
-                        if (mainSpan) {
-                            mainSpan.before(badge);
-                            const spacer = document.createTextNode(' ');
-                            badge.after(spacer);
-                        } else pill.appendChild(badge);
-                    }
-
-                    const isFirst = (nextEvent && pill === nextEvent.pill);
-                    const isSecondSameWeek = (secondEvent && pill === secondEvent.pill && firstDate) ?
-                        (Math.ceil((secondEvent.date.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)) < 7) :
-                        false;
-
-                    if (isFirst) {
-                        pill.classList.add('next-event');
-                        badge.textContent = 'this week';
-                        badge.className = 'pill-badge this-week-badge';
-                        const existingUpBadge = pill.querySelector('.up-next-badge');
-                        if (existingUpBadge) existingUpBadge.remove();
-                        const upBadge = document.createElement('span');
-                        upBadge.className = 'up-next-badge';
-                        upBadge.textContent = 'this week';
-                        pill.appendChild(upBadge);
-                    } else if (isSecondSameWeek) {
-                        pill.classList.add('second-event-highlight');
-                        badge.textContent = 'this week';
-                        badge.className = 'pill-badge this-week-badge';
-                    } else if (isPast) {
-                        badge.textContent = 'next week';
-                        badge.className = 'pill-badge next-week-badge';
-                    } else if (daysUntil >= 0 && daysUntil <= 6) {
-                        badge.textContent = 'this week';
-                        badge.className = 'pill-badge this-week-badge';
-                    } else if (daysUntil >= 7) {
-                        badge.textContent = 'next week';
-                        badge.className = 'pill-badge next-week-badge';
-                    } else {
-                        badge.textContent = 'next week';
-                        badge.className = 'pill-badge next-week-badge';
-                    }
-                });
-            }
-
-            function initMainPage() {
-                if (mainInitialized) return;
-                mainInitialized = true;
-
-                sortEventPills();
-                updateCTASection();
-                updateScheduleDisplay();
-                updateMonthPromo();
-
-                const navBar = document.getElementById('nav-buttons');
-                const scheduleTitleEl = document.getElementById('schedule-title');
-                if (navBar && scheduleTitleEl) {
-                    scheduleTitleEl.parentNode.insertBefore(navBar, scheduleTitleEl);
-                    navBar.classList.add('nav-static');
-                    navBar.classList.remove('nav-floating', 'nav-hidden');
-                }
-
-                let lastScrollPos = 0;
-                let ticking = false;
-                let navRAF = null;
-
-                function getStardustHideThreshold() {
-                    const card = document.getElementById('stardust-card');
-                    if (!card) return 450;
-                    const rect = card.getBoundingClientRect();
-                    return rect.top + window.scrollY;
-                }
-
-                function shouldEnableHide() {
-                    if (!scheduleTitleEl) return true;
-                    const rect = scheduleTitleEl.getBoundingClientRect();
-                    return rect.top <= window.innerHeight * 0.75;
-                }
-
-                function updateMenuBar() {
-                    if (!navBar) return;
-                    const scrollY = window.scrollY;
-                    const direction = scrollY > lastScrollPos ? 'down' : 'up';
-                    lastScrollPos = scrollY;
-
-                    if (!shouldEnableHide()) {
-                        navBar.classList.add('nav-static');
-                        navBar.classList.remove('nav-floating', 'nav-hidden');
-                        return;
-                    }
-
-                    if (scrollY <= 8) {
-                        navBar.classList.add('nav-static');
-                        navBar.classList.remove('nav-floating', 'nav-hidden');
-                        return;
-                    }
-
-                    const hideThreshold = getStardustHideThreshold();
-
-                    if (direction === 'down' && scrollY > hideThreshold) {
-                        if (!navBar.classList.contains('nav-hidden')) {
-                            navBar.classList.add('nav-hidden');
-                            navBar.classList.remove('nav-floating', 'nav-static');
-                        }
-                    } else if (direction === 'up') {
-                        if (navBar.classList.contains('nav-hidden')) {
-                            navBar.classList.remove('nav-hidden');
-                            navBar.classList.add('nav-floating');
-                            navBar.classList.remove('nav-static');
-                        } else if (!navBar.classList.contains('nav-floating') && !navBar.classList.contains(
-                            'nav-static')) {
-                            navBar.classList.add('nav-floating');
-                        }
-                    }
-                }
-
-                function handleScroll() {
-                    if (!ticking) {
-                        if (navRAF) cancelAnimationFrame(navRAF);
-                        navRAF = requestAnimationFrame(() => {
-                            updateMenuBar();
-                            ticking = false;
-                            navRAF = null;
-                        });
-                        ticking = true;
-                    }
-                }
-
-                window.addEventListener('scroll', handleScroll, { passive: true });
-                updateMenuBar();
-                window.addEventListener('resize', () => updateMenuBar(), { passive: true });
-
-                function initSectionAnimations() {
-                    const animatedSections = document.querySelectorAll('.section-animate');
-                    const animatedSeparators = document.querySelectorAll('.section-separator');
-
-                    function isElementInViewport(el) {
-                        const rect = el.getBoundingClientRect();
-                        const winH = window.innerHeight || document.documentElement.clientHeight;
-                        return rect.top <= winH - 100 && rect.bottom >= 100;
-                    }
-
-                    function handleScrollAnimation() {
-                        animatedSections.forEach(s => { if (isElementInViewport(s)) s.classList.add('visible'); });
-                        animatedSeparators.forEach(s => { if (isElementInViewport(s)) s.classList.add('visible'); });
-                    }
-                    handleScrollAnimation();
-                    let scrollTimeout;
-                    window.addEventListener('scroll', () => {
-                        if (!scrollTimeout) scrollTimeout = setTimeout(() => { scrollTimeout = null;
-                            handleScrollAnimation(); }, 50);
-                    }, { passive: true });
-                    setTimeout(() => {
-                        animatedSections.forEach(s => { if (isElementInViewport(s)) s.classList.add('visible'); });
-                        animatedSeparators.forEach(s => { if (isElementInViewport(s)) s.classList.add('visible'); });
-                    }, 300);
-                }
-
-                const languageToggle = document.getElementById('language-toggle'),
-                    languageButtons = languageToggle.querySelectorAll('.lang-btn');
-                let currentLanguage = 'en';
-                const translations = {
-                    en: {
-                        mainTitle: "Rebecca & Daniel",
-                        tagline: "Professional Dance Instruction | Express Yourself Through Movement",
-                        connectTitle: "Get Weekly Dance Tips, Reels & Class Updates",
-                        rebeccaTitle: "Rebecca Bachata",
-                        danielTitle: "Daniel Palacios",
-                        upcomingTitle: "Join Our Next Class",
-                        registerCta: "Register Now",
-                        scheduleTitle: "Class Schedule by location",
-                        reviewsTitle: "Student Reviews",
-                        registrationTitle: "Class Registration",
-                        partnerText: "No partner needed - come dance with us!",
-                        namePlaceholder: "Full Name",
-                        registerButton: "Register",
-                        paymentTitle: "Payment Options",
-                        venmoSub: "Secure payment option",
-                        cashAppSub: "Quick & easy payment",
-                        cashTitle: "Cash",
-                        cashSub: "Pay at the studio",
-                        contactTitle: "Contact Us",
-                        contactTitleText: "Professional Inquiries",
-                        contactSubtitle: "Bookings and partnerships",
-                        copyright: "© 2025 Rebecca & Daniel | Professional Dance Instruction",
-                        quote: "dancing is the hidden language of the soul",
-                        privateLessonToggle: "Book a Private Lesson",
-                        privateLessonTitle: "Private Lessons",
-                        privateLessonIntro: "Available days: Sunday, Thursday, Friday, Saturday. Click a day to register via our form.",
-                        privateLessonClose: "Close",
-                        ctaBadge: "New 4-Week Course",
-                        ctaHeadline: "Start Dancing in 4 Weeks",
-                        ctaRegister: "Register Now"
-                    },
-                    es: {
-                        mainTitle: "Rebecca & Daniel",
-                        tagline: "Instrucción Profesional de Baile | Exprésate a Través del Movimiento",
-                        connectTitle: "Obtén consejos de baile semanales, Reels y actualizaciones de clases",
-                        rebeccaTitle: "Rebecca Bachata",
-                        danielTitle: "Daniel Palacios",
-                        upcomingTitle: "Únete a Nuestra Próxima Clase",
-                        registerCta: "Registrarse",
-                        scheduleTitle: "Horario de Clases por ubicación",
-                        reviewsTitle: "Opiniones de Estudiantes",
-                        registrationTitle: "Registro de Clase",
-                        partnerText: "No necesitas pareja - ¡Ven a bailar con nosotros!",
-                        namePlaceholder: "Nombre Completo",
-                        registerButton: "Registrarse",
-                        paymentTitle: "Opciones de Pago",
-                        venmoSub: "Opción de pago segura",
-                        cashAppSub: "Pago rápido y fácil",
-                        cashTitle: "Efectivo",
-                        cashSub: "Paga en el estudio",
-                        contactTitle: "Contáctanos",
-                        contactTitleText: "Consultas Profesionales",
-                        contactSubtitle: "Reservas y colaboraciones",
-                        copyright: "© 2025 Rebecca & Daniel | Instrucción Profesional de Baile",
-                        quote: "El baile es la poesía del pie",
-                        privateLessonToggle: "Reservar Clase Privada",
-                        privateLessonTitle: "Clases Privadas",
-                        privateLessonIntro: "Días disponibles: domingo, jueves, viernes, sábado. Haz clic en un día para registrarte a través de nuestro formulario.",
-                        privateLessonClose: "Cerrar",
-                        ctaBadge: "Nuevo Curso de 4 Semanas",
-                        ctaHeadline: "Empieza a Bailar en 4 Semanas",
-                        ctaRegister: "Registrarse"
-                    }
+                // Try to open the app via iframe, fallback to web after timeout
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                var timeout = setTimeout(function() {
+                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
+                    window.open(fallbackUrl, '_blank');
+                }, 800);
+                iframe.src = schemeUrl;
+                iframe.onload = function() {
+                    clearTimeout(timeout);
+                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
                 };
+                if (isIOS) {
+                    window.location.href = schemeUrl;
+                }
+            }
 
-                function setLanguage(lang) {
-                    languageButtons.forEach(btn => {
-                        btn.dataset.lang === lang ? btn.classList.add('active') : btn.classList.remove('active');
-                    });
-                    const ld = translations[lang];
-                    document.getElementById('main-title').textContent = ld.mainTitle;
-                    document.getElementById('tagline').textContent = ld.tagline;
-                    document.getElementById('connect-title').textContent = ld.connectTitle;
-                    document.getElementById('rebecca-title').textContent = ld.rebeccaTitle;
-                    document.getElementById('daniel-title').textContent = ld.danielTitle;
-                    document.getElementById('upcoming-title').textContent = ld.upcomingTitle;
-                    document.getElementById('register-cta-text').textContent = ld.registerCta;
-                    document.getElementById('schedule-title').textContent = ld.scheduleTitle;
-                    document.getElementById('reviews-title').textContent = ld.reviewsTitle;
-                    document.getElementById('registration-title').textContent = ld.registrationTitle;
-                    document.getElementById('partner-text').textContent = ld.partnerText;
-                    document.querySelectorAll('.participant-fields .form-input').forEach(inp => inp.placeholder = ld
-                        .namePlaceholder);
-                    document.getElementById('register-button').textContent = ld.registerButton;
-                    document.getElementById('payment-title').textContent = ld.paymentTitle;
-                    document.getElementById('venmo-sub').textContent = ld.venmoSub;
-                    const cas = document.getElementById('cash-app-sub');
-                    if (cas) cas.textContent = ld.cashAppSub;
-                    document.getElementById('cash-title').textContent = ld.cashTitle;
-                    document.getElementById('cash-sub').textContent = ld.cashSub;
-                    document.getElementById('contact-title').textContent = ld.contactTitle;
-                    document.getElementById('contact-title-text').textContent = ld.contactTitleText;
-                    document.getElementById('contact-subtitle').textContent = ld.contactSubtitle;
-                    document.getElementById('copyright').textContent = ld.copyright;
-                    document.getElementById('quote').textContent = ld.quote;
-                    const ctaBadge = document.querySelector('.cta-badge');
-                    if (ctaBadge) ctaBadge.textContent = ld.ctaBadge;
-                    const ctaHeadline = document.querySelector('.cta-headline');
-                    if (ctaHeadline) {
-                        const hl = ctaHeadline;
-                        const parts = ld.ctaHeadline.split('en');
-                        if (parts.length > 1) {
-                            hl.innerHTML = parts[0] + '<span class="highlight">en</span>' + parts[1];
-                        } else {
-                            hl.textContent = ld.ctaHeadline;
+            function setupDeepLinks() {
+                var appLinks = document.querySelectorAll('[data-app]');
+                appLinks.forEach(function(link) {
+                    var appType = link.getAttribute('data-app');
+                    if (!appType) return;
+                    if (link.tagName === 'A' && !link.hasAttribute('data-app-processed')) {
+                        link.setAttribute('data-app-processed', 'true');
+                        var originalHref = link.getAttribute('href');
+                        if (!originalHref || originalHref === '#') {
+                            var defaultMap = {
+                                'facebook': 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr',
+                                'instagram': 'https://www.instagram.com/rebecca_bachata/',
+                                'venmo': 'https://account.venmo.com/u/Rebecca_Rose_Bachata',
+                                'cashapp': 'https://cash.app/$RebeccaRoseBachata'
+                            };
+                            originalHref = defaultMap[appType] || 'https://';
                         }
+                        link.addEventListener('click', function(e) {
+                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
+                                    .preventDefault(); return; }
+                            e.preventDefault();
+                            openAppOrWeb(originalHref, appType);
+                        });
+                    } else if (link.tagName !== 'A') {
+                        var fakeHref = (function() {
+                            var map = {
+                                'facebook': 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr',
+                                'instagram': 'https://www.instagram.com/rebecca_bachata/',
+                                'venmo': 'https://account.venmo.com/u/Rebecca_Rose_Bachata',
+                                'cashapp': 'https://cash.app/$RebeccaRoseBachata'
+                            };
+                            return map[appType] || 'https://';
+                        })();
+                        link.addEventListener('click', function(e) {
+                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
+                                    .preventDefault(); return; }
+                            e.preventDefault();
+                            openAppOrWeb(fakeHref, appType);
+                        });
                     }
-                    const regCta = document.getElementById('register-cta-text');
-                    if (regCta) regCta.textContent = ld.ctaRegister;
-                    const toggleBtn = document.getElementById('private-lesson-toggle');
-                    if (toggleBtn) {
-                        const icn = toggleBtn.querySelector('i');
-                        toggleBtn.innerHTML = '';
-                        toggleBtn.appendChild(icn);
-                        toggleBtn.append(' ' + ld.privateLessonToggle);
-                    }
-                    const pTitle = document.getElementById('private-lesson-title');
-                    if (pTitle) pTitle.textContent = ld.privateLessonTitle;
-                    const pIntro = document.getElementById('private-lesson-intro');
-                    if (pIntro) pIntro.textContent = ld.privateLessonIntro;
-                    const closeBtn = document.getElementById('private-lesson-close');
-                    if (closeBtn) closeBtn.textContent = ld.privateLessonClose;
-                    currentLanguage = lang;
-                    localStorage.setItem('language', lang);
-                }
-                languageButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-                const savedLang = localStorage.getItem('language');
-                if (savedLang) setLanguage(savedLang);
+                });
+            }
 
-                const participantContainer = document.getElementById('participant-container');
-                const addBtn = document.getElementById('add-participant');
-                const removeBtn = document.getElementById('remove-participant');
-                const regForm = document.getElementById('dance-registration');
-                let participantCount = 1;
-                const MAX = 6;
-                addBtn.addEventListener('click', () => {
-                    if (participantCount < MAX) {
-                        participantCount++;
-                        const newDiv = document.createElement('div');
-                        newDiv.className = 'participant-fields name-field';
-                        newDiv.innerHTML =
-                            `<div class="participant-form-group"><input type="text" class="form-input" name="participant_${participantCount}" placeholder="${translations[currentLanguage].namePlaceholder}" required></div>`;
-                        participantContainer.appendChild(newDiv);
-                        removeBtn.disabled = false;
-                        if (participantCount === MAX) addBtn.disabled = true;
+            // ----- DOM READY -----
+            document.addEventListener('DOMContentLoaded', function() {
+                setupDeepLinks();
+
+                var progressBar = document.getElementById('scrollProgress');
+                if (progressBar) {
+                    window.addEventListener('scroll', function() {
+                        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        var docHeight = document.documentElement.scrollHeight - document.documentElement
+                            .clientHeight;
+                        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                        progressBar.style.width = Math.min(progress, 100) + '%';
+                        progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                    }, { passive: true });
+                }
+
+                var paymentModalOpen = false;
+                window.paymentModalOpen = false;
+                var autoDismissTimer = null;
+                var welcomeArray = document.getElementById('welcome-array');
+                var mainContainer = document.querySelector('.container');
+                var body = document.body;
+                var mainInitialized = false;
+                var VENMO_URL = 'https://account.venmo.com/u/Rebecca_Rose_Bachata';
+                var CASHAPP_URL = 'https://cash.app/$RebeccaRoseBachata';
+
+                function cancelAutoDismiss() {
+                    if (autoDismissTimer) { clearTimeout(autoDismissTimer);
+                        autoDismissTimer = null; }
+                }
+
+                function restartAutoDismiss() {
+                    cancelAutoDismiss();
+                    autoDismissTimer = setTimeout(fadeOutWelcomeArray, 9000);
+                }
+
+                function fadeOutWelcomeArray(callback) {
+                    cancelAutoDismiss();
+                    if (paymentModalOpen) closePaymentModal();
+                    welcomeArray.classList.add('hidden');
+                    body.classList.remove('welcome-active');
+                    setTimeout(function() {
+                        mainContainer.style.opacity = '1';
+                        welcomeArray.style.display = 'none';
+                        initMainPage();
+                        setTimeout(function() { body.classList.remove('no-scroll'); }, 1000);
+                        if (callback) callback();
+                    }, 500);
+                }
+
+                function showPaymentModal() {
+                    if (document.querySelector('.payment-modal-overlay')) return;
+                    cancelAutoDismiss();
+                    paymentModalOpen = true;
+                    window.paymentModalOpen = true;
+                    var modalOverlay = document.createElement('div');
+                    modalOverlay.className = 'payment-modal-overlay';
+                    modalOverlay.innerHTML =
+                        '<div class="payment-modal-card"><button class="payment-modal-close">&times;</button><div class="payment-modal-title">Select payment</div><div class="payment-modal-sub"></div><div class="payment-options"><button class="payment-option-btn venmo-opt"><i class="fab fa-vimeo-v"></i> Venmo</button><button class="payment-option-btn cashapp-opt"><i class="fas fa-dollar-sign"></i> Cash App</button></div></div>';
+                    document.body.appendChild(modalOverlay);
+                    var closeBtn = modalOverlay.querySelector('.payment-modal-close');
+                    var venmoBtn = modalOverlay.querySelector('.venmo-opt');
+                    var cashBtn = modalOverlay.querySelector('.cashapp-opt');
+                    closeBtn.addEventListener('click', function() { closePaymentModal();
+                        restartAutoDismiss(); });
+                    venmoBtn.addEventListener('click', function() { handlePaymentSelect('venmo'); });
+                    cashBtn.addEventListener('click', function() { handlePaymentSelect('cashapp'); });
+                    modalOverlay.addEventListener('click', function(e) {
+                        if (e.target === modalOverlay) { closePaymentModal();
+                            restartAutoDismiss(); }
+                    });
+                }
+
+                function closePaymentModal() {
+                    var modal = document.querySelector('.payment-modal-overlay');
+                    if (modal) modal.remove();
+                    paymentModalOpen = false;
+                    window.paymentModalOpen = false;
+                }
+
+                function handlePaymentSelect(type) {
+                    var webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
+                    var appType = type === 'venmo' ? 'venmo' : 'cashapp';
+                    if (typeof openAppOrWeb === 'function') {
+                        openAppOrWeb(webUrl, appType);
+                    } else {
+                        window.open(webUrl, '_blank');
                     }
-                });
-                removeBtn.addEventListener('click', () => {
-                    if (participantCount > 1) {
-                        participantContainer.removeChild(participantContainer.lastChild);
-                        participantCount--;
-                        if (participantCount === 1) removeBtn.disabled = true;
-                        addBtn.disabled = false;
-                    }
-                });
-                const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform';
-                regForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const names = Array.from(participantContainer.querySelectorAll('.form-input')).map(i => i.value
-                        .trim()).filter(v => v);
-                    if (names.length === 0) {
-                        alert(currentLanguage === 'es' ? 'Por favor ingresa al menos un nombre' :
-                            'Please enter at least one name');
+                    fadeOutWelcomeArray();
+                }
+
+                var logo = document.querySelector('.logo');
+                var clickCount = 0,
+                    clickTimer = null;
+                var WHATSAPP_LINK = 'https://chat.whatsapp.com/IRz7E4pKaZaJKA53HWQIPB?mode=gi_t';
+                if (logo) {
+                    logo.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        clickCount++;
+                        if (clickTimer) clearTimeout(clickTimer);
+                        clickTimer = setTimeout(function() { clickCount = 0; }, 500);
+                        if (clickCount === 3) { clearTimeout(clickTimer);
+                            clickCount = 0;
+                            window.open(WHATSAPP_LINK, '_blank'); }
+                    });
+                }
+
+                var skipBtn = document.getElementById('welcome-skip-btn');
+                if (skipBtn) skipBtn.addEventListener('click', function(e) { e.stopPropagation(); if (paymentModalOpen)
                         return;
-                    }
-                    window.open(FORM_URL, '_blank');
+                    fadeOutWelcomeArray(); });
+                welcomeArray.addEventListener('click', function(e) {
+                    var target = e.target;
+                    if (paymentModalOpen) return;
+                    if (target === welcomeArray || target.classList.contains('welcome-content') || target
+                        .classList.contains('welcome-title') || target.classList.contains(
+                            'welcome-social-prompt') || target.tagName === 'P')
+                        fadeOutWelcomeArray();
                 });
 
-                function initReviewsCarousel() {
-                    const reviews = document.querySelectorAll('.review-item');
-                    const inds = document.querySelectorAll('.review-indicator');
-                    let current = 0;
+                var payIcon = document.getElementById('pay-icon');
+                if (payIcon) payIcon.addEventListener('click', function(e) { e.preventDefault();
+                    showPaymentModal(); });
 
-                    function show(idx) {
-                        reviews.forEach(r => r.classList.remove('active'));
-                        inds.forEach(i => i.classList.remove('active'));
-                        reviews[idx].classList.add('active');
-                        inds[idx].classList.add('active');
-                        current = idx;
+                var appIcons = document.querySelectorAll('.app-icon');
+                appIcons.forEach(function(icon, idx) {
+                    setTimeout(function() { icon.classList.add('loaded'); }, idx * 150);
+                });
+
+                var touchStartY = 0,
+                    touchEndY = 0,
+                    touchStartTime = 0,
+                    touchActive = false,
+                    touchMoved = false,
+                    swipeHoldTimer = null;
+                var SWIPE_THRESHOLD = 50,
+                    HOLD_DELAY = 1000;
+                welcomeArray.addEventListener('touchstart', function(e) {
+                    if (paymentModalOpen) return;
+                    touchStartY = e.touches[0].clientY;
+                    touchStartTime = Date.now();
+                    touchActive = true;
+                    touchMoved = false;
+                    if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
+                }, { passive: false });
+                welcomeArray.addEventListener('touchmove', function(e) {
+                    if (!touchActive || paymentModalOpen) return;
+                    var moveY = e.touches[0].clientY;
+                    if (Math.abs(moveY - touchStartY) > SWIPE_THRESHOLD) {
+                        touchMoved = true;
+                        if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
+                        swipeHoldTimer = setTimeout(function() {
+                            if (touchActive && touchMoved && !paymentModalOpen) fadeOutWelcomeArray();
+                        }, HOLD_DELAY);
                     }
-                    inds.forEach((ind, idx) => ind.addEventListener('click', () => show(idx)));
-                    let interval = setInterval(() => {
-                        current = (current + 1) % reviews.length;
-                        show(current);
-                    }, 5000);
-                    const container = document.querySelector('.reviews-container');
-                    container.addEventListener('mouseenter', () => clearInterval(interval));
-                    container.addEventListener('mouseleave', () => {
-                        interval = setInterval(() => {
-                            current = (current + 1) % reviews.length;
-                            show(current);
-                        }, 5000);
-                    });
-                }
+                    e.preventDefault();
+                }, { passive: false });
+                welcomeArray.addEventListener('touchend', function(e) {
+                    touchEndY = e.changedTouches[0].clientY;
+                    touchActive = false;
+                    if (swipeHoldTimer) clearTimeout(swipeHoldTimer);
+                    if (Math.abs(touchEndY - touchStartY) > SWIPE_THRESHOLD && (Date.now() - touchStartTime) <
+                        300 && !paymentModalOpen) fadeOutWelcomeArray();
+                });
 
-                function initNavButtons() {
-                    document.getElementById('btn-social').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.getElementById('connect-title').scrollIntoView({ behavior: 'smooth',
-                            block: 'start' });
-                    });
-                    document.getElementById('btn-schedule').addEventListener('click', (e) => {
-                        e.preventDefault();
+                var lastScrollTime = 0,
+                    scrollCount = 0;
+                welcomeArray.addEventListener('wheel', function(e) {
+                    if (paymentModalOpen) return;
+                    var now = Date.now();
+                    if (Math.abs(e.deltaY) > 50) {
+                        if (now - lastScrollTime < 500) {
+                            scrollCount++;
+                            if (scrollCount >= 2) fadeOutWelcomeArray();
+                        } else scrollCount = 1;
+                        lastScrollTime = now;
+                        setTimeout(function() { scrollCount = 0; }, 500);
+                    }
+                });
+
+                var calendarIcon = document.getElementById('welcome-calendar-icon');
+                if (calendarIcon) calendarIcon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (paymentModalOpen) return;
+                    fadeOutWelcomeArray(function() {
                         document.getElementById('schedule-title').scrollIntoView({ behavior: 'smooth',
                             block: 'start' });
                     });
-                    document.getElementById('btn-events').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const carousel = document.getElementById('events-carousel');
-                        if (carousel) carousel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    });
-                    document.getElementById('btn-payment').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.getElementById('payment-title').scrollIntoView({ behavior: 'smooth',
-                            block: 'start' });
-                    });
+                });
+
+                var signinBtn = document.getElementById('signinCornerBtn');
+                if (signinBtn) signinBtn.addEventListener('click', function() {
+                    window.open('https://forms.gle/1VptpwmGA2VdSvB6A', '_blank');
+                });
+
+                function updateSigninVisibility() {
+                    if (!signinBtn) return;
+                    var atTop = window.scrollY <= 10;
+                    if (atTop) signinBtn.classList.remove('hidden');
+                    else signinBtn.classList.add('hidden');
+                }
+                if (signinBtn) {
+                    updateSigninVisibility();
+                    window.addEventListener('scroll', updateSigninVisibility, { passive: true });
                 }
 
-                function setActiveSection() {
-                    const sections = [{ id: 'connect-title', btn: 'btn-social' }, { id: 'schedule-title',
-                        btn: 'btn-schedule' }, { id: 'events-carousel', btn: 'btn-events' },
-                    { id: 'payment-title', btn: 'btn-payment' }];
-                    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-section'));
-                    const cur = sections.find(s => {
-                        const el = document.getElementById(s.id);
-                        if (el) {
-                            const rect = el.getBoundingClientRect();
-                            return rect.top <= 200 && rect.bottom >= 100;
+                restartAutoDismiss();
+
+                // ----- SCHEDULE DATA -----
+                var classSchedule = [
+                    { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
+                        classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
+                        locationId: "stardust-card", endTime: 2100 },
+                    { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom",
+                        classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Bachata Advanced Beginner",
+                            "9:00pm Bachata Elite"
+                        ], locationId: "stardust-card", endTime: 2200 },
+                    { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio",
+                        classes: ["4:00pm Salsa", "5:00pm Bachata"], locationId: "estilo-card",
+                        endTime: 1800 }
+                ];
+
+                function getDaysUntil(dayIndex, endTime) {
+                    var now = new Date();
+                    var curDay = now.getDay();
+                    var curTime = now.getHours() * 100 + now.getMinutes();
+                    var days = dayIndex - curDay;
+                    if (days < 0) days += 7;
+                    if (days === 0 && curTime >= endTime) days = 7;
+                    return days;
+                }
+
+                function getNextStardustClassInfoWithDays() {
+                    var stardustClasses = classSchedule.filter(function(s) { return s.studio === "Stardust Ballroom"; });
+                    var best = null;
+                    var bestDays = 8;
+                    for (var i = 0; i < stardustClasses.length; i++) {
+                        var s = stardustClasses[i];
+                        var days = getDaysUntil(s.dayIndex, s.endTime);
+                        if (days < bestDays) {
+                            bestDays = days;
+                            best = s;
                         }
-                        return false;
-                    });
-                    if (cur) document.getElementById(cur.btn).classList.add('active-section');
-                }
-
-                function initReviewsToggle() {
-                    const toggle = document.getElementById('reviews-toggle');
-                    const section = document.getElementById('reviews-section');
-                    const hide = document.getElementById('hide-reviews');
-                    const leave = document.getElementById('leave-review');
-                    const chev = toggle.querySelector('i');
-                    toggle.addEventListener('click', () => {
-                        const hidden = section.classList.contains('hidden');
-                        section.classList.toggle('hidden');
-                        toggle.classList.toggle('active', !hidden);
-                        chev.className = hidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-                        if (!hidden) setTimeout(() => section.scrollIntoView({ behavior: 'smooth',
-                            block: 'start' }), 100);
-                    });
-                    hide.addEventListener('click', () => {
-                        section.classList.add('hidden');
-                        toggle.classList.remove('active');
-                        chev.className = 'fas fa-chevron-down';
-                    });
-                    leave.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        section.classList.add('hidden');
-                        toggle.classList.remove('active');
-                        chev.className = 'fas fa-chevron-down';
-                        setTimeout(() => window.open(
-                            'https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic', '_blank'), 300);
-                    });
-                }
-
-                function initPrivateLessonToggle() {
-                    const toggle = document.getElementById('private-lesson-toggle');
-                    const section = document.getElementById('private-lesson-section');
-                    const close = document.getElementById('private-lesson-close');
-                    const dayBtns = document.querySelectorAll('.private-lesson-day');
-                    const chev = toggle.querySelector('i');
-                    toggle.addEventListener('click', () => {
-                        const hidden = section.classList.contains('hidden');
-                        section.classList.toggle('hidden');
-                        toggle.classList.toggle('active', !hidden);
-                        chev.className = hidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-                        if (!hidden) setTimeout(() => section.scrollIntoView({ behavior: 'smooth',
-                            block: 'start' }), 100);
-                    });
-                    close.addEventListener('click', () => {
-                        section.classList.add('hidden');
-                        toggle.classList.remove('active');
-                        chev.className = 'fas fa-chevron-down';
-                    });
-                    dayBtns.forEach(btn => btn.addEventListener('click', () => window.open(FORM_URL, '_blank')));
-                }
-
-                const showVideoBtn = document.getElementById('show-video-btn');
-                const closeVideoBtn = document.getElementById('close-video-btn');
-                const videoSection = document.getElementById('video-library');
-                if (showVideoBtn && closeVideoBtn && videoSection) {
-                    showVideoBtn.addEventListener('click', () => {
-                        videoSection.classList.remove('collapsed');
-                        setTimeout(() => videoSection.scrollIntoView({ behavior: 'smooth',
-                        block: 'start' }), 50);
-                    });
-                    closeVideoBtn.addEventListener('click', () => videoSection.classList.add('collapsed'));
-                }
-
-                function initAnnouncementCarousel() {
-                    const slidesContainer = document.getElementById('carousel-slides');
-                    const slides = document.querySelectorAll('.carousel-slide');
-                    const prev = document.getElementById('carousel-prev');
-                    const next = document.getElementById('carousel-next');
-                    const indicators = document.querySelectorAll('.carousel-indicator');
-                    let idx = 0,
-                        total = slides.length;
-
-                    function update(i) {
-                        if (i < 0) i = 0;
-                        if (i >= total) i = total - 1;
-                        slidesContainer.style.transform = `translateX(-${i*100}%)`;
-                        indicators.forEach((ind, pos) => ind.classList.toggle('active', pos === i));
-                        idx = i;
                     }
-                    prev.addEventListener('click', () => update(idx - 1));
-                    next.addEventListener('click', () => update(idx + 1));
-                    indicators.forEach(ind => ind.addEventListener('click', (e) => update(parseInt(e.target.dataset
-                        .slide))));
-                    let auto = setInterval(() => update((idx + 1) % total), 6000);
-                    const carousel = document.querySelector('.announcement-carousel');
-                    carousel.addEventListener('mouseenter', () => clearInterval(auto));
-                    carousel.addEventListener('mouseleave', () => {
-                        auto = setInterval(() => update((idx + 1) % total), 6000);
-                    });
+                    if (!best) best = stardustClasses[0];
+                    var daysUntil = getDaysUntil(best.dayIndex, best.endTime);
+                    return { daysUntil: daysUntil, day: best.day, classes: best.classes, locationId: best
+                            .locationId };
                 }
 
-                function initShareButton() {
-                    const container = document.getElementById('bottomShareContainer');
-                    const shareBtn = document.getElementById('shareMainBtn');
-                    const bubbles = document.getElementById('shareBubbles');
-                    const reviewBubble = document.getElementById('reviewBubble');
-                    let overlay = null;
+                function updateCTASection() {
+                    var next = getNextStardustClassInfoWithDays();
+                    var classList = document.getElementById('cta-class-list');
+                    if (!classList) return;
+                    var rows = classList.querySelectorAll('.cta-class-row');
+                    if (rows.length < 2) return;
+                    var classes = next.classes || [];
+                    var firstClass = classes[0] || "7:00pm Intro to Salsa & Bachata";
+                    var secondClass = classes[1] || "8:00pm Advanced Beginner";
 
-                    function removeOverlayAndUnlock() {
-                        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                        overlay = null;
-                        document.body.classList.remove('no-scroll');
-                    }
+                    var time1 = firstClass.split(' ')[0] || "7:00";
+                    var time2 = secondClass.split(' ')[0] || "8:00";
+                    var name1 = firstClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Salsa & Bachata Intro";
+                    var name2 = secondClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Advanced Beginner";
 
-                    function closeShareMenu() {
-                        bubbles.classList.remove('active');
-                        reviewBubble.classList.remove('active');
-                        shareBtn.classList.remove('active');
-                        removeOverlayAndUnlock();
-                    }
+                    var timeEl1 = rows[0].querySelector('.cta-class-time');
+                    var nameEl1 = rows[0].querySelector('.cta-class-name');
+                    var timeEl2 = rows[1].querySelector('.cta-class-time');
+                    var nameEl2 = rows[1].querySelector('.cta-class-name');
+                    var levelBadge = rows[1].querySelector('.cta-class-level');
 
-                    function openShareMenu() {
-                        bubbles.classList.add('active');
-                        reviewBubble.classList.add('active');
-                        shareBtn.classList.add('active');
-                        if (!overlay) {
-                            overlay = document.createElement('div');
-                            overlay.className = 'share-overlay';
-                            overlay.style.position = 'fixed';
-                            overlay.style.top = '0';
-                            overlay.style.left = '0';
-                            overlay.style.width = '100%';
-                            overlay.style.height = '100%';
-                            overlay.style.backgroundColor = 'rgba(0,0,0,0)';
-                            overlay.style.zIndex = '950';
-                            overlay.style.pointerEvents = 'auto';
-                            overlay.style.cursor = 'default';
-                            overlay.addEventListener('click', (e) => { e.stopPropagation();
-                                closeShareMenu(); });
-                            document.body.appendChild(overlay);
+                    if (timeEl1) timeEl1.textContent = time1;
+                    if (nameEl1) nameEl1.textContent = name1;
+                    if (timeEl2) timeEl2.textContent = time2;
+                    if (nameEl2) nameEl2.textContent = name2;
+
+                    if (levelBadge) {
+                        var badgeText = 'Salsa / Bachata';
+                        var badgeClass = 'advanced';
+                        if (secondClass.includes('Salsa') && !secondClass.includes('Bachata')) {
+                            badgeText = 'Salsa';
+                            badgeClass = 'salsa-level';
+                        } else if (secondClass.includes('Bachata') && !secondClass.includes('Salsa')) {
+                            badgeText = 'Bachata';
+                            badgeClass = 'bachata-level';
+                        } else {
+                            badgeText = 'Salsa / Bachata';
+                            badgeClass = 'advanced';
                         }
-                        document.body.classList.add('no-scroll');
+                        levelBadge.textContent = badgeText;
+                        levelBadge.className = 'cta-class-level ' + badgeClass;
                     }
-                    shareBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isActive = bubbles.classList.contains('active');
-                        if (isActive) closeShareMenu();
-                        else openShareMenu();
+
+                    var ctaBadge = document.querySelector('.cta-badge');
+                    if (ctaBadge) {
+                        var d = next.daysUntil;
+                        if (d === 0) ctaBadge.textContent = 'Tonight';
+                        else if (d === 1) ctaBadge.textContent = 'Tomorrow';
+                        else if (d >= 2 && d <= 6) ctaBadge.textContent = 'This Week';
+                        else ctaBadge.textContent = 'Upcoming Class';
+                    }
+
+                    var dayNameEl = document.getElementById('cta-day-name');
+                    if (dayNameEl && next && next.day) {
+                        dayNameEl.textContent = next.day;
+                    }
+                }
+
+                function getBadgeText(daysUntil) {
+                    if (daysUntil === 0) return "Tonight";
+                    if (daysUntil === 1) return "Tomorrow";
+                    if (daysUntil >= 2 && daysUntil <= 6) return "This Week";
+                    return "Next Class";
+                }
+
+                function updateDynamicBadge() {
+                    var cards = document.querySelectorAll('.link-card');
+                    cards.forEach(function(c) {
+                        var existing = c.querySelector('.next-class-badge');
+                        if (existing) existing.remove();
+                        c.classList.remove('next-class-highlight');
                     });
-                    document.addEventListener('click', (e) => {
-                        if (!container.contains(e.target) && bubbles.classList.contains('active'))
-                            closeShareMenu();
-                    });
-                    let lastScroll = 0;
-                    window.addEventListener('scroll', () => {
-                        const st = window.pageYOffset || document.documentElement.scrollTop;
-                        if (Math.abs(st - lastScroll) < 50) return;
-                        if (st > lastScroll && st > 50) container.classList.add('share-hidden');
-                        else container.classList.remove('share-hidden');
-                        lastScroll = st;
-                    }, { passive: true });
-                    const pageUrl = encodeURIComponent(window.location.href);
-                    const shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
-                    const fullMsg = shareText + pageUrl;
-                    const shareLinks = {
-                        messenger: `https://www.facebook.com/dialog/send?link=${pageUrl}&app_id=87741124305&redirect_uri=${pageUrl}`,
-                        whatsapp: `https://api.whatsapp.com/send?text=${fullMsg}`,
-                        email: `mailto:?subject=Check%20out%20Rebecca%20%26%20Daniel's%20dance%20classes&body=${fullMsg}`,
-                        sms: `sms:?body=${fullMsg}`
-                    };
-                    document.querySelectorAll('.share-bubble').forEach(bubble => {
-                        bubble.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const platform = bubble.dataset.share;
-                            if (platform === 'copy') {
-                                navigator.clipboard.writeText(window.location.href).then(() => alert(
-                                    'Link copied to clipboard! Share it anywhere.')).catch(() =>
-                                    alert('Could not copy link. Please copy manually.'));
-                                closeShareMenu();
-                                return;
+                    var bestCard = null;
+                    var bestDays = 8;
+                    for (var i = 0; i < classSchedule.length; i++) {
+                        var s = classSchedule[i];
+                        var days = getDaysUntil(s.dayIndex, s.endTime);
+                        if (days < bestDays) {
+                            bestDays = days;
+                            bestCard = document.getElementById(s.locationId);
+                        }
+                    }
+                    if (bestCard) {
+                        bestCard.classList.add('next-class-highlight');
+                        var badge = bestCard.querySelector('.next-class-badge');
+                        if (!badge) {
+                            badge = document.createElement('span');
+                            badge.className = 'next-class-badge';
+                            bestCard.appendChild(badge);
+                        }
+                        badge.textContent = getBadgeText(bestDays);
+                    }
+                }
+
+                function reorderDayGroupsInCards() {
+                    var now = new Date();
+                    var curDayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+                    document.querySelectorAll('.link-card').forEach(function(card) {
+                        var list = card.querySelector('.schedule-list');
+                        if (!list) return;
+                        var groups = Array.from(list.querySelectorAll('.schedule-day-group'));
+                        if (groups.length > 1) {
+                            var todayIdx = groups.findIndex(function(g) { return g.dataset.day === curDayName; });
+                            if (todayIdx > 0) {
+                                var todayGroup = groups[todayIdx];
+                                todayGroup.remove();
+                                list.insertBefore(todayGroup, list.firstChild);
                             }
-                            if (platform === 'instagram') {
-                                navigator.clipboard.writeText(window.location.href).then(() => alert(
-                                    'Link copied to clipboard! Share it on Instagram.')).catch(() =>
-                                    alert('Could not copy link.'));
-                                closeShareMenu();
-                                return;
-                            }
-                            if (shareLinks[platform]) window.open(shareLinks[platform], '_blank');
-                            closeShareMenu();
-                        });
+                        }
                     });
-                    if (reviewBubble) reviewBubble.addEventListener('click', () => { setTimeout(() =>
-                            closeShareMenu(), 100); });
                 }
 
-                function initVideoLibrary() {
-                    const videoFeed = document.getElementById('video-feed');
-                    const videoIndicators = document.getElementById('video-indicators');
-                    const catBtns = document.querySelectorAll('.category-btn');
-                    const prevVideo = document.querySelector('.prev-video');
-                    const nextVideo = document.querySelector('.next-video');
-                    const videoData = [{ id: 0, title: "Bongo and Güira - Bachata Rhythm",
-                            category: ["bachata-counts"],
-                            thumbnail: "https://img.youtube.com/vi/NcpGLZVhKDc/maxresdefault.jpg",
-                            videoId: "NcpGLZVhKDc", level: "Beginner", views: "1.2K" },
-                        { id: 1, title: "Bass and Guira - Bachata Rhythm", category: ["bachata-counts"],
-                            thumbnail: "https://img.youtube.com/vi/9o73jWbb3gU/maxresdefault.jpg",
-                            videoId: "9o73jWbb3gU", level: "Beginner", views: "980" },
-                        { id: 2, title: "Lead Guitar (Requinto) - Bachata Melody",
-                            category: ["bachata-counts"],
-                            thumbnail: "https://img.youtube.com/vi/J5SEMr4vmTM/maxresdefault.jpg",
-                            videoId: "J5SEMr4vmTM", level: "Intermediate", views: "1.5K" },
-                        { id: 3, title: "All Instruments Together - Bachata Full Arrangement",
-                            category: ["bachata-counts"],
-                            thumbnail: "https://img.youtube.com/vi/PPnVKETxf6I/maxresdefault.jpg",
-                            videoId: "PPnVKETxf6I", level: "Intermediate", views: "2.1K" },
-                        { id: 4, title: "3 Rhythm Básicos de Bachata", category: ["bachata-counts"],
-                            thumbnail: "https://img.youtube.com/vi/kSQVKBmtZu4/maxresdefault.jpg",
-                            videoId: "kSQVKBmtZu4", level: "Beginner", views: "3.5K" }
-                    ];
-                    let currentCategory = 'all';
-                    let currentVideoIndex = 0;
-                    let activeIframe = null;
+                function updateScheduleDisplay() {
+                    var now = new Date();
+                    var curDay = now.getDay();
+                    var curTime = now.getHours() * 100 + now.getMinutes();
+                    var map = {};
+                    classSchedule.forEach(function(s) {
+                        var daysUntil = getDaysUntil(s.dayIndex, s.endTime);
+                        if (!map[s.locationId] || daysUntil < map[s.locationId].daysUntil) map[s
+                        .locationId] = { daysUntil: daysUntil, schedule: s };
+                    });
+                    var sorted = Object.values(map).sort(function(a, b) { return a.daysUntil - b.daysUntil; });
+                    var grid = document.getElementById('schedule-grid');
+                    var cards = Array.from(grid.children);
+                    var ordered = sorted.map(function(s) {
+                        return cards.find(function(c) { return c.id === s.schedule.locationId; });
+                    });
+                    while (grid.firstChild) grid.removeChild(grid.firstChild);
+                    ordered.forEach(function(c) { if (c) grid.appendChild(c); });
+                    reorderDayGroupsInCards();
+                    updateDynamicBadge();
+                }
 
-                    function pauseAll() {
-                        if (activeIframe) {
-                            const src = activeIframe.src;
-                            activeIframe.src = src.replace('&autoplay=1', '');
-                            activeIframe = null;
-                        }
+                function updateMonthPromo() {
+                    var now = new Date();
+                    var y = now.getFullYear(),
+                        m = now.getMonth(),
+                        d = now.getDate();
+                    var lastDay = new Date(y, m + 1, 0).getDate();
+                    var lastSun = lastDay;
+                    if (new Date(y, m, lastDay).getDay() !== 0) lastSun = lastDay - new Date(y, m, lastDay).getDay();
+                    var isLastSunday = d === lastSun;
+                    var monthToShow = isLastSunday ? new Date(y, m + 1, 1).toLocaleDateString('en-US', { month: 'long' }) :
+                        now.toLocaleDateString('en-US', { month: 'long' });
+                    var promo = document.getElementById('stardust-month-promo');
+                    if (promo) promo.textContent = monthToShow;
+                }
+
+                function sortEventPills() {
+                    var container = document.getElementById('welcome-pills-container');
+                    if (!container) return;
+                    var pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
+                    if (pills.length === 0) return;
+                    document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
+                    pills.forEach(function(p) { p.classList.remove('next-event');
+                        p.classList.remove('second-event-highlight'); });
+
+                    var now = new Date();
+                    now.setHours(0, 0, 0, 0);
+
+                    function parseEventKey(key) {
+                        var map = {
+                            'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
+                            'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Inés' },
+                            'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
+                        };
+                        return map[key] || null;
                     }
 
-                    function renderVideos(cat = 'all') {
-                        videoFeed.innerHTML = '';
-                        videoIndicators.innerHTML = '';
-                        const filtered = cat === 'all' ? videoData : videoData.filter(v => v.category.includes(cat));
-                        if (filtered.length === 0) {
-                            videoFeed.innerHTML =
-                                `<div class="video-item"><div class="video-placeholder"><div class="video-placeholder-content"><h3>No videos found</h3></div></div></div>`;
-                            videoIndicators.innerHTML = '';
+                    function getDayNameFromKey(key) {
+                        var map = {
+                            'ardmore': 'Saturday',
+                            'sorines-wed': 'Wednesday',
+                            'sorynez-fri': 'Friday'
+                        };
+                        return map[key] || '';
+                    }
+
+                    function getNextOccurrence(dayName, weekPattern) {
+                        var dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+                        var targetDay = dayMap[dayName];
+                        if (targetDay === undefined) return null;
+                        var weekNumbers = [];
+                        if (weekPattern === 'every') weekNumbers = [1, 2, 3, 4, 5];
+                        else if (weekPattern === '1st&3rd') weekNumbers = [1, 3];
+                        else if (weekPattern === '2nd&4th') weekNumbers = [2, 4];
+                        else if (weekPattern === '1st') weekNumbers = [1];
+                        else if (weekPattern === '2nd') weekNumbers = [2];
+                        else if (weekPattern === '3rd') weekNumbers = [3];
+                        else if (weekPattern === '4th') weekNumbers = [4];
+                        else weekNumbers = [1, 2, 3, 4, 5];
+
+                        for (var monthOffset = 0; monthOffset < 6; monthOffset++) {
+                            var year = now.getFullYear() + Math.floor((now.getMonth() + monthOffset) / 12);
+                            var month = (now.getMonth() + monthOffset) % 12;
+                            var lastDay = new Date(year, month + 1, 0);
+                            var occurrences = [];
+                            for (var day = 1; day <= lastDay.getDate(); day++) {
+                                var date = new Date(year, month, day);
+                                if (date.getDay() === targetDay) occurrences.push(date);
+                            }
+                            var filtered = occurrences.filter(function(date, index) {
+                                return weekNumbers.indexOf(index + 1) !== -1;
+                            });
+                            for (var j = 0; j < filtered.length; j++) {
+                                if (filtered[j] >= now) return filtered[j];
+                            }
+                        }
+                        return null;
+                    }
+
+                    var withDates = pills.map(function(pill) {
+                        var key = pill.getAttribute('data-event-key');
+                        if (!key) return { pill: pill, date: null, key: key, info: null };
+                        var info = parseEventKey(key);
+                        if (!info) return { pill: pill, date: null, key: key, info: null };
+                        var date = getNextOccurrence(info.day, info.pattern);
+                        return { pill: pill, date: date, key: key, info: info };
+                    });
+
+                    var valid = withDates.filter(function(item) { return item.date !== null; });
+                    valid.sort(function(a, b) { return a.date.getTime() - b.date.getTime(); });
+
+                    var unprocessed = withDates.filter(function(item) { return item.date === null; }).map(function(
+                    item) { return item.pill; });
+                    var orderedPills = valid.map(function(item) { return item.pill; });
+                    orderedPills.push.apply(orderedPills, unprocessed);
+
+                    while (container.firstChild) container.removeChild(container.firstChild);
+                    orderedPills.forEach(function(p) { container.appendChild(p); });
+
+                    var orderedData = valid.map(function(item) {
+                        var daysUntil = Math.ceil((item.date.getTime() - now.getTime()) / (1000 * 60 * 60 *
+                        24));
+                        return { pill: item.pill, date: item.date, key: item.key, info: item.info,
+                            daysUntil: daysUntil };
+                    });
+
+                    var nextEvent = orderedData.length > 0 ? orderedData[0] : null;
+                    var secondEvent = orderedData.length > 1 ? orderedData[1] : null;
+                    var firstDate = nextEvent ? nextEvent.date : null;
+
+                    orderedPills.forEach(function(pill, index) {
+                        var key = pill.getAttribute('data-event-key');
+                        var daysUntil = 999;
+                        var dayName = getDayNameFromKey(key);
+                        if (key) {
+                            var info = parseEventKey(key);
+                            if (info) {
+                                var date = getNextOccurrence(info.day, info.pattern);
+                                if (date) {
+                                    var dateCopy = new Date(date);
+                                    dateCopy.setHours(0, 0, 0, 0);
+                                    daysUntil = Math.ceil((dateCopy.getTime() - now.getTime()) / (1000 *
+                                        60 * 60 * 24));
+                                    if (daysUntil < 0) daysUntil = 0;
+                                }
+                            }
+                        }
+
+                        var stylesEl = pill.querySelector('.pill-styles');
+                        if (stylesEl) {
+                            var stylesText = stylesEl.textContent;
+                            if (stylesText && stylesText.trim()) stylesEl.style.display = 'inline';
+                        }
+
+                        var badge = pill.querySelector('.pill-badge');
+                        if (!badge) {
+                            badge = document.createElement('span');
+                            badge.className = 'pill-badge';
+                            var mainSpan = pill.querySelector('.pill-main');
+                            if (mainSpan) {
+                                mainSpan.before(badge);
+                                var spacer = document.createTextNode(' ');
+                                badge.after(spacer);
+                            } else pill.appendChild(badge);
+                        }
+
+                        var isFirst = (nextEvent && pill === nextEvent.pill);
+                        var isSecondSameWeek = (secondEvent && pill === secondEvent.pill && firstDate) ?
+                            (Math.ceil((secondEvent.date.getTime() - firstDate.getTime()) / (1000 * 60 * 60 *
+                                24)) < 7) :
+                            false;
+
+                        if (dayName) {
+                            badge.textContent = dayName;
+                            badge.className = 'pill-badge';
+                        } else {
+                            badge.textContent = 'this week';
+                            badge.className = 'pill-badge this-week-badge';
+                        }
+
+                        if (isFirst) {
+                            pill.classList.add('next-event');
+                            var existingUpBadge = pill.querySelector('.up-next-badge');
+                            if (existingUpBadge) existingUpBadge.remove();
+                            var upBadge = document.createElement('span');
+                            upBadge.className = 'up-next-badge';
+                            upBadge.textContent = 'this week';
+                            pill.appendChild(upBadge);
+                        } else if (isSecondSameWeek) {
+                            pill.classList.add('second-event-highlight');
+                        }
+                    });
+                }
+
+                // ----- MAIN INIT -----
+                function initMainPage() {
+                    if (mainInitialized) return;
+                    mainInitialized = true;
+
+                    sortEventPills();
+                    updateCTASection();
+                    updateScheduleDisplay();
+                    updateMonthPromo();
+
+                    var navBar = document.getElementById('nav-buttons');
+                    var scheduleTitleEl = document.getElementById('schedule-title');
+                    if (navBar && scheduleTitleEl) {
+                        scheduleTitleEl.parentNode.insertBefore(navBar, scheduleTitleEl);
+                        navBar.classList.add('nav-static');
+                        navBar.classList.remove('nav-floating', 'nav-hidden');
+                    }
+
+                    var lastScrollPos = 0;
+                    var ticking = false;
+                    var navRAF = null;
+
+                    function getStardustHideThreshold() {
+                        var card = document.getElementById('stardust-card');
+                        if (!card) return 450;
+                        var rect = card.getBoundingClientRect();
+                        return rect.top + window.scrollY;
+                    }
+
+                    function shouldEnableHide() {
+                        if (!scheduleTitleEl) return true;
+                        var rect = scheduleTitleEl.getBoundingClientRect();
+                        return rect.top <= window.innerHeight * 0.75;
+                    }
+
+                    function updateMenuBar() {
+                        if (!navBar) return;
+                        var scrollY = window.scrollY;
+                        var direction = scrollY > lastScrollPos ? 'down' : 'up';
+                        lastScrollPos = scrollY;
+
+                        if (!shouldEnableHide()) {
+                            navBar.classList.add('nav-static');
+                            navBar.classList.remove('nav-floating', 'nav-hidden');
                             return;
                         }
-                        const total = filtered.length;
-                        filtered.forEach((v, idx) => {
-                            const div = document.createElement('div');
-                            div.className = 'video-item';
-                            div.dataset.index = idx;
-                            div.style.height = '100%';
-                            div.innerHTML = `
-                                <div class="video-player">
-                                    <div class="youtube-overlay" id="youtube-overlay-${idx}">
-                                        <div class="video-loading">
-                                            <div class="spinner"></div>
-                                            <div class="video-loading-text">Loading video...</div>
-                                        </div>
-                                    </div>
-                                    <iframe id="yt-${idx}" src="https://www.youtube.com/embed/${v.videoId}?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe>
-                                    <div class="video-info-overlay">
-                                        <div class="video-item-title">${v.title}</div>
-                                        <div class="video-meta"><span class="video-level">${v.level}</span><span class="video-views"><i class="fas fa-eye"></i> ${v.views}</span></div>
-                                    </div>
-                                </div>
-                            `;
-                            videoFeed.appendChild(div);
-                            const indicator = document.createElement('button');
-                            indicator.className = 'video-indicator' + (idx === currentVideoIndex ? ' active' : '');
-                            indicator.dataset.index = idx;
-                            indicator.addEventListener('click', () => { goToVideo(idx); });
-                            videoIndicators.appendChild(indicator);
-                        });
-                        const iframes = videoFeed.querySelectorAll('iframe');
-                        iframes.forEach(iframe => {
-                            iframe.addEventListener('load', function() {
-                                const overlay = this.closest('.video-player').querySelector(
-                                    '.youtube-overlay');
-                                if (overlay) overlay.classList.add('hidden');
-                            });
-                        });
-                        goToVideo(0);
-                    }
 
-                    function goToVideo(idx) {
-                        pauseAll();
-                        const items = videoFeed.querySelectorAll('.video-item');
-                        const total = items.length;
-                        if (total === 0) return;
-                        const newIdx = Math.max(0, Math.min(idx, total - 1));
-                        currentVideoIndex = newIdx;
-                        items.forEach((item, i) => {
-                            item.style.display = i === newIdx ? 'flex' : 'none';
-                        });
-                        const inds = videoIndicators.querySelectorAll('.video-indicator');
-                        inds.forEach((ind, i) => {
-                            ind.classList.toggle('active', i === newIdx);
-                        });
-                        const iframe = videoFeed.querySelector(`.video-item:nth-child(${newIdx+1}) iframe`);
-                        if (iframe) {
-                            const src = iframe.src;
-                            if (src.indexOf('autoplay=1') === -1) {
-                                iframe.src = src + '&autoplay=1';
-                                activeIframe = iframe;
+                        if (scrollY <= 8) {
+                            navBar.classList.add('nav-static');
+                            navBar.classList.remove('nav-floating', 'nav-hidden');
+                            return;
+                        }
+
+                        var hideThreshold = getStardustHideThreshold();
+
+                        if (direction === 'down' && scrollY > hideThreshold) {
+                            if (!navBar.classList.contains('nav-hidden')) {
+                                navBar.classList.add('nav-hidden');
+                                navBar.classList.remove('nav-floating', 'nav-static');
                             }
-                            const overlay = iframe.closest('.video-player').querySelector('.youtube-overlay');
-                            if (overlay) {
-                                overlay.classList.add('hidden');
+                        } else if (direction === 'up') {
+                            if (navBar.classList.contains('nav-hidden')) {
+                                navBar.classList.remove('nav-hidden');
+                                navBar.classList.add('nav-floating');
+                                navBar.classList.remove('nav-static');
+                            } else if (!navBar.classList.contains('nav-floating') && !navBar.classList.contains(
+                                'nav-static')) {
+                                navBar.classList.add('nav-floating');
                             }
                         }
                     }
 
-                    function nextVideoFn() {
-                        const items = videoFeed.querySelectorAll('.video-item');
-                        if (items.length === 0) return;
-                        goToVideo(currentVideoIndex + 1);
+                    function handleScroll() {
+                        if (!ticking) {
+                            if (navRAF) cancelAnimationFrame(navRAF);
+                            navRAF = requestAnimationFrame(function() {
+                                updateMenuBar();
+                                ticking = false;
+                                navRAF = null;
+                            });
+                            ticking = true;
+                        }
                     }
 
-                    function prevVideoFn() {
-                        const items = videoFeed.querySelectorAll('.video-item');
-                        if (items.length === 0) return;
-                        goToVideo(currentVideoIndex - 1);
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    updateMenuBar();
+                    window.addEventListener('resize', function() { updateMenuBar(); }, { passive: true });
+
+                    // ----- Section Animations -----
+                    function initSectionAnimations() {
+                        var animatedSections = document.querySelectorAll('.section-animate');
+                        var animatedSeparators = document.querySelectorAll('.section-separator');
+
+                        function isElementInViewport(el) {
+                            var rect = el.getBoundingClientRect();
+                            var winH = window.innerHeight || document.documentElement.clientHeight;
+                            return rect.top <= winH - 100 && rect.bottom >= 100;
+                        }
+
+                        function handleScrollAnimation() {
+                            animatedSections.forEach(function(s) {
+                                if (isElementInViewport(s)) s.classList.add('visible');
+                            });
+                            animatedSeparators.forEach(function(s) {
+                                if (isElementInViewport(s)) s.classList.add('visible');
+                            });
+                        }
+                        handleScrollAnimation();
+                        var scrollTimeout;
+                        window.addEventListener('scroll', function() {
+                            if (!scrollTimeout) scrollTimeout = setTimeout(function() { scrollTimeout =
+                                    null;
+                                handleScrollAnimation(); }, 50);
+                        }, { passive: true });
+                        setTimeout(function() {
+                            animatedSections.forEach(function(s) {
+                                if (isElementInViewport(s)) s.classList.add('visible');
+                            });
+                            animatedSeparators.forEach(function(s) {
+                                if (isElementInViewport(s)) s.classList.add('visible');
+                            });
+                        }, 300);
                     }
 
-                    prevVideo.addEventListener('click', prevVideoFn);
-                    nextVideo.addEventListener('click', nextVideoFn);
-                    document.addEventListener('keydown', (e) => {
-                        if (e.key === 'ArrowDown') { e.preventDefault();
-                            nextVideoFn(); }
-                        if (e.key === 'ArrowUp') { e.preventDefault();
-                            prevVideoFn(); }
-                    });
-                    catBtns.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            catBtns.forEach(b => b.classList.remove('active'));
-                            btn.classList.add('active');
-                            currentCategory = btn.dataset.category;
-                            currentVideoIndex = 0;
-                            renderVideos(currentCategory);
+                    // ----- Language Toggle -----
+                    var languageToggle = document.getElementById('language-toggle');
+                    var languageButtons = languageToggle.querySelectorAll('.lang-btn');
+                    var currentLanguage = 'en';
+                    var translations = {
+                        en: {
+                            mainTitle: "Rebecca & Daniel",
+                            tagline: "Professional Dance Instruction | Express Yourself Through Movement",
+                            connectTitle: "Get Weekly Dance Tips, Reels & Class Updates",
+                            rebeccaTitle: "Rebecca Bachata",
+                            danielTitle: "Daniel Palacios",
+                            upcomingTitle: "Join Our Next Class",
+                            registerCta: "Register Now",
+                            scheduleTitle: "Class Schedule by location",
+                            reviewsTitle: "Student Reviews",
+                            registrationTitle: "Class Registration",
+                            partnerText: "No partner needed - come dance with us!",
+                            namePlaceholder: "Full Name",
+                            registerButton: "Register",
+                            paymentTitle: "Payment Options",
+                            venmoSub: "Secure payment option",
+                            cashAppSub: "Quick & easy payment",
+                            cashTitle: "Cash",
+                            cashSub: "Pay at the studio",
+                            contactTitle: "Contact Us",
+                            contactTitleText: "Professional Inquiries",
+                            contactSubtitle: "Bookings and partnerships",
+                            copyright: "© 2025 Rebecca & Daniel | Professional Dance Instruction",
+                            quote: "dancing is the hidden language of the soul",
+                            privateLessonToggle: "Book a Private Lesson",
+                            privateLessonTitle: "Private Lessons",
+                            privateLessonIntro: "Available days: Sunday, Thursday, Friday, Saturday. Click a day to register via our form.",
+                            privateLessonClose: "Close",
+                            ctaBadge: "New 4-Week Course",
+                            ctaHeadline: "Start Dancing in 4 Weeks",
+                            ctaRegister: "Register Now"
+                        },
+                        es: {
+                            mainTitle: "Rebecca & Daniel",
+                            tagline: "Instrucción Profesional de Baile | Exprésate a Través del Movimiento",
+                            connectTitle: "Obtén consejos de baile semanales, Reels y actualizaciones de clases",
+                            rebeccaTitle: "Rebecca Bachata",
+                            danielTitle: "Daniel Palacios",
+                            upcomingTitle: "Únete a Nuestra Próxima Clase",
+                            registerCta: "Registrarse",
+                            scheduleTitle: "Horario de Clases por ubicación",
+                            reviewsTitle: "Opiniones de Estudiantes",
+                            registrationTitle: "Registro de Clase",
+                            partnerText: "No necesitas pareja - ¡Ven a bailar con nosotros!",
+                            namePlaceholder: "Nombre Completo",
+                            registerButton: "Registrarse",
+                            paymentTitle: "Opciones de Pago",
+                            venmoSub: "Opción de pago segura",
+                            cashAppSub: "Pago rápido y fácil",
+                            cashTitle: "Efectivo",
+                            cashSub: "Paga en el estudio",
+                            contactTitle: "Contáctanos",
+                            contactTitleText: "Consultas Profesionales",
+                            contactSubtitle: "Reservas y colaboraciones",
+                            copyright: "© 2025 Rebecca & Daniel | Instrucción Profesional de Baile",
+                            quote: "El baile es la poesía del pie",
+                            privateLessonToggle: "Reservar Clase Privada",
+                            privateLessonTitle: "Clases Privadas",
+                            privateLessonIntro: "Días disponibles: domingo, jueves, viernes, sábado. Haz clic en un día para registrarte a través de nuestro formulario.",
+                            privateLessonClose: "Cerrar",
+                            ctaBadge: "Nuevo Curso de 4 Semanas",
+                            ctaHeadline: "Empieza a Bailar en 4 Semanas",
+                            ctaRegister: "Registrarse"
+                        }
+                    };
+
+                    function setLanguage(lang) {
+                        languageButtons.forEach(function(btn) {
+                            if (btn.dataset.lang === lang) btn.classList.add('active');
+                            else btn.classList.remove('active');
                         });
+                        var ld = translations[lang];
+                        document.getElementById('main-title').textContent = ld.mainTitle;
+                        document.getElementById('tagline').textContent = ld.tagline;
+                        document.getElementById('connect-title').textContent = ld.connectTitle;
+                        document.getElementById('rebecca-title').textContent = ld.rebeccaTitle;
+                        document.getElementById('daniel-title').textContent = ld.danielTitle;
+                        document.getElementById('upcoming-title').textContent = ld.upcomingTitle;
+                        document.getElementById('register-cta-text').textContent = ld.registerCta;
+                        document.getElementById('schedule-title').textContent = ld.scheduleTitle;
+                        document.getElementById('reviews-title').textContent = ld.reviewsTitle;
+                        document.getElementById('registration-title').textContent = ld.registrationTitle;
+                        document.getElementById('partner-text').textContent = ld.partnerText;
+                        document.querySelectorAll('.participant-fields .form-input').forEach(function(inp) {
+                            inp.placeholder = ld.namePlaceholder;
+                        });
+                        document.getElementById('register-button').textContent = ld.registerButton;
+                        document.getElementById('payment-title').textContent = ld.paymentTitle;
+                        document.getElementById('venmo-sub').textContent = ld.venmoSub;
+                        var cas = document.getElementById('cash-app-sub');
+                        if (cas) cas.textContent = ld.cashAppSub;
+                        document.getElementById('cash-title').textContent = ld.cashTitle;
+                        document.getElementById('cash-sub').textContent = ld.cashSub;
+                        document.getElementById('contact-title').textContent = ld.contactTitle;
+                        document.getElementById('contact-title-text').textContent = ld.contactTitleText;
+                        document.getElementById('contact-subtitle').textContent = ld.contactSubtitle;
+                        document.getElementById('copyright').textContent = ld.copyright;
+                        document.getElementById('quote').textContent = ld.quote;
+                        var ctaBadge = document.querySelector('.cta-badge');
+                        if (ctaBadge) ctaBadge.textContent = ld.ctaBadge;
+                        var ctaHeadline = document.querySelector('.cta-headline');
+                        if (ctaHeadline) {
+                            var hl = ctaHeadline;
+                            var splitWord = lang === 'en' ? 'in' : 'en';
+                            var parts = ld.ctaHeadline.split(splitWord);
+                            if (parts.length > 1) {
+                                hl.innerHTML = parts[0] + '<span class="highlight">' + splitWord + '</span>' +
+                                    parts[1];
+                            } else {
+                                hl.textContent = ld.ctaHeadline;
+                            }
+                        }
+                        var regCta = document.getElementById('register-cta-text');
+                        if (regCta) regCta.textContent = ld.ctaRegister;
+                        var toggleBtn = document.getElementById('private-lesson-toggle');
+                        if (toggleBtn) {
+                            var icn = toggleBtn.querySelector('i');
+                            toggleBtn.innerHTML = '';
+                            toggleBtn.appendChild(icn);
+                            toggleBtn.append(' ' + ld.privateLessonToggle);
+                        }
+                        var pTitle = document.getElementById('private-lesson-title');
+                        if (pTitle) pTitle.textContent = ld.privateLessonTitle;
+                        var pIntro = document.getElementById('private-lesson-intro');
+                        if (pIntro) pIntro.textContent = ld.privateLessonIntro;
+                        var closeBtn = document.getElementById('private-lesson-close');
+                        if (closeBtn) closeBtn.textContent = ld.privateLessonClose;
+                        currentLanguage = lang;
+                        localStorage.setItem('language', lang);
+                    }
+                    languageButtons.forEach(function(btn) {
+                        btn.addEventListener('click', function() { setLanguage(btn.dataset.lang); });
                     });
-                    renderVideos('all');
+                    var savedLang = localStorage.getItem('language');
+                    if (savedLang) setLanguage(savedLang);
+
+                    // ----- Registration Form -----
+                    var participantContainer = document.getElementById('participant-container');
+                    var addBtn = document.getElementById('add-participant');
+                    var removeBtn = document.getElementById('remove-participant');
+                    var regForm = document.getElementById('dance-registration');
+                    var participantCount = 1;
+                    var MAX = 6;
+                    addBtn.addEventListener('click', function() {
+                        if (participantCount < MAX) {
+                            participantCount++;
+                            var newDiv = document.createElement('div');
+                            newDiv.className = 'participant-fields name-field';
+                            newDiv.innerHTML =
+                                '<div class="participant-form-group"><input type="text" class="form-input" name="participant_' +
+                                participantCount + '" placeholder="' + translations[currentLanguage]
+                                .namePlaceholder + '" required></div>';
+                            participantContainer.appendChild(newDiv);
+                            removeBtn.disabled = false;
+                            if (participantCount === MAX) addBtn.disabled = true;
+                        }
+                    });
+                    removeBtn.addEventListener('click', function() {
+                        if (participantCount > 1) {
+                            participantContainer.removeChild(participantContainer.lastChild);
+                            participantCount--;
+                            if (participantCount === 1) removeBtn.disabled = true;
+                            addBtn.disabled = false;
+                        }
+                    });
+                    var FORM_URL =
+                        'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform';
+                    regForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        var names = Array.from(participantContainer.querySelectorAll('.form-input')).map(
+                        function(i) { return i.value.trim(); }).filter(function(v) { return v; });
+                        if (names.length === 0) {
+                            alert(currentLanguage === 'es' ? 'Por favor ingresa al menos un nombre' :
+                                'Please enter at least one name');
+                            return;
+                        }
+                        window.open(FORM_URL, '_blank');
+                    });
+
+                    // ----- Reviews Carousel -----
+                    function initReviewsCarousel() {
+                        var reviews = document.querySelectorAll('.review-item');
+                        var inds = document.querySelectorAll('.review-indicator');
+                        var current = 0;
+
+                        function show(idx) {
+                            reviews.forEach(function(r) { r.classList.remove('active'); });
+                            inds.forEach(function(i) { i.classList.remove('active'); });
+                            reviews[idx].classList.add('active');
+                            inds[idx].classList.add('active');
+                            current = idx;
+                        }
+                        inds.forEach(function(ind, idx) {
+                            ind.addEventListener('click', function() { show(idx); });
+                        });
+                        var interval = setInterval(function() {
+                            current = (current + 1) % reviews.length;
+                            show(current);
+                        }, 5000);
+                        var container = document.querySelector('.reviews-container');
+                        container.addEventListener('mouseenter', function() { clearInterval(interval); });
+                        container.addEventListener('mouseleave', function() {
+                            interval = setInterval(function() {
+                                current = (current + 1) % reviews.length;
+                                show(current);
+                            }, 5000);
+                        });
+                    }
+
+                    // ----- Nav Buttons -----
+                    function initNavButtons() {
+                        document.getElementById('btn-social').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            document.getElementById('connect-title').scrollIntoView({ behavior: 'smooth',
+                                block: 'start' });
+                        });
+                        document.getElementById('btn-schedule').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            document.getElementById('schedule-title').scrollIntoView({ behavior: 'smooth',
+                                block: 'start' });
+                        });
+                        document.getElementById('btn-events').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            var carousel = document.getElementById('events-carousel');
+                            if (carousel) carousel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        });
+                        document.getElementById('btn-payment').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            document.getElementById('payment-title').scrollIntoView({ behavior: 'smooth',
+                                block: 'start' });
+                        });
+                    }
+
+                    // ----- Active Section Highlight -----
+                    function setActiveSection() {
+                        var sections = [
+                            { id: 'connect-title', btn: 'btn-social' },
+                            { id: 'schedule-title', btn: 'btn-schedule' },
+                            { id: 'events-carousel', btn: 'btn-events' },
+                            { id: 'payment-title', btn: 'btn-payment' }
+                        ];
+                        document.querySelectorAll('.nav-btn').forEach(function(btn) {
+                            btn.classList.remove('active-section');
+                        });
+                        var cur = sections.find(function(s) {
+                            var el = document.getElementById(s.id);
+                            if (el) {
+                                var rect = el.getBoundingClientRect();
+                                return rect.top <= 200 && rect.bottom >= 100;
+                            }
+                            return false;
+                        });
+                        if (cur) document.getElementById(cur.btn).classList.add('active-section');
+                    }
+
+                    // ----- Reviews Toggle -----
+                    function initReviewsToggle() {
+                        var toggle = document.getElementById('reviews-toggle');
+                        var section = document.getElementById('reviews-section');
+                        var hide = document.getElementById('hide-reviews');
+                        var leave = document.getElementById('leave-review');
+                        var chev = toggle.querySelector('i');
+                        toggle.addEventListener('click', function() {
+                            var hidden = section.classList.contains('hidden');
+                            section.classList.toggle('hidden');
+                            toggle.classList.toggle('active', !hidden);
+                            chev.className = hidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+                            if (!hidden) setTimeout(function() {
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        });
+                        hide.addEventListener('click', function() {
+                            section.classList.add('hidden');
+                            toggle.classList.remove('active');
+                            chev.className = 'fas fa-chevron-down';
+                        });
+                        leave.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            section.classList.add('hidden');
+                            toggle.classList.remove('active');
+                            chev.className = 'fas fa-chevron-down';
+                            setTimeout(function() {
+                                window.open('https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic',
+                                    '_blank');
+                            }, 300);
+                        });
+                    }
+
+                    // ----- Private Lesson Toggle -----
+                    function initPrivateLessonToggle() {
+                        var toggle = document.getElementById('private-lesson-toggle');
+                        var section = document.getElementById('private-lesson-section');
+                        var close = document.getElementById('private-lesson-close');
+                        var dayBtns = document.querySelectorAll('.private-lesson-day');
+                        var chev = toggle.querySelector('i');
+                        toggle.addEventListener('click', function() {
+                            var hidden = section.classList.contains('hidden');
+                            section.classList.toggle('hidden');
+                            toggle.classList.toggle('active', !hidden);
+                            chev.className = hidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+                            if (!hidden) setTimeout(function() {
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        });
+                        close.addEventListener('click', function() {
+                            section.classList.add('hidden');
+                            toggle.classList.remove('active');
+                            chev.className = 'fas fa-chevron-down';
+                        });
+                        dayBtns.forEach(function(btn) {
+                            btn.addEventListener('click', function() { window.open(FORM_URL, '_blank'); });
+                        });
+                    }
+
+                    // ----- Video Library Toggle -----
+                    var showVideoBtn = document.getElementById('show-video-btn');
+                    var closeVideoBtn = document.getElementById('close-video-btn');
+                    var videoSection = document.getElementById('video-library');
+                    if (showVideoBtn && closeVideoBtn && videoSection) {
+                        showVideoBtn.addEventListener('click', function() {
+                            videoSection.classList.remove('collapsed');
+                            setTimeout(function() {
+                                videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 50);
+                        });
+                        closeVideoBtn.addEventListener('click', function() {
+                            videoSection.classList.add('collapsed');
+                        });
+                    }
+
+                    // ----- Announcement Carousel -----
+                    function initAnnouncementCarousel() {
+                        var slidesContainer = document.getElementById('carousel-slides');
+                        var slides = document.querySelectorAll('.carousel-slide');
+                        var prev = document.getElementById('carousel-prev');
+                        var next = document.getElementById('carousel-next');
+                        var indicators = document.querySelectorAll('.carousel-indicator');
+                        var idx = 0,
+                            total = slides.length;
+
+                        function update(i) {
+                            if (i < 0) i = 0;
+                            if (i >= total) i = total - 1;
+                            slidesContainer.style.transform = 'translateX(-' + (i * 100) + '%)';
+                            indicators.forEach(function(ind, pos) {
+                                ind.classList.toggle('active', pos === i);
+                            });
+                            idx = i;
+                        }
+                        prev.addEventListener('click', function() { update(idx - 1); });
+                        next.addEventListener('click', function() { update(idx + 1); });
+                        indicators.forEach(function(ind) {
+                            ind.addEventListener('click', function(e) {
+                                update(parseInt(e.target.dataset.slide));
+                            });
+                        });
+                        var auto = setInterval(function() { update((idx + 1) % total); }, 6000);
+                        var carousel = document.querySelector('.announcement-carousel');
+                        carousel.addEventListener('mouseenter', function() { clearInterval(auto); });
+                        carousel.addEventListener('mouseleave', function() {
+                            auto = setInterval(function() { update((idx + 1) % total); }, 6000);
+                        });
+                    }
+
+                    // ----- Share Button -----
+                    function initShareButton() {
+                        var container = document.getElementById('bottomShareContainer');
+                        var shareBtn = document.getElementById('shareMainBtn');
+                        var bubbles = document.getElementById('shareBubbles');
+                        var reviewBubble = document.getElementById('reviewBubble');
+                        var overlay = null;
+
+                        function removeOverlayAndUnlock() {
+                            if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                            overlay = null;
+                            document.body.classList.remove('no-scroll');
+                        }
+
+                        function closeShareMenu() {
+                            bubbles.classList.remove('active');
+                            reviewBubble.classList.remove('active');
+                            shareBtn.classList.remove('active');
+                            removeOverlayAndUnlock();
+                        }
+
+                        function openShareMenu() {
+                            bubbles.classList.add('active');
+                            reviewBubble.classList.add('active');
+                            shareBtn.classList.add('active');
+                            if (!overlay) {
+                                overlay = document.createElement('div');
+                                overlay.className = 'share-overlay';
+                                overlay.style.position = 'fixed';
+                                overlay.style.top = '0';
+                                overlay.style.left = '0';
+                                overlay.style.width = '100%';
+                                overlay.style.height = '100%';
+                                overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+                                overlay.style.zIndex = '950';
+                                overlay.style.pointerEvents = 'auto';
+                                overlay.style.cursor = 'default';
+                                overlay.addEventListener('click', function(e) { e.stopPropagation();
+                                    closeShareMenu(); });
+                                document.body.appendChild(overlay);
+                            }
+                            document.body.classList.add('no-scroll');
+                        }
+                        shareBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            var isActive = bubbles.classList.contains('active');
+                            if (isActive) closeShareMenu();
+                            else openShareMenu();
+                        });
+                        document.addEventListener('click', function(e) {
+                            if (!container.contains(e.target) && bubbles.classList.contains('active'))
+                                closeShareMenu();
+                        });
+                        var lastScroll = 0;
+                        window.addEventListener('scroll', function() {
+                            var st = window.pageYOffset || document.documentElement.scrollTop;
+                            if (Math.abs(st - lastScroll) < 50) return;
+                            if (st > lastScroll && st > 50) container.classList.add('share-hidden');
+                            else container.classList.remove('share-hidden');
+                            lastScroll = st;
+                        }, { passive: true });
+                        var pageUrl = encodeURIComponent(window.location.href);
+                        var shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
+                        var fullMsg = shareText + pageUrl;
+                        var shareLinks = {
+                            messenger: 'https://www.facebook.com/dialog/send?link=' + pageUrl +
+                                '&app_id=87741124305&redirect_uri=' + pageUrl,
+                            whatsapp: 'https://api.whatsapp.com/send?text=' + fullMsg,
+                            email: 'mailto:?subject=Check%20out%20Rebecca%20%26%20Daniel%27s%20dance%20classes&body=' +
+                                fullMsg,
+                            sms: 'sms:?body=' + fullMsg
+                        };
+                        document.querySelectorAll('.share-bubble').forEach(function(bubble) {
+                            bubble.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                var platform = bubble.dataset.share;
+                                if (platform === 'copy') {
+                                    navigator.clipboard.writeText(window.location.href).then(function() {
+                                        alert('Link copied to clipboard! Share it anywhere.');
+                                    }).catch(function() {
+                                        alert('Could not copy link. Please copy manually.');
+                                    });
+                                    closeShareMenu();
+                                    return;
+                                }
+                                if (platform === 'instagram') {
+                                    navigator.clipboard.writeText(window.location.href).then(function() {
+                                        alert('Link copied to clipboard! Share it on Instagram.');
+                                    }).catch(function() {
+                                        alert('Could not copy link.');
+                                    });
+                                    closeShareMenu();
+                                    return;
+                                }
+                                if (shareLinks[platform]) window.open(shareLinks[platform], '_blank');
+                                closeShareMenu();
+                            });
+                        });
+                        if (reviewBubble) reviewBubble.addEventListener('click', function() {
+                            setTimeout(function() { closeShareMenu(); }, 100);
+                        });
+                    }
+
+                    // ----- Video Library -----
+                    function initVideoLibrary() {
+                        var videoFeed = document.getElementById('video-feed');
+                        var videoIndicators = document.getElementById('video-indicators');
+                        var catBtns = document.querySelectorAll('.category-btn');
+                        var prevVideo = document.querySelector('.prev-video');
+                        var nextVideo = document.querySelector('.next-video');
+                        var videoData = [
+                            { id: 0, title: "Bongo and Güira - Bachata Rhythm",
+                                category: ["bachata-counts"],
+                                thumbnail: "https://img.youtube.com/vi/NcpGLZVhKDc/maxresdefault.jpg",
+                                videoId: "NcpGLZVhKDc", level: "Beginner", views: "1.2K" },
+                            { id: 1, title: "Bass and Guira - Bachata Rhythm", category: ["bachata-counts"],
+                                thumbnail: "https://img.youtube.com/vi/9o73jWbb3gU/maxresdefault.jpg",
+                                videoId: "9o73jWbb3gU", level: "Beginner", views: "980" },
+                            { id: 2, title: "Lead Guitar (Requinto) - Bachata Melody",
+                                category: ["bachata-counts"],
+                                thumbnail: "https://img.youtube.com/vi/J5SEMr4vmTM/maxresdefault.jpg",
+                                videoId: "J5SEMr4vmTM", level: "Intermediate", views: "1.5K" },
+                            { id: 3, title: "All Instruments Together - Bachata Full Arrangement",
+                                category: ["bachata-counts"],
+                                thumbnail: "https://img.youtube.com/vi/PPnVKETxf6I/maxresdefault.jpg",
+                                videoId: "PPnVKETxf6I", level: "Intermediate", views: "2.1K" },
+                            { id: 4, title: "3 Rhythm Básicos de Bachata", category: ["bachata-counts"],
+                                thumbnail: "https://img.youtube.com/vi/kSQVKBmtZu4/maxresdefault.jpg",
+                                videoId: "kSQVKBmtZu4", level: "Beginner", views: "3.5K" }
+                        ];
+                        var currentCategory = 'all';
+                        var currentVideoIndex = 0;
+                        var activeIframe = null;
+
+                        function pauseAll() {
+                            if (activeIframe) {
+                                var src = activeIframe.src;
+                                activeIframe.src = src.replace('&autoplay=1', '');
+                                activeIframe = null;
+                            }
+                        }
+
+                        function renderVideos(cat) {
+                            if (cat === undefined) cat = 'all';
+                            videoFeed.innerHTML = '';
+                            videoIndicators.innerHTML = '';
+                            var filtered = cat === 'all' ? videoData : videoData.filter(function(v) {
+                                return v.category.indexOf(cat) !== -1;
+                            });
+                            if (filtered.length === 0) {
+                                videoFeed.innerHTML =
+                                    '<div class="video-item"><div class="video-placeholder"><div class="video-placeholder-content"><h3>No videos found</h3></div></div></div>';
+                                videoIndicators.innerHTML = '';
+                                return;
+                            }
+                            var total = filtered.length;
+                            filtered.forEach(function(v, idx) {
+                                var div = document.createElement('div');
+                                div.className = 'video-item';
+                                div.dataset.index = idx;
+                                div.style.height = '100%';
+                                div.innerHTML =
+                                    '<div class="video-player"><div class="youtube-overlay" id="youtube-overlay-' +
+                                    idx +
+                                    '"><div class="video-loading"><div class="spinner"></div><div class="video-loading-text">Loading video...</div></div></div><iframe id="yt-' +
+                                    idx + '" src="https://www.youtube.com/embed/' + v.videoId +
+                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe><div class="video-info-overlay"><div class="video-item-title">' +
+                                    v.title +
+                                    '</div><div class="video-meta"><span class="video-level">' + v.level +
+                                    '</span><span class="video-views"><i class="fas fa-eye"></i> ' + v
+                                    .views + '</span></div></div></div>';
+                                videoFeed.appendChild(div);
+                                var indicator = document.createElement('button');
+                                indicator.className = 'video-indicator' + (idx === currentVideoIndex ?
+                                    ' active' : '');
+                                indicator.dataset.index = idx;
+                                indicator.addEventListener('click', function() { goToVideo(idx); });
+                                videoIndicators.appendChild(indicator);
+                            });
+                            var iframes = videoFeed.querySelectorAll('iframe');
+                            iframes.forEach(function(iframe) {
+                                iframe.addEventListener('load', function() {
+                                    var overlay = this.closest('.video-player').querySelector(
+                                        '.youtube-overlay');
+                                    if (overlay) overlay.classList.add('hidden');
+                                });
+                            });
+                            goToVideo(0);
+                        }
+
+                        function goToVideo(idx) {
+                            pauseAll();
+                            var items = videoFeed.querySelectorAll('.video-item');
+                            var total = items.length;
+                            if (total === 0) return;
+                            var newIdx = Math.max(0, Math.min(idx, total - 1));
+                            currentVideoIndex = newIdx;
+                            items.forEach(function(item, i) {
+                                item.style.display = i === newIdx ? 'flex' : 'none';
+                            });
+                            var inds = videoIndicators.querySelectorAll('.video-indicator');
+                            inds.forEach(function(ind, i) {
+                                ind.classList.toggle('active', i === newIdx);
+                            });
+                            var iframe = videoFeed.querySelector('.video-item:nth-child(' + (newIdx + 1) +
+                                ') iframe');
+                            if (iframe) {
+                                var src = iframe.src;
+                                if (src.indexOf('autoplay=1') === -1) {
+                                    iframe.src = src + '&autoplay=1';
+                                    activeIframe = iframe;
+                                }
+                                var overlay = iframe.closest('.video-player').querySelector(
+                                '.youtube-overlay');
+                                if (overlay) {
+                                    overlay.classList.add('hidden');
+                                }
+                            }
+                        }
+
+                        function nextVideoFn() {
+                            var items = videoFeed.querySelectorAll('.video-item');
+                            if (items.length === 0) return;
+                            goToVideo(currentVideoIndex + 1);
+                        }
+
+                        function prevVideoFn() {
+                            var items = videoFeed.querySelectorAll('.video-item');
+                            if (items.length === 0) return;
+                            goToVideo(currentVideoIndex - 1);
+                        }
+
+                        prevVideo.addEventListener('click', prevVideoFn);
+                        nextVideo.addEventListener('click', nextVideoFn);
+                        document.addEventListener('keydown', function(e) {
+                            if (e.key === 'ArrowDown') { e.preventDefault();
+                                nextVideoFn(); }
+                            if (e.key === 'ArrowUp') { e.preventDefault();
+                                prevVideoFn(); }
+                        });
+                        catBtns.forEach(function(btn) {
+                            btn.addEventListener('click', function() {
+                                catBtns.forEach(function(b) { b.classList.remove('active'); });
+                                btn.classList.add('active');
+                                currentCategory = btn.dataset.category;
+                                currentVideoIndex = 0;
+                                renderVideos(currentCategory);
+                            });
+                        });
+                        renderVideos('all');
+                    }
+
+                    // ----- Initialize all components -----
+                    initSectionAnimations();
+                    initReviewsCarousel();
+                    initNavButtons();
+                    initReviewsToggle();
+                    initPrivateLessonToggle();
+                    initAnnouncementCarousel();
+                    initShareButton();
+                    initVideoLibrary();
+
+                    var activeTimeout;
+                    window.addEventListener('scroll', function() {
+                        if (!activeTimeout) activeTimeout = setTimeout(function() { activeTimeout = null;
+                            setActiveSection(); }, 80);
+                    }, { passive: true });
+                    setActiveSection();
                 }
 
-                // ─── INITIALIZE ALL ───
-                initSectionAnimations();
-                initReviewsCarousel();
-                initNavButtons();
-                initReviewsToggle();
-                initPrivateLessonToggle();
-                initAnnouncementCarousel();
-                initShareButton();
-                initVideoLibrary();
+                // Re-run CTA update after a short delay to ensure DOM is fully rendered
+                setTimeout(function() {
+                    if (mainInitialized) {
+                        updateCTASection();
+                    }
+                }, 500);
 
-                // Set active section on scroll
-                let activeTimeout;
-                window.addEventListener('scroll', () => {
-                    if (!activeTimeout) activeTimeout = setTimeout(() => { activeTimeout = null;
-                        setActiveSection(); }, 80);
-                }, { passive: true });
-                setActiveSection();
-            }
+                // MutationObserver for deep links
+                var observer = new MutationObserver(function() { setupDeepLinks(); });
+                observer.observe(document.body, { childList: true, subtree: true });
 
-            // ─── EXTRA: ensure cta-day-name gets updated on language change ───
-            // The language change doesn't affect the day name since it's dynamic from schedule
-            // But we want to ensure it's set correctly
-
-            // Also re-run updateCTASection after page load to ensure day is shown
-            setTimeout(() => {
-                if (mainInitialized) {
-                    updateCTASection();
-                }
-            }, 500);
-
-        });
+            }); // end DOMContentLoaded
+        })();
     </script>
 </body>
 </html>
