@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
     <title>Rebecca & Daniel | Professional Dance Instruction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -25,14 +25,13 @@
             color: #1e293b;
             background: linear-gradient(145deg, #f0f5fc, #e6edf7);
             min-height: 100vh;
-            padding: 20px 24px 32px;
+            min-height: 100dvh;
+            padding: 16px 16px 100px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+            overflow-x: hidden;
         }
         h1,
         h2,
@@ -148,7 +147,6 @@
         ::-webkit-scrollbar-thumb {
             background: rgba(44, 90, 160, 0.25);
             border-radius: 10px;
-            transition: background 0.3s;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(44, 90, 160, 0.4);
@@ -161,6 +159,7 @@
         .container {
             width: 100%;
             max-width: 1200px;
+            margin: 0 auto;
             background: var(--white);
             border-radius: var(--radius-4xl);
             padding: var(--space-8) var(--space-10) var(--space-12);
@@ -273,6 +272,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            height: 100dvh;
             background: radial-gradient(ellipse at 30% 20%, #f8fcff, #e8f0fa 70%, #dce6f2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -3135,8 +3135,8 @@
 
         .bottom-share-container {
             position: fixed;
-            bottom: var(--space-2);
-            right: var(--space-4);
+            bottom: max(var(--space-2), env(safe-area-inset-bottom, 20px));
+            right: max(var(--space-4), env(safe-area-inset-right, 16px));
             left: auto;
             display: flex;
             flex-direction: column;
@@ -3653,7 +3653,7 @@
             }
             body {
                 font-size: var(--font-sm);
-                padding: var(--space-3) var(--space-3) var(--space-6);
+                padding: var(--space-3) var(--space-3) calc(100px + env(safe-area-inset-bottom, 20px));
             }
             .container {
                 padding: var(--space-4) var(--space-3) var(--space-8);
@@ -4054,8 +4054,8 @@
                 font-size: var(--font-xs);
             }
             .bottom-share-container {
-                right: var(--space-2);
-                bottom: var(--space-2);
+                right: max(var(--space-2), env(safe-area-inset-right, 8px));
+                bottom: max(var(--space-2), env(safe-area-inset-bottom, 16px));
             }
             .share-actions-row {
                 gap: var(--space-3);
@@ -4627,7 +4627,6 @@
         (function() {
             'use strict';
 
-            // ----- UTILITY -----
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
@@ -4642,20 +4641,38 @@
                 var fallbackUrl = webUrl;
 
                 if (appType === 'facebook') {
-                    if (isFB) { window.location.href = webUrl; return; }
-                    schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+                    var eventMatch = webUrl.match(/\/events\/[^\/]*\/(\d+)\/?/);
+                    if (eventMatch) {
+                        var eventId = eventMatch[1];
+                        if (isFB) {
+                            window.location.href = 'fb://event/' + eventId;
+                            return;
+                        }
+                        schemeUrl = 'fb://event/' + eventId;
+                        fallbackUrl = webUrl;
+                    } else {
+                        if (isFB) {
+                            window.location.href = webUrl;
+                            return;
+                        }
+                        schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+                        fallbackUrl = webUrl;
+                    }
                 } else if (appType === 'instagram') {
                     var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
                     var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
                     schemeUrl = 'instagram://user?username=' + username;
+                    fallbackUrl = webUrl;
                 } else if (appType === 'venmo') {
                     var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
                     var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
                     schemeUrl = 'venmo://pay?recipients=' + handle;
+                    fallbackUrl = webUrl;
                 } else if (appType === 'cashapp') {
                     var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
                     var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
                     schemeUrl = 'cashapp://$' + tag;
+                    fallbackUrl = webUrl;
                 } else {
                     window.open(webUrl, '_blank');
                     return;
@@ -4723,7 +4740,6 @@
                 });
             }
 
-            // ----- DOM READY -----
             document.addEventListener('DOMContentLoaded', function() {
                 setupDeepLinks();
 
@@ -4931,7 +4947,6 @@
 
                 restartAutoDismiss();
 
-                // ----- SCHEDULE DATA -----
                 var classSchedule = [
                     { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
@@ -5280,7 +5295,6 @@
                     });
                 }
 
-                // ----- VIDEO FIX: no autoplay on page load -----
                 function initVideoLibrary() {
                     var videoFeed = document.getElementById('video-feed');
                     var videoIndicators = document.getElementById('video-indicators');
@@ -5314,7 +5328,6 @@
                     var activeIframe = null;
                     var currentFilteredData = videoData;
 
-                    // ----- Pause all videos using postMessage -----
                     function pauseAllVideos() {
                         var iframes = videoFeed.querySelectorAll('iframe');
                         iframes.forEach(function(iframe) {
@@ -5329,7 +5342,6 @@
                         activeIframe = null;
                     }
 
-                    // ----- Show video at index, optionally autoplay -----
                     function goToVideo(idx, shouldAutoplay) {
                         pauseAllVideos();
                         var items = videoFeed.querySelectorAll('.video-item');
@@ -5360,7 +5372,6 @@
                                 iframe.src = baseSrc;
                             }
 
-                            // hide loading overlay once iframe loads
                             iframe.onload = function() {
                                 var overlay = iframe.closest('.video-player').querySelector(
                                     '.youtube-overlay');
@@ -5413,12 +5424,10 @@
                             videoIndicators.appendChild(indicator);
                         });
 
-                        // Show first video without autoplay
                         currentVideoIndex = 0;
                         var iframes = videoFeed.querySelectorAll('iframe');
                         iframes.forEach(function(iframe, i) {
                             if (i === 0) {
-                                // First video: load without autoplay
                                 var vid = filtered[0];
                                 iframe.src = 'https://www.youtube.com/embed/' + vid.videoId +
                                     '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
@@ -5428,7 +5437,6 @@
                                     if (overlay) overlay.classList.add('hidden');
                                 };
                             } else {
-                                // Other videos: load lazily
                                 var vid2 = filtered[i];
                                 iframe.src = 'https://www.youtube.com/embed/' + vid2.videoId +
                                     '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
@@ -5457,7 +5465,6 @@
                         goToVideo(prevIdx, true);
                     }
 
-                    // ----- Event listeners -----
                     if (prevVideo) prevVideo.addEventListener('click', prevVideoFn);
                     if (nextVideo) nextVideo.addEventListener('click', nextVideoFn);
 
@@ -5480,7 +5487,6 @@
                         });
                     });
 
-                    // ----- Close video library: pause all videos -----
                     var closeBtn = document.getElementById('close-video-btn');
                     if (closeBtn) {
                         closeBtn.addEventListener('click', function() {
@@ -5490,14 +5496,12 @@
                         });
                     }
 
-                    // ----- Open video library: show first video without autoplay -----
                     var showBtn = document.getElementById('show-video-btn');
                     if (showBtn) {
                         showBtn.addEventListener('click', function() {
                             var section = document.getElementById('video-library');
                             if (section) {
                                 section.classList.remove('collapsed');
-                                // ensure first video is shown without autoplay
                                 var items = videoFeed.querySelectorAll('.video-item');
                                 if (items.length > 0) {
                                     goToVideo(0, false);
@@ -5509,11 +5513,9 @@
                         });
                     }
 
-                    // Initial render: NO autoplay
                     renderVideos('all');
                 }
 
-                // ----- MAIN INIT -----
                 function initMainPage() {
                     if (mainInitialized) return;
                     mainInitialized = true;
@@ -5601,7 +5603,6 @@
                     updateMenuBar();
                     window.addEventListener('resize', function() { updateMenuBar(); }, { passive: true });
 
-                    // ----- Section Animations -----
                     function initSectionAnimations() {
                         var animatedSections = document.querySelectorAll('.section-animate');
                         var animatedSeparators = document.querySelectorAll('.section-separator');
@@ -5637,7 +5638,6 @@
                         }, 300);
                     }
 
-                    // ----- Language Toggle -----
                     var languageToggle = document.getElementById('language-toggle');
                     var languageButtons = languageToggle.querySelectorAll('.lang-btn');
                     var currentLanguage = 'en';
@@ -5778,7 +5778,6 @@
                     var savedLang = localStorage.getItem('language');
                     if (savedLang) setLanguage(savedLang);
 
-                    // ----- Registration Form -----
                     var participantContainer = document.getElementById('participant-container');
                     var addBtn = document.getElementById('add-participant');
                     var removeBtn = document.getElementById('remove-participant');
@@ -5821,7 +5820,6 @@
                         window.open(FORM_URL, '_blank');
                     });
 
-                    // ----- Reviews Carousel -----
                     function initReviewsCarousel() {
                         var reviews = document.querySelectorAll('.review-item');
                         var inds = document.querySelectorAll('.review-indicator');
@@ -5851,7 +5849,6 @@
                         });
                     }
 
-                    // ----- Nav Buttons -----
                     function initNavButtons() {
                         document.getElementById('btn-social').addEventListener('click', function(e) {
                             e.preventDefault();
@@ -5875,7 +5872,6 @@
                         });
                     }
 
-                    // ----- Active Section Highlight -----
                     function setActiveSection() {
                         var sections = [
                             { id: 'connect-title', btn: 'btn-social' },
@@ -5897,7 +5893,6 @@
                         if (cur) document.getElementById(cur.btn).classList.add('active-section');
                     }
 
-                    // ----- Reviews Toggle -----
                     function initReviewsToggle() {
                         var toggle = document.getElementById('reviews-toggle');
                         var section = document.getElementById('reviews-section');
@@ -5930,7 +5925,6 @@
                         });
                     }
 
-                    // ----- Private Lesson Toggle -----
                     function initPrivateLessonToggle() {
                         var toggle = document.getElementById('private-lesson-toggle');
                         var section = document.getElementById('private-lesson-section');
@@ -5956,7 +5950,6 @@
                         });
                     }
 
-                    // ----- Announcement Carousel -----
                     function initAnnouncementCarousel() {
                         var slidesContainer = document.getElementById('carousel-slides');
                         var slides = document.querySelectorAll('.carousel-slide');
@@ -5990,7 +5983,6 @@
                         });
                     }
 
-                    // ----- Share Button -----
                     function initShareButton() {
                         var container = document.getElementById('bottomShareContainer');
                         var shareBtn = document.getElementById('shareMainBtn');
@@ -6093,7 +6085,6 @@
                         });
                     }
 
-                    // ----- Initialize all components -----
                     initSectionAnimations();
                     initReviewsCarousel();
                     initNavButtons();
@@ -6111,18 +6102,16 @@
                     setActiveSection();
                 }
 
-                // Re-run CTA update after a short delay to ensure DOM is fully rendered
                 setTimeout(function() {
                     if (mainInitialized) {
                         updateCTASection();
                     }
                 }, 500);
 
-                // MutationObserver for deep links
                 var observer = new MutationObserver(function() { setupDeepLinks(); });
                 observer.observe(document.body, { childList: true, subtree: true });
 
-            }); // end DOMContentLoaded
+            });
         })();
     </script>
 </body>
