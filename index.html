@@ -4663,7 +4663,6 @@
 
                 if (!schemeUrl) return;
 
-                // Try to open the app via iframe, fallback to web after timeout
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 document.body.appendChild(iframe);
@@ -5199,7 +5198,7 @@
                     valid.sort(function(a, b) { return a.date.getTime() - b.date.getTime(); });
 
                     var unprocessed = withDates.filter(function(item) { return item.date === null; }).map(function(
-                    item) { return item.pill; });
+                        item) { return item.pill; });
                     var orderedPills = valid.map(function(item) { return item.pill; });
                     orderedPills.push.apply(orderedPills, unprocessed);
 
@@ -5279,6 +5278,239 @@
                             pill.classList.add('second-event-highlight');
                         }
                     });
+                }
+
+                // ----- VIDEO FIX: no autoplay on page load -----
+                function initVideoLibrary() {
+                    var videoFeed = document.getElementById('video-feed');
+                    var videoIndicators = document.getElementById('video-indicators');
+                    var catBtns = document.querySelectorAll('.category-btn');
+                    var prevVideo = document.querySelector('.prev-video');
+                    var nextVideo = document.querySelector('.next-video');
+
+                    var videoData = [
+                        { id: 0, title: "Bongo and Güira - Bachata Rhythm",
+                            category: ["bachata-counts"],
+                            thumbnail: "https://img.youtube.com/vi/NcpGLZVhKDc/maxresdefault.jpg",
+                            videoId: "NcpGLZVhKDc", level: "Beginner", views: "1.2K" },
+                        { id: 1, title: "Bass and Guira - Bachata Rhythm", category: ["bachata-counts"],
+                            thumbnail: "https://img.youtube.com/vi/9o73jWbb3gU/maxresdefault.jpg",
+                            videoId: "9o73jWbb3gU", level: "Beginner", views: "980" },
+                        { id: 2, title: "Lead Guitar (Requinto) - Bachata Melody",
+                            category: ["bachata-counts"],
+                            thumbnail: "https://img.youtube.com/vi/J5SEMr4vmTM/maxresdefault.jpg",
+                            videoId: "J5SEMr4vmTM", level: "Intermediate", views: "1.5K" },
+                        { id: 3, title: "All Instruments Together - Bachata Full Arrangement",
+                            category: ["bachata-counts"],
+                            thumbnail: "https://img.youtube.com/vi/PPnVKETxf6I/maxresdefault.jpg",
+                            videoId: "PPnVKETxf6I", level: "Intermediate", views: "2.1K" },
+                        { id: 4, title: "3 Rhythm Básicos de Bachata", category: ["bachata-counts"],
+                            thumbnail: "https://img.youtube.com/vi/kSQVKBmtZu4/maxresdefault.jpg",
+                            videoId: "kSQVKBmtZu4", level: "Beginner", views: "3.5K" }
+                    ];
+
+                    var currentCategory = 'all';
+                    var currentVideoIndex = 0;
+                    var activeIframe = null;
+                    var currentFilteredData = videoData;
+
+                    // ----- Pause all videos using postMessage -----
+                    function pauseAllVideos() {
+                        var iframes = videoFeed.querySelectorAll('iframe');
+                        iframes.forEach(function(iframe) {
+                            try {
+                                iframe.contentWindow.postMessage(JSON.stringify({
+                                    event: 'command',
+                                    func: 'pauseVideo',
+                                    args: []
+                                }), '*');
+                            } catch (e) { /* ignore */ }
+                        });
+                        activeIframe = null;
+                    }
+
+                    // ----- Show video at index, optionally autoplay -----
+                    function goToVideo(idx, shouldAutoplay) {
+                        pauseAllVideos();
+                        var items = videoFeed.querySelectorAll('.video-item');
+                        var total = items.length;
+                        if (total === 0) return;
+                        var newIdx = Math.max(0, Math.min(idx, total - 1));
+                        currentVideoIndex = newIdx;
+
+                        items.forEach(function(item, i) {
+                            item.style.display = i === newIdx ? 'flex' : 'none';
+                        });
+
+                        var inds = videoIndicators.querySelectorAll('.video-indicator');
+                        inds.forEach(function(ind, i) {
+                            ind.classList.toggle('active', i === newIdx);
+                        });
+
+                        var iframe = videoFeed.querySelector('.video-item:nth-child(' + (newIdx + 1) +
+                            ') iframe');
+                        if (iframe) {
+                            var videoId = currentFilteredData[newIdx].videoId;
+                            var baseSrc = 'https://www.youtube.com/embed/' + videoId +
+                                '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
+                            if (shouldAutoplay) {
+                                iframe.src = baseSrc + '&autoplay=1';
+                                activeIframe = iframe;
+                            } else {
+                                iframe.src = baseSrc;
+                            }
+
+                            // hide loading overlay once iframe loads
+                            iframe.onload = function() {
+                                var overlay = iframe.closest('.video-player').querySelector(
+                                    '.youtube-overlay');
+                                if (overlay) overlay.classList.add('hidden');
+                            };
+                        }
+                    }
+
+                    function renderVideos(cat) {
+                        if (cat === undefined) cat = 'all';
+                        videoFeed.innerHTML = '';
+                        videoIndicators.innerHTML = '';
+
+                        var filtered = cat === 'all' ? videoData : videoData.filter(function(v) {
+                            return v.category.indexOf(cat) !== -1;
+                        });
+                        currentFilteredData = filtered;
+
+                        if (filtered.length === 0) {
+                            videoFeed.innerHTML =
+                                '<div class="video-item"><div class="video-placeholder"><div class="video-placeholder-content"><h3>No videos found</h3></div></div></div>';
+                            videoIndicators.innerHTML = '';
+                            return;
+                        }
+
+                        var total = filtered.length;
+                        filtered.forEach(function(v, idx) {
+                            var div = document.createElement('div');
+                            div.className = 'video-item';
+                            div.dataset.index = idx;
+                            div.style.height = '100%';
+                            div.style.display = idx === 0 ? 'flex' : 'none';
+                            div.innerHTML =
+                                '<div class="video-player"><div class="youtube-overlay" id="youtube-overlay-' +
+                                idx +
+                                '"><div class="video-loading"><div class="spinner"></div><div class="video-loading-text">Loading video...</div></div></div><iframe id="yt-' +
+                                idx +
+                                '" src="https://www.youtube.com/embed/' + v.videoId +
+                                '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe><div class="video-info-overlay"><div class="video-item-title">' +
+                                v.title +
+                                '</div><div class="video-meta"><span class="video-level">' + v.level +
+                                '</span><span class="video-views"><i class="fas fa-eye"></i> ' + v
+                                .views + '</span></div></div></div>';
+                            videoFeed.appendChild(div);
+
+                            var indicator = document.createElement('button');
+                            indicator.className = 'video-indicator' + (idx === 0 ? ' active' : '');
+                            indicator.dataset.index = idx;
+                            indicator.addEventListener('click', function() { goToVideo(idx, true); });
+                            videoIndicators.appendChild(indicator);
+                        });
+
+                        // Show first video without autoplay
+                        currentVideoIndex = 0;
+                        var iframes = videoFeed.querySelectorAll('iframe');
+                        iframes.forEach(function(iframe, i) {
+                            if (i === 0) {
+                                // First video: load without autoplay
+                                var vid = filtered[0];
+                                iframe.src = 'https://www.youtube.com/embed/' + vid.videoId +
+                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
+                                iframe.onload = function() {
+                                    var overlay = iframe.closest('.video-player').querySelector(
+                                        '.youtube-overlay');
+                                    if (overlay) overlay.classList.add('hidden');
+                                };
+                            } else {
+                                // Other videos: load lazily
+                                var vid2 = filtered[i];
+                                iframe.src = 'https://www.youtube.com/embed/' + vid2.videoId +
+                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
+                                iframe.onload = function() {
+                                    var overlay = iframe.closest('.video-player').querySelector(
+                                        '.youtube-overlay');
+                                    if (overlay) overlay.classList.add('hidden');
+                                };
+                            }
+                        });
+                    }
+
+                    function nextVideoFn() {
+                        var items = videoFeed.querySelectorAll('.video-item');
+                        if (items.length === 0) return;
+                        var nextIdx = currentVideoIndex + 1;
+                        if (nextIdx >= items.length) nextIdx = 0;
+                        goToVideo(nextIdx, true);
+                    }
+
+                    function prevVideoFn() {
+                        var items = videoFeed.querySelectorAll('.video-item');
+                        if (items.length === 0) return;
+                        var prevIdx = currentVideoIndex - 1;
+                        if (prevIdx < 0) prevIdx = items.length - 1;
+                        goToVideo(prevIdx, true);
+                    }
+
+                    // ----- Event listeners -----
+                    if (prevVideo) prevVideo.addEventListener('click', prevVideoFn);
+                    if (nextVideo) nextVideo.addEventListener('click', nextVideoFn);
+
+                    document.addEventListener('keydown', function(e) {
+                        var lib = document.getElementById('video-library');
+                        if (lib && lib.classList.contains('collapsed')) return;
+                        if (e.key === 'ArrowDown') { e.preventDefault();
+                            nextVideoFn(); }
+                        if (e.key === 'ArrowUp') { e.preventDefault();
+                            prevVideoFn(); }
+                    });
+
+                    catBtns.forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            catBtns.forEach(function(b) { b.classList.remove('active'); });
+                            btn.classList.add('active');
+                            currentCategory = btn.dataset.category;
+                            currentVideoIndex = 0;
+                            renderVideos(currentCategory);
+                        });
+                    });
+
+                    // ----- Close video library: pause all videos -----
+                    var closeBtn = document.getElementById('close-video-btn');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function() {
+                            pauseAllVideos();
+                            var section = document.getElementById('video-library');
+                            if (section) section.classList.add('collapsed');
+                        });
+                    }
+
+                    // ----- Open video library: show first video without autoplay -----
+                    var showBtn = document.getElementById('show-video-btn');
+                    if (showBtn) {
+                        showBtn.addEventListener('click', function() {
+                            var section = document.getElementById('video-library');
+                            if (section) {
+                                section.classList.remove('collapsed');
+                                // ensure first video is shown without autoplay
+                                var items = videoFeed.querySelectorAll('.video-item');
+                                if (items.length > 0) {
+                                    goToVideo(0, false);
+                                }
+                                setTimeout(function() {
+                                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 50);
+                            }
+                        });
+                    }
+
+                    // Initial render: NO autoplay
+                    renderVideos('all');
                 }
 
                 // ----- MAIN INIT -----
@@ -5580,7 +5812,7 @@
                     regForm.addEventListener('submit', function(e) {
                         e.preventDefault();
                         var names = Array.from(participantContainer.querySelectorAll('.form-input')).map(
-                        function(i) { return i.value.trim(); }).filter(function(v) { return v; });
+                            function(i) { return i.value.trim(); }).filter(function(v) { return v; });
                         if (names.length === 0) {
                             alert(currentLanguage === 'es' ? 'Por favor ingresa al menos un nombre' :
                                 'Please enter at least one name');
@@ -5724,22 +5956,6 @@
                         });
                     }
 
-                    // ----- Video Library Toggle -----
-                    var showVideoBtn = document.getElementById('show-video-btn');
-                    var closeVideoBtn = document.getElementById('close-video-btn');
-                    var videoSection = document.getElementById('video-library');
-                    if (showVideoBtn && closeVideoBtn && videoSection) {
-                        showVideoBtn.addEventListener('click', function() {
-                            videoSection.classList.remove('collapsed');
-                            setTimeout(function() {
-                                videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }, 50);
-                        });
-                        closeVideoBtn.addEventListener('click', function() {
-                            videoSection.classList.add('collapsed');
-                        });
-                    }
-
                     // ----- Announcement Carousel -----
                     function initAnnouncementCarousel() {
                         var slidesContainer = document.getElementById('carousel-slides');
@@ -5875,155 +6091,6 @@
                         if (reviewBubble) reviewBubble.addEventListener('click', function() {
                             setTimeout(function() { closeShareMenu(); }, 100);
                         });
-                    }
-
-                    // ----- Video Library -----
-                    function initVideoLibrary() {
-                        var videoFeed = document.getElementById('video-feed');
-                        var videoIndicators = document.getElementById('video-indicators');
-                        var catBtns = document.querySelectorAll('.category-btn');
-                        var prevVideo = document.querySelector('.prev-video');
-                        var nextVideo = document.querySelector('.next-video');
-                        var videoData = [
-                            { id: 0, title: "Bongo and Güira - Bachata Rhythm",
-                                category: ["bachata-counts"],
-                                thumbnail: "https://img.youtube.com/vi/NcpGLZVhKDc/maxresdefault.jpg",
-                                videoId: "NcpGLZVhKDc", level: "Beginner", views: "1.2K" },
-                            { id: 1, title: "Bass and Guira - Bachata Rhythm", category: ["bachata-counts"],
-                                thumbnail: "https://img.youtube.com/vi/9o73jWbb3gU/maxresdefault.jpg",
-                                videoId: "9o73jWbb3gU", level: "Beginner", views: "980" },
-                            { id: 2, title: "Lead Guitar (Requinto) - Bachata Melody",
-                                category: ["bachata-counts"],
-                                thumbnail: "https://img.youtube.com/vi/J5SEMr4vmTM/maxresdefault.jpg",
-                                videoId: "J5SEMr4vmTM", level: "Intermediate", views: "1.5K" },
-                            { id: 3, title: "All Instruments Together - Bachata Full Arrangement",
-                                category: ["bachata-counts"],
-                                thumbnail: "https://img.youtube.com/vi/PPnVKETxf6I/maxresdefault.jpg",
-                                videoId: "PPnVKETxf6I", level: "Intermediate", views: "2.1K" },
-                            { id: 4, title: "3 Rhythm Básicos de Bachata", category: ["bachata-counts"],
-                                thumbnail: "https://img.youtube.com/vi/kSQVKBmtZu4/maxresdefault.jpg",
-                                videoId: "kSQVKBmtZu4", level: "Beginner", views: "3.5K" }
-                        ];
-                        var currentCategory = 'all';
-                        var currentVideoIndex = 0;
-                        var activeIframe = null;
-
-                        function pauseAll() {
-                            if (activeIframe) {
-                                var src = activeIframe.src;
-                                activeIframe.src = src.replace('&autoplay=1', '');
-                                activeIframe = null;
-                            }
-                        }
-
-                        function renderVideos(cat) {
-                            if (cat === undefined) cat = 'all';
-                            videoFeed.innerHTML = '';
-                            videoIndicators.innerHTML = '';
-                            var filtered = cat === 'all' ? videoData : videoData.filter(function(v) {
-                                return v.category.indexOf(cat) !== -1;
-                            });
-                            if (filtered.length === 0) {
-                                videoFeed.innerHTML =
-                                    '<div class="video-item"><div class="video-placeholder"><div class="video-placeholder-content"><h3>No videos found</h3></div></div></div>';
-                                videoIndicators.innerHTML = '';
-                                return;
-                            }
-                            var total = filtered.length;
-                            filtered.forEach(function(v, idx) {
-                                var div = document.createElement('div');
-                                div.className = 'video-item';
-                                div.dataset.index = idx;
-                                div.style.height = '100%';
-                                div.innerHTML =
-                                    '<div class="video-player"><div class="youtube-overlay" id="youtube-overlay-' +
-                                    idx +
-                                    '"><div class="video-loading"><div class="spinner"></div><div class="video-loading-text">Loading video...</div></div></div><iframe id="yt-' +
-                                    idx + '" src="https://www.youtube.com/embed/' + v.videoId +
-                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe><div class="video-info-overlay"><div class="video-item-title">' +
-                                    v.title +
-                                    '</div><div class="video-meta"><span class="video-level">' + v.level +
-                                    '</span><span class="video-views"><i class="fas fa-eye"></i> ' + v
-                                    .views + '</span></div></div></div>';
-                                videoFeed.appendChild(div);
-                                var indicator = document.createElement('button');
-                                indicator.className = 'video-indicator' + (idx === currentVideoIndex ?
-                                    ' active' : '');
-                                indicator.dataset.index = idx;
-                                indicator.addEventListener('click', function() { goToVideo(idx); });
-                                videoIndicators.appendChild(indicator);
-                            });
-                            var iframes = videoFeed.querySelectorAll('iframe');
-                            iframes.forEach(function(iframe) {
-                                iframe.addEventListener('load', function() {
-                                    var overlay = this.closest('.video-player').querySelector(
-                                        '.youtube-overlay');
-                                    if (overlay) overlay.classList.add('hidden');
-                                });
-                            });
-                            goToVideo(0);
-                        }
-
-                        function goToVideo(idx) {
-                            pauseAll();
-                            var items = videoFeed.querySelectorAll('.video-item');
-                            var total = items.length;
-                            if (total === 0) return;
-                            var newIdx = Math.max(0, Math.min(idx, total - 1));
-                            currentVideoIndex = newIdx;
-                            items.forEach(function(item, i) {
-                                item.style.display = i === newIdx ? 'flex' : 'none';
-                            });
-                            var inds = videoIndicators.querySelectorAll('.video-indicator');
-                            inds.forEach(function(ind, i) {
-                                ind.classList.toggle('active', i === newIdx);
-                            });
-                            var iframe = videoFeed.querySelector('.video-item:nth-child(' + (newIdx + 1) +
-                                ') iframe');
-                            if (iframe) {
-                                var src = iframe.src;
-                                if (src.indexOf('autoplay=1') === -1) {
-                                    iframe.src = src + '&autoplay=1';
-                                    activeIframe = iframe;
-                                }
-                                var overlay = iframe.closest('.video-player').querySelector(
-                                '.youtube-overlay');
-                                if (overlay) {
-                                    overlay.classList.add('hidden');
-                                }
-                            }
-                        }
-
-                        function nextVideoFn() {
-                            var items = videoFeed.querySelectorAll('.video-item');
-                            if (items.length === 0) return;
-                            goToVideo(currentVideoIndex + 1);
-                        }
-
-                        function prevVideoFn() {
-                            var items = videoFeed.querySelectorAll('.video-item');
-                            if (items.length === 0) return;
-                            goToVideo(currentVideoIndex - 1);
-                        }
-
-                        prevVideo.addEventListener('click', prevVideoFn);
-                        nextVideo.addEventListener('click', nextVideoFn);
-                        document.addEventListener('keydown', function(e) {
-                            if (e.key === 'ArrowDown') { e.preventDefault();
-                                nextVideoFn(); }
-                            if (e.key === 'ArrowUp') { e.preventDefault();
-                                prevVideoFn(); }
-                        });
-                        catBtns.forEach(function(btn) {
-                            btn.addEventListener('click', function() {
-                                catBtns.forEach(function(b) { b.classList.remove('active'); });
-                                btn.classList.add('active');
-                                currentCategory = btn.dataset.category;
-                                currentVideoIndex = 0;
-                                renderVideos(currentCategory);
-                            });
-                        });
-                        renderVideos('all');
                     }
 
                     // ----- Initialize all components -----
