@@ -23,7 +23,7 @@
             font-size: 1rem;
             line-height: 1.75;
             color: #1e293b;
-            background: linear-gradient(145deg, #f0f5fc, #e6edf7);
+            background: #eef4fa;
             min-height: 100vh;
             min-height: 100dvh;
             padding: 16px 16px 100px;
@@ -134,6 +134,9 @@
             --icon-font-base: 30px;
             --icon-label-lg: 15px;
             --icon-label-base: 13px;
+            --golden: #f59e0b;
+            --golden-dark: #d97706;
+            --golden-glow: rgba(245, 158, 11, 0.35);
         }
 
         ::-webkit-scrollbar {
@@ -168,6 +171,7 @@
             transition: filter 0.5s ease, opacity 0.5s ease;
             position: relative;
             z-index: 10;
+            overflow: hidden;
         }
         .section-title {
             font-weight: 800;
@@ -283,6 +287,7 @@
             transition: opacity 0.5s ease-out;
             pointer-events: all;
             box-shadow: inset 0 0 120px rgba(44, 90, 160, 0.03);
+            overflow: hidden;
         }
         #welcome-array.hidden {
             opacity: 0;
@@ -355,8 +360,8 @@
         }
         .apps-row.second-row {
             display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            justify-content: center;
             align-items: center;
             gap: var(--space-3);
         }
@@ -373,7 +378,7 @@
             justify-content: center;
         }
         #welcome-skip-btn {
-            flex: 1;
+            flex: 0 1 auto;
             text-align: right;
             background: transparent;
             backdrop-filter: none;
@@ -391,10 +396,10 @@
             letter-spacing: 0.2px;
             line-height: 1.4;
             min-height: 44px;
-            margin-left: auto;
             align-self: center;
             justify-content: flex-end;
             opacity: 0.7;
+            white-space: nowrap;
         }
         #welcome-skip-btn i {
             font-size: var(--font-sm);
@@ -430,6 +435,7 @@
             min-width: 60px;
             min-height: 60px;
             padding: var(--space-2) var(--space-1);
+            flex-shrink: 0;
         }
         .app-icon:active {
             transform: scale(0.96);
@@ -673,27 +679,46 @@
         .welcome-cta-pill .pill-badge {
             display: inline-flex;
             align-items: center;
-            background: rgba(44, 90, 160, 0.10);
-            color: var(--primary-blue);
             font-weight: 700;
             font-size: var(--font-xs);
             padding: 0 var(--space-3);
             border-radius: var(--radius-pill);
             line-height: 2;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.4px;
             white-space: nowrap;
             flex-shrink: 0;
-            border: 1px solid rgba(44, 90, 160, 0.06);
-            text-transform: lowercase;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .welcome-cta-pill .pill-badge.wednesday {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+        }
+        .welcome-cta-pill .pill-badge.friday {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.25);
+        }
+        .welcome-cta-pill .pill-badge.saturday {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.this-week-badge {
             background: rgba(44, 90, 160, 0.15);
             color: var(--dark-blue);
             border-color: rgba(44, 90, 160, 0.15);
+            text-transform: uppercase;
         }
         .welcome-cta-pill .pill-badge.next-week-badge {
             background: rgba(44, 90, 160, 0.08);
             color: var(--primary-blue);
+            border-color: rgba(44, 90, 160, 0.10);
+            text-transform: uppercase;
         }
         .welcome-cta-pill.next-event {
             border: 2px solid var(--primary-blue);
@@ -1178,13 +1203,26 @@
         .cta-next-day .cta-next-day-name {
             font-size: var(--font-xl);
             font-weight: 800;
-            color: var(--dark-blue);
             letter-spacing: -0.01em;
+            color: #ffffff;
             background: var(--gradient-blue);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding: 0 var(--space-1);
+            padding: 4px 20px;
+            border-radius: var(--radius-pill);
+            display: inline-block;
+            box-shadow: 0 4px 16px rgba(44, 90, 160, 0.25);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+            position: relative;
+            line-height: 1.4;
+        }
+        .cta-next-day .cta-next-day-name::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-sm);
         }
         .cta-next-day .cta-next-day-icon {
             color: var(--primary-blue);
@@ -1196,12 +1234,14 @@
                 padding: var(--space-1) var(--space-4);
                 gap: var(--space-2);
                 margin-bottom: var(--space-4);
+                flex-wrap: wrap;
             }
             .cta-next-day .cta-next-day-label {
                 font-size: var(--font-xs);
             }
             .cta-next-day .cta-next-day-name {
-                font-size: var(--font-lg);
+                font-size: var(--font-base);
+                padding: 3px 14px;
             }
             .cta-next-day .cta-next-day-icon {
                 font-size: var(--font-md);
@@ -1217,7 +1257,8 @@
                 font-size: 10px;
             }
             .cta-next-day .cta-next-day-name {
-                font-size: var(--font-base);
+                font-size: var(--font-sm);
+                padding: 2px 12px;
             }
         }
 
@@ -1941,7 +1982,7 @@
         .announcement-carousel {
             position: relative;
             margin: var(--space-6) 0 var(--space-10);
-            overflow: visible;
+            overflow: hidden;
             border-radius: var(--radius-3xl);
         }
         .carousel-slides {
@@ -3269,31 +3310,35 @@
             pointer-events: auto;
             cursor: default;
         }
+
         .review-bubble {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            background: rgba(255, 255, 255, 0.85);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             backdrop-filter: blur(8px);
-            color: #2d3f5e;
+            color: #ffffff;
             border-radius: var(--radius-pill);
-            padding: var(--space-2) var(--space-4);
+            padding: var(--space-2) var(--space-5);
             font-size: var(--font-sm);
-            font-weight: 500;
+            font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.06);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
-            border: 1px solid rgba(44, 90, 160, 0.12);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35), 0 2px 6px rgba(245, 158, 11, 0.15);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.3s ease;
+            border: 1px solid rgba(245, 158, 11, 0.25);
             pointer-events: none;
             min-height: 46px;
             cursor: pointer;
             transform: scale(0);
             opacity: 0;
             transform-origin: left center;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
         }
         .review-bubble i {
             font-size: var(--font-md);
-            color: var(--primary-blue);
+            color: #ffffff;
+            opacity: 0.95;
         }
         .review-bubble.active {
             transform: scale(1);
@@ -3301,7 +3346,13 @@
             pointer-events: auto;
         }
         .review-bubble.active:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 14px 34px rgba(245, 158, 11, 0.50), 0 4px 12px rgba(245, 158, 11, 0.20);
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+        .review-bubble.active:active {
+            transform: scale(0.96);
         }
 
         .language-toggle {
@@ -3560,6 +3611,9 @@
             .apps-row {
                 gap: var(--space-2);
             }
+            .apps-row.second-row {
+                gap: var(--space-2);
+            }
             .welcome-cta-pill {
                 min-height: 64px;
                 padding: var(--space-3) var(--space-5);
@@ -3644,11 +3698,11 @@
         }
         @media (max-width: 550px) {
             :root {
-                --icon-size-lg: 84px;
-                --icon-size-base: 70px;
-                --icon-font-lg: 26px;
-                --icon-font-base: 20px;
-                --icon-label-lg: 11px;
+                --icon-size-lg: 78px;
+                --icon-size-base: 66px;
+                --icon-font-lg: 24px;
+                --icon-font-base: 19px;
+                --icon-label-lg: 10px;
                 --icon-label-base: 9px;
             }
             body {
@@ -3658,6 +3712,7 @@
             .container {
                 padding: var(--space-4) var(--space-3) var(--space-8);
                 border-radius: var(--radius-2xl);
+                overflow: hidden;
             }
             #welcome-array {
                 backdrop-filter: blur(8px);
@@ -3677,6 +3732,10 @@
             .apps-row {
                 gap: var(--space-1);
             }
+            .apps-row.second-row {
+                gap: var(--space-1);
+                flex-wrap: wrap;
+            }
             .app-icon.djmx {
                 width: var(--icon-size-base);
                 height: var(--icon-size-base);
@@ -3691,6 +3750,7 @@
                 padding: var(--space-1) var(--space-2);
                 font-size: var(--font-xs);
                 min-height: 38px;
+                flex: 0 1 auto;
             }
             .welcome-pills-heading {
                 font-size: var(--font-2xl);
@@ -4131,15 +4191,19 @@
         }
         @media (max-width: 400px) {
             :root {
-                --icon-size-lg: 76px;
-                --icon-size-base: 64px;
-                --icon-font-lg: 22px;
-                --icon-font-base: 18px;
-                --icon-label-lg: 10px;
+                --icon-size-lg: 70px;
+                --icon-size-base: 60px;
+                --icon-font-lg: 20px;
+                --icon-font-base: 17px;
+                --icon-label-lg: 9px;
                 --icon-label-base: 8px;
             }
             .apps-row {
                 gap: var(--space-1);
+            }
+            .apps-row.second-row {
+                gap: var(--space-1);
+                flex-wrap: wrap;
             }
             .welcome-cta-pill {
                 padding: var(--space-2) var(--space-2);
@@ -4331,7 +4395,7 @@
                         <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
-                    <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
@@ -4546,8 +4610,8 @@
                             <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
-                            <a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-summer-at-sor-ynez-frida/1647476406997920/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                 </div>
@@ -5273,11 +5337,13 @@
                                 24)) < 7) :
                             false;
 
+                        var dayLower = dayName ? dayName.toLowerCase() : '';
+
                         if (dayName) {
-                            badge.textContent = dayName;
-                            badge.className = 'pill-badge';
+                            badge.textContent = dayName.toUpperCase();
+                            badge.className = 'pill-badge ' + dayLower;
                         } else {
-                            badge.textContent = 'this week';
+                            badge.textContent = 'THIS WEEK';
                             badge.className = 'pill-badge this-week-badge';
                         }
 
@@ -5536,12 +5602,20 @@
                     var lastScrollPos = 0;
                     var ticking = false;
                     var navRAF = null;
+                    var navHidden = false;
+                    var navHideScrollY = 0;
+                    var NAV_SHOW_THRESHOLD = 40;
+                    var navShownThisSession = false;
+                    var navHideThresholdCache = null;
 
                     function getStardustHideThreshold() {
+                        if (navHideThresholdCache !== null) return navHideThresholdCache;
                         var card = document.getElementById('stardust-card');
                         if (!card) return 450;
                         var rect = card.getBoundingClientRect();
-                        return rect.top + window.scrollY;
+                        var threshold = rect.top + window.scrollY;
+                        navHideThresholdCache = threshold;
+                        return threshold;
                     }
 
                     function shouldEnableHide() {
@@ -5550,40 +5624,92 @@
                         return rect.top <= window.innerHeight * 0.75;
                     }
 
+                    function isNearBottom() {
+                        var scrollY = window.scrollY;
+                        var docHeight = document.documentElement.scrollHeight;
+                        var winHeight = window.innerHeight;
+                        var scrollBottom = docHeight - (scrollY + winHeight);
+                        return scrollBottom < 250;
+                    }
+
                     function updateMenuBar() {
                         if (!navBar) return;
                         var scrollY = window.scrollY;
                         var direction = scrollY > lastScrollPos ? 'down' : 'up';
-                        lastScrollPos = scrollY;
+                        var scrollDelta = Math.abs(scrollY - lastScrollPos);
 
                         if (!shouldEnableHide()) {
                             navBar.classList.add('nav-static');
                             navBar.classList.remove('nav-floating', 'nav-hidden');
+                            navHidden = false;
+                            navHideScrollY = 0;
+                            lastScrollPos = scrollY;
                             return;
                         }
 
-                        if (scrollY <= 8) {
+                        if (scrollY <= 10) {
                             navBar.classList.add('nav-static');
                             navBar.classList.remove('nav-floating', 'nav-hidden');
+                            navHidden = false;
+                            navHideScrollY = 0;
+                            lastScrollPos = scrollY;
                             return;
                         }
 
                         var hideThreshold = getStardustHideThreshold();
 
-                        if (direction === 'down' && scrollY > hideThreshold) {
-                            if (!navBar.classList.contains('nav-hidden')) {
-                                navBar.classList.add('nav-hidden');
-                                navBar.classList.remove('nav-floating', 'nav-static');
+                        if (direction === 'down') {
+                            if (scrollY > hideThreshold) {
+                                if (!navBar.classList.contains('nav-hidden')) {
+                                    navBar.classList.add('nav-hidden');
+                                    navBar.classList.remove('nav-floating', 'nav-static');
+                                    navHidden = true;
+                                    navHideScrollY = scrollY;
+                                    navShownThisSession = false;
+                                }
+                            } else {
+                                if (navBar.classList.contains('nav-hidden')) {
+                                    navBar.classList.remove('nav-hidden');
+                                    navBar.classList.add('nav-floating');
+                                    navBar.classList.remove('nav-static');
+                                    navHidden = false;
+                                    navHideScrollY = 0;
+                                    navShownThisSession = true;
+                                } else if (!navBar.classList.contains('nav-floating') && !navBar.classList
+                                    .contains('nav-static')) {
+                                    navBar.classList.add('nav-floating');
+                                }
                             }
-                        } else if (direction === 'up') {
-                            if (navBar.classList.contains('nav-hidden')) {
-                                navBar.classList.remove('nav-hidden');
-                                navBar.classList.add('nav-floating');
-                                navBar.classList.remove('nav-static');
-                            } else if (!navBar.classList.contains('nav-floating') && !navBar.classList.contains(
-                                'nav-static')) {
+                            lastScrollPos = scrollY;
+                            return;
+                        }
+
+                        if (direction === 'up') {
+                            var nearBottom = isNearBottom();
+
+                            if (navHidden) {
+                                var scrollUpAmount = navHideScrollY - scrollY;
+                                var shouldShow = false;
+
+                                if (nearBottom) {
+                                    if (scrollUpAmount > 10) shouldShow = true;
+                                } else {
+                                    if (scrollUpAmount > NAV_SHOW_THRESHOLD) shouldShow = true;
+                                }
+
+                                if (shouldShow) {
+                                    navBar.classList.remove('nav-hidden');
+                                    navBar.classList.add('nav-floating');
+                                    navBar.classList.remove('nav-static');
+                                    navHidden = false;
+                                    navHideScrollY = 0;
+                                    navShownThisSession = true;
+                                }
+                            } else if (!navBar.classList.contains('nav-floating') && !navBar.classList
+                                .contains('nav-static')) {
                                 navBar.classList.add('nav-floating');
                             }
+                            lastScrollPos = scrollY;
                         }
                     }
 
@@ -5601,7 +5727,10 @@
 
                     window.addEventListener('scroll', handleScroll, { passive: true });
                     updateMenuBar();
-                    window.addEventListener('resize', function() { updateMenuBar(); }, { passive: true });
+                    window.addEventListener('resize', function() {
+                        navHideThresholdCache = null;
+                        updateMenuBar();
+                    }, { passive: true });
 
                     function initSectionAnimations() {
                         var animatedSections = document.querySelectorAll('.section-animate');
