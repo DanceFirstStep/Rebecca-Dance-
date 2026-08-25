@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
+        /* ── reset & base ── */
         * {
             margin: 0;
             padding: 0;
@@ -137,6 +138,11 @@
             --golden: #f59e0b;
             --golden-dark: #d97706;
             --golden-glow: rgba(245, 158, 11, 0.35);
+            --event-dark: #14213D;
+            --event-blue: #315B9B;
+            --event-gray: #AEB9C9;
+            --event-purple: #7B4DDB;
+            --event-orange: #E89A25;
         }
 
         ::-webkit-scrollbar {
@@ -270,6 +276,7 @@
             }
         }
 
+        /* ── welcome overlay (unchanged) ── */
         #welcome-array {
             position: fixed;
             top: 0;
@@ -627,19 +634,21 @@
             margin: var(--space-5) 0 0;
             width: 100%;
         }
+
+        /* ── event pills (unchanged) ── */
         .welcome-cta-pill {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: var(--space-1) var(--space-3);
+            gap: var(--space-2) var(--space-4);
             background: var(--white);
             border-radius: var(--radius-xl);
             padding: var(--space-4) var(--space-7);
-            min-height: 72px;
+            min-height: 76px;
             width: 100%;
             max-width: 720px;
-            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.03), 0 0 0 1px rgba(44, 90, 160, 0.04);
+            box-shadow: 0 2px 10px rgba(44, 90, 160, 0.04), 0 0 0 1px rgba(44, 90, 160, 0.05);
             border: none;
             text-decoration: none;
             transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
@@ -654,37 +663,55 @@
         }
         .welcome-cta-pill:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(44, 90, 160, 0.06), 0 0 0 1px rgba(44, 90, 160, 0.10);
+            box-shadow: 0 12px 32px rgba(44, 90, 160, 0.08), 0 0 0 1px rgba(44, 90, 160, 0.10);
             background: #fcfdff;
         }
         .welcome-cta-pill:active {
             transform: scale(0.97);
             transition-duration: 0.08s;
         }
+
         .welcome-cta-pill .pill-main {
             font-weight: 600;
-            font-size: var(--font-md);
+            font-size: 1.05rem;
             color: var(--dark);
             letter-spacing: -0.01em;
             display: inline;
+            line-height: 1.6;
+        }
+        .welcome-cta-pill .pill-main .event-name {
+            color: #14213D;
+            font-weight: 700;
+        }
+        .welcome-cta-pill .pill-main .free-purple {
+            color: #7B4DDB;
+            font-weight: 700;
+        }
+        .welcome-cta-pill .pill-main .free-orange {
+            color: #E89A25;
+            font-weight: 700;
+        }
+        .welcome-cta-pill .pill-main .times-blue {
+            color: #315B9B;
+            font-weight: 600;
         }
         .welcome-cta-pill .pill-styles {
             font-weight: 400;
-            font-size: var(--font-sm);
-            color: #4a627a;
-            opacity: 0.5;
+            font-size: 0.85rem;
+            color: #7a8a9e;
             display: inline;
             letter-spacing: 0.02em;
+            font-style: italic;
         }
         .welcome-cta-pill .pill-badge {
             display: inline-flex;
             align-items: center;
             font-weight: 700;
-            font-size: var(--font-xs);
+            font-size: 0.7rem;
             padding: 0 var(--space-3);
             border-radius: var(--radius-pill);
-            line-height: 2;
-            letter-spacing: 0.4px;
+            line-height: 2.2;
+            letter-spacing: 0.5px;
             white-space: nowrap;
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -709,9 +736,9 @@
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.this-week-badge {
-            background: rgba(44, 90, 160, 0.15);
+            background: rgba(44, 90, 160, 0.14);
             color: var(--dark-blue);
-            border-color: rgba(44, 90, 160, 0.15);
+            border-color: rgba(44, 90, 160, 0.14);
             text-transform: uppercase;
         }
         .welcome-cta-pill .pill-badge.next-week-badge {
@@ -736,7 +763,7 @@
             right: var(--space-4);
             background: var(--primary-blue);
             color: var(--white);
-            font-size: var(--font-xs);
+            font-size: 0.65rem;
             font-weight: 700;
             padding: var(--space-1) var(--space-4);
             border-radius: var(--radius-pill);
@@ -763,7 +790,23 @@
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: var(--white);
-            font-size: var(--font-xs);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: var(--space-2);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+        .welcome-cta-pill .pill-main .baile-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: var(--white);
+            font-size: 0.65rem;
             font-weight: 700;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
@@ -776,6 +819,24 @@
             line-height: 1.6;
         }
 
+        .welcome-cta-pill[data-event-key="ardmore"] {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-badge {
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-main {
+            text-align: center;
+        }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-styles {
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* ── header ── */
         .header-container {
             text-align: center;
             margin-bottom: var(--space-6);
@@ -1088,6 +1149,229 @@
             backdrop-filter: blur(2px);
         }
 
+        /* ── NEW: Locations Section ── */
+        .locations-section {
+            margin: var(--space-6) auto var(--space-10);
+            text-align: center;
+        }
+        .locations-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-5) var(--space-6);
+            margin-top: var(--space-4);
+        }
+        .location-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            cursor: pointer;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-2xl);
+            background: var(--white);
+            border: 1px solid rgba(44, 90, 160, 0.06);
+            box-shadow: 0 2px 10px rgba(44, 90, 160, 0.02);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-width: 130px;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .location-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(44, 90, 160, 0.07);
+            border-color: rgba(44, 90, 160, 0.15);
+            background: #f8fcff;
+        }
+        .location-card:active {
+            transform: scale(0.96);
+            transition-duration: 0.08s;
+        }
+        .location-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-3xl);
+            color: var(--white);
+            background: var(--gradient-blue);
+            box-shadow: 0 6px 16px rgba(44, 90, 160, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        .location-card:hover .location-icon-wrap {
+            transform: scale(1.06);
+            box-shadow: 0 10px 24px rgba(44, 90, 160, 0.20);
+        }
+        .location-card .location-name {
+            font-weight: 700;
+            font-size: var(--font-sm);
+            color: var(--dark-blue);
+            letter-spacing: 0.2px;
+            line-height: 1.3;
+            text-align: center;
+        }
+        .location-card .location-label {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            font-weight: 400;
+            opacity: 0.7;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .location-card.stardust .location-icon-wrap {
+            background: linear-gradient(135deg, #1a3a6c, #2c5aa0);
+        }
+        .location-card.sorynez .location-icon-wrap {
+            background: linear-gradient(135deg, #6a4e9c, #9b59b6);
+        }
+        .location-card.ardmore .location-icon-wrap {
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+        }
+
+        /* ── Location Modal ── */
+        .location-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            animation: modalFadeIn 0.2s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .location-modal-card {
+            background: var(--white);
+            border-radius: var(--radius-4xl);
+            padding: var(--space-8) var(--space-7) var(--space-8);
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+            position: relative;
+            animation: modalFadeIn 0.25s ease-out;
+        }
+        .location-modal-close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-5);
+            background: transparent;
+            border: none;
+            font-size: var(--font-xl);
+            cursor: pointer;
+            color: #6c7e94;
+            transition: transform 0.2s, color 0.2s;
+            line-height: 1;
+            padding: var(--space-2);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .location-modal-close:hover {
+            transform: scale(1.12);
+            color: #1e2f40;
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .location-modal-title {
+            font-size: var(--font-2xl);
+            font-weight: 800;
+            color: var(--dark-blue);
+            margin-bottom: var(--space-3);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        .location-modal-address {
+            font-size: var(--font-md);
+            color: var(--text-medium);
+            background: #f5f9ff;
+            border-radius: var(--radius-xl);
+            padding: var(--space-4) var(--space-5);
+            margin: var(--space-3) 0 var(--space-6);
+            border: 1px solid rgba(44, 90, 160, 0.06);
+            word-break: break-word;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        .location-modal-address .address-icon {
+            color: var(--primary-blue);
+            margin-right: var(--space-2);
+            opacity: 0.7;
+        }
+        .location-modal-actions {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .location-modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            border: none;
+            border-radius: var(--btn-radius);
+            padding: 0 var(--btn-pad-x-md);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            line-height: 1.5;
+            flex: 1;
+            min-width: 140px;
+        }
+        .location-modal-btn.copy-btn {
+            background: #eef2f8;
+            color: var(--dark-blue);
+            border: 1px solid rgba(44, 90, 160, 0.08);
+        }
+        .location-modal-btn.copy-btn:hover {
+            background: #e2eaf5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(44, 90, 160, 0.06);
+        }
+        .location-modal-btn.copy-btn.copied {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .location-modal-btn.navigate-btn {
+            background: var(--gradient-blue);
+            color: var(--white);
+            box-shadow: 0 6px 16px rgba(44, 90, 160, 0.15);
+        }
+        .location-modal-btn.navigate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(44, 90, 160, 0.20);
+            background: var(--gradient-dark);
+        }
+        .location-modal-btn i {
+            font-size: var(--font-md);
+        }
+
+        /* ── existing class cta ── */
         .class-cta-container {
             border-radius: var(--radius-3xl);
             padding: var(--space-10) var(--space-10) var(--space-10);
@@ -1416,6 +1700,7 @@
             border-bottom-color: var(--primary-blue);
         }
 
+        /* ── links grid ── */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -3417,17 +3702,24 @@
             opacity: 0.4;
         }
 
-        @media (max-width: 1000px) {
-            .instructors-grid {
-                gap: var(--space-6);
-            }
-            .instructor-card {
-                padding: var(--space-6) var(--space-5);
-            }
-            .links-grid {
-                gap: var(--space-6);
-            }
+        .welcome-cta-pill[data-event-key="ardmore"] {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-badge {
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-main {
+            text-align: center;
+        }
+        .welcome-cta-pill[data-event-key="ardmore"] .pill-styles {
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* ── responsive ── */
         @media (max-width: 850px) {
             :root {
                 --icon-size-lg: 108px;
@@ -3598,7 +3890,41 @@
                 max-width: 100%;
                 gap: var(--space-3);
             }
+            .locations-grid {
+                gap: var(--space-4);
+            }
+            .location-card {
+                min-width: 110px;
+                padding: var(--space-2) var(--space-3);
+            }
+            .location-icon-wrap {
+                width: 60px;
+                height: 60px;
+                font-size: var(--font-2xl);
+            }
+            .location-card .location-name {
+                font-size: var(--font-xs);
+            }
+            .location-modal-card {
+                padding: var(--space-6) var(--space-5);
+                max-width: 400px;
+            }
+            .location-modal-title {
+                font-size: var(--font-xl);
+            }
+            .location-modal-address {
+                font-size: var(--font-sm);
+                padding: var(--space-3) var(--space-4);
+            }
+            .location-modal-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 110px;
+            }
         }
+
         @media (max-width: 650px) {
             :root {
                 --icon-size-lg: 96px;
@@ -3618,12 +3944,19 @@
                 min-height: 64px;
                 padding: var(--space-3) var(--space-5);
                 font-size: var(--font-sm);
+                border-radius: var(--radius-lg);
+                gap: var(--space-1) var(--space-3);
             }
             .welcome-cta-pill .pill-main {
-                font-size: var(--font-base);
+                font-size: 0.95rem;
             }
             .welcome-cta-pill .pill-styles {
-                font-size: var(--font-xs);
+                font-size: 0.8rem;
+            }
+            .welcome-cta-pill .pill-badge {
+                font-size: 0.65rem;
+                line-height: 2;
+                padding: 0 var(--space-2);
             }
             .top-nav-buttons {
                 padding: var(--space-2) var(--space-3);
@@ -3695,7 +4028,41 @@
                 width: 100%;
                 max-width: 300px;
             }
+            .location-card {
+                min-width: 90px;
+                padding: var(--space-2) var(--space-2);
+            }
+            .location-icon-wrap {
+                width: 52px;
+                height: 52px;
+                font-size: var(--font-xl);
+            }
+            .location-card .location-name {
+                font-size: var(--font-xs);
+            }
+            .location-modal-card {
+                padding: var(--space-5) var(--space-4);
+                max-width: 360px;
+            }
+            .location-modal-title {
+                font-size: var(--font-lg);
+            }
+            .location-modal-address {
+                font-size: var(--font-sm);
+                padding: var(--space-3) var(--space-3);
+            }
+            .location-modal-btn {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 100px;
+            }
+            .location-modal-actions {
+                gap: var(--space-2);
+            }
         }
+
         @media (max-width: 550px) {
             :root {
                 --icon-size-lg: 78px;
@@ -4025,20 +4392,20 @@
             .welcome-cta-pill {
                 min-height: 54px;
                 padding: var(--space-2) var(--space-3);
-                border-radius: var(--radius-lg);
+                border-radius: var(--radius-md);
                 gap: var(--space-1) var(--space-2);
             }
             .welcome-cta-pill .pill-main {
-                font-size: var(--font-sm);
+                font-size: 0.85rem;
             }
             .welcome-cta-pill .pill-styles {
-                font-size: var(--font-xs);
-                opacity: 0.45;
+                font-size: 0.7rem;
+                opacity: 0.5;
             }
             .welcome-cta-pill .pill-badge {
-                font-size: 9px;
+                font-size: 0.55rem;
                 padding: 0 var(--space-2);
-                line-height: 1.8;
+                line-height: 1.9;
             }
             .modern-event-card {
                 padding: var(--space-4) var(--space-3) var(--space-5);
@@ -4188,7 +4555,71 @@
                 padding: 0 var(--btn-pad-x-sm);
                 min-width: 80px;
             }
+
+            .welcome-cta-pill[data-event-key="ardmore"] {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: var(--space-2) var(--space-3);
+            }
+            .welcome-cta-pill[data-event-key="ardmore"] .pill-badge {
+                margin-bottom: 3px;
+                font-size: 0.5rem;
+                padding: 0 var(--space-2);
+                line-height: 1.8;
+            }
+            .welcome-cta-pill[data-event-key="ardmore"] .pill-main {
+                font-size: 0.8rem;
+                text-align: center;
+            }
+            .welcome-cta-pill[data-event-key="ardmore"] .pill-styles {
+                font-size: 0.7rem;
+                margin-top: 2px;
+                text-align: center;
+            }
+            .locations-grid {
+                gap: var(--space-3);
+            }
+            .location-card {
+                min-width: 76px;
+                padding: var(--space-2) var(--space-2);
+            }
+            .location-icon-wrap {
+                width: 44px;
+                height: 44px;
+                font-size: var(--font-lg);
+            }
+            .location-card .location-name {
+                font-size: 10px;
+            }
+            .location-modal-card {
+                padding: var(--space-4) var(--space-3);
+                max-width: 320px;
+            }
+            .location-modal-title {
+                font-size: var(--font-md);
+            }
+            .location-modal-address {
+                font-size: var(--font-xs);
+                padding: var(--space-2) var(--space-3);
+                margin: var(--space-2) 0 var(--space-4);
+            }
+            .location-modal-btn {
+                font-size: var(--font-xs);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 80px;
+            }
+            .location-modal-actions {
+                gap: var(--space-2);
+                flex-direction: column;
+            }
+            .location-modal-btn {
+                width: 100%;
+            }
         }
+
         @media (max-width: 400px) {
             :root {
                 --icon-size-lg: 70px;
@@ -4208,18 +4639,18 @@
             .welcome-cta-pill {
                 padding: var(--space-2) var(--space-2);
                 min-height: 48px;
-                border-radius: var(--radius-md);
+                border-radius: var(--radius-sm);
             }
             .welcome-cta-pill .pill-main {
-                font-size: var(--font-xs);
+                font-size: 0.75rem;
             }
             .welcome-cta-pill .pill-styles {
-                font-size: var(--font-xs);
+                font-size: 0.65rem;
             }
             .welcome-cta-pill .pill-badge {
-                font-size: 8px;
+                font-size: 0.5rem;
                 padding: 0 var(--space-1);
-                line-height: 1.6;
+                line-height: 1.7;
             }
             .top-nav-buttons {
                 padding: var(--space-1) var(--space-1);
@@ -4268,7 +4699,38 @@
                 font-size: 8px;
                 padding: var(--space-1) var(--space-2);
             }
+            .location-card {
+                min-width: 64px;
+                padding: var(--space-1) var(--space-1);
+            }
+            .location-icon-wrap {
+                width: 38px;
+                height: 38px;
+                font-size: var(--font-base);
+            }
+            .location-card .location-name {
+                font-size: 9px;
+            }
+            .location-modal-card {
+                padding: var(--space-3) var(--space-2);
+                max-width: 280px;
+            }
+            .location-modal-title {
+                font-size: var(--font-sm);
+            }
+            .location-modal-address {
+                font-size: var(--font-xs);
+                padding: var(--space-2) var(--space-2);
+            }
+            .location-modal-btn {
+                font-size: var(--font-xs);
+                height: 40px;
+                min-height: 40px;
+                padding: 0 var(--btn-pad-x-sm);
+                min-width: 70px;
+            }
         }
+
         @media (max-height: 500px) and (orientation: landscape) {
             .apps-row {
                 flex-direction: row;
@@ -4287,6 +4749,14 @@
             }
             .app-icon.djmx i {
                 font-size: var(--icon-font-base);
+            }
+            .location-card {
+                min-width: 70px;
+            }
+            .location-icon-wrap {
+                width: 40px;
+                height: 40px;
+                font-size: var(--font-md);
             }
         }
 
@@ -4387,20 +4857,45 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
-                    <a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
-                        <span class="pill-main">Ardmore Salsa Nights (2nd &amp; 4th Sat) • 9:15pm Lesson • 10:00pm Social</span>
+                    <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
+                        <span class="pill-main"><span class="event-name">Ardmore Salsa Night • Sat 2nd &amp; 4th</span><br><span class="times-blue">9:15PM Lesson • 10PM Social</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
                     </a>
                     <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
-                        <span class="pill-main">Sor Inés Wed (1st &amp; 3rd) • FREE • Outdoor Social <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
+                        <span class="pill-main"><span class="event-name">Sor Inés • Wed 1st &amp; 3rd</span><br><span class="free-orange">FREE</span> • Outdoor Social<br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span> <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
                     <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
-                        <span class="pill-main">Sor Ynéz Fri (2nd &amp; 4th) • FREE • Patio Party • 6pm Music • 7pm Lesson • 8pm Social</span>
+                        <span class="pill-main"><span class="event-name">Sor Ynéz • Fri 2nd &amp; 4th</span><br><span class="free-purple">FREE</span> • Patio Party<br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
                     </a>
                 </div>
                 <p class="welcome-pills-subheading">No partner needed • All levels welcome</p>
+            </div>
+
+            <!-- ─── NEW LOCATIONS SECTION ─── -->
+            <div class="locations-section section-animate" id="locations-section">
+                <h2 class="section-title" id="locations-title">Find Our Locations</h2>
+                <div class="locations-grid">
+                    <!-- Stardust -->
+                    <div class="location-card stardust" data-venue="stardust">
+                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
+                        <span class="location-name">Stardust Ballroom</span>
+                        <span class="location-label">Bellmawr, NJ</span>
+                    </div>
+                    <!-- Sor Ynez -->
+                    <div class="location-card sorynez" data-venue="sorynez">
+                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
+                        <span class="location-name">Sor Ynéz</span>
+                        <span class="location-label">Philadelphia, PA</span>
+                    </div>
+                    <!-- Ardmore -->
+                    <div class="location-card ardmore" data-venue="ardmore">
+                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
+                        <span class="location-name">Ardmore</span>
+                        <span class="location-label">Ardmore, PA</span>
+                    </div>
+                </div>
             </div>
 
             <hr class="section-separator" id="separator-1">
@@ -4592,8 +5087,8 @@
                             <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Social until 1am</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
-                            <a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line/1791721795352987/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
@@ -4691,6 +5186,7 @@
         (function() {
             'use strict';
 
+            /* ── deep link helpers ── */
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
@@ -4708,17 +5204,11 @@
                     var eventMatch = webUrl.match(/\/events\/[^\/]*\/(\d+)\/?/);
                     if (eventMatch) {
                         var eventId = eventMatch[1];
-                        if (isFB) {
-                            window.location.href = 'fb://event/' + eventId;
-                            return;
-                        }
+                        if (isFB) { window.location.href = 'fb://event/' + eventId; return; }
                         schemeUrl = 'fb://event/' + eventId;
                         fallbackUrl = webUrl;
                     } else {
-                        if (isFB) {
-                            window.location.href = webUrl;
-                            return;
-                        }
+                        if (isFB) { window.location.href = webUrl; return; }
                         schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
                         fallbackUrl = webUrl;
                     }
@@ -4804,6 +5294,135 @@
                 });
             }
 
+            /* ── Location Modal System ── */
+            var locationData = {
+                stardust: {
+                    name: 'Stardust Ballroom',
+                    address: '363 W Browning Rd, Bellmawr, NJ 08031',
+                    mapsUrl: 'https://maps.app.goo.gl/ZdDJ1aJW6o945nkz7?g_st=ic'
+                },
+                sorynez: {
+                    name: 'Sor Ynéz',
+                    address: '1800 N American St Unit G, Philadelphia, PA 19122',
+                    mapsUrl: 'https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic'
+                },
+                ardmore: {
+                    name: 'Ardmore',
+                    address: '5 W Lancaster Ave, Ardmore, PA 19003',
+                    mapsUrl: 'https://maps.app.goo.gl/LUX2Q9WGwck2dpLHA?g_st=ic'
+                }
+            };
+
+            var locationModalOpen = false;
+            var locationModalEl = null;
+
+            function openLocationModal(venueKey) {
+                if (locationModalOpen) return;
+                var data = locationData[venueKey];
+                if (!data) return;
+
+                var overlay = document.createElement('div');
+                overlay.className = 'location-modal-overlay';
+                overlay.innerHTML =
+                    '<div class="location-modal-card">' +
+                    '<button class="location-modal-close">&times;</button>' +
+                    '<div class="location-modal-title">' + data.name + '</div>' +
+                    '<div class="location-modal-address"><i class="fas fa-map-pin address-icon"></i>' + data
+                    .address + '</div>' +
+                    '<div class="location-modal-actions">' +
+                    '<button class="location-modal-btn copy-btn" id="locCopyBtn"><i class="fas fa-copy"></i> Copy Address</button>' +
+                    '<button class="location-modal-btn navigate-btn" id="locNavBtn"><i class="fas fa-directions"></i> Navigate</button>' +
+                    '</div>' +
+                    '</div>';
+                document.body.appendChild(overlay);
+                locationModalOpen = true;
+                locationModalEl = overlay;
+
+                var closeBtn = overlay.querySelector('.location-modal-close');
+                var copyBtn = overlay.querySelector('#locCopyBtn');
+                var navBtn = overlay.querySelector('#locNavBtn');
+
+                closeBtn.addEventListener('click', closeLocationModal);
+
+                copyBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(data.address).then(function() {
+                            copyBtn.classList.add('copied');
+                            var originalText = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                            setTimeout(function() {
+                                copyBtn.classList.remove('copied');
+                                copyBtn.innerHTML = originalText;
+                            }, 2200);
+                        }).catch(function() {
+                            fallbackCopy(data.address, copyBtn);
+                        });
+                    } else {
+                        fallbackCopy(data.address, copyBtn);
+                    }
+                });
+
+                navBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    window.open(data.mapsUrl, '_blank');
+                    closeLocationModal();
+                });
+
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) closeLocationModal();
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') closeLocationModal();
+                });
+            }
+
+            function fallbackCopy(text, btn) {
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    btn.classList.add('copied');
+                    var originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(function() {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = originalText;
+                    }, 2200);
+                } catch (err) {
+                    alert('Could not copy address. Please copy it manually.');
+                }
+                document.body.removeChild(textarea);
+            }
+
+            function closeLocationModal() {
+                if (locationModalEl && locationModalEl.parentNode) {
+                    locationModalEl.parentNode.removeChild(locationModalEl);
+                }
+                locationModalEl = null;
+                locationModalOpen = false;
+            }
+
+            function initLocationCards() {
+                var cards = document.querySelectorAll('.location-card');
+                cards.forEach(function(card) {
+                    card.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var venue = card.dataset.venue;
+                        if (venue && locationData[venue]) {
+                            openLocationModal(venue);
+                        }
+                    });
+                });
+            }
+
+            /* ── DOM ready ── */
             document.addEventListener('DOMContentLoaded', function() {
                 setupDeepLinks();
 
@@ -5011,6 +5630,7 @@
 
                 restartAutoDismiss();
 
+                /* ── class schedule helpers ── */
                 var classSchedule = [
                     { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
@@ -5201,6 +5821,21 @@
                     if (promo) promo.textContent = monthToShow;
                 }
 
+                function getWeekMonday(date) {
+                    var d = new Date(date);
+                    var day = d.getDay();
+                    var diff = d.getDate() - day + (day === 0 ? -6 : 1);
+                    d.setDate(diff);
+                    d.setHours(0, 0, 0, 0);
+                    return d;
+                }
+
+                function isSameCalendarWeek(date1, date2) {
+                    var m1 = getWeekMonday(date1);
+                    var m2 = getWeekMonday(date2);
+                    return m1.getTime() === m2.getTime();
+                }
+
                 function sortEventPills() {
                     var container = document.getElementById('welcome-pills-container');
                     if (!container) return;
@@ -5332,10 +5967,10 @@
                         }
 
                         var isFirst = (nextEvent && pill === nextEvent.pill);
-                        var isSecondSameWeek = (secondEvent && pill === secondEvent.pill && firstDate) ?
-                            (Math.ceil((secondEvent.date.getTime() - firstDate.getTime()) / (1000 * 60 * 60 *
-                                24)) < 7) :
-                            false;
+                        var isSecondSameWeek = false;
+                        if (secondEvent && pill === secondEvent.pill && firstDate) {
+                            isSecondSameWeek = isSameCalendarWeek(firstDate, secondEvent.date);
+                        }
 
                         var dayLower = dayName ? dayName.toLowerCase() : '';
 
@@ -5361,6 +5996,7 @@
                     });
                 }
 
+                /* ── video library ── */
                 function initVideoLibrary() {
                     var videoFeed = document.getElementById('video-feed');
                     var videoIndicators = document.getElementById('video-indicators');
@@ -5582,9 +6218,12 @@
                     renderVideos('all');
                 }
 
+                /* ── main init ── */
                 function initMainPage() {
                     if (mainInitialized) return;
                     mainInitialized = true;
+
+                    initLocationCards();
 
                     sortEventPills();
                     updateCTASection();
@@ -5732,6 +6371,7 @@
                         updateMenuBar();
                     }, { passive: true });
 
+                    /* ── animations ── */
                     function initSectionAnimations() {
                         var animatedSections = document.querySelectorAll('.section-animate');
                         var animatedSeparators = document.querySelectorAll('.section-separator');
@@ -5767,6 +6407,7 @@
                         }, 300);
                     }
 
+                    /* ── language toggle ── */
                     var languageToggle = document.getElementById('language-toggle');
                     var languageButtons = languageToggle.querySelectorAll('.lang-btn');
                     var currentLanguage = 'en';
@@ -5801,7 +6442,8 @@
                             privateLessonClose: "Close",
                             ctaBadge: "New 4-Week Course",
                             ctaHeadline: "Start Dancing in 4 Weeks",
-                            ctaRegister: "Register Now"
+                            ctaRegister: "Register Now",
+                            locationsTitle: "Find Our Locations"
                         },
                         es: {
                             mainTitle: "Rebecca & Daniel",
@@ -5833,7 +6475,8 @@
                             privateLessonClose: "Cerrar",
                             ctaBadge: "Nuevo Curso de 4 Semanas",
                             ctaHeadline: "Empieza a Bailar en 4 Semanas",
-                            ctaRegister: "Registrarse"
+                            ctaRegister: "Registrarse",
+                            locationsTitle: "Encuentra Nuestras Ubicaciones"
                         }
                     };
 
@@ -5869,6 +6512,8 @@
                         document.getElementById('contact-subtitle').textContent = ld.contactSubtitle;
                         document.getElementById('copyright').textContent = ld.copyright;
                         document.getElementById('quote').textContent = ld.quote;
+                        var locationsTitle = document.getElementById('locations-title');
+                        if (locationsTitle) locationsTitle.textContent = ld.locationsTitle;
                         var ctaBadge = document.querySelector('.cta-badge');
                         if (ctaBadge) ctaBadge.textContent = ld.ctaBadge;
                         var ctaHeadline = document.querySelector('.cta-headline');
@@ -5907,6 +6552,7 @@
                     var savedLang = localStorage.getItem('language');
                     if (savedLang) setLanguage(savedLang);
 
+                    /* ── registration form ── */
                     var participantContainer = document.getElementById('participant-container');
                     var addBtn = document.getElementById('add-participant');
                     var removeBtn = document.getElementById('remove-participant');
@@ -5949,6 +6595,7 @@
                         window.open(FORM_URL, '_blank');
                     });
 
+                    /* ── reviews carousel ── */
                     function initReviewsCarousel() {
                         var reviews = document.querySelectorAll('.review-item');
                         var inds = document.querySelectorAll('.review-indicator');
@@ -5978,6 +6625,7 @@
                         });
                     }
 
+                    /* ── nav buttons ── */
                     function initNavButtons() {
                         document.getElementById('btn-social').addEventListener('click', function(e) {
                             e.preventDefault();
@@ -6001,6 +6649,7 @@
                         });
                     }
 
+                    /* ── active section highlight ── */
                     function setActiveSection() {
                         var sections = [
                             { id: 'connect-title', btn: 'btn-social' },
@@ -6022,6 +6671,7 @@
                         if (cur) document.getElementById(cur.btn).classList.add('active-section');
                     }
 
+                    /* ── reviews toggle ── */
                     function initReviewsToggle() {
                         var toggle = document.getElementById('reviews-toggle');
                         var section = document.getElementById('reviews-section');
@@ -6054,6 +6704,7 @@
                         });
                     }
 
+                    /* ── private lesson toggle ── */
                     function initPrivateLessonToggle() {
                         var toggle = document.getElementById('private-lesson-toggle');
                         var section = document.getElementById('private-lesson-section');
@@ -6079,6 +6730,7 @@
                         });
                     }
 
+                    /* ── announcement carousel ── */
                     function initAnnouncementCarousel() {
                         var slidesContainer = document.getElementById('carousel-slides');
                         var slides = document.querySelectorAll('.carousel-slide');
@@ -6112,6 +6764,7 @@
                         });
                     }
 
+                    /* ── share button ── */
                     function initShareButton() {
                         var container = document.getElementById('bottomShareContainer');
                         var shareBtn = document.getElementById('shareMainBtn');
@@ -6214,6 +6867,7 @@
                         });
                     }
 
+                    /* ── call all inits ── */
                     initSectionAnimations();
                     initReviewsCarousel();
                     initNavButtons();
