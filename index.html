@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── reset & base ── */
+        /* ── Reset & Base ── */
         * {
             margin: 0;
             padding: 0;
@@ -21,13 +21,13 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 1rem;
-            line-height: 1.75;
-            color: #1e293b;
+            font-size: 1.2rem;
+            line-height: 1.85;
+            color: #1a2a3f;
             background: #eef4fa;
             min-height: 100vh;
             min-height: 100dvh;
-            padding: 16px 16px 100px;
+            padding: 20px 20px 120px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -43,7 +43,7 @@
             font-family: inherit;
             color: #0b1a2b;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.01em;
         }
         a {
@@ -62,6 +62,7 @@
             letter-spacing: 0.5px;
         }
 
+        /* ── Variables ── */
         :root {
             --primary-blue: #2c5aa0;
             --secondary-blue: #4a7bc1;
@@ -70,7 +71,7 @@
             --dark: #0b1a2b;
             --text-dark: #0f172a;
             --text-medium: #1e293b;
-            --text-light: #334155;
+            --text-light: #2c3f5a;
             --text-muted: #5f6b7a;
             --white: #ffffff;
             --light-bg: #f5f9ff;
@@ -99,15 +100,15 @@
             --space-10: 40px;
             --space-12: 48px;
             --space-14: 56px;
-            --font-xs: 0.75rem;
-            --font-sm: 0.875rem;
-            --font-base: 1rem;
-            --font-md: 1.125rem;
-            --font-lg: 1.25rem;
-            --font-xl: 1.5rem;
-            --font-2xl: 1.75rem;
-            --font-3xl: 2.25rem;
-            --font-4xl: 2.75rem;
+            --font-xs: 0.8rem;
+            --font-sm: 0.95rem;
+            --font-base: 1.2rem;
+            --font-md: 1.3rem;
+            --font-lg: 1.5rem;
+            --font-xl: 1.7rem;
+            --font-2xl: 2.0rem;
+            --font-3xl: 2.5rem;
+            --font-4xl: 3.2rem;
             --radius-sm: 10px;
             --radius-md: 14px;
             --radius-lg: 18px;
@@ -117,24 +118,24 @@
             --radius-4xl: 36px;
             --radius-pill: 60px;
             --radius-full: 9999px;
-            --btn-height-md: 54px;
-            --btn-height-sm: 46px;
-            --btn-pad-x-md: 28px;
-            --btn-pad-x-sm: 22px;
-            --btn-font-md: 1rem;
-            --btn-font-sm: 0.9rem;
+            --btn-height-md: 60px;
+            --btn-height-sm: 52px;
+            --btn-pad-x-md: 36px;
+            --btn-pad-x-sm: 28px;
+            --btn-font-md: 1.1rem;
+            --btn-font-sm: 0.95rem;
             --btn-radius: var(--radius-pill);
             --card-padding: var(--space-7);
             --card-radius: var(--radius-3xl);
             --card-shadow: var(--shadow-md);
             --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition: 0.3s var(--ease);
-            --icon-size-lg: 116px;
-            --icon-size-base: 100px;
-            --icon-font-lg: 38px;
-            --icon-font-base: 30px;
-            --icon-label-lg: 15px;
-            --icon-label-base: 13px;
+            --icon-size-lg: 120px;
+            --icon-size-base: 104px;
+            --icon-font-lg: 40px;
+            --icon-font-base: 32px;
+            --icon-label-lg: 16px;
+            --icon-label-base: 14px;
             --golden: #f59e0b;
             --golden-dark: #d97706;
             --golden-glow: rgba(245, 158, 11, 0.35);
@@ -143,8 +144,11 @@
             --event-gray: #AEB9C9;
             --event-purple: #7B4DDB;
             --event-orange: #E89A25;
+            --red-accent: #c0392b;
+            --red-soft: #e74c3c;
         }
 
+        /* ── Scrollbar ── */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -165,6 +169,7 @@
             scrollbar-color: rgba(44, 90, 160, 0.25) rgba(44, 90, 160, 0.04);
         }
 
+        /* ── Container ── */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -192,7 +197,7 @@
             width: 100%;
             color: var(--dark-blue);
             padding-bottom: var(--space-5);
-            line-height: 1.3;
+            line-height: 1.25;
         }
         .section-title::after {
             content: '';
@@ -258,6 +263,7 @@
             transition-delay: 0.25s;
         }
 
+        /* ── Scroll Progress ── */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -270,13 +276,8 @@
             border-radius: 0 2px 2px 0;
             will-change: width;
         }
-        @media (max-width: 550px) {
-            .scroll-progress {
-                height: 2px;
-            }
-        }
 
-        /* ── welcome overlay (unchanged) ── */
+        /* ── Welcome Overlay ── */
         #welcome-array {
             position: fixed;
             top: 0;
@@ -316,7 +317,7 @@
             z-index: 2;
         }
         .welcome-title {
-            font-size: clamp(3.4rem, 7.5vw, 4.8rem);
+            font-size: clamp(3.8rem, 7.5vw, 5.2rem);
             font-weight: 800;
             color: var(--dark);
             margin-bottom: var(--space-5);
@@ -613,7 +614,7 @@
 
         .welcome-pills-heading {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-size: clamp(2rem, 5vw, 2.8rem);
             font-weight: 600;
             color: var(--dark);
             margin-bottom: var(--space-3);
@@ -635,7 +636,6 @@
             width: 100%;
         }
 
-        /* ── event pills (unchanged) ── */
         .welcome-cta-pill {
             display: flex;
             flex-wrap: wrap;
@@ -645,7 +645,7 @@
             background: var(--white);
             border-radius: var(--radius-xl);
             padding: var(--space-4) var(--space-7);
-            min-height: 76px;
+            min-height: 80px;
             width: 100%;
             max-width: 720px;
             box-shadow: 0 2px 10px rgba(44, 90, 160, 0.04), 0 0 0 1px rgba(44, 90, 160, 0.05);
@@ -673,7 +673,7 @@
 
         .welcome-cta-pill .pill-main {
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--dark);
             letter-spacing: -0.01em;
             display: inline;
@@ -697,17 +697,24 @@
         }
         .welcome-cta-pill .pill-styles {
             font-weight: 400;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #7a8a9e;
             display: inline;
             letter-spacing: 0.02em;
-            font-style: italic;
+        }
+        .welcome-cta-pill .pill-styles .dj-guest {
+            font-weight: 600;
+            color: var(--primary-blue);
+            background: rgba(44, 90, 160, 0.08);
+            padding: 0 var(--space-2);
+            border-radius: var(--radius-sm);
+            display: inline-block;
         }
         .welcome-cta-pill .pill-badge {
             display: inline-flex;
             align-items: center;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             padding: 0 var(--space-3);
             border-radius: var(--radius-pill);
             line-height: 2.2;
@@ -763,7 +770,7 @@
             right: var(--space-4);
             background: var(--primary-blue);
             color: var(--white);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
             padding: var(--space-1) var(--space-4);
             border-radius: var(--radius-pill);
@@ -790,7 +797,7 @@
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: var(--white);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
@@ -806,7 +813,7 @@
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: var(--white);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
@@ -817,6 +824,12 @@
             white-space: nowrap;
             vertical-align: middle;
             line-height: 1.6;
+        }
+
+        /* ── Red accent for "Baile Inolvidable" ── */
+        .baile-inolvidable-red {
+            color: var(--red-accent);
+            font-weight: 700;
         }
 
         .welcome-cta-pill[data-event-key="ardmore"] {
@@ -836,7 +849,6 @@
             margin-top: 2px;
         }
 
-        /* ── header ── */
         .header-container {
             text-align: center;
             margin-bottom: var(--space-6);
@@ -918,7 +930,7 @@
         }
         h1#main-title {
             font-family: 'Playfair Display', serif !important;
-            font-size: clamp(3.2rem, 7vw, 4.6rem);
+            font-size: clamp(3.4rem, 7vw, 4.8rem);
             font-weight: 800;
             color: var(--dark);
             margin-bottom: var(--space-2);
@@ -931,21 +943,21 @@
         }
         @media (max-width: 650px) {
             h1#main-title {
-                font-size: clamp(2.6rem, 6vw, 3.6rem);
+                font-size: clamp(2.8rem, 6vw, 3.8rem);
                 white-space: nowrap;
                 letter-spacing: -0.01em;
             }
         }
         @media (max-width: 480px) {
             h1#main-title {
-                font-size: clamp(2rem, 5.5vw, 2.8rem);
+                font-size: clamp(2.2rem, 5.5vw, 3rem);
                 white-space: nowrap;
                 letter-spacing: -0.01em;
             }
         }
         @media (max-width: 380px) {
             h1#main-title {
-                font-size: clamp(1.6rem, 5vw, 2.2rem);
+                font-size: clamp(1.8rem, 5vw, 2.4rem);
                 white-space: nowrap;
                 letter-spacing: -0.01em;
             }
@@ -984,7 +996,7 @@
             box-shadow: 0 6px 14px rgba(44, 90, 160, 0.08);
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             line-height: 1.5;
-            min-height: 42px;
+            min-height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1091,7 +1103,7 @@
             gap: var(--space-2);
             position: relative;
             overflow: hidden;
-            min-height: 50px;
+            min-height: 52px;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -1149,7 +1161,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* ── NEW: Locations Section ── */
         .locations-section {
             margin: var(--space-6) auto var(--space-10);
             text-align: center;
@@ -1188,8 +1199,8 @@
             transition-duration: 0.08s;
         }
         .location-icon-wrap {
-            width: 72px;
-            height: 72px;
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1231,7 +1242,6 @@
             background: linear-gradient(135deg, #b45309, #f59e0b);
         }
 
-        /* ── Location Modal ── */
         .location-modal-overlay {
             position: fixed;
             top: 0;
@@ -1371,7 +1381,7 @@
             font-size: var(--font-md);
         }
 
-        /* ── existing class cta ── */
+        /* ── CTA Section ── */
         .class-cta-container {
             border-radius: var(--radius-3xl);
             padding: var(--space-10) var(--space-10) var(--space-10);
@@ -1468,10 +1478,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-3);
+            gap: var(--space-4);
             margin: 0 auto var(--space-6);
             background: rgba(44, 90, 160, 0.06);
-            padding: var(--space-2) var(--space-6);
+            padding: var(--space-3) var(--space-7);
             border-radius: var(--radius-pill);
             border: 1px solid rgba(44, 90, 160, 0.08);
             backdrop-filter: blur(2px);
@@ -1479,70 +1489,74 @@
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
         .cta-next-day .cta-next-day-label {
-            font-size: var(--font-sm);
+            font-size: var(--font-md);
             font-weight: 600;
             color: var(--text-muted);
             letter-spacing: 0.3px;
         }
         .cta-next-day .cta-next-day-name {
-            font-size: var(--font-xl);
-            font-weight: 800;
-            letter-spacing: -0.01em;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
             color: #ffffff;
-            background: var(--gradient-blue);
-            padding: 4px 20px;
+            background: var(--gradient-dark);
+            padding: 6px 32px;
             border-radius: var(--radius-pill);
             display: inline-block;
-            box-shadow: 0 4px 16px rgba(44, 90, 160, 0.25);
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+            box-shadow: 0 8px 28px rgba(44, 90, 160, 0.30);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
             position: relative;
-            line-height: 1.4;
+            line-height: 1.3;
+            min-width: 160px;
         }
         .cta-next-day .cta-next-day-name::after {
             content: '';
             position: absolute;
-            bottom: -2px;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.3);
+            bottom: 4px;
+            left: 15%;
+            width: 70%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.25);
             border-radius: var(--radius-sm);
         }
         .cta-next-day .cta-next-day-icon {
             color: var(--primary-blue);
-            font-size: var(--font-lg);
+            font-size: var(--font-2xl);
             -webkit-text-fill-color: var(--primary-blue);
         }
         @media (max-width: 550px) {
             .cta-next-day {
-                padding: var(--space-1) var(--space-4);
-                gap: var(--space-2);
-                margin-bottom: var(--space-4);
+                padding: var(--space-2) var(--space-4);
+                gap: var(--space-3);
+                margin-bottom: var(--space-5);
                 flex-wrap: wrap;
+                border-radius: var(--radius-xl);
             }
             .cta-next-day .cta-next-day-label {
-                font-size: var(--font-xs);
+                font-size: var(--font-sm);
             }
             .cta-next-day .cta-next-day-name {
-                font-size: var(--font-base);
-                padding: 3px 14px;
+                font-size: clamp(2rem, 5vw, 2.8rem);
+                padding: 4px 20px;
+                min-width: 120px;
             }
             .cta-next-day .cta-next-day-icon {
-                font-size: var(--font-md);
+                font-size: var(--font-xl);
             }
         }
         @media (max-width: 400px) {
             .cta-next-day {
                 flex-wrap: wrap;
-                gap: var(--space-1);
-                padding: var(--space-1) var(--space-3);
+                gap: var(--space-2);
+                padding: var(--space-2) var(--space-3);
             }
             .cta-next-day .cta-next-day-label {
-                font-size: 10px;
+                font-size: var(--font-xs);
             }
             .cta-next-day .cta-next-day-name {
-                font-size: var(--font-sm);
-                padding: 2px 12px;
+                font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+                padding: 3px 14px;
+                min-width: 90px;
             }
         }
 
@@ -1552,25 +1566,27 @@
             gap: var(--space-4);
             margin: 0 auto var(--space-6);
             width: 100%;
-            max-width: 560px;
+            max-width: 640px;
         }
         .cta-class-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.70);
+            background: rgba(255, 255, 255, 0.80);
             backdrop-filter: blur(4px);
             border-radius: var(--radius-xl);
             padding: var(--space-4) var(--space-6);
             border: 1px solid rgba(44, 90, 160, 0.06);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            transition: background 0.2s ease, border-color 0.2s ease;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
             gap: var(--space-3);
             flex-wrap: wrap;
+            position: relative;
         }
         .cta-class-row:hover {
-            background: rgba(255, 255, 255, 0.90);
-            border-color: rgba(44, 90, 160, 0.12);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(44, 90, 160, 0.15);
+            transform: translateX(4px);
         }
         .cta-class-time {
             font-weight: 800;
@@ -1591,17 +1607,18 @@
             min-width: 130px;
         }
         .cta-class-level {
-            font-weight: 600;
+            font-weight: 700;
             font-size: var(--font-xs);
             color: var(--white);
-            background: var(--gradient-blue);
-            padding: var(--space-1) var(--space-4);
+            padding: var(--space-1) var(--space-5);
             border-radius: var(--radius-pill);
-            letter-spacing: 0.3px;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
             white-space: nowrap;
-            line-height: 2;
             flex-shrink: 0;
+            line-height: 2.2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         .cta-class-level.beginner {
             background: linear-gradient(135deg, #0f766e, #14b8a6);
@@ -1615,6 +1632,80 @@
         .cta-class-level.bachata-level {
             background: linear-gradient(135deg, #2c5aa0, #4a7bc1);
         }
+        .cta-class-level.intermediate {
+            background: linear-gradient(135deg, #6a4e9c, #9b59b6);
+        }
+
+        .cta-location-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+            margin: var(--space-2) 0 var(--space-6);
+            padding: var(--space-3) var(--space-6);
+            background: rgba(255, 255, 255, 0.60);
+            backdrop-filter: blur(4px);
+            border-radius: var(--radius-2xl);
+            border: 1px solid rgba(44, 90, 160, 0.06);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-location-info .loc-label {
+            font-weight: 600;
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+        .cta-location-info .loc-name {
+            font-weight: 700;
+            font-size: var(--font-md);
+            color: var(--dark-blue);
+        }
+        .cta-location-info .loc-nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--gradient-blue);
+            color: var(--white);
+            padding: var(--space-1) var(--space-4);
+            border-radius: var(--radius-pill);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.15);
+            line-height: 2.2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cta-location-info .loc-nav-link:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.25);
+            background: var(--gradient-dark);
+        }
+        .cta-location-info .loc-nav-link i {
+            font-size: var(--font-sm);
+        }
+        @media (max-width: 550px) {
+            .cta-location-info {
+                padding: var(--space-2) var(--space-4);
+                gap: var(--space-2);
+                border-radius: var(--radius-xl);
+                width: 100%;
+            }
+            .cta-location-info .loc-label {
+                font-size: var(--font-xs);
+            }
+            .cta-location-info .loc-name {
+                font-size: var(--font-sm);
+            }
+            .cta-location-info .loc-nav-link {
+                font-size: var(--font-xs);
+                padding: var(--space-1) var(--space-3);
+                line-height: 2;
+            }
+        }
 
         .cta-features {
             display: flex;
@@ -1626,16 +1717,22 @@
         .cta-feature {
             display: inline-flex;
             align-items: center;
+            gap: var(--space-2);
             color: var(--text-medium);
             font-size: var(--font-sm);
             font-weight: 500;
             letter-spacing: 0.1px;
-            background: rgba(255, 255, 255, 0.50);
+            background: rgba(255, 255, 255, 0.60);
             padding: var(--space-1) var(--space-5);
             border-radius: var(--radius-pill);
             border: 1px solid rgba(44, 90, 160, 0.04);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
             line-height: 2.2;
+        }
+        .cta-feature i {
+            color: var(--primary-blue);
+            opacity: 0.7;
+            font-size: var(--font-sm);
         }
 
         .cta-action-wrap {
@@ -1683,6 +1780,16 @@
         .cta-action:active {
             transform: scale(0.97);
         }
+        .cta-action .action-badge {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: var(--radius-pill);
+            padding: 0 var(--space-3);
+            font-size: var(--font-xs);
+            font-weight: 600;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
         .cta-secondary-link {
             color: var(--text-muted);
@@ -1700,7 +1807,176 @@
             border-bottom-color: var(--primary-blue);
         }
 
-        /* ── links grid ── */
+        @media (max-width: 850px) {
+            .class-cta-container {
+                padding: var(--space-7) var(--space-6) var(--space-7);
+            }
+            .cta-class-list {
+                max-width: 100%;
+                gap: var(--space-3);
+            }
+            .cta-class-row {
+                padding: var(--space-3) var(--space-4);
+                gap: var(--space-2);
+            }
+            .cta-class-time {
+                font-size: var(--font-lg);
+                min-width: 64px;
+            }
+            .cta-class-name {
+                font-size: var(--font-sm);
+                min-width: 100px;
+            }
+            .cta-class-level {
+                font-size: var(--font-xs);
+                padding: var(--space-1) var(--space-3);
+            }
+            .cta-features {
+                gap: var(--space-2) var(--space-3);
+            }
+            .cta-feature {
+                font-size: var(--font-xs);
+                padding: var(--space-1) var(--space-4);
+            }
+            .cta-action {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+            }
+            .cta-badge {
+                font-size: var(--font-xs);
+            }
+            .cta-headline {
+                font-size: clamp(var(--font-xl), 3.5vw, var(--font-3xl));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .class-cta-container {
+                padding: var(--space-6) var(--space-4);
+            }
+            .cta-headline {
+                font-size: var(--font-2xl);
+            }
+            .cta-class-row {
+                padding: var(--space-3) var(--space-3);
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+            .cta-class-time {
+                font-size: var(--font-md);
+                min-width: 56px;
+                text-align: center;
+                width: 100%;
+            }
+            .cta-class-name {
+                font-size: var(--font-sm);
+                text-align: center;
+                width: 100%;
+                min-width: unset;
+            }
+            .cta-class-level {
+                font-size: var(--font-xs);
+                padding: var(--space-1) var(--space-3);
+            }
+            .cta-features {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-2);
+            }
+            .cta-feature {
+                font-size: var(--font-xs);
+                padding: var(--space-1) var(--space-4);
+            }
+            .cta-action-wrap {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+            .cta-action {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .class-cta-container {
+                padding: var(--space-5) var(--space-3);
+                border-radius: var(--radius-2xl);
+            }
+            .cta-headline {
+                font-size: var(--font-xl);
+            }
+            .cta-class-row {
+                padding: var(--space-2) var(--space-3);
+                gap: var(--space-1);
+                border-radius: var(--radius-lg);
+            }
+            .cta-class-time {
+                font-size: var(--font-base);
+                min-width: 48px;
+                width: 100%;
+            }
+            .cta-class-name {
+                font-size: var(--font-xs);
+                width: 100%;
+                text-align: center;
+            }
+            .cta-class-level {
+                font-size: 9px;
+                padding: var(--space-1) var(--space-3);
+                line-height: 1.8;
+            }
+            .cta-features {
+                gap: var(--space-1);
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .cta-feature {
+                font-size: 9px;
+                gap: var(--space-1);
+                padding: var(--space-1) var(--space-3);
+            }
+            .cta-badge {
+                font-size: 9px;
+                padding: var(--space-1) var(--space-3);
+                line-height: 1.8;
+            }
+            .cta-action {
+                font-size: var(--btn-font-sm);
+                height: var(--btn-height-sm);
+                min-height: var(--btn-height-sm);
+                padding: 0 var(--btn-pad-x-sm);
+                width: 100%;
+                max-width: 100%;
+            }
+            .cta-action-wrap {
+                width: 100%;
+            }
+            .cta-secondary-link {
+                font-size: var(--font-xs);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .cta-class-row {
+                padding: var(--space-2) var(--space-2);
+            }
+            .cta-class-time {
+                font-size: var(--font-sm);
+            }
+            .cta-class-name {
+                font-size: var(--font-xs);
+            }
+            .cta-class-level {
+                font-size: 8px;
+                padding: var(--space-1) var(--space-2);
+            }
+        }
+
+        /* ── Links Grid ── */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1749,7 +2025,6 @@
             line-height: 1.6;
             font-weight: 400;
         }
-
         .link-card.venmo .link-title {
             color: #0084ff;
         }
@@ -1762,7 +2037,6 @@
         .link-card.contact .link-title {
             color: var(--primary-blue);
         }
-
         .link-card .card-header {
             padding: var(--space-6) var(--space-7) var(--space-4);
             background: linear-gradient(145deg, #f8fbff, #f0f6fe);
@@ -1819,8 +2093,8 @@
             align-items: center;
         }
         .link-card .location-icon {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1828,7 +2102,7 @@
             font-size: var(--font-base);
             color: var(--white);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            min-width: 42px;
+            min-width: 44px;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
         }
@@ -1946,7 +2220,7 @@
             border: 1px solid transparent;
             gap: var(--space-2);
             flex-wrap: wrap;
-            min-height: 46px;
+            min-height: 48px;
         }
         .link-card .schedule-class:last-child {
             margin-bottom: 0;
@@ -1959,7 +2233,7 @@
             font-weight: 700;
             min-width: 78px;
             color: #1e3a5f;
-            font-size: var(--font-xs);
+            font-size: var(--font-sm);
             background: #e9f2fa;
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
@@ -1971,7 +2245,7 @@
             flex: 1;
             color: #1e293b;
             font-weight: 600;
-            font-size: var(--font-sm);
+            font-size: var(--font-md);
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -2109,7 +2383,6 @@
         .link-card .card-cta:hover i {
             transform: translateX(6px);
         }
-
         .link-card.next-class-highlight {
             border: 2px solid var(--primary-blue);
             background: linear-gradient(145deg, #f8fcff, #f0f6fe);
@@ -2130,11 +2403,11 @@
             z-index: 10;
             white-space: nowrap;
         }
-
         .link-card.oldcity {
             display: none !important;
         }
 
+        /* ── Instructors ── */
         .instructors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -2208,7 +2481,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
-            min-height: 64px;
+            min-height: 66px;
         }
         .social-link-item:hover {
             transform: translateY(-3px);
@@ -2217,8 +2490,8 @@
             border-color: var(--lighter-bg);
         }
         .social-link-icon {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
@@ -2264,6 +2537,7 @@
             line-height: 1.3;
         }
 
+        /* ── Announcement Carousel ── */
         .announcement-carousel {
             position: relative;
             margin: var(--space-6) 0 var(--space-10);
@@ -2428,6 +2702,7 @@
             text-decoration: underline;
         }
 
+        /* ── Registration Form ── */
         .registration-form {
             background: #fdfdfd;
             border-radius: var(--radius-3xl);
@@ -2488,7 +2763,7 @@
             appearance: none;
             line-height: 1.5;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
-            min-height: 64px;
+            min-height: 66px;
         }
         .form-input:focus {
             outline: none;
@@ -2517,7 +2792,7 @@
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             -webkit-appearance: none;
             line-height: 1.5;
-            min-height: 64px;
+            min-height: 66px;
         }
         .form-select:focus {
             outline: none;
@@ -2566,8 +2841,8 @@
             margin: var(--space-3) 0 var(--space-5);
         }
         .participant-btn {
-            width: 54px;
-            height: 54px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2614,6 +2889,7 @@
             background: var(--gradient-blue);
         }
 
+        /* ── Reviews ── */
         .reviews-header {
             text-align: center;
             margin: var(--space-8) 0 var(--space-4);
@@ -2790,6 +3066,7 @@
             background: var(--gradient-dark);
         }
 
+        /* ── Private Lessons ── */
         .private-lesson-toggle-container {
             text-align: center;
             margin: var(--space-6) 0 var(--space-3);
@@ -2914,6 +3191,7 @@
             box-shadow: 0 10px 18px rgba(44, 90, 160, 0.1);
         }
 
+        /* ── Video Library ── */
         .video-toggle-container {
             text-align: center;
             margin: var(--space-6) 0 var(--space-3);
@@ -3358,6 +3636,7 @@
             pointer-events: none;
         }
 
+        /* ── Payment Modal ── */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -3438,7 +3717,7 @@
             color: var(--dark);
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 74px;
+            min-height: 76px;
         }
         .payment-option-btn i {
             font-size: 1.8rem;
@@ -3459,6 +3738,7 @@
             transform: translateY(1px);
         }
 
+        /* ── Bottom Share ── */
         .bottom-share-container {
             position: fixed;
             bottom: max(var(--space-2), env(safe-area-inset-bottom, 20px));
@@ -3500,15 +3780,15 @@
             flex-wrap: wrap;
         }
         .share-bubble {
-            width: 60px;
-            height: 60px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: var(--white);
             text-decoration: none;
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
@@ -3562,10 +3842,10 @@
             align-items: center;
             gap: var(--space-2);
             transition: all 0.3s ease;
-            min-width: 170px;
+            min-width: 180px;
             justify-content: center;
             line-height: 1.5;
-            min-height: 50px;
+            min-height: 52px;
         }
         .share-main-btn i {
             font-size: var(--font-lg);
@@ -3612,7 +3892,7 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.3s ease;
             border: 1px solid rgba(245, 158, 11, 0.25);
             pointer-events: none;
-            min-height: 46px;
+            min-height: 48px;
             cursor: pointer;
             transform: scale(0);
             opacity: 0;
@@ -3719,7 +3999,7 @@
             margin-top: 2px;
         }
 
-        /* ── responsive ── */
+        /* ── Responsive ── */
         @media (max-width: 850px) {
             :root {
                 --icon-size-lg: 108px;
@@ -3740,7 +4020,7 @@
                 font-size: var(--font-2xl);
             }
             h1#main-title {
-                font-size: clamp(2.6rem, 6vw, 3.6rem);
+                font-size: clamp(2.8rem, 6vw, 3.8rem);
                 white-space: nowrap;
             }
             .tagline {
@@ -3749,102 +4029,6 @@
             .section-title {
                 font-size: var(--font-3xl);
                 margin: var(--space-10) 0 var(--space-5);
-            }
-            .cta-headline {
-                font-size: clamp(var(--font-xl), 3.5vw, var(--font-3xl));
-            }
-            .cta-class-row {
-                padding: var(--space-3) var(--space-4);
-                gap: var(--space-2);
-            }
-            .cta-class-time {
-                font-size: var(--font-lg);
-                min-width: 64px;
-            }
-            .cta-class-name {
-                font-size: var(--font-sm);
-                min-width: 100px;
-            }
-            .cta-class-level {
-                font-size: var(--font-xs);
-                padding: var(--space-1) var(--space-3);
-            }
-            .cta-features {
-                gap: var(--space-2) var(--space-3);
-            }
-            .cta-feature {
-                font-size: var(--font-xs);
-                padding: var(--space-1) var(--space-4);
-            }
-            .cta-action {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-            }
-            .cta-badge {
-                font-size: var(--font-xs);
-            }
-            .registration-form {
-                padding: var(--space-7) var(--space-5);
-            }
-            .form-title {
-                font-size: var(--font-3xl);
-            }
-            .form-input,
-            .form-select {
-                padding: var(--space-3) var(--space-4);
-                font-size: var(--font-sm);
-            }
-            .submit-btn {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-            }
-            .link-card .card-header,
-            .link-card .card-body {
-                padding-left: var(--space-5);
-                padding-right: var(--space-5);
-            }
-            .link-card .link-title {
-                font-size: var(--font-xl);
-            }
-            .link-card .schedule-day-header {
-                font-size: var(--font-xl);
-            }
-            .link-card .class-time,
-            .link-card .class-name {
-                font-size: var(--font-sm);
-            }
-            .tiktok-video-feed {
-                height: 60vh;
-                max-height: 500px;
-            }
-            .video-title {
-                font-size: var(--font-2xl);
-            }
-            .video-subtitle {
-                font-size: var(--font-sm);
-            }
-            .video-info-overlay {
-                padding: var(--space-5);
-            }
-            .video-item-title {
-                font-size: var(--font-md);
-            }
-            .welcome-title {
-                font-size: var(--font-4xl);
-            }
-            .apps-row {
-                gap: var(--space-3);
-            }
-            .modern-event-card {
-                padding: var(--space-6) var(--space-5) var(--space-7);
-                min-height: 360px;
-            }
-            .event-title {
-                font-size: var(--font-xl);
             }
             .links-grid {
                 grid-template-columns: 1fr;
@@ -3882,13 +4066,6 @@
                 height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
                 padding: 0 var(--btn-pad-x-sm);
-            }
-            .class-cta-container {
-                padding: var(--space-7) var(--space-6) var(--space-7);
-            }
-            .cta-class-list {
-                max-width: 100%;
-                gap: var(--space-3);
             }
             .locations-grid {
                 gap: var(--space-4);
@@ -3948,13 +4125,16 @@
                 gap: var(--space-1) var(--space-3);
             }
             .welcome-cta-pill .pill-main {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
             .welcome-cta-pill .pill-styles {
+                font-size: 0.85rem;
+            }
+            .welcome-cta-pill .pill-styles .dj-guest {
                 font-size: 0.8rem;
             }
             .welcome-cta-pill .pill-badge {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
                 line-height: 2;
                 padding: 0 var(--space-2);
             }
@@ -3965,7 +4145,7 @@
             .nav-btn {
                 padding: var(--space-2) var(--space-3);
                 font-size: var(--font-sm);
-                min-height: 46px;
+                min-height: 48px;
             }
             .nav-btn i {
                 font-size: var(--font-md);
@@ -3976,57 +4156,12 @@
             }
             .link-card .class-time {
                 min-width: 70px;
-                font-size: var(--font-xs);
+                font-size: var(--font-sm);
             }
             .link-card .class-name {
-                font-size: var(--font-xs);
+                font-size: var(--font-md);
                 min-width: 120px;
                 padding-left: 0;
-            }
-            .class-cta-container {
-                padding: var(--space-6) var(--space-4);
-            }
-            .cta-headline {
-                font-size: var(--font-2xl);
-            }
-            .cta-class-row {
-                padding: var(--space-3) var(--space-3);
-                flex-wrap: wrap;
-                justify-content: center;
-                text-align: center;
-            }
-            .cta-class-time {
-                font-size: var(--font-md);
-                min-width: 56px;
-                text-align: center;
-                width: 100%;
-            }
-            .cta-class-name {
-                font-size: var(--font-sm);
-                text-align: center;
-                width: 100%;
-                min-width: unset;
-            }
-            .cta-class-level {
-                font-size: var(--font-xs);
-                padding: var(--space-1) var(--space-3);
-            }
-            .cta-features {
-                flex-direction: column;
-                align-items: center;
-                gap: var(--space-2);
-            }
-            .cta-feature {
-                font-size: var(--font-xs);
-                padding: var(--space-1) var(--space-4);
-            }
-            .cta-action-wrap {
-                flex-direction: column;
-                gap: var(--space-3);
-            }
-            .cta-action {
-                width: 100%;
-                max-width: 300px;
             }
             .location-card {
                 min-width: 90px;
@@ -4130,11 +4265,11 @@
                 padding: var(--space-2) var(--space-4);
                 min-width: 140px;
                 font-size: var(--font-xs);
-                min-height: 44px;
+                min-height: 46px;
             }
             .share-bubble {
-                width: 50px;
-                height: 50px;
+                width: 52px;
+                height: 52px;
                 font-size: var(--font-xl);
             }
             .share-row {
@@ -4142,7 +4277,7 @@
             }
             .review-bubble {
                 padding: var(--space-1) var(--space-3);
-                min-height: 36px;
+                min-height: 38px;
                 font-size: var(--font-xs);
             }
             .review-bubble i {
@@ -4162,11 +4297,11 @@
             }
             .social-link-item {
                 padding: var(--space-2) var(--space-3);
-                min-height: 56px;
+                min-height: 58px;
             }
             .social-link-icon {
-                width: 38px;
-                height: 38px;
+                width: 40px;
+                height: 40px;
                 margin-right: var(--space-2);
                 font-size: var(--font-md);
             }
@@ -4188,7 +4323,7 @@
                 font-size: 56px;
             }
             h1#main-title {
-                font-size: clamp(2rem, 5.5vw, 2.8rem);
+                font-size: clamp(2.2rem, 5.5vw, 3rem);
                 white-space: nowrap;
             }
             .tagline {
@@ -4236,9 +4371,13 @@
             .link-card .schedule-day-header {
                 font-size: var(--font-lg);
             }
-            .link-card .class-time,
+            .link-card .class-time {
+                font-size: var(--font-sm);
+                min-width: 70px;
+            }
             .link-card .class-name {
-                font-size: var(--font-xs);
+                font-size: var(--font-md);
+                min-width: 100px;
             }
             .link-card .card-cta {
                 font-size: var(--btn-font-sm);
@@ -4247,63 +4386,6 @@
                 padding: 0 var(--btn-pad-x-sm);
                 width: 100%;
                 justify-content: center;
-            }
-            .cta-headline {
-                font-size: var(--font-xl);
-            }
-            .cta-class-row {
-                padding: var(--space-2) var(--space-3);
-                gap: var(--space-1);
-                border-radius: var(--radius-lg);
-            }
-            .cta-class-time {
-                font-size: var(--font-base);
-                min-width: 48px;
-                width: 100%;
-            }
-            .cta-class-name {
-                font-size: var(--font-xs);
-                width: 100%;
-                text-align: center;
-            }
-            .cta-class-level {
-                font-size: 9px;
-                padding: var(--space-1) var(--space-2);
-                line-height: 1.8;
-            }
-            .cta-features {
-                gap: var(--space-1);
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .cta-feature {
-                font-size: 9px;
-                gap: var(--space-1);
-                padding: var(--space-1) var(--space-3);
-            }
-            .cta-badge {
-                font-size: 9px;
-                padding: var(--space-1) var(--space-3);
-                line-height: 1.8;
-            }
-            .cta-action {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-                width: 100%;
-                max-width: 100%;
-            }
-            .cta-action-wrap {
-                width: 100%;
-            }
-            .cta-secondary-link {
-                font-size: var(--font-xs);
-            }
-            .class-cta-container {
-                padding: var(--space-5) var(--space-3);
-                border-radius: var(--radius-2xl);
             }
             .form-title {
                 font-size: var(--font-2xl);
@@ -4315,7 +4397,7 @@
             .form-select {
                 padding: var(--space-3) var(--space-3);
                 font-size: var(--font-sm);
-                min-height: 56px;
+                min-height: 58px;
             }
             .submit-btn {
                 font-size: var(--btn-font-sm);
@@ -4362,8 +4444,8 @@
                 font-size: var(--font-sm);
             }
             .nav-arrow {
-                width: 42px;
-                height: 42px;
+                width: 44px;
+                height: 44px;
                 font-size: var(--font-md);
             }
             .video-categories {
@@ -4390,20 +4472,23 @@
                 font-size: var(--btn-font-sm);
             }
             .welcome-cta-pill {
-                min-height: 54px;
+                min-height: 56px;
                 padding: var(--space-2) var(--space-3);
                 border-radius: var(--radius-md);
                 gap: var(--space-1) var(--space-2);
             }
             .welcome-cta-pill .pill-main {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             .welcome-cta-pill .pill-styles {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
                 opacity: 0.5;
             }
+            .welcome-cta-pill .pill-styles .dj-guest {
+                font-size: 0.7rem;
+            }
             .welcome-cta-pill .pill-badge {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
                 padding: 0 var(--space-2);
                 line-height: 1.9;
             }
@@ -4444,8 +4529,8 @@
                 align-items: center;
                 justify-content: center;
                 padding: var(--space-1) var(--space-2);
-                min-height: 56px;
-                min-width: 52px;
+                min-height: 58px;
+                min-width: 54px;
                 gap: var(--space-1);
                 white-space: normal;
                 border-radius: var(--radius-lg);
@@ -4469,8 +4554,8 @@
                 gap: var(--space-1);
             }
             .top-nav-buttons.nav-floating .nav-btn {
-                min-height: 50px;
-                min-width: 46px;
+                min-height: 52px;
+                min-width: 48px;
                 padding: var(--space-1) var(--space-1);
                 font-size: var(--font-xs);
             }
@@ -4495,16 +4580,16 @@
                 padding: var(--space-3) var(--space-2);
             }
             .link-card .schedule-class {
-                padding: var(--space-1) var(--space-2);
-                min-height: 40px;
+                padding: var(--space-2) var(--space-2);
+                min-height: 42px;
             }
             .link-card .class-time {
-                min-width: 56px;
-                font-size: 10px;
+                min-width: 60px;
+                font-size: var(--font-sm);
                 padding: var(--space-1) var(--space-2);
             }
             .link-card .class-name {
-                font-size: 10px;
+                font-size: var(--font-md);
                 min-width: 90px;
                 gap: var(--space-1);
             }
@@ -4533,14 +4618,6 @@
                 font-size: var(--font-xs);
                 padding: var(--space-2) var(--space-3);
             }
-            .reviews-toggle-btn,
-            .private-lesson-toggle-btn,
-            .video-toggle-btn {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-            }
             .private-lesson-close-btn,
             .video-close-btn {
                 font-size: var(--btn-font-sm);
@@ -4564,16 +4641,16 @@
             }
             .welcome-cta-pill[data-event-key="ardmore"] .pill-badge {
                 margin-bottom: 3px;
-                font-size: 0.5rem;
+                font-size: 0.55rem;
                 padding: 0 var(--space-2);
                 line-height: 1.8;
             }
             .welcome-cta-pill[data-event-key="ardmore"] .pill-main {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
                 text-align: center;
             }
             .welcome-cta-pill[data-event-key="ardmore"] .pill-styles {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
                 margin-top: 2px;
                 text-align: center;
             }
@@ -4642,13 +4719,16 @@
                 border-radius: var(--radius-sm);
             }
             .welcome-cta-pill .pill-main {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
             .welcome-cta-pill .pill-styles {
+                font-size: 0.7rem;
+            }
+            .welcome-cta-pill .pill-styles .dj-guest {
                 font-size: 0.65rem;
             }
             .welcome-cta-pill .pill-badge {
-                font-size: 0.5rem;
+                font-size: 0.55rem;
                 padding: 0 var(--space-1);
                 line-height: 1.7;
             }
@@ -4658,8 +4738,8 @@
                 border-radius: var(--radius-md);
             }
             .nav-btn {
-                min-height: 48px;
-                min-width: 44px;
+                min-height: 50px;
+                min-width: 46px;
                 padding: var(--space-1) var(--space-1);
                 font-size: var(--font-xs);
                 border-radius: var(--radius-md);
@@ -4675,8 +4755,8 @@
                 gap: var(--space-1);
             }
             .top-nav-buttons.nav-floating .nav-btn {
-                min-height: 44px;
-                min-width: 40px;
+                min-height: 46px;
+                min-width: 42px;
                 padding: var(--space-1) var(--space-1);
                 font-size: var(--font-xs);
             }
@@ -4685,19 +4765,6 @@
             }
             .top-nav-buttons.nav-floating .nav-btn span {
                 font-size: var(--font-xs);
-            }
-            .cta-class-row {
-                padding: var(--space-2) var(--space-2);
-            }
-            .cta-class-time {
-                font-size: var(--font-sm);
-            }
-            .cta-class-name {
-                font-size: var(--font-xs);
-            }
-            .cta-class-level {
-                font-size: 8px;
-                padding: var(--space-1) var(--space-2);
             }
             .location-card {
                 min-width: 64px;
@@ -4785,7 +4852,7 @@
         .link-card .schedule-class .class-name .bachata-sensual,
         .link-card .schedule-class .class-name .bachata-advance,
         .link-card .schedule-class .class-name .bachata-elite {
-            font-size: 10px;
+            font-size: var(--font-xs);
             padding: var(--space-1) var(--space-2);
         }
         @media (min-width: 551px) {
@@ -4797,6 +4864,15 @@
                 font-size: var(--font-xs);
                 padding: var(--space-1) var(--space-3);
             }
+        }
+        /* ── Red accent for "Baile Inolvidable" (redundant but safe) ── */
+        .baile-inolvidable-red {
+            color: var(--red-accent);
+            font-weight: 700;
+        }
+        .baile-inolvidable-red-light {
+            color: var(--red-soft);
+            font-weight: 700;
         }
     </style>
 </head>
@@ -4859,37 +4935,33 @@
                 <div class="welcome-pills" id="welcome-pills-container">
                     <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-main"><span class="event-name">Ardmore Salsa Night • Sat 2nd &amp; 4th</span><br><span class="times-blue">9:15PM Lesson • 10PM Social</span></span>
-                        <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia</span>
+                        <span class="pill-styles">Salsa • Bachata • Merengue • Cumbia <span class="dj-guest">🎧 Special DJ Guest</span></span>
                     </a>
                     <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
-                        <span class="pill-main"><span class="event-name">Sor Inés • Wed 1st &amp; 3rd</span><br><span class="free-orange">FREE</span> • Outdoor Social<br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span> <span class="baile-badge">✨ BaiLe Inolvidable</span></span>
-                        <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
+                        <span class="pill-main"><span class="event-name">Sor Inés • Wed 1st &amp; 3rd</span><br><span class="free-orange">FREE</span> • Outdoor Social • ✨ <span class="baile-inolvidable-red">BaiLe Inolvidable</span><br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span></span>
+                        <span class="pill-styles">Salsa • Bachata • Merengue &amp; More <span class="dj-guest">🎧 Special DJ Guest</span></span>
                     </a>
                     <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main"><span class="event-name">Sor Ynéz • Fri 2nd &amp; 4th</span><br><span class="free-purple">FREE</span> • Patio Party<br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span></span>
-                        <span class="pill-styles">Salsa • Bachata • Merengue &amp; More</span>
+                        <span class="pill-styles">Salsa • Bachata • Merengue &amp; More <span class="dj-guest">🎧 Special DJ Guest</span></span>
                     </a>
                 </div>
                 <p class="welcome-pills-subheading">No partner needed • All levels welcome</p>
             </div>
 
-            <!-- ─── NEW LOCATIONS SECTION ─── -->
             <div class="locations-section section-animate" id="locations-section">
                 <h2 class="section-title" id="locations-title">Find Our Locations</h2>
                 <div class="locations-grid">
-                    <!-- Stardust -->
                     <div class="location-card stardust" data-venue="stardust">
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
                         <span class="location-name">Stardust Ballroom</span>
                         <span class="location-label">Bellmawr, NJ</span>
                     </div>
-                    <!-- Sor Ynez -->
                     <div class="location-card sorynez" data-venue="sorynez">
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
                         <span class="location-name">Sor Ynéz</span>
                         <span class="location-label">Philadelphia, PA</span>
                     </div>
-                    <!-- Ardmore -->
                     <div class="location-card ardmore" data-venue="ardmore">
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
                         <span class="location-name">Ardmore</span>
@@ -4903,7 +4975,7 @@
             <h2 class="section-title" id="upcoming-title">Join Our Next Class</h2>
 
             <div id="class-cta" class="class-cta-container section-animate">
-                <span class="cta-badge">New 4-Week Course</span>
+                <span class="cta-badge"><i class="fas fa-clock"></i> New 4-Week Course</span>
 
                 <div class="cta-headline">
                     Start Dancing <span class="highlight">in 4 Weeks</span>
@@ -4928,16 +5000,25 @@
                     </div>
                 </div>
 
+                <div class="cta-location-info">
+                    <span class="loc-label"><i class="fas fa-map-pin" style="color:var(--primary-blue);"></i> Location:</span>
+                    <span class="loc-name">Stardust Ballroom</span>
+                    <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="loc-nav-link">
+                        <i class="fas fa-directions"></i> Navigate
+                    </a>
+                </div>
+
                 <div class="cta-features">
-                    <span class="cta-feature">No partner needed</span>
-                    <span class="cta-feature">Walk-ins welcome</span>
-                    <span class="cta-feature">Learn in 4 weeks</span>
+                    <span class="cta-feature"><i class="fas fa-user-friends"></i> No partner needed</span>
+                    <span class="cta-feature"><i class="fas fa-door-open"></i> Walk-ins welcome</span>
+                    <span class="cta-feature"><i class="fas fa-calendar-week"></i> Learn in 4 weeks</span>
                 </div>
 
                 <div class="cta-action-wrap">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" target="_blank" class="cta-action" id="register-cta">
                         <span id="register-cta-text">Register Now</span>
                         <i class="fas fa-arrow-right"></i>
+                        <span class="action-badge">FREE</span>
                     </a>
                     <a href="#schedule-title" class="cta-secondary-link">View full schedule</a>
                 </div>
@@ -4998,8 +5079,8 @@
                         <div class="schedule-list">
                             <div class="schedule-day-group" data-day="Saturday">
                                 <div class="schedule-day-header">Saturday</div>
-                                <div class="schedule-class"><span class="class-time">4:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span></span></div>
-                                <div class="schedule-class"><span class="class-time">5:00pm</span><span class="class-name"><span class="bachata-text">Bachata</span></span></div>
+                                <div class="schedule-class"><span class="class-time">4:00pm</span><span class="class-name"><span class="salsa-text">Advanced Beginner Salsa</span></span></div>
+                                <div class="schedule-class"><span class="class-time">5:00pm</span><span class="class-name"><span class="bachata-sensual">Bachata Sensual</span></span></div>
                             </div>
                         </div>
                     </div>
@@ -5093,7 +5174,7 @@
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Sor Inés – BaiLe Inolvidable • 1st &amp; 3rd Wednesday</h3>
+                            <h3 class="event-title">Sor Inés – <span class="baile-inolvidable-red">BaiLe Inolvidable</span> • 1st &amp; 3rd Wednesday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Inés, Philadelphia</a></div>
                             <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
@@ -5186,7 +5267,6 @@
         (function() {
             'use strict';
 
-            /* ── deep link helpers ── */
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
@@ -5294,7 +5374,6 @@
                 });
             }
 
-            /* ── Location Modal System ── */
             var locationData = {
                 stardust: {
                     name: 'Stardust Ballroom',
@@ -5422,7 +5501,6 @@
                 });
             }
 
-            /* ── DOM ready ── */
             document.addEventListener('DOMContentLoaded', function() {
                 setupDeepLinks();
 
@@ -5630,7 +5708,6 @@
 
                 restartAutoDismiss();
 
-                /* ── class schedule helpers ── */
                 var classSchedule = [
                     { day: "Thursday", dayIndex: 4, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Advanced Beginner Salsa"],
@@ -5640,8 +5717,8 @@
                             "9:00pm Bachata Elite"
                         ], locationId: "stardust-card", endTime: 2200 },
                     { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio",
-                        classes: ["4:00pm Salsa", "5:00pm Bachata"], locationId: "estilo-card",
-                        endTime: 1800 }
+                        classes: ["4:00pm Advanced Beginner Salsa", "5:00pm Bachata Sensual"],
+                        locationId: "estilo-card", endTime: 1800 }
                 ];
 
                 function getDaysUntil(dayIndex, endTime) {
@@ -5718,10 +5795,10 @@
                     var ctaBadge = document.querySelector('.cta-badge');
                     if (ctaBadge) {
                         var d = next.daysUntil;
-                        if (d === 0) ctaBadge.textContent = 'Tonight';
-                        else if (d === 1) ctaBadge.textContent = 'Tomorrow';
-                        else if (d >= 2 && d <= 6) ctaBadge.textContent = 'This Week';
-                        else ctaBadge.textContent = 'Upcoming Class';
+                        if (d === 0) ctaBadge.innerHTML = '<i class="fas fa-clock"></i> Tonight';
+                        else if (d === 1) ctaBadge.innerHTML = '<i class="fas fa-clock"></i> Tomorrow';
+                        else if (d >= 2 && d <= 6) ctaBadge.innerHTML = '<i class="fas fa-clock"></i> This Week';
+                        else ctaBadge.innerHTML = '<i class="fas fa-clock"></i> Upcoming Class';
                     }
 
                     var dayNameEl = document.getElementById('cta-day-name');
@@ -5996,7 +6073,6 @@
                     });
                 }
 
-                /* ── video library ── */
                 function initVideoLibrary() {
                     var videoFeed = document.getElementById('video-feed');
                     var videoIndicators = document.getElementById('video-indicators');
@@ -6218,7 +6294,6 @@
                     renderVideos('all');
                 }
 
-                /* ── main init ── */
                 function initMainPage() {
                     if (mainInitialized) return;
                     mainInitialized = true;
@@ -6371,7 +6446,6 @@
                         updateMenuBar();
                     }, { passive: true });
 
-                    /* ── animations ── */
                     function initSectionAnimations() {
                         var animatedSections = document.querySelectorAll('.section-animate');
                         var animatedSeparators = document.querySelectorAll('.section-separator');
@@ -6407,7 +6481,6 @@
                         }, 300);
                     }
 
-                    /* ── language toggle ── */
                     var languageToggle = document.getElementById('language-toggle');
                     var languageButtons = languageToggle.querySelectorAll('.lang-btn');
                     var currentLanguage = 'en';
@@ -6515,7 +6588,15 @@
                         var locationsTitle = document.getElementById('locations-title');
                         if (locationsTitle) locationsTitle.textContent = ld.locationsTitle;
                         var ctaBadge = document.querySelector('.cta-badge');
-                        if (ctaBadge) ctaBadge.textContent = ld.ctaBadge;
+                        if (ctaBadge) {
+                            var icon = ctaBadge.querySelector('i');
+                            if (icon) {
+                                var iconHtml = icon.outerHTML;
+                                ctaBadge.innerHTML = iconHtml + ' ' + ld.ctaBadge;
+                            } else {
+                                ctaBadge.innerHTML = '<i class="fas fa-clock"></i> ' + ld.ctaBadge;
+                            }
+                        }
                         var ctaHeadline = document.querySelector('.cta-headline');
                         if (ctaHeadline) {
                             var hl = ctaHeadline;
@@ -6552,7 +6633,6 @@
                     var savedLang = localStorage.getItem('language');
                     if (savedLang) setLanguage(savedLang);
 
-                    /* ── registration form ── */
                     var participantContainer = document.getElementById('participant-container');
                     var addBtn = document.getElementById('add-participant');
                     var removeBtn = document.getElementById('remove-participant');
@@ -6595,7 +6675,6 @@
                         window.open(FORM_URL, '_blank');
                     });
 
-                    /* ── reviews carousel ── */
                     function initReviewsCarousel() {
                         var reviews = document.querySelectorAll('.review-item');
                         var inds = document.querySelectorAll('.review-indicator');
@@ -6625,7 +6704,6 @@
                         });
                     }
 
-                    /* ── nav buttons ── */
                     function initNavButtons() {
                         document.getElementById('btn-social').addEventListener('click', function(e) {
                             e.preventDefault();
@@ -6649,7 +6727,6 @@
                         });
                     }
 
-                    /* ── active section highlight ── */
                     function setActiveSection() {
                         var sections = [
                             { id: 'connect-title', btn: 'btn-social' },
@@ -6671,7 +6748,6 @@
                         if (cur) document.getElementById(cur.btn).classList.add('active-section');
                     }
 
-                    /* ── reviews toggle ── */
                     function initReviewsToggle() {
                         var toggle = document.getElementById('reviews-toggle');
                         var section = document.getElementById('reviews-section');
@@ -6704,7 +6780,6 @@
                         });
                     }
 
-                    /* ── private lesson toggle ── */
                     function initPrivateLessonToggle() {
                         var toggle = document.getElementById('private-lesson-toggle');
                         var section = document.getElementById('private-lesson-section');
@@ -6730,7 +6805,6 @@
                         });
                     }
 
-                    /* ── announcement carousel ── */
                     function initAnnouncementCarousel() {
                         var slidesContainer = document.getElementById('carousel-slides');
                         var slides = document.querySelectorAll('.carousel-slide');
@@ -6764,7 +6838,6 @@
                         });
                     }
 
-                    /* ── share button ── */
                     function initShareButton() {
                         var container = document.getElementById('bottomShareContainer');
                         var shareBtn = document.getElementById('shareMainBtn');
@@ -6867,7 +6940,6 @@
                         });
                     }
 
-                    /* ── call all inits ── */
                     initSectionAnimations();
                     initReviewsCarousel();
                     initNavButtons();
