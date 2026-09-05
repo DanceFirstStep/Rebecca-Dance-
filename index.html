@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── Reset & Base ── */
         * {
             margin: 0;
             padding: 0;
@@ -62,7 +61,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* ── Variables ── */
         :root {
             --primary-blue: #2c5aa0;
             --secondary-blue: #4a7bc1;
@@ -148,7 +146,6 @@
             --red-soft: #e74c3c;
         }
 
-        /* ── Scrollbar ── */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -169,7 +166,6 @@
             scrollbar-color: rgba(44, 90, 160, 0.25) rgba(44, 90, 160, 0.04);
         }
 
-        /* ── Container ── */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -263,7 +259,6 @@
             transition-delay: 0.25s;
         }
 
-        /* ── Scroll Progress ── */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -277,7 +272,6 @@
             will-change: width;
         }
 
-        /* ── Welcome Overlay ── */
         #welcome-array {
             position: fixed;
             top: 0;
@@ -680,7 +674,6 @@
             line-height: 1.6;
         }
 
-        /* ── make location name + date slightly bigger ── */
         .welcome-cta-pill .pill-main .event-name {
             font-size: 1.25rem;
             font-weight: 700;
@@ -751,6 +744,11 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             border-color: rgba(59, 130, 246, 0.4);
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
+        }
+        .welcome-cta-pill .pill-badge.thursday {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            border-color: rgba(230, 126, 34, 0.4);
+            box-shadow: 0 2px 10px rgba(230, 126, 34, 0.25);
         }
         .welcome-cta-pill .pill-badge.this-week-badge {
             background: rgba(44, 90, 160, 0.14);
@@ -1250,6 +1248,9 @@
         .location-card.ardmore .location-icon-wrap {
             background: linear-gradient(135deg, #b45309, #f59e0b);
         }
+        .location-card.cubalibre .location-icon-wrap {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+        }
 
         .location-modal-overlay {
             position: fixed;
@@ -1390,7 +1391,6 @@
             font-size: var(--font-md);
         }
 
-        /* ── CTA Section ── */
         .class-cta-container {
             border-radius: var(--radius-3xl);
             padding: var(--space-10) var(--space-10) var(--space-10);
@@ -1985,7 +1985,6 @@
             }
         }
 
-        /* ── Links Grid ── */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -2416,7 +2415,6 @@
             display: none !important;
         }
 
-        /* ── Instructors ── */
         .instructors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -2546,7 +2544,6 @@
             line-height: 1.3;
         }
 
-        /* ── Announcement Carousel ── */
         .announcement-carousel {
             position: relative;
             margin: var(--space-6) 0 var(--space-10);
@@ -2711,7 +2708,6 @@
             text-decoration: underline;
         }
 
-        /* ── Registration Form ── */
         .registration-form {
             background: #fdfdfd;
             border-radius: var(--radius-3xl);
@@ -2898,7 +2894,6 @@
             background: var(--gradient-blue);
         }
 
-        /* ── Reviews ── */
         .reviews-header {
             text-align: center;
             margin: var(--space-8) 0 var(--space-4);
@@ -3075,7 +3070,6 @@
             background: var(--gradient-dark);
         }
 
-        /* ── Private Lessons ── */
         .private-lesson-toggle-container {
             text-align: center;
             margin: var(--space-6) 0 var(--space-3);
@@ -3200,7 +3194,6 @@
             box-shadow: 0 10px 18px rgba(44, 90, 160, 0.1);
         }
 
-        /* ── Video Library ── */
         .video-toggle-container {
             text-align: center;
             margin: var(--space-6) 0 var(--space-3);
@@ -3645,7 +3638,6 @@
             pointer-events: none;
         }
 
-        /* ── Payment Modal ── */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -3747,7 +3739,6 @@
             transform: translateY(1px);
         }
 
-        /* ── Bottom Share ── */
         .bottom-share-container {
             position: fixed;
             bottom: max(var(--space-2), env(safe-area-inset-bottom, 20px));
@@ -4008,7 +3999,6 @@
             margin-top: 2px;
         }
 
-        /* ── Responsive ── */
         @media (max-width: 850px) {
             :root {
                 --icon-size-lg: 108px;
@@ -4920,7 +4910,7 @@
                 <div class="second-row-left"></div>
                 <div class="second-row-icons">
                     <a href="#" class="app-icon pay" id="pay-icon"><i class="fas fa-credit-card"></i><span>Pay</span></a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="app-icon register"><i class="fas fa-clipboard-list"></i><span>Register</span></a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="app-icon register" data-app="register"><i class="fas fa-clipboard-list"></i><span>Register</span></a>
                 </div>
                 <button id="welcome-skip-btn" class="skip-inline"><i class="fas fa-chevron-right"></i> Skip</button>
             </div>
@@ -4967,9 +4957,13 @@
                         <span class="pill-main"><span class="event-name">Sor Ynéz • Wed 1st &amp; 3rd</span><br><span class="free-orange">FREE</span> • Outdoor Social • ✨ <span class="baile-inolvidable-red">BaiLe Inolvidable</span><br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More <span class="dj-guest">🎧 Special DJ Guest</span></span>
                     </a>
-                    <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
+                    <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-main"><span class="event-name">Sor Ynéz • Fri 2nd &amp; 4th</span><br><span class="free-purple">FREE</span> • Patio Party<br><span class="times-blue">6PM Music • 6:30PM Lesson • 7:30PM Social</span></span>
                         <span class="pill-styles">Salsa • Bachata • Merengue &amp; More <span class="dj-guest">🎧 Special DJ Guest</span></span>
+                    </a>
+                    <a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="welcome-cta-pill" data-app="facebook" data-event-key="cubalibre">
+                        <span class="pill-main"><span class="event-name">Salsa Libre • Thu Weekly</span><br><span class="free-orange">FREE</span> • No Cover • Salsa Lesson 9PM<br><span class="times-blue">DJ MX 10-1:30AM</span></span>
+                        <span class="pill-styles">Salsa • Bachata • Merengue &amp; More <span class="dj-guest">🎧 DJ MX</span></span>
                     </a>
                 </div>
                 <p class="welcome-pills-subheading">No partner needed • All levels welcome</p>
@@ -4993,12 +4987,81 @@
                         <span class="location-name">Ardmore</span>
                         <span class="location-label">Ardmore, PA</span>
                     </div>
+                    <div class="location-card cubalibre" data-venue="cubalibre">
+                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
+                        <span class="location-name">Cuba Libre</span>
+                        <span class="location-label">Old City, PA</span>
+                    </div>
                 </div>
             </div>
 
             <hr class="section-separator" id="separator-1">
 
-            <h2 class="section-title" id="upcoming-title">Join Our Next Class</h2>
+            <h3 class="section-title" id="schedule-title">Class Schedule by location</h3>
+            <div class="links-grid stagger-children section-animate" id="schedule-grid">
+
+                <div class="link-card stardust" data-studio="Stardust Ballroom" id="stardust-card">
+                    <div class="card-header">
+                        <div class="studio-name-address">
+                            <div class="link-title">Stardust Ballroom</div>
+                            <div class="link-subtitle">
+                                <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-map-pin"></i> 363 W Browning Rd, Bellmawr, NJ</a>
+                            </div>
+                            <div class="cycle-badge-wrap">
+                                <span class="cycle-icon"><i class="fas fa-sync-alt"></i></span>
+                                <span class="cycle-text"><strong>4‑Week Cycle</strong> <span class="cycle-sub">— Learn in one month! No partner needed, walk‑ins welcome.</span></span>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
+                            <span class="month-promo" id="stardust-month-promo">March</span>
+                            <div class="location-icons">
+                                <a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="schedule-list">
+                            <div class="schedule-day-group" data-day="Thursday">
+                                <div class="schedule-day-header">Thursday</div>
+                                <div class="schedule-class"><span class="class-time">7:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span> &amp; <span class="bachata-text">Bachata</span> Intro<span class="class-badge badge-cycle">4‑wk cycle</span></span></div>
+                                <div class="schedule-class"><span class="class-time">8:00pm</span><span class="class-name"><span class="salsa-text">Advanced Beginner Salsa</span></span></div>
+                            </div>
+                            <div class="schedule-day-group" data-day="Sunday">
+                                <div class="schedule-day-header">Sunday</div>
+                                <div class="schedule-class"><span class="class-time">7:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span> &amp; <span class="bachata-text">Bachata</span> Intro<span class="class-badge badge-cycle">4‑wk cycle</span></span></div>
+                                <div class="schedule-class"><span class="class-time">8:00pm</span><span class="class-name"><span class="bachata-text">Bachata Advanced Beginner</span></span></div>
+                                <div class="schedule-class"><span class="class-time">9:00pm</span><span class="class-name"><span class="bachata-elite">Bachata Elite</span></span></div>
+                            </div>
+                        </div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="card-cta" data-app="register">Register <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="link-card estilo" data-studio="Estilo Dance Studio" id="estilo-card">
+                    <div class="card-header">
+                        <div class="studio-name-address">
+                            <div class="link-title">Estilo Dance Studio</div>
+                            <div class="link-subtitle">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Estilo+Dance+Studio+Fishtown+Philadelphia" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Fishtown, Philadelphia</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="schedule-list">
+                            <div class="schedule-day-group" data-day="Saturday">
+                                <div class="schedule-day-header">Saturday</div>
+                                <div class="schedule-class"><span class="class-time">4:00pm</span><span class="class-name"><span class="salsa-text">Advanced Beginner Salsa</span></span></div>
+                                <div class="schedule-class"><span class="class-time">5:00pm</span><span class="class-name"><span class="bachata-sensual">Bachata Sensual</span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="section-separator" id="separator-3">
+
+            <h2 id="upcoming-title" class="section-title">Join Our Next Class</h2>
 
             <div id="class-cta" class="class-cta-container section-animate">
                 <span class="cta-badge"><i class="fas fa-clock"></i> New 4-Week Course</span>
@@ -5029,7 +5092,7 @@
                 <div class="cta-location-info">
                     <span class="loc-label"><i class="fas fa-map-pin" style="color:var(--primary-blue);"></i> Location:</span>
                     <span class="loc-name">Stardust Ballroom</span>
-                    <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="loc-nav-link">
+                    <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="loc-nav-link" data-app="google-maps">
                         <i class="fas fa-directions"></i> Navigate
                     </a>
                 </div>
@@ -5041,77 +5104,13 @@
                 </div>
 
                 <div class="cta-action-wrap">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" target="_blank" class="cta-action" id="register-cta">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" target="_blank" class="cta-action" id="register-cta" data-app="register">
                         <span id="register-cta-text">Register Now</span>
                         <i class="fas fa-arrow-right"></i>
                         <span class="action-badge">FREE</span>
                     </a>
                     <a href="#schedule-title" class="cta-secondary-link">View full schedule</a>
                 </div>
-            </div>
-
-            <hr class="section-separator" id="separator-3">
-
-            <h3 class="section-title" id="schedule-title">Class Schedule by location</h3>
-            <div class="links-grid stagger-children section-animate" id="schedule-grid">
-
-                <div class="link-card stardust" data-studio="Stardust Ballroom" id="stardust-card">
-                    <div class="card-header">
-                        <div class="studio-name-address">
-                            <div class="link-title">Stardust Ballroom</div>
-                            <div class="link-subtitle">
-                                <a href="https://maps.app.goo.gl/22YhBGsCm2FBvGh17?g_st=ic" target="_blank" rel="noopener" class="address-link"><i class="fas fa-map-pin"></i> 363 W Browning Rd, Bellmawr, NJ</a>
-                            </div>
-                            <div class="cycle-badge-wrap">
-                                <span class="cycle-icon"><i class="fas fa-sync-alt"></i></span>
-                                <span class="cycle-text"><strong>4‑Week Cycle</strong> <span class="cycle-sub">— Learn in one month! No partner needed, walk‑ins welcome.</span></span>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
-                            <span class="month-promo" id="stardust-month-promo">March</span>
-                            <div class="location-icons">
-                                <a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="schedule-list">
-                            <div class="schedule-day-group" data-day="Thursday">
-                                <div class="schedule-day-header">Thursday</div>
-                                <div class="schedule-class"><span class="class-time">7:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span> &amp; <span class="bachata-text">Bachata</span> Intro<span class="class-badge badge-cycle">4‑wk cycle</span></span></div>
-                                <div class="schedule-class"><span class="class-time">8:00pm</span><span class="class-name"><span class="salsa-text">Advanced Beginner Salsa</span></span></div>
-                            </div>
-                            <div class="schedule-day-group" data-day="Sunday">
-                                <div class="schedule-day-header">Sunday</div>
-                                <div class="schedule-class"><span class="class-time">7:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span> &amp; <span class="bachata-text">Bachata</span> Intro<span class="class-badge badge-cycle">4‑wk cycle</span></span></div>
-                                <div class="schedule-class"><span class="class-time">8:00pm</span><span class="class-name"><span class="bachata-text">Bachata Advanced Beginner</span></span></div>
-                                <div class="schedule-class"><span class="class-time">9:00pm</span><span class="class-name"><span class="bachata-elite">Bachata Elite</span></span></div>
-                            </div>
-                        </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="card-cta">Register <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="link-card estilo" data-studio="Estilo Dance Studio" id="estilo-card">
-                    <div class="card-header">
-                        <div class="studio-name-address">
-                            <div class="link-title">Estilo Dance Studio</div>
-                            <div class="link-subtitle">
-                                <a href="https://www.google.com/maps/search/?api=1&query=Estilo+Dance+Studio+Fishtown+Philadelphia" target="_blank" rel="noopener" class="address-link"><i class="fas fa-location-dot"></i> Fishtown, Philadelphia</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="schedule-list">
-                            <div class="schedule-day-group" data-day="Saturday">
-                                <div class="schedule-day-header">Saturday</div>
-                                <div class="schedule-class"><span class="class-time">4:00pm</span><span class="class-name"><span class="salsa-text">Advanced Beginner Salsa</span></span></div>
-                                <div class="schedule-class"><span class="class-time">5:00pm</span><span class="class-name"><span class="bachata-sensual">Bachata Sensual</span></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="private-lesson-toggle-container">
@@ -5142,22 +5141,10 @@
                     <div class="review-item"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="review-text">I've been dancing for years, but Rebecca and Daniel took my skills to the next level. Their attention to detail and personalized feedback make all the difference. Best instructors in the city!</div><div class="review-author">- Jessica Martinez</div></div>
                 </div>
                 <div class="review-indicators"><div class="review-indicator active" data-index="0"></div><div class="review-indicator" data-index="1"></div><div class="review-indicator" data-index="2"></div></div>
-                <div class="reviews-actions"><button class="reviews-action-btn" id="hide-reviews">Hide Reviews</button><a href="#" class="reviews-action-btn leave-review" id="leave-review">Write a Review</a></div>
+                <div class="reviews-actions"><button class="reviews-action-btn" id="hide-reviews">Hide Reviews</button><a href="https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic" class="reviews-action-btn leave-review" id="leave-review" data-app="google-maps">Write a Review</a></div>
             </div>
 
             <hr class="section-separator" id="separator-5">
-
-            <div class="registration-form section-animate" id="registration-form">
-                <div class="form-title" id="registration-title">Class Registration</div>
-                <div class="partner-notice" id="partner-text">No partner needed - come dance with us!</div>
-                <form id="dance-registration">
-                    <div id="participant-container"><div class="participant-fields name-field"><div class="participant-form-group"><input type="text" class="form-input" name="participant_1" placeholder="Full Name" required></div></div></div>
-                    <div class="participant-controls"><button type="button" id="add-participant" class="participant-btn"><i class="fas fa-plus"></i></button><button type="button" id="remove-participant" class="participant-btn" disabled><i class="fas fa-minus"></i></button></div>
-                    <button type="submit" class="submit-btn" id="register-button">Register</button>
-                </form>
-            </div>
-
-            <hr class="section-separator" id="separator-6">
 
             <h2 class="section-title" id="connect-title">Get Weekly Dance Tips, Reels &amp; Class Updates</h2>
             <div class="instructors-grid section-animate stagger-children">
@@ -5168,7 +5155,7 @@
                         <div class="social-links-grid">
                             <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="social-link-item" data-app="facebook"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@RebeccaBachata</span></div></a>
                             <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@rebecca_bachata</span></div></a>
-                            <a href="https://www.tiktok.com/@rebecca_bachata" class="social-link-item" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@rebecca_bachata</span></div></a>
+                            <a href="https://www.tiktok.com/@rebecca_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@rebecca_bachata</span></div></a>
                         </div>
                     </div>
                 </div>
@@ -5180,11 +5167,25 @@
                         <div class="social-links-grid">
                             <a href="https://www.facebook.com/share/17ZozCRrRN/" class="social-link-item" data-app="facebook"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@DanielPalaciosDance</span></div></a>
                             <a href="https://www.instagram.com/danielp_bachata?igsh=d3Jpa3RtaTRqcm1y&utm_source=qr" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@danielp_bachata</span></div></a>
-                            <a href="https://www.tiktok.com/@danielp_bachata" class="social-link-item" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@danielp_bachata</span></div></a>
+                            <a href="https://www.tiktok.com/@danielp_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@danielp_bachata</span></div></a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <hr class="section-separator" id="separator-6">
+
+            <div class="registration-form section-animate" id="registration-form">
+                <div class="form-title" id="registration-title">Class Registration</div>
+                <div class="partner-notice" id="partner-text">No partner needed - come dance with us!</div>
+                <form id="dance-registration">
+                    <div id="participant-container"><div class="participant-fields name-field"><div class="participant-form-group"><input type="text" class="form-input" name="participant_1" placeholder="Full Name" required></div></div></div>
+                    <div class="participant-controls"><button type="button" id="add-participant" class="participant-btn"><i class="fas fa-plus"></i></button><button type="button" id="remove-participant" class="participant-btn" disabled><i class="fas fa-minus"></i></button></div>
+                    <button type="submit" class="submit-btn" id="register-button">Register</button>
+                </form>
+            </div>
+
+            <hr class="section-separator" id="separator-7">
 
             <h2 class="section-title" style="margin-bottom: var(--space-6);">Our Next Social Events</h2>
             <div class="announcement-carousel section-animate" id="events-carousel">
@@ -5193,7 +5194,7 @@
                         <div class="modern-event-card">
                             <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Social until 1am</div>
-                            <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
+                            <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
                             <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
                             <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
@@ -5212,8 +5213,8 @@
                             <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="#" target="_blank" class="address-link"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
-                            <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/924005516835459/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                 </div>
@@ -5226,7 +5227,7 @@
                 </div>
             </div>
 
-            <hr class="section-separator" id="separator-2">
+            <hr class="section-separator" id="separator-8">
 
             <div class="video-toggle-container">
                 <button id="show-video-btn" class="video-toggle-btn"><i class="fas fa-play"></i> Watch Dance Videos</button>
@@ -5238,7 +5239,7 @@
                 <div class="video-close-container"><button id="close-video-btn" class="video-close-btn">✕ Close Videos</button></div>
             </section>
 
-            <hr class="section-separator" id="separator-7">
+            <hr class="section-separator" id="separator-9">
 
             <h2 class="section-title" id="payment-title">Payment Options</h2>
             <div class="links-grid stagger-children section-animate">
@@ -5262,11 +5263,11 @@
                 </div>
             </div>
 
-            <hr class="section-separator" id="separator-8">
+            <hr class="section-separator" id="separator-10">
 
             <h2 class="section-title" id="contact-title">Contact Us</h2>
             <div class="links-grid section-animate">
-                <a href="mailto:roserendell@gmail.com" class="link-card contact">
+                <a href="mailto:roserendell@gmail.com" class="link-card contact" data-app="email">
                     <div class="link-text">
                         <div class="link-title" id="contact-title-text">Professional Inquiries</div>
                         <div class="link-subtitle" id="contact-subtitle">Bookings and partnerships</div>
@@ -5286,7 +5287,7 @@
 
     <div class="bottom-share-container" id="bottomShareContainer">
         <div class="share-bubbles" id="shareBubbles"><div class="share-row"><a href="#" class="share-bubble copy-link" data-share="copy"><i class="fas fa-link"></i></a><a href="#" class="share-bubble messenger" data-share="messenger"><i class="fab fa-facebook-messenger"></i></a><a href="#" class="share-bubble instagram" data-share="instagram"><i class="fab fa-instagram"></i></a><a href="#" class="share-bubble whatsapp" data-share="whatsapp"><i class="fab fa-whatsapp"></i></a><a href="#" class="share-bubble email" data-share="email"><i class="fas fa-envelope"></i></a><a href="#" class="share-bubble sms" data-share="sms"><i class="fas fa-comment"></i></a></div></div>
-        <div class="share-actions-row"><a href="https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic" class="review-bubble" target="_blank" id="reviewBubble"><i class="fab fa-google"></i> Write a review</a><button class="share-main-btn" id="shareMainBtn"><i class="fas fa-share-alt"></i> <span>Share with a friend</span></button></div>
+        <div class="share-actions-row"><a href="https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic" class="review-bubble" target="_blank" id="reviewBubble" data-app="google-maps"><i class="fab fa-google"></i> Write a review</a><button class="share-main-btn" id="shareMainBtn"><i class="fas fa-share-alt"></i> <span>Share with a friend</span></button></div>
     </div>
 
     <script>
@@ -5298,11 +5299,20 @@
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
             }
 
-            function openAppOrWeb(webUrl, appType) {
+            function getMobileOS() {
+                var ua = navigator.userAgent.toLowerCase();
+                if (/iphone|ipad|ipod/.test(ua)) return 'ios';
+                if (/android/.test(ua)) return 'android';
+                return 'other';
+            }
+
+            function openAppOrWeb(webUrl, appType, options) {
+                options = options || {};
                 var userAgent = navigator.userAgent.toLowerCase();
                 var isIOS = /iphone|ipad|ipod/.test(userAgent);
                 var isAndroid = /android/.test(userAgent);
                 var isFB = isFacebookInAppBrowser();
+                var os = getMobileOS();
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
@@ -5314,31 +5324,78 @@
                         schemeUrl = 'fb://event/' + eventId;
                         fallbackUrl = webUrl;
                     } else {
+                        var profileMatch = webUrl.match(/facebook\.com\/(?:share\/)?([^\/?]+)/);
+                        var username = profileMatch ? profileMatch[1] : 'rebecca_bachata';
                         if (isFB) { window.location.href = webUrl; return; }
-                        schemeUrl = 'fb://facewebmodal/f?href=' + encodeURIComponent(webUrl);
+                        schemeUrl = 'fb://profile/' + username;
                         fallbackUrl = webUrl;
                     }
                 } else if (appType === 'instagram') {
-                    var usernameMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
-                    var username = usernameMatch ? usernameMatch[1] : 'rebecca_bachata';
-                    schemeUrl = 'instagram://user?username=' + username;
+                    var igMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
+                    var igUsername = igMatch ? igMatch[1] : 'rebecca_bachata';
+                    schemeUrl = 'instagram://user?username=' + igUsername;
+                    fallbackUrl = webUrl;
+                } else if (appType === 'tiktok') {
+                    var ttMatch = webUrl.match(/tiktok\.com\/@([^\/?]+)/);
+                    var ttUsername = ttMatch ? ttMatch[1] : 'rebecca_bachata';
+                    if (isIOS) {
+                        schemeUrl = 'tiktok://user?username=' + ttUsername;
+                    } else if (isAndroid) {
+                        schemeUrl = 'tiktok://@' + ttUsername;
+                    } else {
+                        schemeUrl = 'tiktok://user?username=' + ttUsername;
+                    }
                     fallbackUrl = webUrl;
                 } else if (appType === 'venmo') {
-                    var venmoHandle = webUrl.match(/\/u\/([^\/?]+)/);
-                    var handle = venmoHandle ? venmoHandle[1] : 'Rebecca_Rose_Bachata';
-                    schemeUrl = 'venmo://pay?recipients=' + handle;
+                    var vMatch = webUrl.match(/\/u\/([^\/?]+)/);
+                    var vHandle = vMatch ? vMatch[1] : 'Rebecca_Rose_Bachata';
+                    schemeUrl = 'venmo://pay?recipients=' + vHandle;
                     fallbackUrl = webUrl;
                 } else if (appType === 'cashapp') {
-                    var cashTag = webUrl.match(/\$([A-Za-z0-9]+)/);
-                    var tag = cashTag ? cashTag[1] : 'RebeccaRoseBachata';
-                    schemeUrl = 'cashapp://$' + tag;
+                    var cMatch = webUrl.match(/\$([A-Za-z0-9]+)/);
+                    var cTag = cMatch ? cMatch[1] : 'RebeccaRoseBachata';
+                    schemeUrl = 'cashapp://$' + cTag;
                     fallbackUrl = webUrl;
-                } else {
+                } else if (appType === 'google-maps') {
+                    var mapsUrl = webUrl;
+                    var coordMatch = webUrl.match(/@([-+]?\d+\.\d+),([-+]?\d+\.\d+)/);
+                    var placeMatch = webUrl.match(/[?&]q=([^&]+)/);
+                    var query = placeMatch ? decodeURIComponent(placeMatch[1]) : '';
+
+                    if (isIOS) {
+                        if (coordMatch) {
+                            schemeUrl = 'comgooglemaps://?q=' + coordMatch[1] + ',' + coordMatch[2];
+                        } else if (query) {
+                            schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(query);
+                        } else {
+                            schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(mapsUrl);
+                        }
+                        if (!schemeUrl) schemeUrl = 'maps://?q=' + encodeURIComponent(mapsUrl);
+                    } else if (isAndroid) {
+                        if (coordMatch) {
+                            schemeUrl = 'geo:' + coordMatch[1] + ',' + coordMatch[2] + '?q=' + coordMatch[1] + ',' +
+                                coordMatch[2];
+                        } else if (query) {
+                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(query);
+                        } else {
+                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(mapsUrl);
+                        }
+                    } else {
+                        schemeUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(mapsUrl);
+                    }
+                    fallbackUrl = webUrl;
+                } else if (appType === 'email') {
+                    window.location.href = webUrl;
+                    return;
+                } else if (appType === 'register') {
                     window.open(webUrl, '_blank');
                     return;
                 }
 
-                if (!schemeUrl) return;
+                if (!schemeUrl) {
+                    window.open(webUrl, '_blank');
+                    return;
+                }
 
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
@@ -5362,41 +5419,42 @@
                 appLinks.forEach(function(link) {
                     var appType = link.getAttribute('data-app');
                     if (!appType) return;
-                    if (link.tagName === 'A' && !link.hasAttribute('data-app-processed')) {
+                    if (link.hasAttribute('data-app-processed')) return;
+
+                    if (appType === 'email') {
                         link.setAttribute('data-app-processed', 'true');
-                        var originalHref = link.getAttribute('href');
-                        if (!originalHref || originalHref === '#') {
-                            var defaultMap = {
-                                'facebook': 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr',
-                                'instagram': 'https://www.instagram.com/rebecca_bachata/',
-                                'venmo': 'https://account.venmo.com/u/Rebecca_Rose_Bachata',
-                                'cashapp': 'https://cash.app/$RebeccaRoseBachata'
-                            };
-                            originalHref = defaultMap[appType] || 'https://';
-                        }
-                        link.addEventListener('click', function(e) {
-                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                    .preventDefault(); return; }
-                            e.preventDefault();
-                            openAppOrWeb(originalHref, appType);
-                        });
-                    } else if (link.tagName !== 'A') {
-                        var fakeHref = (function() {
-                            var map = {
-                                'facebook': 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr',
-                                'instagram': 'https://www.instagram.com/rebecca_bachata/',
-                                'venmo': 'https://account.venmo.com/u/Rebecca_Rose_Bachata',
-                                'cashapp': 'https://cash.app/$RebeccaRoseBachata'
-                            };
-                            return map[appType] || 'https://';
-                        })();
-                        link.addEventListener('click', function(e) {
-                            if (window.paymentModalOpen === true && this.id !== 'pay-icon') { e
-                                    .preventDefault(); return; }
-                            e.preventDefault();
-                            openAppOrWeb(fakeHref, appType);
-                        });
+                        return;
                     }
+
+                    var originalHref = link.getAttribute('href');
+                    var defaultMap = {
+                        'facebook': 'https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr',
+                        'instagram': 'https://www.instagram.com/rebecca_bachata/',
+                        'venmo': 'https://account.venmo.com/u/Rebecca_Rose_Bachata',
+                        'cashapp': 'https://cash.app/$RebeccaRoseBachata',
+                        'google-maps': 'https://maps.app.goo.gl/',
+                        'tiktok': 'https://www.tiktok.com/@rebecca_bachata',
+                        'register': 'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform'
+                    };
+
+                    if (!originalHref || originalHref === '#' || originalHref === '') {
+                        originalHref = defaultMap[appType] || 'https://';
+                    }
+
+                    link.setAttribute('data-app-processed', 'true');
+
+                    link.addEventListener('click', function(e) {
+                        if (window.paymentModalOpen === true && this.id !== 'pay-icon') {
+                            e.preventDefault();
+                            return;
+                        }
+                        e.preventDefault();
+                        if (appType === 'email') {
+                            window.location.href = originalHref;
+                            return;
+                        }
+                        openAppOrWeb(originalHref, appType);
+                    });
                 });
             }
 
@@ -5415,6 +5473,11 @@
                     name: 'Ardmore',
                     address: '5 W Lancaster Ave, Ardmore, PA 19003',
                     mapsUrl: 'https://maps.app.goo.gl/LUX2Q9WGwck2dpLHA?g_st=ic'
+                },
+                cubalibre: {
+                    name: 'Cuba Libre',
+                    address: '10 S 2nd St, Philadelphia, PA 19106',
+                    mapsUrl: 'https://maps.app.goo.gl/fsxVcy9MtHmUtegb7?g_st=ic'
                 }
             };
 
@@ -5470,7 +5533,7 @@
 
                 navBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    window.open(data.mapsUrl, '_blank');
+                    openAppOrWeb(data.mapsUrl, 'google-maps');
                     closeLocationModal();
                 });
 
@@ -5609,11 +5672,7 @@
                 function handlePaymentSelect(type) {
                     var webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
                     var appType = type === 'venmo' ? 'venmo' : 'cashapp';
-                    if (typeof openAppOrWeb === 'function') {
-                        openAppOrWeb(webUrl, appType);
-                    } else {
-                        window.open(webUrl, '_blank');
-                    }
+                    openAppOrWeb(webUrl, appType);
                     fadeOutWelcomeArray();
                 }
 
@@ -5955,7 +6014,8 @@
                         var map = {
                             'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
                             'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Ynéz' },
-                            'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' }
+                            'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' },
+                            'cubalibre': { day: 'Thu', pattern: 'every', label: 'Salsa Libre' }
                         };
                         return map[key] || null;
                     }
@@ -5964,7 +6024,8 @@
                         var map = {
                             'ardmore': 'Saturday',
                             'sorines-wed': 'Wednesday',
-                            'sorynez-fri': 'Friday'
+                            'sorynez-fri': 'Friday',
+                            'cubalibre': 'Thursday'
                         };
                         return map[key] || '';
                     }
@@ -6323,6 +6384,8 @@
                 function initMainPage() {
                     if (mainInitialized) return;
                     mainInitialized = true;
+
+                    setupDeepLinks();
 
                     initLocationCards();
 
@@ -6794,16 +6857,6 @@
                             toggle.classList.remove('active');
                             chev.className = 'fas fa-chevron-down';
                         });
-                        leave.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            section.classList.add('hidden');
-                            toggle.classList.remove('active');
-                            chev.className = 'fas fa-chevron-down';
-                            setTimeout(function() {
-                                window.open('https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic',
-                                    '_blank');
-                            }, 300);
-                        });
                     }
 
                     function initPrivateLessonToggle() {
@@ -6871,6 +6924,8 @@
                         var reviewBubble = document.getElementById('reviewBubble');
                         var overlay = null;
 
+                        var SHARE_URL = 'https://g.page/r/Cemmw4NCvdyQEBI/review';
+
                         function removeOverlayAndUnlock() {
                             if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
                             overlay = null;
@@ -6924,7 +6979,7 @@
                             else container.classList.remove('share-hidden');
                             lastScroll = st;
                         }, { passive: true });
-                        var pageUrl = encodeURIComponent(window.location.href);
+                        var pageUrl = encodeURIComponent(SHARE_URL);
                         var shareText = encodeURIComponent("Check out Rebecca & Daniel's dance classes! ");
                         var fullMsg = shareText + pageUrl;
                         var shareLinks = {
@@ -6940,7 +6995,7 @@
                                 e.preventDefault();
                                 var platform = bubble.dataset.share;
                                 if (platform === 'copy') {
-                                    navigator.clipboard.writeText(window.location.href).then(function() {
+                                    navigator.clipboard.writeText(SHARE_URL).then(function() {
                                         alert('Link copied to clipboard! Share it anywhere.');
                                     }).catch(function() {
                                         alert('Could not copy link. Please copy manually.');
@@ -6949,7 +7004,7 @@
                                     return;
                                 }
                                 if (platform === 'instagram') {
-                                    navigator.clipboard.writeText(window.location.href).then(function() {
+                                    navigator.clipboard.writeText(SHARE_URL).then(function() {
                                         alert('Link copied to clipboard! Share it on Instagram.');
                                     }).catch(function() {
                                         alert('Could not copy link.');
