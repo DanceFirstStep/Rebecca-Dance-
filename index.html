@@ -139,6 +139,8 @@
             --golden-glow: rgba(245, 158, 11, 0.35);
             --red-accent: #b8312a;
             --red-soft: #d94a3d;
+            --glow-ring-color: rgba(31, 75, 138, 0.50);
+            --glow-ring-spread: 0 0 0 3px var(--glow-ring-color), 0 0 32px rgba(31, 75, 138, 0.18);
         }
 
         ::-webkit-scrollbar {
@@ -401,6 +403,8 @@
             justify-content: flex-end;
             opacity: 0.7;
             white-space: nowrap;
+            position: relative;
+            z-index: 10001;
         }
         #welcome-skip-btn i {
             font-size: var(--font-sm);
@@ -412,6 +416,10 @@
         }
         #welcome-skip-btn:hover i {
             transform: translateX(3px);
+        }
+        #welcome-skip-btn {
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
         }
 
         .app-icon {
@@ -663,6 +671,34 @@
             transition-duration: 0.08s;
         }
 
+        .welcome-cta-pill.event-this-week {
+            box-shadow: 0 0 0 3px rgba(31, 75, 138, 0.35), 0 0 32px rgba(31, 75, 138, 0.13), 0 2px 12px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.05);
+            transition: box-shadow 0.3s ease, transform 0.25s ease;
+        }
+        .welcome-cta-pill.event-this-week:hover {
+            box-shadow: 0 0 0 4px rgba(31, 75, 138, 0.50), 0 0 48px rgba(31, 75, 138, 0.20), 0 14px 36px rgba(31, 75, 138, 0.10), 0 0 0 1px rgba(31, 75, 138, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .welcome-cta-pill .up-next-badge {
+            position: absolute;
+            top: -14px;
+            right: var(--space-4);
+            background: var(--primary-blue);
+            color: var(--white);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: var(--space-2) var(--space-6);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.25);
+            white-space: nowrap;
+            min-width: 70px;
+            text-align: center;
+            z-index: 5;
+        }
+
         .welcome-cta-pill .pill-badge {
             display: inline-flex;
             align-items: center;
@@ -685,24 +721,25 @@
             justify-content: center;
             padding-left: var(--space-5);
             padding-right: var(--space-5);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
         }
         .welcome-cta-pill .pill-badge.wednesday {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-color: rgba(245, 158, 11, 0.4);
             box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
         }
         .welcome-cta-pill .pill-badge.friday {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
             border-color: rgba(139, 92, 246, 0.4);
             box-shadow: 0 2px 10px rgba(139, 92, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.saturday {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #60a5fa, #2563eb);
             border-color: rgba(59, 130, 246, 0.4);
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
         }
-        .welcome-cta-pill .pill-badge.thursday {
-            background: linear-gradient(135deg, #e67e22, #d35400);
+        .welcome-cta-pill .pill-badge.thursdays {
+            background: linear-gradient(135deg, #fb923c, #d97706);
             border-color: rgba(230, 126, 34, 0.4);
             box-shadow: 0 2px 10px rgba(230, 126, 34, 0.25);
         }
@@ -787,24 +824,7 @@
             background: linear-gradient(145deg, #f4faff, var(--white));
             box-shadow: 0 8px 28px rgba(31, 75, 138, 0.14);
         }
-        .welcome-cta-pill .up-next-badge {
-            position: absolute;
-            top: -14px;
-            right: var(--space-4);
-            background: var(--primary-blue);
-            color: var(--white);
-            font-size: 0.82rem;
-            font-weight: 700;
-            padding: var(--space-2) var(--space-6);
-            border-radius: var(--radius-pill);
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.25);
-            white-space: nowrap;
-            min-width: 70px;
-            text-align: center;
-            z-index: 5;
-        }
+
         .baile-badge {
             display: inline-block;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
@@ -1761,6 +1781,12 @@
         .cta-class-level.intermediate {
             background: linear-gradient(135deg, #6a4e9c, #9b59b6);
         }
+        .cta-class-level.sensual {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+        .cta-class-level.practice {
+            background: linear-gradient(135deg, #2d7aff, #1f4b8a);
+        }
 
         .cta-location-info {
             display: flex;
@@ -2083,22 +2109,6 @@
             }
             .cta-secondary-link {
                 font-size: var(--font-xs);
-            }
-        }
-
-        @media (max-width: 400px) {
-            .cta-class-row {
-                padding: var(--space-2) var(--space-2);
-            }
-            .cta-class-time {
-                font-size: var(--font-sm);
-            }
-            .cta-class-name {
-                font-size: var(--font-xs);
-            }
-            .cta-class-level {
-                font-size: 8px;
-                padding: var(--space-1) var(--space-2);
             }
         }
 
@@ -5023,24 +5033,37 @@
         }
 
         .welcome-cta-pill .pill-badge.wednesday {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-color: rgba(245, 158, 11, 0.4);
             box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
         }
         .welcome-cta-pill .pill-badge.friday {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
             border-color: rgba(139, 92, 246, 0.4);
             box-shadow: 0 2px 10px rgba(139, 92, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.saturday {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #60a5fa, #2563eb);
             border-color: rgba(59, 130, 246, 0.4);
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
         }
-        .welcome-cta-pill .pill-badge.thursday {
-            background: linear-gradient(135deg, #e67e22, #d35400);
+        .welcome-cta-pill .pill-badge.thursdays {
+            background: linear-gradient(135deg, #fb923c, #d97706);
             border-color: rgba(230, 126, 34, 0.4);
             box-shadow: 0 2px 10px rgba(230, 126, 34, 0.25);
+        }
+        .welcome-cta-pill .pill-badge.this-week-badge {
+            background: linear-gradient(135deg, #6c7e94, #4a627a);
+            border-color: rgba(74, 98, 122, 0.4);
+            box-shadow: 0 2px 10px rgba(74, 98, 122, 0.25);
+        }
+
+        .welcome-cta-pill .pill-main .event-name .baile-inolvidable-red {
+            display: inline;
+        }
+        .welcome-cta-pill .pill-main .event-name .baile-inolvidable-red .star-icon {
+            display: inline;
+            margin-right: 0;
         }
     </style>
 </head>
@@ -5117,7 +5140,7 @@
                     <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
                         <span class="pill-badge wednesday">Wednesday</span>
                         <span class="pill-main">
-                            <span class="event-name">Sor Ynéz • Wed 1st &amp; 3rd <span class="baile-inolvidable-red">✨ BaiLe Inolvidable</span></span>
+                            <span class="event-name">Sor Ynéz • Wed 1st &amp; 3rd <span class="baile-inolvidable-red"><span class="star-icon">✨</span>Baile Inolvidable</span></span>
                             <span class="event-time"><span class="free-orange">FREE</span> • 6PM Music • 6:30PM Lesson • 7:30PM Social</span>
                         </span>
                         <span class="pill-styles">
@@ -5139,9 +5162,9 @@
                     </a>
 
                     <a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="welcome-cta-pill" data-app="facebook" data-event-key="cubalibre">
-                        <span class="pill-badge thursday">Thursday</span>
+                        <span class="pill-badge thursdays">Thursdays</span>
                         <span class="pill-main">
-                            <span class="event-name">Salsa Libre • Thu Weekly</span>
+                            <span class="event-name">Salsa Libre at Cuba Libre</span>
                             <span class="event-time"><span class="free-orange">FREE</span> • 9PM Lesson • 10PM Social</span>
                         </span>
                         <span class="pill-styles">
@@ -5178,7 +5201,7 @@
                     <div class="location-card cubalibre" data-venue="cubalibre">
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
                         <span class="location-name">Cuba Libre</span>
-                        <span class="location-days">Thursday</span>
+                        <span class="location-days">Thursdays</span>
                         <span class="location-label">Old City, PA</span>
                     </div>
                 </div>
@@ -5262,7 +5285,7 @@
                 <div class="cta-next-day" id="cta-next-day">
                     <span class="cta-next-day-icon"><i class="fas fa-calendar-check"></i></span>
                     <span class="cta-next-day-label">Next Class:</span>
-                    <span class="cta-next-day-name" id="cta-day-name">Thursday</span>
+                    <span class="cta-next-day-name" id="cta-day-name">Sunday</span>
                 </div>
 
                 <div class="cta-class-list" id="cta-class-list">
@@ -5273,8 +5296,13 @@
                     </div>
                     <div class="cta-class-row">
                         <span class="cta-class-time">8:00 PM</span>
-                        <span class="cta-class-name">Guided Practice</span>
-                        <span class="cta-class-level advanced" id="cta-level-badge">Practice</span>
+                        <span class="cta-class-name">Bachata Advanced Beginner</span>
+                        <span class="cta-class-level bachata-level">Bachata</span>
+                    </div>
+                    <div class="cta-class-row">
+                        <span class="cta-class-time">9:00 PM</span>
+                        <span class="cta-class-name">Bachata Sensual</span>
+                        <span class="cta-class-level sensual">Sensual</span>
                     </div>
                 </div>
 
@@ -5390,7 +5418,7 @@
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Sor Ynéz – <span class="baile-inolvidable-red">BaiLe Inolvidable</span> • 1st &amp; 3rd Wednesday</h3>
+                            <h3 class="event-title">Sor Ynéz – <span class="baile-inolvidable-red">✨Baile Inolvidable</span> • 1st &amp; 3rd Wednesday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Social</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
                             <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
@@ -5408,7 +5436,7 @@
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Salsa Libre – Thu Weekly</h3>
+                            <h3 class="event-title">Salsa Libre at Cuba Libre – Thu Weekly</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE · 9pm Lesson · 10pm Social</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/voTCqTyDaWUyYGsD7?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Cuba Libre, Old City, PA</a></div>
                             <a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
@@ -5928,9 +5956,19 @@
                 }
 
                 var skipBtn = document.getElementById('welcome-skip-btn');
-                if (skipBtn) skipBtn.addEventListener('click', function(e) { e.stopPropagation(); if (paymentModalOpen)
-                        return;
-                    fadeOutWelcomeArray(); });
+                if (skipBtn) {
+                    skipBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (paymentModalOpen) return;
+                        cancelAutoDismiss();
+                        fadeOutWelcomeArray();
+                    });
+                    skipBtn.addEventListener('touchstart', function(e) {
+                        e.stopPropagation();
+                    }, { passive: true });
+                }
+
                 welcomeArray.addEventListener('click', function(e) {
                     var target = e.target;
                     if (paymentModalOpen) return;
@@ -6074,45 +6112,82 @@
                     var classList = document.getElementById('cta-class-list');
                     if (!classList) return;
                     var rows = classList.querySelectorAll('.cta-class-row');
-                    if (rows.length < 2) return;
                     var classes = next.classes || [];
-                    var firstClass = classes[0] || "7:00pm Intro to Salsa & Bachata";
-                    var secondClass = classes[1] || "8:00pm Guided Practice";
 
-                    var time1 = firstClass.split(' ')[0] || "7:00";
-                    var time2 = secondClass.split(' ')[0] || "8:00";
-                    var name1 = firstClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Salsa & Bachata Intro";
-                    var name2 = secondClass.replace(/^\d+:\d+(am|pm)\s*/, '') || "Guided Practice";
-
-                    var timeEl1 = rows[0].querySelector('.cta-class-time');
-                    var nameEl1 = rows[0].querySelector('.cta-class-name');
-                    var timeEl2 = rows[1].querySelector('.cta-class-time');
-                    var nameEl2 = rows[1].querySelector('.cta-class-name');
-                    var levelBadge = rows[1].querySelector('.cta-class-level');
-
-                    if (timeEl1) timeEl1.textContent = time1;
-                    if (nameEl1) nameEl1.textContent = name1;
-                    if (timeEl2) timeEl2.textContent = time2;
-                    if (nameEl2) nameEl2.textContent = name2;
-
-                    if (levelBadge) {
-                        var badgeText = 'Practice';
-                        var badgeClass = 'advanced';
-                        if (secondClass.includes('Salsa') && !secondClass.includes('Bachata')) {
-                            badgeText = 'Salsa';
-                            badgeClass = 'salsa-level';
-                        } else if (secondClass.includes('Bachata') && !secondClass.includes('Salsa')) {
-                            badgeText = 'Bachata';
-                            badgeClass = 'bachata-level';
-                        } else if (secondClass.includes('Guided')) {
-                            badgeText = 'Practice';
-                            badgeClass = 'advanced';
-                        } else {
-                            badgeText = 'Practice';
-                            badgeClass = 'advanced';
+                    var classData = [];
+                    if (classes.length >= 1) {
+                        var parts1 = classes[0].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
+                        classData.push({
+                            time: parts1 ? parts1[1] : "7:00pm",
+                            name: parts1 ? parts1[2] : "Intro to Salsa & Bachata",
+                            level: "beginner",
+                            levelText: "Beginner"
+                        });
+                    }
+                    if (classes.length >= 2) {
+                        var parts2 = classes[1].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
+                        var name2 = parts2 ? parts2[2] : "Guided Practice";
+                        var level2 = "practice";
+                        var levelText2 = "Practice";
+                        if (name2.includes("Bachata Advanced Beginner")) {
+                            level2 = "bachata-level";
+                            levelText2 = "Bachata";
+                        } else if (name2.includes("Bachata Sensual")) {
+                            level2 = "sensual";
+                            levelText2 = "Sensual";
+                        } else if (name2.includes("Guided Practice")) {
+                            level2 = "practice";
+                            levelText2 = "Practice";
                         }
-                        levelBadge.textContent = badgeText;
-                        levelBadge.className = 'cta-class-level ' + badgeClass;
+                        classData.push({
+                            time: parts2 ? parts2[1] : "8:00pm",
+                            name: name2,
+                            level: level2,
+                            levelText: levelText2
+                        });
+                    }
+                    if (classes.length >= 3) {
+                        var parts3 = classes[2].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
+                        var name3 = parts3 ? parts3[2] : "Bachata Sensual";
+                        var level3 = "sensual";
+                        var levelText3 = "Sensual";
+                        if (name3.includes("Bachata Sensual")) {
+                            level3 = "sensual";
+                            levelText3 = "Sensual";
+                        } else if (name3.includes("Bachata Advanced Beginner")) {
+                            level3 = "bachata-level";
+                            levelText3 = "Bachata";
+                        }
+                        classData.push({
+                            time: parts3 ? parts3[1] : "9:00pm",
+                            name: name3,
+                            level: level3,
+                            levelText: levelText3
+                        });
+                    }
+
+                    while (classData.length < 3) {
+                        var idx = classData.length + 1;
+                        classData.push({
+                            time: (6 + idx) + ":00pm",
+                            name: "Class " + idx,
+                            level: "beginner",
+                            levelText: "Class"
+                        });
+                    }
+
+                    for (var r = 0; r < Math.min(rows.length, classData.length); r++) {
+                        var row = rows[r];
+                        var data = classData[r];
+                        var timeEl = row.querySelector('.cta-class-time');
+                        var nameEl = row.querySelector('.cta-class-name');
+                        var levelEl = row.querySelector('.cta-class-level');
+                        if (timeEl) timeEl.textContent = data.time;
+                        if (nameEl) nameEl.textContent = data.name;
+                        if (levelEl) {
+                            levelEl.textContent = data.levelText;
+                            levelEl.className = 'cta-class-level ' + data.level;
+                        }
                     }
 
                     var ctaBadge = document.querySelector('.cta-badge');
@@ -6242,8 +6317,8 @@
                     var pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
                     if (pills.length === 0) return;
                     document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
-                    pills.forEach(function(p) { p.classList.remove('next-event');
-                        p.classList.remove('second-event-highlight'); });
+                    pills.forEach(function(p) { p.classList.remove('next-event', 'event-this-week');
+                        p.style.boxShadow = ''; });
 
                     var now = new Date();
                     now.setHours(0, 0, 0, 0);
@@ -6253,7 +6328,7 @@
                             'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
                             'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Ynéz' },
                             'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' },
-                            'cubalibre': { day: 'Thu', pattern: 'every', label: 'Salsa Libre' }
+                            'cubalibre': { day: 'Thu', pattern: 'every', label: 'Salsa Libre at Cuba Libre' }
                         };
                         return map[key] || null;
                     }
@@ -6328,69 +6403,33 @@
                             daysUntil: daysUntil };
                     });
 
-                    var nextEvent = orderedData.length > 0 ? orderedData[0] : null;
-                    var secondEvent = orderedData.length > 1 ? orderedData[1] : null;
-                    var firstDate = nextEvent ? nextEvent.date : null;
+                    var thisWeekEvents = orderedData.filter(function(item) {
+                        return item.daysUntil >= 0 && item.daysUntil < 7;
+                    });
 
-                    orderedPills.forEach(function(pill, index) {
-                        var key = pill.getAttribute('data-event-key');
-                        var daysUntil = 999;
-                        var dayName = getDayNameFromKey(key);
-                        if (key) {
-                            var info = parseEventKey(key);
-                            if (info) {
-                                var date = getNextOccurrence(info.day, info.pattern);
-                                if (date) {
-                                    var dateCopy = new Date(date);
-                                    dateCopy.setHours(0, 0, 0, 0);
-                                    daysUntil = Math.ceil((dateCopy.getTime() - now.getTime()) / (1000 *
-                                        60 * 60 * 24));
-                                    if (daysUntil < 0) daysUntil = 0;
-                                }
-                            }
-                        }
-
-                        var stylesEl = pill.querySelector('.pill-styles');
-                        if (stylesEl) {
-                            var stylesText = stylesEl.textContent;
-                            if (stylesText && stylesText.trim()) stylesEl.style.display = 'flex';
-                        }
-
-                        var badge = pill.querySelector('.pill-badge');
-                        if (!badge) {
-                            badge = document.createElement('span');
-                            badge.className = 'pill-badge';
-                            pill.prepend(badge);
-                        }
-
-                        var isFirst = (nextEvent && pill === nextEvent.pill);
-                        var isSecondSameWeek = false;
-                        if (secondEvent && pill === secondEvent.pill && firstDate) {
-                            isSecondSameWeek = isSameCalendarWeek(firstDate, secondEvent.date);
-                        }
-
-                        var dayLower = dayName ? dayName.toLowerCase() : '';
-
-                        if (dayName) {
-                            badge.textContent = dayName.toUpperCase();
-                            badge.className = 'pill-badge ' + dayLower;
-                        } else {
-                            badge.textContent = 'THIS WEEK';
-                            badge.className = 'pill-badge this-week-badge';
-                        }
-
-                        if (isFirst) {
-                            pill.classList.add('next-event');
-                            var existingUpBadge = pill.querySelector('.up-next-badge');
-                            if (existingUpBadge) existingUpBadge.remove();
-                            var upBadge = document.createElement('span');
-                            upBadge.className = 'up-next-badge';
-                            upBadge.textContent = 'this week';
-                            pill.appendChild(upBadge);
-                        } else if (isSecondSameWeek) {
-                            pill.classList.add('second-event-highlight');
+                    orderedData.forEach(function(item) {
+                        var pill = item.pill;
+                        var daysUntil = item.daysUntil;
+                        if (daysUntil >= 0 && daysUntil < 7) {
+                            pill.classList.add('event-this-week');
+                            pill.style.boxShadow = '0 0 0 3px rgba(31, 75, 138, 0.40), 0 0 32px rgba(31, 75, 138, 0.15), 0 2px 12px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.05)';
                         }
                     });
+
+                    if (thisWeekEvents.length === 1) {
+                        var ev = thisWeekEvents[0];
+                        var pill = ev.pill;
+                        pill.classList.add('next-event');
+                        var existingUpBadge = pill.querySelector('.up-next-badge');
+                        if (existingUpBadge) existingUpBadge.remove();
+                        var upBadge = document.createElement('span');
+                        upBadge.className = 'up-next-badge';
+                        upBadge.textContent = 'this week';
+                        pill.appendChild(upBadge);
+                    } else if (thisWeekEvents.length >= 3) {
+                        // remove any existing up-next-badge from all pills
+                        document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
+                    }
                 }
 
                 function initVideoLibrary() {
