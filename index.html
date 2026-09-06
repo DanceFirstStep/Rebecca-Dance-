@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── reset & base ── */
         * {
             margin: 0;
             padding: 0;
@@ -142,7 +141,6 @@
             --red-soft: #d94a3d;
         }
 
-        /* ── scrollbar ── */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -273,7 +271,6 @@
             will-change: width;
         }
 
-        /* ── welcome splash ── */
         #welcome-array {
             position: fixed;
             top: 0;
@@ -962,7 +959,6 @@
             }
         }
 
-        /* ── header ── */
         .header-container {
             text-align: center;
             margin-bottom: var(--space-7);
@@ -2439,14 +2435,6 @@
             color: #16a085;
             font-weight: 700;
             background: rgba(22, 160, 133, 0.08);
-            padding: var(--space-1) var(--space-3);
-            border-radius: var(--radius-pill);
-            display: inline-block;
-        }
-        .link-card .bachata-elite {
-            color: #e67e22;
-            font-weight: 700;
-            background: rgba(230, 126, 34, 0.08);
             padding: var(--space-1) var(--space-3);
             border-radius: var(--radius-pill);
             display: inline-block;
@@ -4992,8 +4980,7 @@
         .link-card .schedule-class .class-name .salsa-text,
         .link-card .schedule-class .class-name .bachata-text,
         .link-card .schedule-class .class-name .bachata-sensual,
-        .link-card .schedule-class .class-name .bachata-advance,
-        .link-card .schedule-class .class-name .bachata-elite {
+        .link-card .schedule-class .class-name .bachata-advance {
             font-size: var(--font-xs);
             padding: var(--space-1) var(--space-2);
         }
@@ -5001,8 +4988,7 @@
             .link-card .schedule-class .class-name .salsa-text,
             .link-card .schedule-class .class-name .bachata-text,
             .link-card .schedule-class .class-name .bachata-sensual,
-            .link-card .schedule-class .class-name .bachata-advance,
-            .link-card .schedule-class .class-name .bachata-elite {
+            .link-card .schedule-class .class-name .bachata-advance {
                 font-size: var(--font-xs);
                 padding: var(--space-1) var(--space-3);
             }
@@ -5067,12 +5053,9 @@
             <h1 class="welcome-title">Rebecca & Daniel</h1>
             <p class="welcome-social-prompt">Follow us for dance tips &amp; social nights</p>
             <div class="apps-row">
-                <!-- Rebecca Facebook – share link but app‑first -->
                 <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="app-icon facebook" data-app="facebook" data-fb-username="rebecca_bachata"><i class="fab fa-facebook"></i><span>Facebook</span></a>
-                <!-- Rebecca Instagram -->
                 <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="app-icon instagram" data-app="instagram"><i class="fab fa-instagram"></i><span>Instagram<br>Rebecca_bachata</span></a>
                 <a href="#" class="app-icon calendar" id="welcome-calendar-icon"><i class="fas fa-calendar-alt"></i><span>Class Schedule</span></a>
-                <!-- DJ MX Instagram -->
                 <a href="https://www.instagram.com/djmxphilly?igsh=MWhjNnh6dm56NjUzMA==" class="app-icon djmx" data-app="instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i><span>Instagram<br>DJ MX</span></a>
             </div>
             <div class="apps-row second-row">
@@ -5119,7 +5102,6 @@
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
 
-                    <!-- ARDMORE – Saturday 2nd & 4th -->
                     <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-badge saturday">Saturday</span>
                         <span class="pill-main">
@@ -5128,11 +5110,10 @@
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue • Cumbia</span>
-                            <span class="dj-guest">🎧 Special DJ Guest</span>
+                            <span class="dj-guest">🎧 DJ MX</span>
                         </span>
                     </a>
 
-                    <!-- SOR YNÉZ – Wednesday 1st & 3rd -->
                     <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
                         <span class="pill-badge wednesday">Wednesday</span>
                         <span class="pill-main">
@@ -5141,11 +5122,10 @@
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue &amp; More</span>
-                            <span class="dj-guest">🎧 Special DJ Guest</span>
+                            <span class="dj-guest">🎧 DJ MX</span>
                         </span>
                     </a>
 
-                    <!-- SOR YNÉZ – Friday 2nd & 4th -->
                     <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri">
                         <span class="pill-badge friday">Friday</span>
                         <span class="pill-main">
@@ -5154,11 +5134,10 @@
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue &amp; More</span>
-                            <span class="dj-guest">🎧 Special DJ Guest</span>
+                            <span class="dj-guest">🎧 DJ MX</span>
                         </span>
                     </a>
 
-                    <!-- CUBA LIBRE – Thursday weekly -->
                     <a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="welcome-cta-pill" data-app="facebook" data-event-key="cubalibre">
                         <span class="pill-badge thursday">Thursday</span>
                         <span class="pill-main">
@@ -5188,7 +5167,7 @@
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
                         <span class="location-name">Sor Ynéz</span>
                         <span class="location-days">Wednesday (1st &amp; 3rd) · Friday (2nd &amp; 4th)</span>
-                        <span class="location-label">Philadelphia, PA</span>
+                        <span class="location-label">Fishtown, Philadelphia</span>
                     </div>
                     <div class="location-card ardmore" data-venue="ardmore">
                         <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
@@ -5240,7 +5219,7 @@
                                 <div class="schedule-day-header">Sunday</div>
                                 <div class="schedule-class"><span class="class-time">7:00pm</span><span class="class-name"><span class="salsa-text">Salsa</span> &amp; <span class="bachata-text">Bachata</span> Intro<span class="class-badge badge-cycle">4‑wk cycle</span></span></div>
                                 <div class="schedule-class"><span class="class-time">8:00pm</span><span class="class-name"><span class="bachata-text">Bachata Advanced Beginner</span></span></div>
-                                <div class="schedule-class"><span class="class-time">9:00pm</span><span class="class-name"><span class="bachata-elite">Bachata Elite</span></span></div>
+                                <div class="schedule-class"><span class="class-time">9:00pm</span><span class="class-name"><span class="bachata-sensual">Bachata Sensual</span></span></div>
                             </div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform" class="card-cta" data-app="register">Register <i class="fas fa-arrow-right"></i></a>
@@ -5363,7 +5342,6 @@
                     <div class="social-links-container">
                         <span class="social-links-title">Follow Rebecca on Social Media:</span>
                         <div class="social-links-grid">
-                            <!-- Rebecca Facebook – share link, app‑first via data-fb-username -->
                             <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="social-link-item" data-app="facebook" data-fb-username="rebecca_bachata"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@RebeccaBachata</span></div></a>
                             <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@rebecca_bachata</span></div></a>
                             <a href="https://www.tiktok.com/@rebecca_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@rebecca_bachata</span></div></a>
@@ -5376,7 +5354,6 @@
                     <div class="social-links-container">
                         <span class="social-links-title">Follow Daniel on Social Media:</span>
                         <div class="social-links-grid">
-                            <!-- Daniel Facebook – share link, app‑first via data-fb-username -->
                             <a href="https://www.facebook.com/share/17ZozCRrRN/" class="social-link-item" data-app="facebook" data-fb-username="danielp_bachata"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@DanielPalaciosDance</span></div></a>
                             <a href="https://www.instagram.com/danielp_bachata?igsh=d3Jpa3RtaTRqcm1y&utm_source=qr" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@danielp_bachata</span></div></a>
                             <a href="https://www.tiktok.com/@danielp_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@danielp_bachata</span></div></a>
@@ -5516,13 +5493,11 @@
         (function() {
             'use strict';
 
-            // ── detect Facebook in‑app browser ──
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
             }
 
-            // ── open app directly without pop-up messages ──
             function openAppOrWeb(webUrl, appType, options) {
                 options = options || {};
                 var userAgent = navigator.userAgent.toLowerCase();
@@ -5533,7 +5508,6 @@
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
-                // ---- Facebook ----
                 if (appType === 'facebook') {
                     var fbUsername = options.fbUsername || null;
                     var profileMatch = webUrl.match(/facebook\.com\/(?:share\/)?([^\/?]+)/);
@@ -5566,10 +5540,7 @@
                         }
                         fallbackUrl = webUrl;
                     }
-                }
-
-                // ---- Instagram ----
-                else if (appType === 'instagram') {
+                } else if (appType === 'instagram') {
                     var igMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
                     var igUsername = igMatch ? igMatch[1].split('?')[0] : 'rebecca_bachata';
                     if (isFB) { window.open(webUrl, '_blank'); return; }
@@ -5580,10 +5551,7 @@
                         schemeUrl = 'instagram://user?username=' + igUsername;
                     }
                     fallbackUrl = webUrl;
-                }
-
-                // ---- TikTok ----
-                else if (appType === 'tiktok') {
+                } else if (appType === 'tiktok') {
                     var ttMatch = webUrl.match(/tiktok\.com\/@([^\/?]+)/);
                     var ttUsername = ttMatch ? ttMatch[1] : 'rebecca_bachata';
                     if (isFB) { window.open(webUrl, '_blank'); return; }
@@ -5594,10 +5562,7 @@
                         schemeUrl = 'tiktok://user?username=' + ttUsername;
                     }
                     fallbackUrl = webUrl;
-                }
-
-                // ---- Venmo ----
-                else if (appType === 'venmo') {
+                } else if (appType === 'venmo') {
                     var vMatch = webUrl.match(/\/u\/([^\/?]+)/);
                     var vHandle = vMatch ? vMatch[1] : 'Rebecca_Rose_Bachata';
                     if (isFB) { window.open(webUrl, '_blank'); return; }
@@ -5608,10 +5573,7 @@
                         schemeUrl = 'venmo://pay?recipients=' + vHandle;
                     }
                     fallbackUrl = webUrl;
-                }
-
-                // ---- Cash App ----
-                else if (appType === 'cashapp') {
+                } else if (appType === 'cashapp') {
                     var cMatch = webUrl.match(/\$([A-Za-z0-9]+)/);
                     var cTag = cMatch ? cMatch[1] : 'RebeccaRoseBachata';
                     if (isFB) { window.open(webUrl, '_blank'); return; }
@@ -5622,10 +5584,7 @@
                         schemeUrl = 'cashapp://$' + cTag;
                     }
                     fallbackUrl = webUrl;
-                }
-
-                // ---- Google Maps ----
-                else if (appType === 'google-maps') {
+                } else if (appType === 'google-maps') {
                     var mapsUrl = webUrl;
                     var coordMatch = webUrl.match(/@([-+]?\d+\.\d+),([-+]?\d+\.\d+)/);
                     var placeMatch = webUrl.match(/[?&]q=([^&]+)/);
@@ -5653,10 +5612,7 @@
                         schemeUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(mapsUrl);
                     }
                     fallbackUrl = webUrl;
-                }
-
-                // ---- email / register ----
-                else if (appType === 'email') {
+                } else if (appType === 'email') {
                     window.location.href = webUrl;
                     return;
                 } else if (appType === 'register') {
@@ -5664,33 +5620,24 @@
                     return;
                 }
 
-                // If in Facebook in-app browser, just open the web URL
                 if (isFB) {
                     window.open(webUrl, '_blank');
                     return;
                 }
 
-                // If no scheme was built, open web URL
                 if (!schemeUrl) {
                     window.open(webUrl, '_blank');
                     return;
                 }
 
-                // --- Use window.location.href to open the app directly ---
-                // This will show the system dialog once (unavoidable on iOS/Android)
-                // but we do NOT show any custom message ourselves.
                 window.location.href = schemeUrl;
 
-                // Fallback: if the app doesn't open, go to the web URL after a timeout
-                // Use a shorter timeout to avoid the user waiting too long
                 var fallbackTimer = setTimeout(function() {
-                    // If the page is still visible (app didn't open), go to web URL
                     if (!document.hidden) {
                         window.location.href = fallbackUrl;
                     }
                 }, 600);
 
-                // Cancel the fallback if the page becomes hidden (app opened)
                 var visibilityHandler = function() {
                     if (document.hidden) {
                         clearTimeout(fallbackTimer);
@@ -5700,7 +5647,6 @@
                 document.addEventListener('visibilitychange', visibilityHandler);
             }
 
-            // ── setup deep‑link handlers ──
             function setupDeepLinks() {
                 var appLinks = document.querySelectorAll('[data-app]');
                 appLinks.forEach(function(link) {
@@ -5747,7 +5693,6 @@
                 });
             }
 
-            // ── location data ──
             var locationData = {
                 stardust: {
                     name: 'Stardust Ballroom',
@@ -5880,7 +5825,6 @@
                 });
             }
 
-            // ── DOM ready ──
             document.addEventListener('DOMContentLoaded', function() {
                 setupDeepLinks();
 
@@ -6090,7 +6034,7 @@
                         locationId: "stardust-card", endTime: 2100 },
                     { day: "Sunday", dayIndex: 0, studio: "Stardust Ballroom",
                         classes: ["7:00pm Intro to Salsa & Bachata", "8:00pm Bachata Advanced Beginner",
-                            "9:00pm Bachata Elite"
+                            "9:00pm Bachata Sensual"
                         ], locationId: "stardust-card", endTime: 2200 },
                     { day: "Saturday", dayIndex: 6, studio: "Estilo Dance Studio",
                         classes: ["4:00pm Advanced Beginner Salsa", "5:00pm Bachata Sensual"],
