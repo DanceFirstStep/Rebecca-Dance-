@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
+        /* ── reset & base ── */
         * {
             margin: 0;
             padding: 0;
@@ -141,6 +142,7 @@
             --red-soft: #d94a3d;
         }
 
+        /* ── scrollbar ── */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -271,6 +273,7 @@
             will-change: width;
         }
 
+        /* ── welcome splash ── */
         #welcome-array {
             position: fixed;
             top: 0;
@@ -628,7 +631,6 @@
             width: 100%;
         }
 
-        /* ----- PILLS – bigger day badge, balanced layout ----- */
         .welcome-cta-pill {
             display: flex;
             flex-direction: row;
@@ -664,7 +666,6 @@
             transition-duration: 0.08s;
         }
 
-        /* day badge – bigger, bolder, balanced */
         .welcome-cta-pill .pill-badge {
             display: inline-flex;
             align-items: center;
@@ -789,11 +790,6 @@
             background: linear-gradient(145deg, #f4faff, var(--white));
             box-shadow: 0 8px 28px rgba(31, 75, 138, 0.14);
         }
-        .welcome-cta-pill.second-event-highlight {
-            border: 2px solid var(--primary-blue);
-            background: linear-gradient(145deg, #f4faff, var(--white));
-            box-shadow: 0 4px 18px rgba(31, 75, 138, 0.08);
-        }
         .welcome-cta-pill .up-next-badge {
             position: absolute;
             top: -14px;
@@ -833,7 +829,6 @@
             font-weight: 700;
         }
 
-        /* ------ responsive pill tweaks ------ */
         @media (max-width: 850px) {
             .welcome-cta-pill {
                 padding: var(--space-4) var(--space-5);
@@ -860,7 +855,6 @@
                 font-size: 0.9rem;
             }
         }
-
         @media (max-width: 650px) {
             .welcome-cta-pill {
                 flex-direction: row;
@@ -899,7 +893,6 @@
                 min-width: 56px;
             }
         }
-
         @media (max-width: 550px) {
             .welcome-cta-pill {
                 flex-direction: row;
@@ -939,7 +932,6 @@
                 min-width: 48px;
             }
         }
-
         @media (max-width: 400px) {
             .welcome-cta-pill .pill-badge {
                 font-size: 0.62rem;
@@ -970,7 +962,7 @@
             }
         }
 
-        /* ------ rest of layout ------ */
+        /* ── header ── */
         .header-container {
             text-align: center;
             margin-bottom: var(--space-7);
@@ -5075,9 +5067,12 @@
             <h1 class="welcome-title">Rebecca & Daniel</h1>
             <p class="welcome-social-prompt">Follow us for dance tips &amp; social nights</p>
             <div class="apps-row">
-                <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="app-icon facebook" data-app="facebook"><i class="fab fa-facebook"></i><span>Facebook</span></a>
+                <!-- Rebecca Facebook – share link but app‑first -->
+                <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="app-icon facebook" data-app="facebook" data-fb-username="rebecca_bachata"><i class="fab fa-facebook"></i><span>Facebook</span></a>
+                <!-- Rebecca Instagram -->
                 <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="app-icon instagram" data-app="instagram"><i class="fab fa-instagram"></i><span>Instagram<br>Rebecca_bachata</span></a>
                 <a href="#" class="app-icon calendar" id="welcome-calendar-icon"><i class="fas fa-calendar-alt"></i><span>Class Schedule</span></a>
+                <!-- DJ MX Instagram -->
                 <a href="https://www.instagram.com/djmxphilly?igsh=MWhjNnh6dm56NjUzMA==" class="app-icon djmx" data-app="instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i><span>Instagram<br>DJ MX</span></a>
             </div>
             <div class="apps-row second-row">
@@ -5230,7 +5225,7 @@
                         <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
                             <span class="month-promo" id="stardust-month-promo">March</span>
                             <div class="location-icons">
-                                <a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/share/16jfEPvQbw/" class="location-icon facebook-icon" data-app="facebook" data-fb-username="stardust_ballroom"><i class="fab fa-facebook-f"></i></a>
                             </div>
                         </div>
                     </div>
@@ -5368,7 +5363,8 @@
                     <div class="social-links-container">
                         <span class="social-links-title">Follow Rebecca on Social Media:</span>
                         <div class="social-links-grid">
-                            <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="social-link-item" data-app="facebook"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@RebeccaBachata</span></div></a>
+                            <!-- Rebecca Facebook – share link, app‑first via data-fb-username -->
+                            <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="social-link-item" data-app="facebook" data-fb-username="rebecca_bachata"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@RebeccaBachata</span></div></a>
                             <a href="https://www.instagram.com/rebecca_bachata?igsh=MWY1cHI4c2Z0a21zcw==" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@rebecca_bachata</span></div></a>
                             <a href="https://www.tiktok.com/@rebecca_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@rebecca_bachata</span></div></a>
                         </div>
@@ -5380,7 +5376,8 @@
                     <div class="social-links-container">
                         <span class="social-links-title">Follow Daniel on Social Media:</span>
                         <div class="social-links-grid">
-                            <a href="https://www.facebook.com/share/17ZozCRrRN/" class="social-link-item" data-app="facebook"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@DanielPalaciosDance</span></div></a>
+                            <!-- Daniel Facebook – share link, app‑first via data-fb-username -->
+                            <a href="https://www.facebook.com/share/17ZozCRrRN/" class="social-link-item" data-app="facebook" data-fb-username="danielp_bachata"><div class="social-link-icon facebook-icon-bg"><i class="fab fa-facebook-f"></i></div><div class="social-link-text"><span class="social-link-platform">Facebook</span><span class="social-link-username">@DanielPalaciosDance</span></div></a>
                             <a href="https://www.instagram.com/danielp_bachata?igsh=d3Jpa3RtaTRqcm1y&utm_source=qr" class="social-link-item" data-app="instagram"><div class="social-link-icon instagram-icon-bg"><i class="fab fa-instagram"></i></div><div class="social-link-text"><span class="social-link-platform">Instagram</span><span class="social-link-username">@danielp_bachata</span></div></a>
                             <a href="https://www.tiktok.com/@danielp_bachata" class="social-link-item" data-app="tiktok" target="_blank" rel="noopener"><div class="social-link-icon tiktok-icon-bg"><i class="fab fa-tiktok"></i></div><div class="social-link-text"><span class="social-link-platform">TikTok</span><span class="social-link-username">@danielp_bachata</span></div></a>
                         </div>
@@ -5519,95 +5516,131 @@
         (function() {
             'use strict';
 
+            // ── detect Facebook in‑app browser ──
             function isFacebookInAppBrowser() {
                 var ua = navigator.userAgent || navigator.vendor || window.opera;
                 return /FBAN|FBAV|FBIOS|FB_IAB/i.test(ua);
             }
 
-            function getMobileOS() {
-                var ua = navigator.userAgent.toLowerCase();
-                if (/iphone|ipad|ipod/.test(ua)) return 'ios';
-                if (/android/.test(ua)) return 'android';
-                return 'other';
-            }
-
+            // ── open app directly without pop-up messages ──
             function openAppOrWeb(webUrl, appType, options) {
                 options = options || {};
                 var userAgent = navigator.userAgent.toLowerCase();
                 var isIOS = /iphone|ipad|ipod/.test(userAgent);
                 var isAndroid = /android/.test(userAgent);
                 var isFB = isFacebookInAppBrowser();
-                var os = getMobileOS();
+
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
+                // ---- Facebook ----
                 if (appType === 'facebook') {
-                    // Extract event ID from URL like:
-                    // https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/
-                    // or https://www.facebook.com/events/123456789/
+                    var fbUsername = options.fbUsername || null;
+                    var profileMatch = webUrl.match(/facebook\.com\/(?:share\/)?([^\/?]+)/);
+                    var urlUsername = profileMatch ? profileMatch[1] : null;
                     var eventMatch = webUrl.match(/\/events\/(?:[^\/]+\/)?(?:[^\/]+\/)?(\d+)\/?/);
-                    // Also try simpler pattern for /events/{id}/
-                    if (!eventMatch) {
-                        eventMatch = webUrl.match(/\/events\/(\d+)\/?/);
-                    }
-                    // Also try to extract last numeric segment
+                    if (!eventMatch) eventMatch = webUrl.match(/\/events\/(\d+)\/?/);
                     if (!eventMatch) {
                         var numMatch = webUrl.match(/\/(\d{10,})\/?$/);
                         if (numMatch) eventMatch = ['', numMatch[1]];
                     }
-
                     if (eventMatch) {
                         var eventId = eventMatch[1];
-                        if (isFB) {
-                            window.location.href = 'fb://event/' + eventId;
-                            return;
+                        if (isFB) { window.open(webUrl, '_blank'); return; }
+                        if (isAndroid) {
+                            schemeUrl = 'intent://facebook.com/events/' + eventId +
+                                '#Intent;scheme=https;package=com.facebook.katana;end';
+                        } else {
+                            schemeUrl = 'fb://event/' + eventId;
                         }
-                        schemeUrl = 'fb://event/' + eventId;
                         fallbackUrl = webUrl;
                     } else {
-                        // fallback: try to open profile
-                        var profileMatch = webUrl.match(/facebook\.com\/(?:share\/)?([^\/?]+)/);
-                        var username = profileMatch ? profileMatch[1] : 'rebecca_bachata';
-                        if (isFB) {
-                            window.location.href = webUrl;
-                            return;
+                        var username = fbUsername || urlUsername || 'rebecca_bachata';
+                        if (username === 'share' || !username) username = fbUsername || 'rebecca_bachata';
+                        if (isFB) { window.open(webUrl, '_blank'); return; }
+                        if (isAndroid) {
+                            schemeUrl = 'intent://facebook.com/' + username +
+                                '#Intent;scheme=https;package=com.facebook.katana;end';
+                        } else {
+                            schemeUrl = 'fb://profile/' + username;
                         }
-                        schemeUrl = 'fb://profile/' + username;
                         fallbackUrl = webUrl;
                     }
-                } else if (appType === 'instagram') {
+                }
+
+                // ---- Instagram ----
+                else if (appType === 'instagram') {
                     var igMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
-                    var igUsername = igMatch ? igMatch[1] : 'rebecca_bachata';
-                    schemeUrl = 'instagram://user?username=' + igUsername;
+                    var igUsername = igMatch ? igMatch[1].split('?')[0] : 'rebecca_bachata';
+                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isAndroid) {
+                        schemeUrl = 'intent://instagram.com/' + igUsername +
+                            '#Intent;scheme=https;package=com.instagram.android;end';
+                    } else {
+                        schemeUrl = 'instagram://user?username=' + igUsername;
+                    }
                     fallbackUrl = webUrl;
-                } else if (appType === 'tiktok') {
+                }
+
+                // ---- TikTok ----
+                else if (appType === 'tiktok') {
                     var ttMatch = webUrl.match(/tiktok\.com\/@([^\/?]+)/);
                     var ttUsername = ttMatch ? ttMatch[1] : 'rebecca_bachata';
-                    if (isIOS) {
-                        schemeUrl = 'tiktok://user?username=' + ttUsername;
-                    } else if (isAndroid) {
-                        schemeUrl = 'tiktok://@' + ttUsername;
+                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isAndroid) {
+                        schemeUrl = 'intent://tiktok.com/@' + ttUsername +
+                            '#Intent;scheme=https;package=com.zhiliaoapp.musically;end';
                     } else {
                         schemeUrl = 'tiktok://user?username=' + ttUsername;
                     }
                     fallbackUrl = webUrl;
-                } else if (appType === 'venmo') {
+                }
+
+                // ---- Venmo ----
+                else if (appType === 'venmo') {
                     var vMatch = webUrl.match(/\/u\/([^\/?]+)/);
                     var vHandle = vMatch ? vMatch[1] : 'Rebecca_Rose_Bachata';
-                    schemeUrl = 'venmo://pay?recipients=' + vHandle;
+                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isAndroid) {
+                        schemeUrl = 'intent://venmo.com/' + vHandle +
+                            '#Intent;scheme=https;package=com.venmo;end';
+                    } else {
+                        schemeUrl = 'venmo://pay?recipients=' + vHandle;
+                    }
                     fallbackUrl = webUrl;
-                } else if (appType === 'cashapp') {
+                }
+
+                // ---- Cash App ----
+                else if (appType === 'cashapp') {
                     var cMatch = webUrl.match(/\$([A-Za-z0-9]+)/);
                     var cTag = cMatch ? cMatch[1] : 'RebeccaRoseBachata';
-                    schemeUrl = 'cashapp://$' + cTag;
+                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isAndroid) {
+                        schemeUrl = 'intent://cash.app/$' + cTag +
+                            '#Intent;scheme=https;package=com.block.cashapp;end';
+                    } else {
+                        schemeUrl = 'cashapp://$' + cTag;
+                    }
                     fallbackUrl = webUrl;
-                } else if (appType === 'google-maps') {
+                }
+
+                // ---- Google Maps ----
+                else if (appType === 'google-maps') {
                     var mapsUrl = webUrl;
                     var coordMatch = webUrl.match(/@([-+]?\d+\.\d+),([-+]?\d+\.\d+)/);
                     var placeMatch = webUrl.match(/[?&]q=([^&]+)/);
                     var query = placeMatch ? decodeURIComponent(placeMatch[1]) : '';
-
-                    if (isIOS) {
+                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isAndroid) {
+                        if (coordMatch) {
+                            schemeUrl = 'geo:' + coordMatch[1] + ',' + coordMatch[2] + '?q=' + coordMatch[1] +
+                                ',' + coordMatch[2];
+                        } else if (query) {
+                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(query);
+                        } else {
+                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(mapsUrl);
+                        }
+                    } else if (isIOS) {
                         if (coordMatch) {
                             schemeUrl = 'comgooglemaps://?q=' + coordMatch[1] + ',' + coordMatch[2];
                         } else if (query) {
@@ -5616,20 +5649,14 @@
                             schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(mapsUrl);
                         }
                         if (!schemeUrl) schemeUrl = 'maps://?q=' + encodeURIComponent(mapsUrl);
-                    } else if (isAndroid) {
-                        if (coordMatch) {
-                            schemeUrl = 'geo:' + coordMatch[1] + ',' + coordMatch[2] + '?q=' + coordMatch[1] + ',' +
-                                coordMatch[2];
-                        } else if (query) {
-                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(query);
-                        } else {
-                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(mapsUrl);
-                        }
                     } else {
                         schemeUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(mapsUrl);
                     }
                     fallbackUrl = webUrl;
-                } else if (appType === 'email') {
+                }
+
+                // ---- email / register ----
+                else if (appType === 'email') {
                     window.location.href = webUrl;
                     return;
                 } else if (appType === 'register') {
@@ -5637,28 +5664,43 @@
                     return;
                 }
 
-                if (!schemeUrl) {
-                    window.open(fallbackUrl, '_blank');
+                // If in Facebook in-app browser, just open the web URL
+                if (isFB) {
+                    window.open(webUrl, '_blank');
                     return;
                 }
 
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-                var timeout = setTimeout(function() {
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                    window.open(fallbackUrl, '_blank');
-                }, 800);
-                iframe.src = schemeUrl;
-                iframe.onload = function() {
-                    clearTimeout(timeout);
-                    if (iframe && iframe.parentNode) iframe.parentNode.removeChild(iframe);
-                };
-                if (isIOS) {
-                    window.location.href = schemeUrl;
+                // If no scheme was built, open web URL
+                if (!schemeUrl) {
+                    window.open(webUrl, '_blank');
+                    return;
                 }
+
+                // --- Use window.location.href to open the app directly ---
+                // This will show the system dialog once (unavoidable on iOS/Android)
+                // but we do NOT show any custom message ourselves.
+                window.location.href = schemeUrl;
+
+                // Fallback: if the app doesn't open, go to the web URL after a timeout
+                // Use a shorter timeout to avoid the user waiting too long
+                var fallbackTimer = setTimeout(function() {
+                    // If the page is still visible (app didn't open), go to web URL
+                    if (!document.hidden) {
+                        window.location.href = fallbackUrl;
+                    }
+                }, 600);
+
+                // Cancel the fallback if the page becomes hidden (app opened)
+                var visibilityHandler = function() {
+                    if (document.hidden) {
+                        clearTimeout(fallbackTimer);
+                        document.removeEventListener('visibilitychange', visibilityHandler);
+                    }
+                };
+                document.addEventListener('visibilitychange', visibilityHandler);
             }
 
+            // ── setup deep‑link handlers ──
             function setupDeepLinks() {
                 var appLinks = document.querySelectorAll('[data-app]');
                 appLinks.forEach(function(link) {
@@ -5686,6 +5728,8 @@
                         originalHref = defaultMap[appType] || 'https://';
                     }
 
+                    var fbUser = link.getAttribute('data-fb-username') || null;
+
                     link.setAttribute('data-app-processed', 'true');
 
                     link.addEventListener('click', function(e) {
@@ -5698,11 +5742,12 @@
                             window.location.href = originalHref;
                             return;
                         }
-                        openAppOrWeb(originalHref, appType);
+                        openAppOrWeb(originalHref, appType, { fbUsername: fbUser });
                     });
                 });
             }
 
+            // ── location data ──
             var locationData = {
                 stardust: {
                     name: 'Stardust Ballroom',
@@ -5835,6 +5880,7 @@
                 });
             }
 
+            // ── DOM ready ──
             document.addEventListener('DOMContentLoaded', function() {
                 setupDeepLinks();
 
