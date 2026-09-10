@@ -65,12 +65,14 @@
             --primary-blue: #1f4b8a;
             --secondary-blue: #3a70b5;
             --accent-blue: #2d7aff;
+            --action-blue: #1d4ed8;
+            --action-blue-dark: #1e3a8a;
             --dark-blue: #122b5a;
             --dark: #081220;
             --text-dark: #0b1628;
             --text-medium: #1a2c44;
             --text-light: #2a405a;
-            --text-muted: #5b6f85;
+            --text-muted: #4e6480;
             --white: #ffffff;
             --light-bg: #f5f9ff;
             --lighter-bg: #eaf0fa;
@@ -82,6 +84,8 @@
             --shadow-xl: 0 24px 64px rgba(31, 75, 138, 0.12);
             --gradient-blue: linear-gradient(135deg, #1f4b8a, #3a70b5);
             --gradient-dark: linear-gradient(135deg, #122b5a, #1f4b8a);
+            --gradient-action: linear-gradient(135deg, #2563eb, #1d4ed8);
+            --gradient-action-hover: linear-gradient(135deg, #1d4ed8, #1e3a8a);
             --gradient-warm: linear-gradient(135deg, #f59e0b, #d97706);
             --gradient-cycle: linear-gradient(135deg, #0f766e, #14b8a6);
             --gradient-card: linear-gradient(145deg, #ffffff, #f8fbff);
@@ -405,6 +409,8 @@
             white-space: nowrap;
             position: relative;
             z-index: 10001;
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
         }
         #welcome-skip-btn i {
             font-size: var(--font-sm);
@@ -416,10 +422,6 @@
         }
         #welcome-skip-btn:hover i {
             transform: translateX(3px);
-        }
-        #welcome-skip-btn {
-            pointer-events: auto !important;
-            touch-action: manipulation !important;
         }
 
         .app-icon {
@@ -648,10 +650,9 @@
             min-height: 96px;
             width: 100%;
             max-width: 780px;
-            box-shadow: 0 2px 12px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.05);
-            border: none;
+            border: 1.5px solid rgba(31, 75, 138, 0.08);
             text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
             line-height: 1.5;
             color: #0a2038;
             font-weight: 500;
@@ -660,10 +661,13 @@
             cursor: pointer;
             position: relative;
             overflow: visible;
+            box-shadow: 0 2px 12px rgba(31, 75, 138, 0.03), 0 0 0 1px rgba(31, 75, 138, 0.02);
+            background: linear-gradient(145deg, #ffffff, #fbfdff);
         }
         .welcome-cta-pill:hover {
             transform: translateY(-4px);
-            box-shadow: 0 14px 36px rgba(31, 75, 138, 0.08), 0 0 0 1px rgba(31, 75, 138, 0.10);
+            box-shadow: 0 14px 36px rgba(31, 75, 138, 0.08), 0 0 0 1px rgba(31, 75, 138, 0.10), 0 0 24px rgba(31, 75, 138, 0.04);
+            border-color: rgba(31, 75, 138, 0.18);
             background: #fcfdff;
         }
         .welcome-cta-pill:active {
@@ -672,31 +676,71 @@
         }
 
         .welcome-cta-pill.event-this-week {
-            box-shadow: 0 0 0 3px rgba(31, 75, 138, 0.35), 0 0 32px rgba(31, 75, 138, 0.13), 0 2px 12px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.05);
-            transition: box-shadow 0.3s ease, transform 0.25s ease;
+            border: 2px solid var(--primary-blue);
+            box-shadow: 0 0 28px rgba(31, 75, 138, 0.07), 0 4px 18px rgba(31, 75, 138, 0.05), 0 0 0 1px rgba(31, 75, 138, 0.06);
+            background: linear-gradient(145deg, #f7fbff, #f0f6fe);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
         .welcome-cta-pill.event-this-week:hover {
-            box-shadow: 0 0 0 4px rgba(31, 75, 138, 0.50), 0 0 48px rgba(31, 75, 138, 0.20), 0 14px 36px rgba(31, 75, 138, 0.10), 0 0 0 1px rgba(31, 75, 138, 0.12);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 40px rgba(31, 75, 138, 0.12), 0 16px 40px rgba(31, 75, 138, 0.08), 0 0 0 1px rgba(31, 75, 138, 0.12);
             transform: translateY(-4px);
+            background: #f8fcff;
+        }
+
+        .welcome-cta-pill.next-event {
+            border: 2.5px solid var(--golden);
+            box-shadow: 0 0 36px rgba(245, 158, 11, 0.10), 0 8px 28px rgba(245, 158, 11, 0.06), 0 0 0 1px rgba(245, 158, 11, 0.08);
+            background: linear-gradient(145deg, #fefcf7, #fdf8ee);
+            position: relative;
+        }
+        .welcome-cta-pill.next-event:hover {
+            border-color: var(--golden-dark);
+            box-shadow: 0 0 52px rgba(245, 158, 11, 0.16), 0 20px 48px rgba(245, 158, 11, 0.10), 0 0 0 1px rgba(245, 158, 11, 0.14);
+            transform: translateY(-5px);
+            background: #fffcf3;
         }
 
         .welcome-cta-pill .up-next-badge {
             position: absolute;
-            top: -14px;
+            top: -12px;
             right: var(--space-4);
-            background: var(--primary-blue);
+            background: var(--gradient-warm);
             color: var(--white);
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: var(--space-2) var(--space-6);
+            padding: var(--space-1) var(--space-5);
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+            min-width: 62px;
+            text-align: center;
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .welcome-cta-pill .week-badge {
+            position: absolute;
+            top: -10px;
+            right: var(--space-4);
+            background: var(--gradient-blue);
+            color: var(--white);
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: var(--space-1) var(--space-4);
             border-radius: var(--radius-pill);
             letter-spacing: 0.6px;
             text-transform: uppercase;
-            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.25);
+            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.20), 0 0 0 1px rgba(255, 255, 255, 0.10);
             white-space: nowrap;
-            min-width: 70px;
+            min-width: 50px;
             text-align: center;
             z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .welcome-cta-pill.next-event .week-badge {
+            display: none;
         }
 
         .welcome-cta-pill .pill-badge {
@@ -711,42 +755,45 @@
             letter-spacing: 0.8px;
             white-space: nowrap;
             flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.20);
             text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
             color: #ffffff;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             min-width: 120px;
             text-align: center;
             justify-content: center;
             padding-left: var(--space-5);
             padding-right: var(--space-5);
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+        .welcome-cta-pill:hover .pill-badge {
+            transform: scale(1.02);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
         }
         .welcome-cta-pill .pill-badge.wednesday {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-color: rgba(245, 158, 11, 0.4);
-            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-color: rgba(245, 158, 11, 0.35);
+            box-shadow: 0 2px 12px rgba(245, 158, 11, 0.25);
         }
         .welcome-cta-pill .pill-badge.friday {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.25);
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border-color: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 2px 12px rgba(139, 92, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.saturday {
-            background: linear-gradient(135deg, #60a5fa, #2563eb);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: rgba(59, 130, 246, 0.35);
+            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.25);
         }
         .welcome-cta-pill .pill-badge.thursdays {
-            background: linear-gradient(135deg, #fb923c, #d97706);
-            border-color: rgba(230, 126, 34, 0.4);
-            box-shadow: 0 2px 10px rgba(230, 126, 34, 0.25);
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            border-color: rgba(230, 126, 34, 0.35);
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.25);
         }
         .welcome-cta-pill .pill-badge.this-week-badge {
             background: linear-gradient(135deg, #6c7e94, #4a627a);
-            border-color: rgba(74, 98, 122, 0.4);
-            box-shadow: 0 2px 10px rgba(74, 98, 122, 0.25);
+            border-color: rgba(74, 98, 122, 0.35);
+            box-shadow: 0 2px 12px rgba(74, 98, 122, 0.20);
         }
 
         .welcome-cta-pill .pill-main {
@@ -812,38 +859,11 @@
         .welcome-cta-pill .pill-styles .dj-guest {
             font-weight: 600;
             color: var(--primary-blue);
-            background: rgba(31, 75, 138, 0.08);
+            background: rgba(31, 75, 138, 0.07);
             padding: 0 var(--space-3);
             border-radius: var(--radius-sm);
             display: inline-block;
             font-size: 0.9rem;
-        }
-
-        .welcome-cta-pill.next-event {
-            border: 2px solid var(--primary-blue);
-            background: linear-gradient(145deg, #f4faff, var(--white));
-            box-shadow: 0 8px 28px rgba(31, 75, 138, 0.14);
-        }
-
-        .baile-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: var(--white);
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: var(--space-1) var(--space-3);
-            border-radius: var(--radius-pill);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-left: var(--space-2);
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
-            white-space: nowrap;
-            vertical-align: middle;
-            line-height: 1.6;
-        }
-        .baile-inolvidable-red {
-            color: var(--red-accent);
-            font-weight: 700;
         }
 
         @media (max-width: 850px) {
@@ -870,6 +890,20 @@
             }
             .welcome-cta-pill .pill-styles .dj-guest {
                 font-size: 0.9rem;
+            }
+            .welcome-cta-pill .up-next-badge {
+                font-size: 0.65rem;
+                padding: var(--space-1) var(--space-3);
+                min-width: 50px;
+                top: -10px;
+                right: var(--space-3);
+            }
+            .welcome-cta-pill .week-badge {
+                font-size: 0.55rem;
+                padding: var(--space-1) var(--space-3);
+                min-width: 44px;
+                top: -8px;
+                right: var(--space-3);
             }
         }
         @media (max-width: 650px) {
@@ -903,11 +937,24 @@
                 padding: 0 var(--space-2);
             }
             .welcome-cta-pill .up-next-badge {
-                font-size: 0.7rem;
-                padding: var(--space-1) var(--space-3);
-                top: -10px;
+                font-size: 0.58rem;
+                padding: var(--space-1) var(--space-2);
+                min-width: 42px;
+                top: -8px;
                 right: var(--space-2);
-                min-width: 56px;
+            }
+            .welcome-cta-pill .week-badge {
+                font-size: 0.5rem;
+                padding: var(--space-1) var(--space-2);
+                min-width: 36px;
+                top: -6px;
+                right: var(--space-2);
+            }
+            .welcome-cta-pill.event-this-week {
+                box-shadow: 0 0 16px rgba(31, 75, 138, 0.05), 0 4px 14px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.06);
+            }
+            .welcome-cta-pill.next-event {
+                box-shadow: 0 0 20px rgba(245, 158, 11, 0.08), 0 6px 20px rgba(245, 158, 11, 0.05), 0 0 0 1px rgba(245, 158, 11, 0.08);
             }
         }
         @media (max-width: 550px) {
@@ -942,11 +989,24 @@
                 padding: 0 var(--space-2);
             }
             .welcome-cta-pill .up-next-badge {
-                font-size: 0.62rem;
+                font-size: 0.52rem;
                 padding: var(--space-1) var(--space-2);
-                top: -8px;
+                top: -6px;
                 right: var(--space-1);
-                min-width: 48px;
+                min-width: 36px;
+            }
+            .welcome-cta-pill .week-badge {
+                font-size: 0.45rem;
+                padding: var(--space-1) var(--space-2);
+                top: -5px;
+                right: var(--space-1);
+                min-width: 32px;
+            }
+            .welcome-cta-pill.event-this-week {
+                box-shadow: 0 0 12px rgba(31, 75, 138, 0.04), 0 4px 12px rgba(31, 75, 138, 0.03), 0 0 0 1px rgba(31, 75, 138, 0.05);
+            }
+            .welcome-cta-pill.next-event {
+                box-shadow: 0 0 16px rgba(245, 158, 11, 0.06), 0 6px 16px rgba(245, 158, 11, 0.04), 0 0 0 1px rgba(245, 158, 11, 0.07);
             }
         }
         @media (max-width: 400px) {
@@ -971,11 +1031,18 @@
                 font-size: 0.72rem;
             }
             .welcome-cta-pill .up-next-badge {
-                font-size: 0.55rem;
+                font-size: 0.45rem;
                 padding: var(--space-1) var(--space-1);
-                top: -6px;
+                top: -5px;
                 right: var(--space-1);
-                min-width: 38px;
+                min-width: 28px;
+            }
+            .welcome-cta-pill .week-badge {
+                font-size: 0.4rem;
+                padding: var(--space-1) var(--space-1);
+                top: -4px;
+                right: var(--space-1);
+                min-width: 26px;
             }
         }
 
@@ -1155,7 +1222,7 @@
                 transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: rgba(255, 255, 255, 0.80);
             backdrop-filter: blur(16px);
-            border-radius: var(--radius-3xl);
+            border-radius: var(--radius-4xl);
             box-shadow: 0 6px 18px rgba(31, 75, 138, 0.04);
             border: 1px solid rgba(31, 75, 138, 0.10);
             padding: var(--space-3) var(--space-6);
@@ -1205,7 +1272,7 @@
             box-shadow: 0 12px 28px rgba(31, 75, 138, 0.12);
             background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(20px);
-            border-radius: var(--radius-3xl);
+            border-radius: var(--radius-4xl);
             padding: var(--space-2) var(--space-5);
             border: 1px solid rgba(31, 75, 138, 0.15);
         }
@@ -1218,11 +1285,12 @@
                 visibility 0.55s ease,
                 transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+
         .nav-btn {
             background: transparent;
             border: none;
-            border-radius: var(--radius-xl);
-            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius-pill);
+            padding: var(--space-3) var(--space-7);
             font-size: var(--font-base);
             font-weight: 600;
             color: var(--primary-blue);
@@ -1230,12 +1298,15 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
-            gap: var(--space-2);
+            gap: var(--space-3);
             position: relative;
             overflow: hidden;
-            min-height: 56px;
+            min-height: 60px;
             white-space: nowrap;
             flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1.5px solid transparent;
+            box-shadow: 0 2px 8px rgba(31, 75, 138, 0.04);
         }
         .nav-btn::before {
             content: '';
@@ -1244,24 +1315,26 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(31, 75, 138, 0.08), transparent);
+            background: linear-gradient(135deg, rgba(31, 75, 138, 0.06), transparent);
             z-index: -1;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
         .nav-btn:hover {
-            background: rgba(31, 75, 138, 0.06);
+            background: rgba(31, 75, 138, 0.04);
             color: var(--dark-blue);
             transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.04);
+            box-shadow: 0 6px 18px rgba(31, 75, 138, 0.08);
+            border-color: rgba(31, 75, 138, 0.10);
         }
         .nav-btn.active-section {
             background: var(--gradient-blue);
             color: var(--white);
-            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.12);
+            box-shadow: 0 6px 24px rgba(31, 75, 138, 0.20);
+            border-color: var(--primary-blue);
         }
         .nav-btn i {
-            font-size: var(--font-lg);
+            font-size: var(--font-xl);
             transition: transform 0.3s ease;
         }
         .nav-btn:hover i {
@@ -1280,9 +1353,9 @@
             font-size: var(--font-xs);
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #6c7e94;
+            color: #5b6f88;
             margin-bottom: var(--space-3);
-            font-weight: 500;
+            font-weight: 600;
             background: rgba(255, 255, 240, 0.5);
             display: inline-block;
             width: auto;
@@ -1292,240 +1365,539 @@
         }
 
         .locations-section {
-            margin: var(--space-6) auto var(--space-10);
+            margin: var(--space-6) auto var(--space-8);
             text-align: center;
+            padding: var(--space-2) 0;
         }
+        .locations-section .section-title {
+            margin-bottom: var(--space-6);
+            font-size: clamp(var(--font-2xl), 4.2vw, var(--font-3xl));
+        }
+        .locations-section .section-title::after {
+            width: 84px;
+            height: 4px;
+            opacity: 0.8;
+        }
+
         .locations-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: var(--space-5) var(--space-7);
-            margin-top: var(--space-4);
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: var(--space-5);
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: var(--space-2) 0 var(--space-3);
         }
-        .location-card {
+
+        .location-app {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: var(--space-1);
-            cursor: pointer;
-            padding: var(--space-4) var(--space-5);
-            border-radius: var(--radius-2xl);
+            justify-content: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-6) var(--space-4) var(--space-5);
             background: var(--white);
-            border: 1px solid rgba(31, 75, 138, 0.06);
-            box-shadow: 0 2px 12px rgba(31, 75, 138, 0.02);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            min-width: 140px;
-            text-decoration: none;
+            border-radius: var(--radius-2xl);
+            border: 1.5px solid rgba(31, 75, 138, 0.10);
+            box-shadow: 0 6px 22px rgba(31, 75, 138, 0.06);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
         }
-        .location-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 18px 36px rgba(31, 75, 138, 0.07);
-            border-color: rgba(31, 75, 138, 0.15);
-            background: #f8fcff;
+        .location-app::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, rgba(37, 99, 235, 0.06), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        .location-card:active {
-            transform: scale(0.96);
+        .location-app:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 46px rgba(31, 75, 138, 0.16);
+            border-color: rgba(37, 99, 235, 0.35);
+        }
+        .location-app:hover::before {
+            opacity: 1;
+        }
+        .location-app:active {
+            transform: translateY(-2px) scale(0.98);
             transition-duration: 0.08s;
         }
-        .location-icon-wrap {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-3xl);
-            color: var(--white);
-            background: var(--gradient-blue);
-            box-shadow: 0 6px 18px rgba(31, 75, 138, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            flex-shrink: 0;
-        }
-        .location-card:hover .location-icon-wrap {
-            transform: scale(1.06);
-            box-shadow: 0 10px 28px rgba(31, 75, 138, 0.22);
-        }
-        .location-card .location-name {
-            font-weight: 700;
-            font-size: var(--font-sm);
-            color: var(--dark-blue);
-            letter-spacing: 0.2px;
-            line-height: 1.3;
-            text-align: center;
-            margin-top: var(--space-1);
-        }
-        .location-card .location-days {
-            font-size: var(--font-xs);
-            font-weight: 600;
-            color: var(--primary-blue);
-            letter-spacing: 0.2px;
-            line-height: 1.4;
-            text-align: center;
-            background: rgba(31, 75, 138, 0.06);
-            padding: 0 var(--space-3);
-            border-radius: var(--radius-pill);
-            display: inline-block;
-            margin: var(--space-1) 0;
-        }
-        .location-card .location-label {
-            font-size: var(--font-xs);
-            color: var(--text-muted);
-            font-weight: 400;
-            opacity: 0.7;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-        .location-card.stardust .location-icon-wrap {
-            background: linear-gradient(135deg, #122b5a, #1f4b8a);
-        }
-        .location-card.sorynez .location-icon-wrap {
-            background: linear-gradient(135deg, #6a4e9c, #9b59b6);
-        }
-        .location-card.ardmore .location-icon-wrap {
-            background: linear-gradient(135deg, #b45309, #f59e0b);
-        }
-        .location-card.cubalibre .location-icon-wrap {
-            background: linear-gradient(135deg, #b8312a, #d94a3d);
+        .location-app:focus-visible {
+            outline: none;
+            box-shadow: var(--glow-ring-spread);
         }
 
-        .location-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            z-index: 10001;
+        .location-app-icon {
+            width: 104px;
+            height: 104px;
+            border-radius: 28px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            animation: modalFadeIn 0.2s ease-out;
-        }
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .location-modal-card {
-            background: var(--white);
-            border-radius: var(--radius-4xl);
-            padding: var(--space-8) var(--space-7) var(--space-8);
-            max-width: 460px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+            gap: 2px;
             position: relative;
-            animation: modalFadeIn 0.25s ease-out;
+            color: #fff;
+            border: 2.5px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.35s ease;
         }
-        .location-modal-close {
+        .location-app-icon .icon-bg-shine {
             position: absolute;
-            top: var(--space-4);
-            right: var(--space-5);
-            background: transparent;
-            border: none;
-            font-size: var(--font-xl);
-            cursor: pointer;
-            color: #6c7e94;
-            transition: transform 0.2s, color 0.2s;
+            top: 6px;
+            left: 12px;
+            right: 12px;
+            height: 34%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
+            border-radius: 20px 20px 60% 60%;
+            pointer-events: none;
+            opacity: 0.75;
+        }
+        .location-app-icon i {
+            position: relative;
+            z-index: 2;
+            font-size: 34px;
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.18));
+            transition: transform 0.35s ease;
+        }
+        .location-app-icon-label {
+            position: relative;
+            z-index: 2;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
             line-height: 1;
-            padding: var(--space-2);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            opacity: 0.98;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+        }
+        .location-app:hover .location-app-icon {
+            transform: translateY(-4px) scale(1.06);
+        }
+        .location-app:hover .location-app-icon i {
+            transform: scale(1.08);
+        }
+
+        .loc-icon-stardust {
+            background: linear-gradient(145deg, #1e40af, #3b82f6);
+        }
+        .loc-icon-sorynez {
+            background: linear-gradient(145deg, #6d28d9, #a855f7);
+        }
+        .loc-icon-ardmore {
+            background: linear-gradient(145deg, #b45309, #f59e0b);
+        }
+        .loc-icon-cubalibre {
+            background: linear-gradient(145deg, #b91c1c, #ef4444);
+        }
+
+        .location-app[data-venue="stardust"]:hover .location-app-icon {
+            box-shadow: 0 16px 36px rgba(37, 99, 235, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+        .location-app[data-venue="sorynez"]:hover .location-app-icon {
+            box-shadow: 0 16px 36px rgba(147, 51, 234, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+        .location-app[data-venue="ardmore"]:hover .location-app-icon {
+            box-shadow: 0 16px 36px rgba(245, 158, 11, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+        .location-app[data-venue="cubalibre"]:hover .location-app-icon {
+            box-shadow: 0 16px 36px rgba(220, 38, 38, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .location-app-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.32rem;
+            font-weight: 800;
+            color: #0a2440;
+            letter-spacing: -0.02em;
+            line-height: 1.28;
+            margin-top: var(--space-1);
+        }
+
+        .location-app-schedule {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            width: 100%;
+        }
+
+        .location-app-days {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 7px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.1px;
+            padding: 7px 17px;
+            border-radius: var(--radius-pill);
+            line-height: 1.4;
+            white-space: nowrap;
+            transition: transform 0.25s ease;
         }
-        .location-modal-close:hover {
-            transform: scale(1.12);
-            color: #1a2f44;
-            background: rgba(0, 0, 0, 0.03);
+        .location-app:hover .location-app-days {
+            transform: scale(1.04);
         }
-        .location-modal-title {
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--dark-blue);
-            margin-bottom: var(--space-3);
-            letter-spacing: -0.01em;
-            line-height: 1.3;
+
+        .location-app-days.weekly {
+            background: #e8f0fe;
+            color: #1a56db;
+            border: 1px solid rgba(26, 86, 219, 0.22);
         }
-        .location-modal-address {
-            font-size: var(--font-md);
-            color: var(--text-medium);
-            background: #f5f9ff;
-            border-radius: var(--radius-xl);
-            padding: var(--space-4) var(--space-5);
-            margin: var(--space-3) 0 var(--space-6);
-            border: 1px solid rgba(31, 75, 138, 0.06);
-            word-break: break-word;
-            line-height: 1.6;
-            font-weight: 500;
+        .location-app-days.biweekly {
+            background: #fef3e2;
+            color: #b45309;
+            border: 1px solid rgba(180, 83, 9, 0.22);
         }
-        .location-modal-address .address-icon {
-            color: var(--primary-blue);
-            margin-right: var(--space-2);
-            opacity: 0.7;
+        .location-app-days.special {
+            background: #f3ebfd;
+            color: #6d28d9;
+            border: 1px solid rgba(109, 40, 217, 0.20);
         }
-        .location-modal-actions {
+        .location-app-days.hot {
+            background: #fdeaea;
+            color: #b91c1c;
+            border: 1px solid rgba(185, 28, 28, 0.20);
+        }
+
+        .location-week-note {
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: #55677f;
+            letter-spacing: 0.25px;
+            line-height: 1.4;
+        }
+
+        .badge-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
+        }
+        .badge-dot.blue {
+            background: #1a56db;
+        }
+        .badge-dot.purple {
+            background: #6d28d9;
+        }
+        .badge-dot.gold {
+            background: #b45309;
+        }
+        .badge-dot.red {
+            background: #b91c1c;
+        }
+
+        .location-app-actions {
             display: flex;
-            gap: var(--space-3);
             flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
+            gap: var(--space-2);
+            width: 100%;
+            margin-top: var(--space-2);
         }
-        .location-modal-btn {
+        .loc-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: none;
+            border-radius: var(--radius-pill);
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            line-height: 1.2;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #ffffff;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.25s ease, background 0.25s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .loc-action-btn i {
+            font-size: 0.88rem;
+        }
+        .loc-action-btn.book {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.38);
+        }
+        .loc-action-btn.book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(245, 158, 11, 0.52);
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .loc-action-btn:active {
+            transform: scale(0.94);
+            transition-duration: 0.06s;
+        }
+        .loc-action-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.45);
+        }
+
+        .locations-hint {
+            margin: var(--space-5) auto 0;
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #41556e;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: var(--space-2);
-            border: none;
-            border-radius: var(--btn-radius);
-            padding: 0 var(--btn-pad-x-md);
-            height: var(--btn-height-sm);
-            min-height: var(--btn-height-sm);
-            font-size: var(--btn-font-sm);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            line-height: 1.5;
-            flex: 1;
-            min-width: 150px;
+            background: rgba(37, 99, 235, 0.06);
+            padding: var(--space-2) var(--space-6);
+            border-radius: var(--radius-pill);
+            line-height: 1.6;
+            border: 1px solid rgba(37, 99, 235, 0.10);
         }
-        .location-modal-btn.copy-btn {
-            background: #eef2f8;
-            color: var(--dark-blue);
-            border: 1px solid rgba(31, 75, 138, 0.08);
+        .locations-hint i {
+            color: var(--action-blue);
+            animation: point 2s infinite ease-in-out;
         }
-        .location-modal-btn.copy-btn:hover {
-            background: #e2eaf5;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(31, 75, 138, 0.06);
+
+        @media (max-width: 1000px) {
+            .locations-grid {
+                gap: var(--space-4);
+            }
+            .location-app-icon {
+                width: 92px;
+                height: 92px;
+                border-radius: 24px;
+            }
+            .location-app-icon i {
+                font-size: 30px;
+            }
+            .location-app-icon-label {
+                font-size: 0.62rem;
+            }
+            .location-app-name {
+                font-size: 1.18rem;
+            }
+            .location-app-days {
+                font-size: 0.88rem;
+                padding: 6px 14px;
+            }
+            .location-week-note {
+                font-size: 0.78rem;
+            }
         }
-        .location-modal-btn.copy-btn.copied {
-            background: #d4edda;
-            color: #155724;
-            border-color: #c3e6cb;
+
+        @media (max-width: 780px) {
+            .locations-grid {
+                gap: var(--space-3);
+            }
+            .location-app {
+                padding: var(--space-5) var(--space-3) var(--space-4);
+                border-radius: var(--radius-xl);
+                gap: var(--space-2);
+            }
+            .location-app-icon {
+                width: 80px;
+                height: 80px;
+                border-radius: 21px;
+                border-width: 2px;
+            }
+            .location-app-icon i {
+                font-size: 26px;
+            }
+            .location-app-icon-label {
+                font-size: 0.56rem;
+                letter-spacing: 0.5px;
+            }
+            .location-app-name {
+                font-size: 1.1rem;
+            }
+            .location-app-days {
+                font-size: 0.82rem;
+                padding: 5px 12px;
+                gap: 5px;
+            }
+            .location-week-note {
+                font-size: 0.73rem;
+            }
+            .badge-dot {
+                width: 7px;
+                height: 7px;
+            }
+            .loc-action-btn {
+                font-size: 0.75rem;
+                padding: 7px 14px;
+                gap: 5px;
+            }
+            .loc-action-btn i {
+                font-size: 0.79rem;
+            }
+            .locations-hint {
+                font-size: 0.88rem;
+                padding: var(--space-2) var(--space-4);
+            }
         }
-        .location-modal-btn.navigate-btn {
-            background: var(--gradient-blue);
-            color: var(--white);
-            box-shadow: 0 6px 18px rgba(31, 75, 138, 0.15);
+
+        @media (max-width: 600px) {
+            .locations-grid {
+                gap: var(--space-2);
+            }
+            .location-app {
+                padding: var(--space-4) var(--space-2) var(--space-3);
+                border-radius: var(--radius-lg);
+                gap: var(--space-2);
+            }
+            .location-app-icon {
+                width: 66px;
+                height: 66px;
+                border-radius: 18px;
+                border-width: 2px;
+            }
+            .location-app-icon i {
+                font-size: 21px;
+            }
+            .location-app-icon-label {
+                font-size: 0.5rem;
+                letter-spacing: 0.3px;
+            }
+            .location-app-name {
+                font-size: 0.98rem;
+            }
+            .location-app-days {
+                font-size: 0.73rem;
+                padding: 4px 10px;
+                gap: 4px;
+            }
+            .location-week-note {
+                font-size: 0.66rem;
+            }
+            .badge-dot {
+                width: 6px;
+                height: 6px;
+            }
+            .loc-action-btn {
+                font-size: 0.68rem;
+                padding: 5px 11px;
+                gap: 4px;
+            }
+            .loc-action-btn i {
+                font-size: 0.72rem;
+            }
+            .locations-hint {
+                font-size: 0.8rem;
+                padding: var(--space-1) var(--space-4);
+                gap: var(--space-1);
+            }
         }
-        .location-modal-btn.navigate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(31, 75, 138, 0.22);
-            background: var(--gradient-dark);
+
+        @media (max-width: 460px) {
+            .locations-grid {
+                gap: 6px;
+            }
+            .location-app {
+                padding: var(--space-3) 3px var(--space-2);
+                border-radius: var(--radius-md);
+                border-width: 1px;
+                gap: 5px;
+            }
+            .location-app-icon {
+                width: 56px;
+                height: 56px;
+                border-radius: 15px;
+                border-width: 1.5px;
+            }
+            .location-app-icon i {
+                font-size: 18px;
+            }
+            .location-app-icon-label {
+                font-size: 0.44rem;
+                letter-spacing: 0;
+            }
+            .location-app-name {
+                font-size: 0.88rem;
+            }
+            .location-app-days {
+                font-size: 0.66rem;
+                padding: 3px 8px;
+                gap: 3px;
+                letter-spacing: 0;
+                white-space: normal;
+                text-align: center;
+            }
+            .location-week-note {
+                font-size: 0.6rem;
+                line-height: 1.3;
+            }
+            .badge-dot {
+                width: 5px;
+                height: 5px;
+                box-shadow: none;
+            }
+            .location-app-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                margin-top: 4px;
+            }
+            .loc-action-btn {
+                width: 100%;
+                font-size: 0.6rem;
+                padding: 5px 2px;
+                gap: 3px;
+                letter-spacing: 0.2px;
+            }
+            .loc-action-btn i {
+                font-size: 0.65rem;
+            }
+            .locations-section .section-title {
+                font-size: var(--font-2xl);
+            }
         }
-        .location-modal-btn i {
-            font-size: var(--font-md);
+
+        @media (max-width: 380px) {
+            .location-app-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 13px;
+            }
+            .location-app-icon i {
+                font-size: 16px;
+            }
+            .location-app-icon-label {
+                font-size: 0.4rem;
+            }
+            .location-app-name {
+                font-size: 0.82rem;
+            }
+            .location-app-days {
+                font-size: 0.6rem;
+                padding: 2px 7px;
+            }
+            .location-week-note {
+                font-size: 0.55rem;
+            }
+            .badge-dot {
+                width: 4px;
+                height: 4px;
+            }
+            .loc-action-btn {
+                font-size: 0.54rem;
+                padding: 4px 2px;
+            }
+            .loc-action-btn i {
+                font-size: 0.6rem;
+            }
         }
 
         .class-cta-container {
@@ -1818,8 +2190,9 @@
         .cta-location-info .loc-nav-link {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-2);
-            background: var(--gradient-blue);
+            background: var(--gradient-action);
             color: var(--white);
             padding: var(--space-1) var(--space-5);
             border-radius: var(--radius-pill);
@@ -1827,14 +2200,14 @@
             font-weight: 700;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 14px rgba(31, 75, 138, 0.15);
+            box-shadow: 0 4px 14px rgba(29, 78, 216, 0.22);
             line-height: 2.4;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .cta-location-info .loc-nav-link:hover {
             transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 8px 24px rgba(31, 75, 138, 0.25);
-            background: var(--gradient-dark);
+            box-shadow: 0 8px 24px rgba(29, 78, 216, 0.32);
+            background: var(--gradient-action-hover);
         }
         .cta-location-info .loc-nav-link i {
             font-size: var(--font-sm);
@@ -2530,9 +2903,6 @@
             z-index: 10;
             white-space: nowrap;
         }
-        .link-card.oldcity {
-            display: none !important;
-        }
 
         .instructors-grid {
             display: grid;
@@ -3107,7 +3477,7 @@
             content: "❝";
             position: absolute;
             color: rgba(31, 75, 138, 0.12);
-            font-size: var(--font-5xl);
+            font-size: var(--font-4xl);
             top: -20px;
         }
         .review-text::before {
@@ -3154,19 +3524,20 @@
             display: flex;
             justify-content: center;
             gap: var(--space-5);
-            margin-top: var(--space-6);
+            margin-top: var(--space-7);
             flex-wrap: wrap;
+            align-items: center;
         }
         .reviews-action-btn {
             background: transparent;
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
             border-radius: var(--btn-radius);
-            padding: 0 var(--btn-pad-x-md);
-            height: var(--btn-height-sm);
-            min-height: var(--btn-height-sm);
-            font-size: var(--btn-font-sm);
-            font-weight: 600;
+            padding: 0 44px;
+            height: 62px;
+            min-height: 62px;
+            font-size: 1.08rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -3174,6 +3545,7 @@
             align-items: center;
             justify-content: center;
             line-height: 1.5;
+            letter-spacing: 0.3px;
         }
         .reviews-action-btn:hover {
             background: var(--primary-blue);
@@ -3181,12 +3553,38 @@
             transform: translateY(-2px);
         }
         .reviews-action-btn.leave-review {
-            background: var(--gradient-blue);
+            background: var(--gradient-action);
             border: none;
             color: var(--white);
+            padding: 0 58px;
+            height: 70px;
+            min-height: 70px;
+            font-size: 1.22rem;
+            letter-spacing: 0.4px;
+            box-shadow: 0 10px 30px rgba(29, 78, 216, 0.28);
+        }
+        .reviews-action-btn.leave-review i {
+            margin-right: var(--space-2);
+            font-size: 1.15em;
         }
         .reviews-action-btn.leave-review:hover {
-            background: var(--gradient-dark);
+            background: var(--gradient-action-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(29, 78, 216, 0.38);
+        }
+        @media (max-width: 550px) {
+            .reviews-action-btn {
+                padding: 0 30px;
+                height: 56px;
+                min-height: 56px;
+                font-size: 1rem;
+            }
+            .reviews-action-btn.leave-review {
+                padding: 0 36px;
+                height: 62px;
+                min-height: 62px;
+                font-size: 1.08rem;
+            }
         }
 
         .private-lesson-toggle-container {
@@ -3860,7 +4258,7 @@
 
         .bottom-share-container {
             position: fixed;
-            bottom: max(var(--space-2), env(safe-area-inset-bottom, 20px));
+            bottom: max(var(--space-3), env(safe-area-inset-bottom, 20px));
             right: max(var(--space-4), env(safe-area-inset-right, 16px));
             left: auto;
             display: flex;
@@ -3877,112 +4275,253 @@
             opacity: 0;
             pointer-events: none;
         }
+
         .share-bubbles {
             display: flex;
             flex-direction: column;
-            gap: var(--space-3);
-            margin-bottom: var(--space-3);
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
             pointer-events: auto;
             transform: scale(0);
             opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s;
             transform-origin: bottom right;
         }
         .share-bubbles.active {
             transform: scale(1);
             opacity: 1;
         }
+
         .share-row {
             display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
             gap: var(--space-3);
             justify-content: flex-end;
-            flex-wrap: wrap;
+            align-items: center;
         }
+
         .share-bubble {
-            width: 66px;
-            height: 66px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2.6rem;
             color: var(--white);
             text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
             pointer-events: auto;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .share-bubble::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
         .share-bubble:hover {
-            transform: translateY(-6px) scale(1.08);
-            box-shadow: 0 14px 32px rgba(31, 75, 138, 0.12);
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 18px 44px rgba(31, 75, 138, 0.18), 0 0 0 2px rgba(255, 255, 255, 0.6);
         }
+        .share-bubble:active {
+            transform: scale(0.92);
+            transition-duration: 0.08s;
+        }
+        .share-bubble i {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+            font-size: 2.6rem;
+        }
+        .share-bubble:hover i {
+            transform: scale(1.1);
+        }
+
         .share-bubble.messenger {
-            background: #0084ff;
+            background: linear-gradient(145deg, #0084ff, #0063d6);
+            box-shadow: 0 8px 28px rgba(0, 132, 255, 0.30);
+        }
+        .share-bubble.messenger:hover {
+            box-shadow: 0 18px 44px rgba(0, 132, 255, 0.40);
         }
         .share-bubble.instagram {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            background: linear-gradient(145deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            box-shadow: 0 8px 28px rgba(214, 41, 118, 0.30);
+        }
+        .share-bubble.instagram:hover {
+            box-shadow: 0 18px 44px rgba(214, 41, 118, 0.40);
         }
         .share-bubble.whatsapp {
-            background: #25D366;
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
+        }
+        .share-bubble.whatsapp:hover {
+            box-shadow: 0 18px 44px rgba(37, 211, 102, 0.40);
         }
         .share-bubble.email {
-            background: #7f8c8d;
+            background: linear-gradient(145deg, #7f8c8d, #5d6d7e);
+            box-shadow: 0 8px 28px rgba(127, 140, 141, 0.25);
+        }
+        .share-bubble.email:hover {
+            box-shadow: 0 18px 44px rgba(127, 140, 141, 0.35);
         }
         .share-bubble.sms {
-            background: #3498db;
+            background: linear-gradient(145deg, #3498db, #2E86C1);
+            box-shadow: 0 8px 28px rgba(52, 152, 219, 0.30);
+        }
+        .share-bubble.sms:hover {
+            box-shadow: 0 18px 44px rgba(52, 152, 219, 0.40);
         }
         .share-bubble.copy-link {
-            background: #6c757d;
+            background: linear-gradient(145deg, #6c757d, #495057);
+            box-shadow: 0 8px 28px rgba(108, 117, 125, 0.25);
         }
+        .share-bubble.copy-link:hover {
+            box-shadow: 0 18px 44px rgba(108, 117, 125, 0.35);
+        }
+
         .share-actions-row {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             width: 100%;
-            gap: var(--space-6);
+            gap: var(--space-4);
             pointer-events: none;
+            flex-wrap: nowrap;
         }
+
         .share-main-btn {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(31, 75, 138, 0.12);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(31, 75, 138, 0.15);
             border-radius: var(--radius-pill);
-            padding: var(--space-2) var(--space-6);
-            font-size: var(--font-base);
-            font-weight: 600;
+            padding: var(--space-4) var(--space-7);
+            font-size: var(--font-lg);
+            font-weight: 700;
             color: #1a2f44;
-            box-shadow: 0 6px 16px rgba(31, 75, 138, 0.04);
+            box-shadow: 0 8px 28px rgba(31, 75, 138, 0.08);
             cursor: pointer;
             pointer-events: auto;
             display: flex;
             align-items: center;
-            gap: var(--space-2);
-            transition: all 0.3s ease;
-            min-width: 190px;
+            gap: var(--space-3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-width: 0;
             justify-content: center;
-            line-height: 1.5;
-            min-height: 56px;
+            line-height: 1.4;
+            min-height: 76px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
         }
         .share-main-btn i {
-            font-size: var(--font-lg);
+            font-size: var(--font-xl);
             color: var(--primary-blue);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .share-main-btn span {
+            font-weight: 700;
+            font-size: inherit;
+            white-space: nowrap;
         }
         .share-main-btn:hover {
-            background: rgba(255, 255, 255, 0.96);
-            transform: scale(1.02);
-            box-shadow: 0 10px 24px rgba(31, 75, 138, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+            transform: scale(1.03);
+            box-shadow: 0 14px 38px rgba(31, 75, 138, 0.16);
+            border-color: rgba(31, 75, 138, 0.25);
         }
         .share-main-btn:hover i {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(-6deg);
         }
         .share-main-btn.active {
             background: #f0f5ff;
-            color: #1a2b3c;
+            border-color: rgba(31, 75, 138, 0.30);
+            box-shadow: 0 8px 28px rgba(31, 75, 138, 0.12);
         }
+        .share-main-btn:active {
+            transform: scale(0.96);
+            transition-duration: 0.08s;
+        }
+
+        .review-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-3);
+            background: linear-gradient(145deg, #1a73e8, #0d47a1);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-radius: var(--radius-pill);
+            padding: var(--space-5) var(--space-9);
+            font-size: var(--font-md);
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 32px rgba(26, 115, 232, 0.35), 0 2px 8px rgba(26, 115, 232, 0.15);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+            min-height: 88px;
+            cursor: pointer;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: right center;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+            flex-shrink: 0;
+        }
+        .review-bubble i {
+            font-size: 2.3rem;
+            color: #ffffff;
+            opacity: 0.95;
+        }
+        .review-bubble .review-bubble-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+        .review-bubble .review-bubble-text .review-label {
+            font-size: var(--font-xs);
+            font-weight: 500;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .review-bubble .review-bubble-text .review-main {
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+        .review-bubble.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .review-bubble.active:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 16px 48px rgba(26, 115, 232, 0.50), 0 4px 12px rgba(26, 115, 232, 0.20);
+            background: linear-gradient(145deg, #1565c0, #0a3d91);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        .review-bubble.active:active {
+            transform: scale(0.95);
+            transition-duration: 0.08s;
+        }
+
         .share-overlay {
             position: fixed;
             top: 0;
@@ -3995,48 +4534,234 @@
             cursor: default;
         }
 
-        .review-bubble {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-2);
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            backdrop-filter: blur(8px);
-            color: #ffffff;
-            border-radius: var(--radius-pill);
-            padding: var(--space-2) var(--space-6);
-            font-size: var(--font-sm);
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 8px 28px rgba(245, 158, 11, 0.35), 0 2px 6px rgba(245, 158, 11, 0.15);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.3s ease;
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            pointer-events: none;
-            min-height: 52px;
-            cursor: pointer;
-            transform: scale(0);
-            opacity: 0;
-            transform-origin: left center;
-            letter-spacing: 0.2px;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+        @media (max-width: 1000px) {
+            .share-bubble {
+                width: 84px;
+                height: 84px;
+                font-size: 2.2rem;
+            }
+            .share-bubble i {
+                font-size: 2.2rem;
+            }
+            .share-main-btn {
+                min-width: 0;
+                min-height: 68px;
+                padding: var(--space-3) var(--space-6);
+                font-size: var(--font-md);
+            }
+            .share-main-btn i {
+                font-size: var(--font-lg);
+            }
+            .review-bubble {
+                padding: var(--space-4) var(--space-7);
+                min-height: 78px;
+                font-size: var(--font-md);
+            }
+            .review-bubble i {
+                font-size: 2rem;
+            }
+            .review-bubble .review-bubble-text .review-main {
+                font-size: var(--font-md);
+            }
+            .share-row {
+                gap: var(--space-2);
+            }
+            .share-actions-row {
+                gap: var(--space-3);
+            }
         }
-        .review-bubble i {
-            font-size: var(--font-md);
-            color: #ffffff;
-            opacity: 0.95;
+
+        @media (max-width: 768px) {
+            .share-bubble {
+                width: 72px;
+                height: 72px;
+                font-size: 1.8rem;
+            }
+            .share-bubble i {
+                font-size: 1.8rem;
+            }
+            .share-main-btn {
+                min-width: 0;
+                min-height: 60px;
+                padding: var(--space-2) var(--space-5);
+                font-size: var(--font-sm);
+            }
+            .share-main-btn i {
+                font-size: var(--font-md);
+            }
+            .review-bubble {
+                padding: var(--space-3) var(--space-6);
+                min-height: 70px;
+                font-size: var(--font-base);
+            }
+            .review-bubble i {
+                font-size: 1.8rem;
+            }
+            .review-bubble .review-bubble-text .review-main {
+                font-size: var(--font-base);
+            }
+            .share-row {
+                gap: var(--space-2);
+            }
+            .share-actions-row {
+                gap: var(--space-2);
+            }
         }
-        .review-bubble.active {
-            transform: scale(1);
-            opacity: 1;
-            pointer-events: auto;
+
+        @media (max-width: 600px) {
+            .share-bubble {
+                width: 64px;
+                height: 64px;
+                font-size: 1.5rem;
+            }
+            .share-bubble i {
+                font-size: 1.5rem;
+            }
+            .share-main-btn {
+                min-width: 0;
+                min-height: 54px;
+                padding: var(--space-2) var(--space-4);
+                font-size: var(--font-xs);
+                gap: var(--space-2);
+            }
+            .share-main-btn i {
+                font-size: var(--font-sm);
+            }
+            .review-bubble {
+                padding: var(--space-2) var(--space-5);
+                min-height: 64px;
+                font-size: var(--font-sm);
+                gap: var(--space-2);
+            }
+            .review-bubble i {
+                font-size: 1.6rem;
+            }
+            .review-bubble .review-bubble-text .review-main {
+                font-size: var(--font-sm);
+            }
+            .review-bubble .review-bubble-text .review-label {
+                font-size: 0.65rem;
+            }
+            .share-row {
+                gap: var(--space-1);
+            }
+            .share-actions-row {
+                gap: var(--space-2);
+                flex-wrap: nowrap;
+            }
+            .bottom-share-container {
+                right: max(var(--space-2), env(safe-area-inset-right, 8px));
+                bottom: max(var(--space-2), env(safe-area-inset-bottom, 12px));
+            }
+            .share-bubbles {
+                gap: var(--space-2);
+                margin-bottom: var(--space-2);
+            }
         }
-        .review-bubble.active:hover {
-            transform: translateY(-5px) scale(1.04);
-            box-shadow: 0 14px 38px rgba(245, 158, 11, 0.50), 0 4px 12px rgba(245, 158, 11, 0.20);
-            background: linear-gradient(135deg, #f59e0b, #b45309);
-            border-color: rgba(245, 158, 11, 0.4);
+
+        @media (max-width: 450px) {
+            .share-bubble {
+                width: 54px;
+                height: 54px;
+                font-size: 1.2rem;
+            }
+            .share-bubble i {
+                font-size: 1.2rem;
+            }
+            .share-main-btn {
+                min-width: 0;
+                min-height: 48px;
+                padding: var(--space-1) var(--space-3);
+                font-size: 0.74rem;
+                gap: var(--space-1);
+            }
+            .share-main-btn i {
+                font-size: var(--font-xs);
+            }
+            .review-bubble {
+                padding: var(--space-2) var(--space-4);
+                min-height: 58px;
+                font-size: 0.78rem;
+                gap: var(--space-2);
+            }
+            .review-bubble i {
+                font-size: 1.35rem;
+            }
+            .review-bubble .review-bubble-text .review-main {
+                font-size: 0.78rem;
+            }
+            .review-bubble .review-bubble-text .review-label {
+                font-size: 0.55rem;
+            }
+            .share-row {
+                gap: var(--space-1);
+            }
+            .share-actions-row {
+                gap: var(--space-1);
+                flex-wrap: nowrap;
+            }
+            .bottom-share-container {
+                right: max(var(--space-1), env(safe-area-inset-right, 6px));
+                bottom: max(var(--space-1), env(safe-area-inset-bottom, 8px));
+            }
+            .share-bubbles {
+                gap: var(--space-1);
+                margin-bottom: var(--space-1);
+            }
         }
-        .review-bubble.active:active {
-            transform: scale(0.96);
+
+        @media (max-width: 380px) {
+            .share-main-btn {
+                padding: var(--space-1) var(--space-2);
+                font-size: 0.68rem;
+            }
+            .share-main-btn i {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-height: 600px) and (orientation: landscape) {
+            .share-bubble {
+                width: 56px;
+                height: 56px;
+                font-size: 1.3rem;
+            }
+            .share-bubble i {
+                font-size: 1.3rem;
+            }
+            .share-main-btn {
+                min-width: 0;
+                min-height: 46px;
+                padding: var(--space-1) var(--space-4);
+                font-size: var(--font-xs);
+            }
+            .share-main-btn i {
+                font-size: var(--font-sm);
+            }
+            .review-bubble {
+                padding: var(--space-1) var(--space-4);
+                min-height: 54px;
+                font-size: 0.78rem;
+            }
+            .review-bubble i {
+                font-size: 1.3rem;
+            }
+            .review-bubble .review-bubble-text .review-main {
+                font-size: 0.78rem;
+            }
+            .share-row {
+                gap: var(--space-1);
+            }
+            .share-actions-row {
+                gap: var(--space-1);
+            }
+            .share-bubbles {
+                gap: var(--space-1);
+                margin-bottom: var(--space-1);
+            }
+            .bottom-share-container {
+                bottom: max(var(--space-1), env(safe-area-inset-bottom, 6px));
+            }
         }
 
         .language-toggle {
@@ -4102,6 +4827,229 @@
             opacity: 0.4;
         }
 
+        .location-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 10002;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 14vh 16px 40px;
+            animation: fadeIn 0.2s ease-out;
+            overflow-y: auto;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .location-modal-card {
+            background: var(--white);
+            border-radius: var(--radius-3xl);
+            padding: var(--space-8) var(--space-8) var(--space-9);
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 40px 64px rgba(0, 0, 0, 0.15);
+            position: relative;
+            animation: modalSlideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 78vh;
+            overflow-y: auto;
+        }
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .location-modal-close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-5);
+            background: transparent;
+            border: none;
+            font-size: var(--font-xl);
+            color: #8a9bb0;
+            cursor: pointer;
+            transition: transform 0.2s;
+            line-height: 1;
+            padding: var(--space-1);
+        }
+        .location-modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--dark);
+        }
+        .location-modal-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0a2440;
+            margin-bottom: var(--space-2);
+            text-align: center;
+            letter-spacing: -0.02em;
+            line-height: 1.22;
+        }
+        .location-modal-address {
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #1a2c44;
+            padding: var(--space-3) var(--space-4);
+            background: #f5f9ff;
+            border-radius: var(--radius-xl);
+            margin: var(--space-4) 0 var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            border: 1px solid rgba(31, 75, 138, 0.08);
+            word-break: break-word;
+            line-height: 1.6;
+        }
+        .location-modal-address .address-icon {
+            color: var(--action-blue);
+            font-size: var(--font-lg);
+            flex-shrink: 0;
+        }
+        .location-modal-book {
+            margin-bottom: var(--space-5);
+        }
+        .location-modal-actions {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .location-modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            border: none;
+            border-radius: var(--radius-pill);
+            padding: 0 var(--btn-pad-x-sm);
+            height: var(--btn-height-sm);
+            min-height: var(--btn-height-sm);
+            font-size: var(--btn-font-sm);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex: 1;
+            min-width: 130px;
+            text-decoration: none;
+            font-family: 'Inter', -apple-system, sans-serif;
+            letter-spacing: 0.2px;
+        }
+        .location-modal-btn.copy-btn {
+            background: rgba(31, 75, 138, 0.08);
+            color: var(--dark-blue);
+            border: 1.5px solid rgba(31, 75, 138, 0.12);
+        }
+        .location-modal-btn.copy-btn:hover {
+            background: rgba(31, 75, 138, 0.14);
+            transform: translateY(-2px);
+            border-color: rgba(31, 75, 138, 0.22);
+        }
+        .location-modal-btn.navigate-btn {
+            background: var(--gradient-action);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(29, 78, 216, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .location-modal-btn.navigate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(29, 78, 216, 0.38);
+            background: var(--gradient-action-hover);
+        }
+        .location-modal-btn.book-btn {
+            width: 100%;
+            flex: none;
+            min-width: 0;
+            height: 64px;
+            min-height: 64px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: var(--white);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            letter-spacing: 0.4px;
+        }
+        .location-modal-btn.book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(245, 158, 11, 0.44);
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+        .location-modal-btn:active {
+            transform: scale(0.96);
+            transition-duration: 0.06s;
+        }
+
+        @media (max-width: 550px) {
+            .location-modal-overlay {
+                padding: 11vh 12px 36px;
+            }
+            .location-modal-card {
+                padding: var(--space-6) var(--space-5) var(--space-6);
+                max-width: 380px;
+            }
+            .location-modal-title {
+                font-size: 1.6rem;
+            }
+            .location-modal-address {
+                font-size: 1rem;
+                padding: var(--space-3);
+            }
+            .location-modal-btn {
+                font-size: var(--font-sm);
+                height: 52px;
+                min-height: 52px;
+                min-width: 110px;
+                padding: 0 var(--space-4);
+            }
+            .location-modal-btn.book-btn {
+                height: 58px;
+                min-height: 58px;
+                font-size: 1.02rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .location-modal-overlay {
+                padding: 9vh 10px 32px;
+            }
+            .location-modal-card {
+                padding: var(--space-5) var(--space-4);
+                max-width: 330px;
+            }
+            .location-modal-title {
+                font-size: 1.38rem;
+            }
+            .location-modal-address {
+                font-size: 0.95rem;
+            }
+            .location-modal-btn {
+                font-size: var(--font-xs);
+                height: 48px;
+                min-height: 48px;
+                min-width: 90px;
+                padding: 0 var(--space-3);
+            }
+            .location-modal-btn.book-btn {
+                height: 54px;
+                min-height: 54px;
+                font-size: 0.95rem;
+            }
+        }
+
         @media (max-width: 850px) {
             :root {
                 --icon-size-lg: 112px;
@@ -4158,64 +5106,22 @@
                 min-width: 120px;
             }
             .reviews-action-btn {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
+                font-size: 1rem;
+                height: 58px;
+                min-height: 58px;
+                padding: 0 34px;
+            }
+            .reviews-action-btn.leave-review {
+                font-size: 1.12rem;
+                height: 64px;
+                min-height: 64px;
+                padding: 0 44px;
             }
             .event-cta-primary {
                 font-size: var(--btn-font-sm);
                 height: var(--btn-height-sm);
                 min-height: var(--btn-height-sm);
                 padding: 0 var(--btn-pad-x-sm);
-            }
-            .locations-grid {
-                gap: var(--space-4);
-            }
-            .location-card {
-                min-width: 120px;
-                padding: var(--space-2) var(--space-3);
-            }
-            .location-icon-wrap {
-                width: 64px;
-                height: 64px;
-                font-size: var(--font-2xl);
-            }
-            .location-card .location-name {
-                font-size: var(--font-xs);
-            }
-            .location-card .location-days {
-                font-size: var(--font-xs);
-            }
-            .location-modal-card {
-                padding: var(--space-6) var(--space-5);
-                max-width: 420px;
-            }
-            .location-modal-title {
-                font-size: var(--font-xl);
-            }
-            .location-modal-address {
-                font-size: var(--font-sm);
-                padding: var(--space-3) var(--space-4);
-            }
-            .location-modal-btn {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-                min-width: 120px;
-            }
-            .welcome-cta-pill .pill-main .event-name {
-                font-size: 1.2rem;
-            }
-            .welcome-cta-pill .pill-main .event-time {
-                font-size: 1rem;
-            }
-            .welcome-cta-pill .pill-styles .styles {
-                font-size: 0.9rem;
-            }
-            .welcome-cta-pill .pill-styles .dj-guest {
-                font-size: 0.9rem;
             }
         }
 
@@ -4239,9 +5145,10 @@
                 gap: var(--space-2);
             }
             .nav-btn {
-                padding: var(--space-2) var(--space-3);
+                padding: var(--space-2) var(--space-4);
                 font-size: var(--font-sm);
-                min-height: 52px;
+                min-height: 54px;
+                gap: var(--space-2);
             }
             .nav-btn i {
                 font-size: var(--font-md);
@@ -4258,53 +5165,6 @@
                 font-size: var(--font-md);
                 min-width: 130px;
                 padding-left: 0;
-            }
-            .location-card {
-                min-width: 100px;
-                padding: var(--space-2) var(--space-2);
-            }
-            .location-icon-wrap {
-                width: 56px;
-                height: 56px;
-                font-size: var(--font-xl);
-            }
-            .location-card .location-name {
-                font-size: var(--font-xs);
-            }
-            .location-card .location-days {
-                font-size: var(--font-xs);
-            }
-            .location-modal-card {
-                padding: var(--space-5) var(--space-4);
-                max-width: 380px;
-            }
-            .location-modal-title {
-                font-size: var(--font-lg);
-            }
-            .location-modal-address {
-                font-size: var(--font-sm);
-                padding: var(--space-3) var(--space-3);
-            }
-            .location-modal-btn {
-                font-size: var(--btn-font-sm);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-                min-width: 110px;
-            }
-            .location-modal-actions {
-                gap: var(--space-2);
-            }
-            .welcome-cta-pill .pill-main .event-name {
-                font-size: 1.05rem;
-            }
-            .welcome-cta-pill .pill-badge {
-                font-size: 0.82rem;
-                padding: 0 var(--space-3);
-                line-height: 2.4;
-                min-width: 80px;
-                padding-left: var(--space-3);
-                padding-right: var(--space-3);
             }
         }
 
@@ -4371,28 +5231,7 @@
                 font-size: var(--font-sm);
                 margin-top: var(--space-3);
             }
-            .share-main-btn {
-                padding: var(--space-2) var(--space-4);
-                min-width: 150px;
-                font-size: var(--font-xs);
-                min-height: 50px;
-            }
-            .share-bubble {
-                width: 56px;
-                height: 56px;
-                font-size: var(--font-xl);
-            }
-            .share-row {
-                gap: var(--space-2);
-            }
-            .review-bubble {
-                padding: var(--space-1) var(--space-3);
-                min-height: 40px;
-                font-size: var(--font-xs);
-            }
-            .review-bubble i {
-                font-size: var(--font-sm);
-            }
+
             .instructors-grid {
                 gap: var(--space-4);
             }
@@ -4574,40 +5413,18 @@
             }
             .reviews-action-btn {
                 width: 100%;
-                max-width: 260px;
+                max-width: 300px;
                 text-align: center;
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
+                height: 56px;
+                min-height: 56px;
                 padding: 0 var(--btn-pad-x-sm);
-                font-size: var(--btn-font-sm);
+                font-size: 1rem;
             }
-            .welcome-cta-pill {
-                padding: var(--space-3) var(--space-4);
-                min-height: 72px;
-                border-radius: var(--radius-md);
-                gap: var(--space-2);
-                padding-top: var(--space-4);
-            }
-            .welcome-cta-pill .pill-main .event-name {
-                font-size: 1.0rem;
-            }
-            .welcome-cta-pill .pill-main .event-time {
-                font-size: 0.9rem;
-            }
-            .welcome-cta-pill .pill-styles .styles {
-                font-size: 0.8rem;
-            }
-            .welcome-cta-pill .pill-styles .dj-guest {
-                font-size: 0.8rem;
-                padding: 0 var(--space-2);
-            }
-            .welcome-cta-pill .pill-badge {
-                font-size: 0.72rem;
-                padding: 0 var(--space-2);
-                line-height: 2.2;
-                min-width: 64px;
-                padding-left: var(--space-2);
-                padding-right: var(--space-2);
+            .reviews-action-btn.leave-review {
+                height: 62px;
+                min-height: 62px;
+                font-size: 1.08rem;
+                max-width: 320px;
             }
             .modern-event-card {
                 padding: var(--space-4) var(--space-3) var(--space-5);
@@ -4682,13 +5499,6 @@
             .top-nav-buttons.nav-floating .nav-btn span {
                 font-size: var(--font-xs);
             }
-            .bottom-share-container {
-                right: max(var(--space-2), env(safe-area-inset-right, 8px));
-                bottom: max(var(--space-2), env(safe-area-inset-bottom, 16px));
-            }
-            .share-actions-row {
-                gap: var(--space-3);
-            }
             .links-grid {
                 grid-template-columns: 1fr;
                 gap: var(--space-4);
@@ -4749,66 +5559,6 @@
                 padding: 0 var(--btn-pad-x-sm);
                 min-width: 90px;
             }
-            .locations-grid {
-                gap: var(--space-3);
-            }
-            .location-card {
-                min-width: 82px;
-                padding: var(--space-2) var(--space-2);
-            }
-            .location-icon-wrap {
-                width: 48px;
-                height: 48px;
-                font-size: var(--font-lg);
-            }
-            .location-card .location-name {
-                font-size: 10px;
-            }
-            .location-card .location-days {
-                font-size: 9px;
-                padding: 0 var(--space-2);
-            }
-            .location-modal-card {
-                padding: var(--space-4) var(--space-3);
-                max-width: 340px;
-            }
-            .location-modal-title {
-                font-size: var(--font-md);
-            }
-            .location-modal-address {
-                font-size: var(--font-xs);
-                padding: var(--space-2) var(--space-3);
-                margin: var(--space-2) 0 var(--space-4);
-            }
-            .location-modal-btn {
-                font-size: var(--font-xs);
-                height: var(--btn-height-sm);
-                min-height: var(--btn-height-sm);
-                padding: 0 var(--btn-pad-x-sm);
-                min-width: 90px;
-            }
-            .location-modal-actions {
-                gap: var(--space-2);
-                flex-direction: column;
-            }
-            .location-modal-btn {
-                width: 100%;
-            }
-            .welcome-cta-pill .up-next-badge {
-                font-size: 0.75rem;
-                padding: var(--space-1) var(--space-3);
-                top: -10px;
-                right: var(--space-2);
-                min-width: 60px;
-            }
-            .welcome-cta-pill .pill-badge {
-                font-size: 0.62rem;
-                padding: 0 var(--space-2);
-                line-height: 2.0;
-                min-width: 48px;
-                padding-left: var(--space-2);
-                padding-right: var(--space-2);
-            }
         }
 
         @media (max-width: 400px) {
@@ -4826,32 +5576,6 @@
             .apps-row.second-row {
                 gap: var(--space-1);
                 flex-wrap: wrap;
-            }
-            .welcome-cta-pill {
-                padding: var(--space-2) var(--space-3);
-                min-height: 56px;
-                border-radius: var(--radius-sm);
-                padding-top: var(--space-3);
-            }
-            .welcome-cta-pill .pill-main .event-name {
-                font-size: 0.9rem;
-            }
-            .welcome-cta-pill .pill-main .event-time {
-                font-size: 0.85rem;
-            }
-            .welcome-cta-pill .pill-styles .styles {
-                font-size: 0.75rem;
-            }
-            .welcome-cta-pill .pill-styles .dj-guest {
-                font-size: 0.75rem;
-            }
-            .welcome-cta-pill .pill-badge {
-                font-size: 0.55rem;
-                padding: 0 var(--space-1);
-                line-height: 1.8;
-                min-width: 36px;
-                padding-left: var(--space-1);
-                padding-right: var(--space-1);
             }
             .top-nav-buttons {
                 padding: var(--space-1) var(--space-1);
@@ -4887,89 +5611,10 @@
             .top-nav-buttons.nav-floating .nav-btn span {
                 font-size: var(--font-xs);
             }
-            .location-card {
-                min-width: 70px;
-                padding: var(--space-1) var(--space-1);
-            }
-            .location-icon-wrap {
-                width: 42px;
-                height: 42px;
-                font-size: var(--font-base);
-            }
-            .location-card .location-name {
-                font-size: 9px;
-            }
-            .location-card .location-days {
-                font-size: 8px;
-                padding: 0 var(--space-1);
-            }
-            .location-modal-card {
-                padding: var(--space-3) var(--space-2);
-                max-width: 300px;
-            }
-            .location-modal-title {
-                font-size: var(--font-sm);
-            }
-            .location-modal-address {
-                font-size: var(--font-xs);
-                padding: var(--space-2) var(--space-2);
-            }
-            .location-modal-btn {
-                font-size: var(--font-xs);
-                height: 44px;
-                min-height: 44px;
-                padding: 0 var(--btn-pad-x-sm);
-                min-width: 80px;
-            }
-            .welcome-cta-pill .up-next-badge {
-                font-size: 0.65rem;
-                padding: var(--space-1) var(--space-1);
-                top: -8px;
-                right: var(--space-1);
-                min-width: 44px;
-            }
-            .welcome-cta-pill .pill-badge {
-                font-size: 0.48rem;
-                padding: 0 var(--space-1);
-                line-height: 1.6;
-                min-width: 32px;
-                padding-left: var(--space-1);
-                padding-right: var(--space-1);
-            }
-        }
-
-        @media (max-height: 500px) and (orientation: landscape) {
-            .apps-row {
-                flex-direction: row;
-                gap: var(--space-2);
-            }
-            .app-icon {
-                width: var(--icon-size-sm);
-                height: var(--icon-size-sm);
-            }
-            .app-icon i {
-                font-size: var(--icon-font-base);
-            }
-            .app-icon.djmx {
-                width: var(--icon-size-sm);
-                height: var(--icon-size-sm);
-            }
-            .app-icon.djmx i {
-                font-size: var(--icon-font-base);
-            }
-            .location-card {
-                min-width: 76px;
-            }
-            .location-icon-wrap {
-                width: 44px;
-                height: 44px;
-                font-size: var(--font-md);
-            }
         }
 
         a,
         button,
-        .clickable,
         .location-icon,
         .submit-btn,
         .form-input,
@@ -4977,9 +5622,6 @@
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
             cursor: pointer;
-        }
-        .scroll-smooth {
-            scroll-behavior: smooth;
         }
         .link-card .card-body .schedule-list .schedule-day-group:last-child {
             margin-bottom: 0;
@@ -5011,60 +5653,6 @@
             color: var(--red-soft);
             font-weight: 700;
         }
-        .welcome-cta-pill .pill-main .baile-inolvidable-red {
-            color: var(--red-accent);
-            font-weight: 700;
-        }
-        .welcome-cta-pill .pill-main .free-orange {
-            color: #E89A25;
-            font-weight: 700;
-        }
-        .welcome-cta-pill .pill-main .free-purple {
-            color: #7B4DDB;
-            font-weight: 700;
-        }
-        .welcome-cta-pill .pill-main .times-blue {
-            color: #315B9B;
-            font-weight: 600;
-        }
-        .welcome-cta-pill .pill-main .free-green {
-            color: #2e7d32;
-            font-weight: 700;
-        }
-
-        .welcome-cta-pill .pill-badge.wednesday {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-color: rgba(245, 158, 11, 0.4);
-            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
-        }
-        .welcome-cta-pill .pill-badge.friday {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.25);
-        }
-        .welcome-cta-pill .pill-badge.saturday {
-            background: linear-gradient(135deg, #60a5fa, #2563eb);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.25);
-        }
-        .welcome-cta-pill .pill-badge.thursdays {
-            background: linear-gradient(135deg, #fb923c, #d97706);
-            border-color: rgba(230, 126, 34, 0.4);
-            box-shadow: 0 2px 10px rgba(230, 126, 34, 0.25);
-        }
-        .welcome-cta-pill .pill-badge.this-week-badge {
-            background: linear-gradient(135deg, #6c7e94, #4a627a);
-            border-color: rgba(74, 98, 122, 0.4);
-            box-shadow: 0 2px 10px rgba(74, 98, 122, 0.25);
-        }
-
-        .welcome-cta-pill .pill-main .event-name .baile-inolvidable-red {
-            display: inline;
-        }
-        .welcome-cta-pill .pill-main .event-name .baile-inolvidable-red .star-icon {
-            display: inline;
-            margin-right: 0;
-        }
     </style>
 </head>
 <body class="welcome-active no-scroll">
@@ -5073,7 +5661,7 @@
 
     <div id="welcome-array">
         <div class="welcome-content">
-            <h1 class="welcome-title">Rebecca & Daniel</h1>
+            <h1 class="welcome-title">Rebecca &amp; Daniel</h1>
             <p class="welcome-social-prompt">Follow us for dance tips &amp; social nights</p>
             <div class="apps-row">
                 <a href="https://www.facebook.com/share/1CYPavhpbi/?mibextid=wwXIfr" class="app-icon facebook" data-app="facebook" data-fb-username="rebecca_bachata"><i class="fab fa-facebook"></i><span>Facebook</span></a>
@@ -5125,11 +5713,11 @@
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
                 <div class="welcome-pills" id="welcome-pills-container">
 
-                    <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
+                    <a href="https://facebook.com/events/s/salsa-on-the-main-line/945421021287172/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-badge saturday">Saturday</span>
                         <span class="pill-main">
                             <span class="event-name">Ardmore Salsa Night • Sat 2nd &amp; 4th</span>
-                            <span class="event-time">9:15PM Lesson • 10PM Social</span>
+                            <span class="event-time">9:15PM Lesson • 10PM Dancing</span>
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue • Cumbia</span>
@@ -5140,8 +5728,8 @@
                     <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorines-wed">
                         <span class="pill-badge wednesday">Wednesday</span>
                         <span class="pill-main">
-                            <span class="event-name">Sor Ynéz • Wed 1st &amp; 3rd <span class="baile-inolvidable-red"><span class="star-icon">✨</span>Baile Inolvidable</span></span>
-                            <span class="event-time"><span class="free-orange">FREE</span> • 6PM Music • 6:30PM Lesson • 7:30PM Social</span>
+                            <span class="event-name">Sor Ynéz • Wed 1st &amp; 3rd <span class="baile-inolvidable-red">✨Baile Inolvidable</span></span>
+                            <span class="event-time"><span class="free-orange">FREE</span> • 6PM Music • 6:30PM Lesson • 7:30PM Dancing</span>
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue &amp; More</span>
@@ -5153,7 +5741,7 @@
                         <span class="pill-badge friday">Friday</span>
                         <span class="pill-main">
                             <span class="event-name">Sor Ynéz • Fri 2nd &amp; 4th</span>
-                            <span class="event-time"><span class="free-purple">FREE</span> • 6PM Music • 6:30PM Lesson • 7:30PM Social</span>
+                            <span class="event-time"><span class="free-purple">FREE</span> • 6PM Music • 6:30PM Lesson • 7:30PM Dancing</span>
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue &amp; More</span>
@@ -5165,7 +5753,7 @@
                         <span class="pill-badge thursdays">Thursdays</span>
                         <span class="pill-main">
                             <span class="event-name">Salsa Libre at Cuba Libre</span>
-                            <span class="event-time"><span class="free-orange">FREE</span> • 9PM Lesson • 10PM Social</span>
+                            <span class="event-time"><span class="free-orange">FREE</span> • 9PM Lesson • 10PM Dancing</span>
                         </span>
                         <span class="pill-styles">
                             <span class="styles">Salsa • Bachata • Merengue &amp; More</span>
@@ -5179,31 +5767,72 @@
 
             <div class="locations-section section-animate" id="locations-section">
                 <h2 class="section-title" id="locations-title">Find Our Locations</h2>
-                <div class="locations-grid">
-                    <div class="location-card stardust" data-venue="stardust">
-                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
-                        <span class="location-name">Stardust Ballroom</span>
-                        <span class="location-days">Thursday &amp; Sunday</span>
-                        <span class="location-label">Bellmawr, NJ</span>
+
+                <div class="locations-grid" id="locations-grid">
+
+                    <div class="location-app" data-venue="stardust" tabindex="0" role="button" aria-label="Stardust Ballroom, every Thursday and Sunday">
+                        <div class="location-app-icon loc-icon-stardust">
+                            <span class="icon-bg-shine"></span>
+                            <i class="fas fa-directions"></i>
+                            <span class="location-app-icon-label">Drive</span>
+                        </div>
+                        <span class="location-app-name">Stardust</span>
+                        <div class="location-app-schedule">
+                            <span class="location-app-days weekly"><span class="badge-dot blue"></span>Thu &amp; Sun</span>
+                            <span class="location-week-note">Every week</span>
+                        </div>
                     </div>
-                    <div class="location-card sorynez" data-venue="sorynez">
-                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
-                        <span class="location-name">Sor Ynéz</span>
-                        <span class="location-days">Wednesday (1st &amp; 3rd) · Friday (2nd &amp; 4th)</span>
-                        <span class="location-label">Fishtown, Philadelphia</span>
+
+                    <div class="location-app" data-venue="sorynez" tabindex="0" role="button" aria-label="Sor Ynéz, Wednesday 1st and 3rd, Friday 2nd and 4th">
+                        <div class="location-app-icon loc-icon-sorynez">
+                            <span class="icon-bg-shine"></span>
+                            <i class="fas fa-directions"></i>
+                            <span class="location-app-icon-label">Drive</span>
+                        </div>
+                        <span class="location-app-name">Sor Ynéz</span>
+                        <div class="location-app-schedule">
+                            <span class="location-app-days special"><span class="badge-dot purple"></span>Wed 1st &amp; 3rd</span>
+                            <span class="location-app-days special"><span class="badge-dot purple"></span>Fri 2nd &amp; 4th</span>
+                        </div>
+                        <div class="location-app-actions">
+                            <button type="button" class="loc-action-btn book"><i class="fas fa-calendar-check"></i>Book</button>
+                        </div>
                     </div>
-                    <div class="location-card ardmore" data-venue="ardmore">
-                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
-                        <span class="location-name">Ardmore</span>
-                        <span class="location-days">Saturday (2nd &amp; 4th)</span>
-                        <span class="location-label">Ardmore, PA</span>
+
+                    <div class="location-app" data-venue="ardmore" tabindex="0" role="button" aria-label="Ardmore, 2nd and 4th Saturday">
+                        <div class="location-app-icon loc-icon-ardmore">
+                            <span class="icon-bg-shine"></span>
+                            <i class="fas fa-directions"></i>
+                            <span class="location-app-icon-label">Drive</span>
+                        </div>
+                        <span class="location-app-name">Ardmore</span>
+                        <div class="location-app-schedule">
+                            <span class="location-app-days biweekly"><span class="badge-dot gold"></span>Saturday</span>
+                            <span class="location-week-note">2nd &amp; 4th of month</span>
+                        </div>
                     </div>
-                    <div class="location-card cubalibre" data-venue="cubalibre">
-                        <div class="location-icon-wrap"><i class="fas fa-location-dot"></i></div>
-                        <span class="location-name">Cuba Libre</span>
-                        <span class="location-days">Thursdays</span>
-                        <span class="location-label">Old City, PA</span>
+
+                    <div class="location-app" data-venue="cubalibre" tabindex="0" role="button" aria-label="Cuba Libre, every Thursday">
+                        <div class="location-app-icon loc-icon-cubalibre">
+                            <span class="icon-bg-shine"></span>
+                            <i class="fas fa-directions"></i>
+                            <span class="location-app-icon-label">Drive</span>
+                        </div>
+                        <span class="location-app-name">Cuba Libre</span>
+                        <div class="location-app-schedule">
+                            <span class="location-app-days hot"><span class="badge-dot red"></span>Thursday</span>
+                            <span class="location-week-note">Every week</span>
+                        </div>
+                        <div class="location-app-actions">
+                            <button type="button" class="loc-action-btn book"><i class="fas fa-calendar-check"></i>Book</button>
+                        </div>
                     </div>
+
+                </div>
+
+                <div class="locations-hint">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span>Tap a venue for address &amp; details</span>
                 </div>
             </div>
 
@@ -5341,7 +5970,10 @@
                     <div class="review-item"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="review-text">I've been dancing for years, but Rebecca and Daniel took my skills to the next level. Their attention to detail and personalized feedback make all the difference. Best instructors in the city!</div><div class="review-author">— Jessica Martinez</div></div>
                 </div>
                 <div class="review-indicators"><div class="review-indicator active" data-index="0"></div><div class="review-indicator" data-index="1"></div><div class="review-indicator" data-index="2"></div></div>
-                <div class="reviews-actions"><button class="reviews-action-btn" id="hide-reviews">Hide Reviews</button><a href="https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic" class="reviews-action-btn leave-review" id="leave-review" data-app="google-maps">Write a Review</a></div>
+                <div class="reviews-actions">
+                    <button class="reviews-action-btn" id="hide-reviews">Hide Reviews</button>
+                    <a href="https://g.page/r/Cemmw4NCvdyQEBI/review" target="_blank" rel="noopener" class="reviews-action-btn leave-review" id="leave-review" data-app="google-maps"><i class="fab fa-google"></i> Write a Review</a>
+                </div>
             </div>
 
             <hr class="section-separator" id="separator-4">
@@ -5410,16 +6042,16 @@
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
-                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Social until 1am</div>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> 9:15pm Lesson · 10:00pm Dancing until 1am</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
-                            <a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line-last-sa/1736848574102152/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-on-the-main-line/945421021287172/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-on-the-main-line/945421021287172/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Sor Ynéz – <span class="baile-inolvidable-red">✨Baile Inolvidable</span> • 1st &amp; 3rd Wednesday</h3>
-                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Social</div>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Outdoor Social · 6pm Music · 7pm Lesson · 8pm Dancing</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
                             <a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
                             <div class="event-footer-minimal"><a href="https://facebook.com/events/s/baile-inolvidable-at-sor-ynez/1742934816752886/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
@@ -5428,7 +6060,7 @@
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
-                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Social</div>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Dancing</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
                             <a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
                             <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez-friday/1984183718935391/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
@@ -5437,7 +6069,7 @@
                     <div class="carousel-slide">
                         <div class="modern-event-card">
                             <h3 class="event-title">Salsa Libre at Cuba Libre – Thu Weekly</h3>
-                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE · 9pm Lesson · 10pm Social</div>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE · 9pm Lesson · 10pm Dancing</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/voTCqTyDaWUyYGsD7?g_st=ic" target="_blank" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Cuba Libre, Old City, PA</a></div>
                             <a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
                             <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-libre/973858399064367/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
@@ -5504,7 +6136,7 @@
 
             <footer class="section-animate">
                 <div class="language-toggle" id="language-toggle"><button class="lang-btn active" data-lang="en">English</button><button class="lang-btn" data-lang="es">Español</button></div>
-                <p id="copyright">© 2025 Rebecca &amp; Daniel | Professional Dance Instruction</p>
+                <p id="copyright">© 2025 Rebecca & Daniel | Professional Dance Instruction</p>
                 <p id="quote">dancing is the hidden language of the soul</p>
                 <div class="signature-container"></div>
             </footer>
@@ -5513,8 +6145,26 @@
     </div>
 
     <div class="bottom-share-container" id="bottomShareContainer">
-        <div class="share-bubbles" id="shareBubbles"><div class="share-row"><a href="#" class="share-bubble copy-link" data-share="copy"><i class="fas fa-link"></i></a><a href="#" class="share-bubble messenger" data-share="messenger"><i class="fab fa-facebook-messenger"></i></a><a href="#" class="share-bubble instagram" data-share="instagram"><i class="fab fa-instagram"></i></a><a href="#" class="share-bubble whatsapp" data-share="whatsapp"><i class="fab fa-whatsapp"></i></a><a href="#" class="share-bubble email" data-share="email"><i class="fas fa-envelope"></i></a><a href="#" class="share-bubble sms" data-share="sms"><i class="fas fa-comment"></i></a></div></div>
-        <div class="share-actions-row"><a href="https://maps.app.goo.gl/PbTDXLSyDpkPq8vh6?g_st=ic" class="review-bubble" target="_blank" id="reviewBubble" data-app="google-maps"><i class="fab fa-google"></i> Write a review</a><button class="share-main-btn" id="shareMainBtn"><i class="fas fa-share-alt"></i> <span>Share with a friend</span></button></div>
+        <div class="share-bubbles" id="shareBubbles">
+            <div class="share-row">
+                <a href="#" class="share-bubble copy-link" data-share="copy"><i class="fas fa-link"></i></a>
+                <a href="#" class="share-bubble messenger" data-share="messenger"><i class="fab fa-facebook-messenger"></i></a>
+                <a href="#" class="share-bubble instagram" data-share="instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="share-bubble whatsapp" data-share="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="share-bubble email" data-share="email"><i class="fas fa-envelope"></i></a>
+                <a href="#" class="share-bubble sms" data-share="sms"><i class="fas fa-comment"></i></a>
+            </div>
+        </div>
+        <div class="share-actions-row">
+            <a href="https://g.page/r/Cemmw4NCvdyQEBI/review" class="review-bubble" target="_blank" id="reviewBubble" data-app="google-maps">
+                <i class="fab fa-google"></i>
+                <span class="review-bubble-text">
+                    <span class="review-label">Leave a</span>
+                    <span class="review-main">★ Review</span>
+                </span>
+            </a>
+            <button class="share-main-btn" id="shareMainBtn"><i class="fas fa-share-alt"></i> <span>Share with a friend</span></button>
+        </div>
     </div>
 
     <script>
@@ -5730,7 +6380,9 @@
                 sorynez: {
                     name: 'Sor Ynéz',
                     address: '1800 N American St Unit G, Philadelphia, PA 19122',
-                    mapsUrl: 'https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic'
+                    mapsUrl: 'https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic',
+                    bookUrl: 'https://www.sorynez.com/',
+                    bookLabel: 'Reserve a Table at Sor Ynéz'
                 },
                 ardmore: {
                     name: 'Ardmore',
@@ -5740,7 +6392,9 @@
                 cubalibre: {
                     name: 'Cuba Libre',
                     address: '10 S 2nd St, Philadelphia, PA 19106',
-                    mapsUrl: 'https://maps.app.goo.gl/voTCqTyDaWUyYGsD7?g_st=ic'
+                    mapsUrl: 'https://maps.app.goo.gl/voTCqTyDaWUyYGsD7?g_st=ic',
+                    bookUrl: 'https://sevn.ly/xbW0R1cG',
+                    bookLabel: 'Reserve a Table at Cuba Libre'
                 }
             };
 
@@ -5752,14 +6406,23 @@
                 var data = locationData[venueKey];
                 if (!data) return;
 
+                var bookHtml = '';
+                if (data.bookUrl) {
+                    bookHtml = '<div class="location-modal-book">' +
+                        '<a class="location-modal-btn book-btn" href="' + data.bookUrl +
+                        '" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> ' +
+                        data.bookLabel + '</a></div>';
+                }
+
                 var overlay = document.createElement('div');
                 overlay.className = 'location-modal-overlay';
                 overlay.innerHTML =
                     '<div class="location-modal-card">' +
-                    '<button class="location-modal-close">&times;</button>' +
+                    '<button class="location-modal-close" aria-label="Close">&times;</button>' +
                     '<div class="location-modal-title">' + data.name + '</div>' +
-                    '<div class="location-modal-address"><i class="fas fa-map-pin address-icon"></i>' + data
-                    .address + '</div>' +
+                    '<div class="location-modal-address"><i class="fas fa-map-pin address-icon"></i>' +
+                    data.address + '</div>' +
+                    bookHtml +
                     '<div class="location-modal-actions">' +
                     '<button class="location-modal-btn copy-btn" id="locCopyBtn"><i class="fas fa-copy"></i> Copy Address</button>' +
                     '<button class="location-modal-btn navigate-btn" id="locNavBtn"><i class="fas fa-directions"></i> Navigate</button>' +
@@ -5840,14 +6503,16 @@
                 locationModalOpen = false;
             }
 
-            function initLocationCards() {
-                var cards = document.querySelectorAll('.location-card');
-                cards.forEach(function(card) {
-                    card.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        var venue = card.dataset.venue;
-                        if (venue && locationData[venue]) {
-                            openLocationModal(venue);
+            function initModernLocations() {
+                document.querySelectorAll('.location-app').forEach(function(app) {
+                    var venue = app.dataset.venue;
+                    app.addEventListener('click', function() {
+                        if (venue && locationData[venue]) openLocationModal(venue);
+                    });
+                    app.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            if (venue && locationData[venue]) openLocationModal(venue);
                         }
                     });
                 });
@@ -5879,8 +6544,10 @@
                 var CASHAPP_URL = 'https://cash.app/$RebeccaRoseBachata';
 
                 function cancelAutoDismiss() {
-                    if (autoDismissTimer) { clearTimeout(autoDismissTimer);
-                        autoDismissTimer = null; }
+                    if (autoDismissTimer) {
+                        clearTimeout(autoDismissTimer);
+                        autoDismissTimer = null;
+                    }
                 }
 
                 function restartAutoDismiss() {
@@ -5915,13 +6582,17 @@
                     var closeBtn = modalOverlay.querySelector('.payment-modal-close');
                     var venmoBtn = modalOverlay.querySelector('.venmo-opt');
                     var cashBtn = modalOverlay.querySelector('.cashapp-opt');
-                    closeBtn.addEventListener('click', function() { closePaymentModal();
-                        restartAutoDismiss(); });
+                    closeBtn.addEventListener('click', function() {
+                        closePaymentModal();
+                        restartAutoDismiss();
+                    });
                     venmoBtn.addEventListener('click', function() { handlePaymentSelect('venmo'); });
                     cashBtn.addEventListener('click', function() { handlePaymentSelect('cashapp'); });
                     modalOverlay.addEventListener('click', function(e) {
-                        if (e.target === modalOverlay) { closePaymentModal();
-                            restartAutoDismiss(); }
+                        if (e.target === modalOverlay) {
+                            closePaymentModal();
+                            restartAutoDismiss();
+                        }
                     });
                 }
 
@@ -5949,24 +6620,32 @@
                         clickCount++;
                         if (clickTimer) clearTimeout(clickTimer);
                         clickTimer = setTimeout(function() { clickCount = 0; }, 500);
-                        if (clickCount === 3) { clearTimeout(clickTimer);
+                        if (clickCount === 3) {
+                            clearTimeout(clickTimer);
                             clickCount = 0;
-                            window.open(WHATSAPP_LINK, '_blank'); }
+                            window.open(WHATSAPP_LINK, '_blank');
+                        }
                     });
                 }
 
                 var skipBtn = document.getElementById('welcome-skip-btn');
                 if (skipBtn) {
-                    skipBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        e.preventDefault();
+                    var skipHandler = function(e) {
+                        if (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
                         if (paymentModalOpen) return;
                         cancelAutoDismiss();
                         fadeOutWelcomeArray();
-                    });
+                    };
+                    skipBtn.addEventListener('click', skipHandler);
                     skipBtn.addEventListener('touchstart', function(e) {
                         e.stopPropagation();
-                    }, { passive: true });
+                        if (paymentModalOpen) return;
+                        cancelAutoDismiss();
+                        fadeOutWelcomeArray();
+                    }, { passive: false });
                 }
 
                 welcomeArray.addEventListener('click', function(e) {
@@ -5979,8 +6658,10 @@
                 });
 
                 var payIcon = document.getElementById('pay-icon');
-                if (payIcon) payIcon.addEventListener('click', function(e) { e.preventDefault();
-                    showPaymentModal(); });
+                if (payIcon) payIcon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPaymentModal();
+                });
 
                 var appIcons = document.querySelectorAll('.app-icon');
                 appIcons.forEach(function(icon, idx) {
@@ -6043,8 +6724,10 @@
                     e.preventDefault();
                     if (paymentModalOpen) return;
                     fadeOutWelcomeArray(function() {
-                        document.getElementById('schedule-title').scrollIntoView({ behavior: 'smooth',
-                            block: 'start' });
+                        document.getElementById('schedule-title').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     });
                 });
 
@@ -6115,20 +6798,40 @@
                     var classes = next.classes || [];
 
                     var classData = [];
+                    var classPatterns = [
+                        { time: "7:00pm", name: "Intro to Salsa & Bachata", level: "beginner",
+                            levelText: "Beginner" },
+                        { time: "8:00pm", name: "Guided Practice", level: "practice", levelText: "Practice" },
+                        { time: "9:00pm", name: "Bachata Sensual", level: "sensual", levelText: "Sensual" }
+                    ];
+
                     if (classes.length >= 1) {
                         var parts1 = classes[0].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
+                        var name1 = parts1 ? parts1[2] : classPatterns[0].name;
+                        var level1 = "beginner",
+                            levelText1 = "Beginner";
+                        if (name1.includes("Bachata Advanced Beginner")) {
+                            level1 = "bachata-level";
+                            levelText1 = "Bachata";
+                        } else if (name1.includes("Bachata Sensual")) {
+                            level1 = "sensual";
+                            levelText1 = "Sensual";
+                        } else if (name1.includes("Guided Practice")) {
+                            level1 = "practice";
+                            levelText1 = "Practice";
+                        }
                         classData.push({
-                            time: parts1 ? parts1[1] : "7:00pm",
-                            name: parts1 ? parts1[2] : "Intro to Salsa & Bachata",
-                            level: "beginner",
-                            levelText: "Beginner"
+                            time: parts1 ? parts1[1] : classPatterns[0].time,
+                            name: name1,
+                            level: level1,
+                            levelText: levelText1
                         });
                     }
                     if (classes.length >= 2) {
                         var parts2 = classes[1].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
-                        var name2 = parts2 ? parts2[2] : "Guided Practice";
-                        var level2 = "practice";
-                        var levelText2 = "Practice";
+                        var name2 = parts2 ? parts2[2] : classPatterns[1].name;
+                        var level2 = "practice",
+                            levelText2 = "Practice";
                         if (name2.includes("Bachata Advanced Beginner")) {
                             level2 = "bachata-level";
                             levelText2 = "Bachata";
@@ -6140,7 +6843,7 @@
                             levelText2 = "Practice";
                         }
                         classData.push({
-                            time: parts2 ? parts2[1] : "8:00pm",
+                            time: parts2 ? parts2[1] : classPatterns[1].time,
                             name: name2,
                             level: level2,
                             levelText: levelText2
@@ -6148,45 +6851,44 @@
                     }
                     if (classes.length >= 3) {
                         var parts3 = classes[2].match(/^(\d+:\d+(?:am|pm)?)\s*(.*)$/);
-                        var name3 = parts3 ? parts3[2] : "Bachata Sensual";
-                        var level3 = "sensual";
-                        var levelText3 = "Sensual";
+                        var name3 = parts3 ? parts3[2] : classPatterns[2].name;
+                        var level3 = "sensual",
+                            levelText3 = "Sensual";
                         if (name3.includes("Bachata Sensual")) {
                             level3 = "sensual";
                             levelText3 = "Sensual";
                         } else if (name3.includes("Bachata Advanced Beginner")) {
                             level3 = "bachata-level";
                             levelText3 = "Bachata";
+                        } else if (name3.includes("Guided Practice")) {
+                            level3 = "practice";
+                            levelText3 = "Practice";
                         }
                         classData.push({
-                            time: parts3 ? parts3[1] : "9:00pm",
+                            time: parts3 ? parts3[1] : classPatterns[2].time,
                             name: name3,
                             level: level3,
                             levelText: levelText3
                         });
                     }
 
-                    while (classData.length < 3) {
-                        var idx = classData.length + 1;
-                        classData.push({
-                            time: (6 + idx) + ":00pm",
-                            name: "Class " + idx,
-                            level: "beginner",
-                            levelText: "Class"
-                        });
-                    }
-
-                    for (var r = 0; r < Math.min(rows.length, classData.length); r++) {
+                    var maxRows = rows.length;
+                    for (var r = 0; r < maxRows; r++) {
                         var row = rows[r];
-                        var data = classData[r];
-                        var timeEl = row.querySelector('.cta-class-time');
-                        var nameEl = row.querySelector('.cta-class-name');
-                        var levelEl = row.querySelector('.cta-class-level');
-                        if (timeEl) timeEl.textContent = data.time;
-                        if (nameEl) nameEl.textContent = data.name;
-                        if (levelEl) {
-                            levelEl.textContent = data.levelText;
-                            levelEl.className = 'cta-class-level ' + data.level;
+                        if (r < classData.length) {
+                            var data = classData[r];
+                            var timeEl = row.querySelector('.cta-class-time');
+                            var nameEl = row.querySelector('.cta-class-name');
+                            var levelEl = row.querySelector('.cta-class-level');
+                            if (timeEl) timeEl.textContent = data.time;
+                            if (nameEl) nameEl.textContent = data.name;
+                            if (levelEl) {
+                                levelEl.textContent = data.levelText;
+                                levelEl.className = 'cta-class-level ' + data.level;
+                            }
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
                         }
                     }
 
@@ -6260,14 +6962,11 @@
                 }
 
                 function updateScheduleDisplay() {
-                    var now = new Date();
-                    var curDay = now.getDay();
-                    var curTime = now.getHours() * 100 + now.getMinutes();
                     var map = {};
                     classSchedule.forEach(function(s) {
                         var daysUntil = getDaysUntil(s.dayIndex, s.endTime);
                         if (!map[s.locationId] || daysUntil < map[s.locationId].daysUntil) map[s
-                        .locationId] = { daysUntil: daysUntil, schedule: s };
+                            .locationId] = { daysUntil: daysUntil, schedule: s };
                     });
                     var sorted = Object.values(map).sort(function(a, b) { return a.daysUntil - b.daysUntil; });
                     var grid = document.getElementById('schedule-grid');
@@ -6317,8 +7016,11 @@
                     var pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
                     if (pills.length === 0) return;
                     document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
-                    pills.forEach(function(p) { p.classList.remove('next-event', 'event-this-week');
-                        p.style.boxShadow = ''; });
+                    document.querySelectorAll('.week-badge').forEach(function(el) { el.remove(); });
+                    pills.forEach(function(p) {
+                        p.classList.remove('next-event', 'event-this-week');
+                        p.style.boxShadow = '';
+                    });
 
                     var now = new Date();
                     now.setHours(0, 0, 0, 0);
@@ -6331,16 +7033,6 @@
                             'cubalibre': { day: 'Thu', pattern: 'every', label: 'Salsa Libre at Cuba Libre' }
                         };
                         return map[key] || null;
-                    }
-
-                    function getDayNameFromKey(key) {
-                        var map = {
-                            'ardmore': 'Saturday',
-                            'sorines-wed': 'Wednesday',
-                            'sorynez-fri': 'Friday',
-                            'cubalibre': 'Thursday'
-                        };
-                        return map[key] || '';
                     }
 
                     function getNextOccurrence(dayName, weekPattern) {
@@ -6403,32 +7095,42 @@
                             daysUntil: daysUntil };
                     });
 
-                    var thisWeekEvents = orderedData.filter(function(item) {
-                        return item.daysUntil >= 0 && item.daysUntil < 7;
-                    });
-
                     orderedData.forEach(function(item) {
                         var pill = item.pill;
-                        var daysUntil = item.daysUntil;
-                        if (daysUntil >= 0 && daysUntil < 7) {
+                        if (isSameCalendarWeek(item.date, now)) {
                             pill.classList.add('event-this-week');
-                            pill.style.boxShadow = '0 0 0 3px rgba(31, 75, 138, 0.40), 0 0 32px rgba(31, 75, 138, 0.15), 0 2px 12px rgba(31, 75, 138, 0.04), 0 0 0 1px rgba(31, 75, 138, 0.05)';
+                            pill.style.boxShadow =
+                                '0 0 28px rgba(31, 75, 138, 0.07), 0 4px 18px rgba(31, 75, 138, 0.05), 0 0 0 1px rgba(31, 75, 138, 0.06)';
+
+                            var existingWeekBadge = pill.querySelector('.week-badge');
+                            if (!existingWeekBadge) {
+                                var weekBadge = document.createElement('span');
+                                weekBadge.className = 'week-badge';
+                                weekBadge.textContent = 'this week';
+                                pill.appendChild(weekBadge);
+                            }
                         }
                     });
 
-                    if (thisWeekEvents.length === 1) {
-                        var ev = thisWeekEvents[0];
-                        var pill = ev.pill;
+                    if (orderedData.length > 0) {
+                        var nextEvent = orderedData[0];
+                        var pill = nextEvent.pill;
                         pill.classList.add('next-event');
+
                         var existingUpBadge = pill.querySelector('.up-next-badge');
                         if (existingUpBadge) existingUpBadge.remove();
+
                         var upBadge = document.createElement('span');
                         upBadge.className = 'up-next-badge';
-                        upBadge.textContent = 'this week';
+                        var daysUntilNext = nextEvent.daysUntil;
+                        if (daysUntilNext === 0) upBadge.textContent = 'today';
+                        else if (daysUntilNext === 1) upBadge.textContent = 'tomorrow';
+                        else if (daysUntilNext >= 2 && daysUntilNext <= 6) upBadge.textContent = 'up next';
+                        else upBadge.textContent = 'next';
                         pill.appendChild(upBadge);
-                    } else if (thisWeekEvents.length >= 3) {
-                        // remove any existing up-next-badge from all pills
-                        document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
+
+                        var weekBadgeOnNext = pill.querySelector('.week-badge');
+                        if (weekBadgeOnNext) weekBadgeOnNext.remove();
                     }
                 }
 
@@ -6474,7 +7176,7 @@
                                     func: 'pauseVideo',
                                     args: []
                                 }), '*');
-                            } catch (e) { /* ignore */ }
+                            } catch (e) {}
                         });
                         activeIframe = null;
                     }
@@ -6534,7 +7236,6 @@
                             return;
                         }
 
-                        var total = filtered.length;
                         filtered.forEach(function(v, idx) {
                             var div = document.createElement('div');
                             div.className = 'video-item';
@@ -6564,25 +7265,14 @@
                         currentVideoIndex = 0;
                         var iframes = videoFeed.querySelectorAll('iframe');
                         iframes.forEach(function(iframe, i) {
-                            if (i === 0) {
-                                var vid = filtered[0];
-                                iframe.src = 'https://www.youtube.com/embed/' + vid.videoId +
-                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
-                                iframe.onload = function() {
-                                    var overlay = iframe.closest('.video-player').querySelector(
-                                        '.youtube-overlay');
-                                    if (overlay) overlay.classList.add('hidden');
-                                };
-                            } else {
-                                var vid2 = filtered[i];
-                                iframe.src = 'https://www.youtube.com/embed/' + vid2.videoId +
-                                    '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
-                                iframe.onload = function() {
-                                    var overlay = iframe.closest('.video-player').querySelector(
-                                        '.youtube-overlay');
-                                    if (overlay) overlay.classList.add('hidden');
-                                };
-                            }
+                            var vid = filtered[i];
+                            iframe.src = 'https://www.youtube.com/embed/' + vid.videoId +
+                                '?enablejsapi=1&rel=0&modestbranding=1&showinfo=0&playsinline=1';
+                            iframe.onload = function() {
+                                var overlay = iframe.closest('.video-player').querySelector(
+                                    '.youtube-overlay');
+                                if (overlay) overlay.classList.add('hidden');
+                            };
                         });
                     }
 
@@ -6608,10 +7298,14 @@
                     document.addEventListener('keydown', function(e) {
                         var lib = document.getElementById('video-library');
                         if (lib && lib.classList.contains('collapsed')) return;
-                        if (e.key === 'ArrowDown') { e.preventDefault();
-                            nextVideoFn(); }
-                        if (e.key === 'ArrowUp') { e.preventDefault();
-                            prevVideoFn(); }
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            nextVideoFn();
+                        }
+                        if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            prevVideoFn();
+                        }
                     });
 
                     catBtns.forEach(function(btn) {
@@ -6659,7 +7353,7 @@
 
                     setupDeepLinks();
 
-                    initLocationCards();
+                    initModernLocations();
 
                     sortEventPills();
                     updateCTASection();
@@ -6711,7 +7405,6 @@
                         if (!navBar) return;
                         var scrollY = window.scrollY;
                         var direction = scrollY > lastScrollPos ? 'down' : 'up';
-                        var scrollDelta = Math.abs(scrollY - lastScrollPos);
 
                         if (!shouldEnableHide()) {
                             navBar.classList.add('nav-static');
@@ -6828,9 +7521,10 @@
                         handleScrollAnimation();
                         var scrollTimeout;
                         window.addEventListener('scroll', function() {
-                            if (!scrollTimeout) scrollTimeout = setTimeout(function() { scrollTimeout =
-                                    null;
-                                handleScrollAnimation(); }, 50);
+                            if (!scrollTimeout) scrollTimeout = setTimeout(function() {
+                                scrollTimeout = null;
+                                handleScrollAnimation();
+                            }, 50);
                         }, { passive: true });
                         setTimeout(function() {
                             animatedSections.forEach(function(s) {
@@ -7113,7 +7807,6 @@
                         var toggle = document.getElementById('reviews-toggle');
                         var section = document.getElementById('reviews-section');
                         var hide = document.getElementById('hide-reviews');
-                        var leave = document.getElementById('leave-review');
                         var chev = toggle.querySelector('i');
                         toggle.addEventListener('click', function() {
                             var hidden = section.classList.contains('hidden');
@@ -7218,17 +7911,10 @@
                             if (!overlay) {
                                 overlay = document.createElement('div');
                                 overlay.className = 'share-overlay';
-                                overlay.style.position = 'fixed';
-                                overlay.style.top = '0';
-                                overlay.style.left = '0';
-                                overlay.style.width = '100%';
-                                overlay.style.height = '100%';
-                                overlay.style.backgroundColor = 'rgba(0,0,0,0)';
-                                overlay.style.zIndex = '950';
-                                overlay.style.pointerEvents = 'auto';
-                                overlay.style.cursor = 'default';
-                                overlay.addEventListener('click', function(e) { e.stopPropagation();
-                                    closeShareMenu(); });
+                                overlay.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    closeShareMenu();
+                                });
                                 document.body.appendChild(overlay);
                             }
                             document.body.classList.add('no-scroll');
@@ -7304,8 +7990,10 @@
 
                     var activeTimeout;
                     window.addEventListener('scroll', function() {
-                        if (!activeTimeout) activeTimeout = setTimeout(function() { activeTimeout = null;
-                            setActiveSection(); }, 80);
+                        if (!activeTimeout) activeTimeout = setTimeout(function() {
+                            activeTimeout = null;
+                            setActiveSection();
+                        }, 80);
                     }, { passive: true });
                     setActiveSection();
                 }
