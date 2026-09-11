@@ -4211,6 +4211,11 @@
             margin-bottom: var(--space-3);
             color: var(--dark);
         }
+        .payment-modal-sub {
+            font-size: var(--font-sm);
+            color: #4a627a;
+            margin-bottom: var(--space-7);
+        }
         .payment-options {
             display: flex;
             flex-direction: column;
@@ -4527,31 +4532,6 @@
             z-index: 950;
             pointer-events: auto;
             cursor: default;
-        }
-
-        .fb-block-toast {
-            position: fixed;
-            left: 50%;
-            bottom: max(28px, env(safe-area-inset-bottom, 28px));
-            transform: translate(-50%, 18px);
-            background: rgba(15, 26, 43, 0.95);
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1.5;
-            padding: 14px 24px;
-            border-radius: var(--radius-pill);
-            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.28);
-            z-index: 20000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            max-width: calc(100% - 32px);
-            text-align: center;
-        }
-        .fb-block-toast.show {
-            opacity: 1;
-            transform: translate(-50%, 0);
         }
 
         @media (max-width: 1000px) {
@@ -6196,38 +6176,14 @@
                 return /FBAN|FBAV|FBIOS|FB_IAB|FB4A|FBMD/i.test(ua);
             }
 
-            var fbToastTimer = null;
-
-            function showFbBlockedToast() {
-                var toast = document.getElementById('fbBlockToast');
-                if (!toast) {
-                    toast = document.createElement('div');
-                    toast.id = 'fbBlockToast';
-                    toast.className = 'fb-block-toast';
-                    document.body.appendChild(toast);
-                }
-                var lang = 'en';
-                try {
-                    lang = localStorage.getItem('language') || 'en';
-                } catch (e) {
-                    lang = 'en';
-                }
-                toast.textContent = lang === 'es' ?
-                    'Los enlaces de Facebook no se pueden abrir dentro de la app de Facebook. Abre esta página en Safari o Chrome.' :
-                    'Facebook links can\u2019t open inside the Facebook app. Open this page in Safari or Chrome.';
-                toast.classList.add('show');
-                clearTimeout(fbToastTimer);
-                fbToastTimer = setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 3400);
-            }
-
             function openAppOrWeb(webUrl, appType, options) {
                 options = options || {};
                 var userAgent = navigator.userAgent.toLowerCase();
                 var isIOS = /iphone|ipad|ipod/.test(userAgent);
                 var isAndroid = /android/.test(userAgent);
                 var isFB = isFacebookInAppBrowser();
+
+                if (isFB && appType === 'facebook') return;
 
                 if (appType === 'email') {
                     window.location.href = webUrl;
@@ -6240,10 +6196,6 @@
                 }
 
                 if (isFB) {
-                    if (appType === 'facebook') {
-                        showFbBlockedToast();
-                        return;
-                    }
                     window.location.href = webUrl;
                     return;
                 }
@@ -6608,7 +6560,7 @@
                     var modalOverlay = document.createElement('div');
                     modalOverlay.className = 'payment-modal-overlay';
                     modalOverlay.innerHTML =
-                        '<div class="payment-modal-card"><button class="payment-modal-close">&times;</button><div class="payment-modal-title">Select payment</div><div class="payment-options"><button class="payment-option-btn venmo-opt"><i class="fab fa-vimeo-v"></i> Venmo</button><button class="payment-option-btn cashapp-opt"><i class="fas fa-dollar-sign"></i> Cash App</button></div></div>';
+                        '<div class="payment-modal-card"><button class="payment-modal-close">&times;</button><div class="payment-modal-title">Select payment</div><div class="payment-modal-sub"></div><div class="payment-options"><button class="payment-option-btn venmo-opt"><i class="fab fa-vimeo-v"></i> Venmo</button><button class="payment-option-btn cashapp-opt"><i class="fas fa-dollar-sign"></i> Cash App</button></div></div>';
                     document.body.appendChild(modalOverlay);
                     var closeBtn = modalOverlay.querySelector('.payment-modal-close');
                     var venmoBtn = modalOverlay.querySelector('.venmo-opt');
