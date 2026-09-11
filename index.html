@@ -6183,91 +6183,89 @@
                 var isAndroid = /android/.test(userAgent);
                 var isFB = isFacebookInAppBrowser();
 
+                if (appType === 'email') {
+                    window.location.href = webUrl;
+                    return;
+                }
+
+                if (appType === 'register') {
+                    window.open(webUrl, '_blank');
+                    return;
+                }
+
+                if (appType === 'facebook') {
+                    if (isFB) {
+                        window.location.href = webUrl;
+                    } else {
+                        var fbWin = window.open(webUrl, '_blank');
+                        if (!fbWin) window.location.href = webUrl;
+                    }
+                    return;
+                }
+
                 var schemeUrl = null;
                 var fallbackUrl = webUrl;
 
-                if (appType === 'facebook') {
-                    var fbUsername = options.fbUsername || null;
-                    var profileMatch = webUrl.match(/facebook\.com\/(?:share\/)?([^\/?]+)/);
-                    var urlUsername = profileMatch ? profileMatch[1] : null;
-                    var eventMatch = webUrl.match(/\/events\/(?:[^\/]+\/)?(?:[^\/]+\/)?(\d+)\/?/);
-                    if (!eventMatch) eventMatch = webUrl.match(/\/events\/(\d+)\/?/);
-                    if (!eventMatch) {
-                        var numMatch = webUrl.match(/\/(\d{10,})\/?$/);
-                        if (numMatch) eventMatch = ['', numMatch[1]];
-                    }
-                    if (eventMatch) {
-                        var eventId = eventMatch[1];
-                        if (isFB) { window.location.href = webUrl; return; }
-                        if (isAndroid) {
-                            schemeUrl = 'intent://facebook.com/events/' + eventId +
-                                '#Intent;scheme=https;package=com.facebook.katana;end';
-                        } else {
-                            schemeUrl = 'fb://event/' + eventId;
-                        }
-                        fallbackUrl = webUrl;
-                    } else {
-                        var username = fbUsername || urlUsername || 'rebecca_bachata';
-                        if (username === 'share' || !username) username = fbUsername || 'rebecca_bachata';
-                        if (isFB) { window.open(webUrl, '_blank'); return; }
-                        if (isAndroid) {
-                            schemeUrl = 'intent://facebook.com/' + username +
-                                '#Intent;scheme=https;package=com.facebook.katana;end';
-                        } else {
-                            schemeUrl = 'fb://profile/' + username;
-                        }
-                        fallbackUrl = webUrl;
-                    }
-                } else if (appType === 'instagram') {
+                if (appType === 'instagram') {
                     var igMatch = webUrl.match(/instagram\.com\/([^\/?]+)/);
                     var igUsername = igMatch ? igMatch[1].split('?')[0] : 'rebecca_bachata';
-                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isFB) {
+                        window.open(webUrl, '_blank');
+                        return;
+                    }
                     if (isAndroid) {
                         schemeUrl = 'intent://instagram.com/' + igUsername +
                             '#Intent;scheme=https;package=com.instagram.android;end';
                     } else {
                         schemeUrl = 'instagram://user?username=' + igUsername;
                     }
-                    fallbackUrl = webUrl;
                 } else if (appType === 'tiktok') {
                     var ttMatch = webUrl.match(/tiktok\.com\/@([^\/?]+)/);
                     var ttUsername = ttMatch ? ttMatch[1] : 'rebecca_bachata';
-                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isFB) {
+                        window.open(webUrl, '_blank');
+                        return;
+                    }
                     if (isAndroid) {
                         schemeUrl = 'intent://tiktok.com/@' + ttUsername +
                             '#Intent;scheme=https;package=com.zhiliaoapp.musically;end';
                     } else {
                         schemeUrl = 'tiktok://user?username=' + ttUsername;
                     }
-                    fallbackUrl = webUrl;
                 } else if (appType === 'venmo') {
                     var vMatch = webUrl.match(/\/u\/([^\/?]+)/);
                     var vHandle = vMatch ? vMatch[1] : 'Rebecca_Rose_Bachata';
-                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isFB) {
+                        window.open(webUrl, '_blank');
+                        return;
+                    }
                     if (isAndroid) {
                         schemeUrl = 'intent://venmo.com/' + vHandle +
                             '#Intent;scheme=https;package=com.venmo;end';
                     } else {
                         schemeUrl = 'venmo://pay?recipients=' + vHandle;
                     }
-                    fallbackUrl = webUrl;
                 } else if (appType === 'cashapp') {
                     var cMatch = webUrl.match(/\$([A-Za-z0-9]+)/);
                     var cTag = cMatch ? cMatch[1] : 'RebeccaRoseBachata';
-                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isFB) {
+                        window.open(webUrl, '_blank');
+                        return;
+                    }
                     if (isAndroid) {
                         schemeUrl = 'intent://cash.app/$' + cTag +
                             '#Intent;scheme=https;package=com.block.cashapp;end';
                     } else {
                         schemeUrl = 'cashapp://$' + cTag;
                     }
-                    fallbackUrl = webUrl;
                 } else if (appType === 'google-maps') {
-                    var mapsUrl = webUrl;
                     var coordMatch = webUrl.match(/@([-+]?\d+\.\d+),([-+]?\d+\.\d+)/);
                     var placeMatch = webUrl.match(/[?&]q=([^&]+)/);
                     var query = placeMatch ? decodeURIComponent(placeMatch[1]) : '';
-                    if (isFB) { window.open(webUrl, '_blank'); return; }
+                    if (isFB) {
+                        window.open(webUrl, '_blank');
+                        return;
+                    }
                     if (isAndroid) {
                         if (coordMatch) {
                             schemeUrl = 'geo:' + coordMatch[1] + ',' + coordMatch[2] + '?q=' + coordMatch[1] +
@@ -6275,7 +6273,7 @@
                         } else if (query) {
                             schemeUrl = 'geo:0,0?q=' + encodeURIComponent(query);
                         } else {
-                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(mapsUrl);
+                            schemeUrl = 'geo:0,0?q=' + encodeURIComponent(webUrl);
                         }
                     } else if (isIOS) {
                         if (coordMatch) {
@@ -6283,19 +6281,12 @@
                         } else if (query) {
                             schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(query);
                         } else {
-                            schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(mapsUrl);
+                            schemeUrl = 'comgooglemaps://?q=' + encodeURIComponent(webUrl);
                         }
-                        if (!schemeUrl) schemeUrl = 'maps://?q=' + encodeURIComponent(mapsUrl);
+                        if (!schemeUrl) schemeUrl = 'maps://?q=' + encodeURIComponent(webUrl);
                     } else {
-                        schemeUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(mapsUrl);
+                        schemeUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(webUrl);
                     }
-                    fallbackUrl = webUrl;
-                } else if (appType === 'email') {
-                    window.location.href = webUrl;
-                    return;
-                } else if (appType === 'register') {
-                    window.open(webUrl, '_blank');
-                    return;
                 }
 
                 if (isFB) {
@@ -6401,6 +6392,37 @@
             var locationModalOpen = false;
             var locationModalEl = null;
 
+            function fallbackCopy(text, btn) {
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    btn.classList.add('copied');
+                    var originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(function() {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = originalText;
+                    }, 2200);
+                } catch (err) {
+                    alert('Could not copy address. Please copy it manually.');
+                }
+                document.body.removeChild(textarea);
+            }
+
+            function closeLocationModal() {
+                if (locationModalEl && locationModalEl.parentNode) {
+                    locationModalEl.parentNode.removeChild(locationModalEl);
+                }
+                locationModalEl = null;
+                locationModalOpen = false;
+            }
+
             function openLocationModal(venueKey) {
                 if (locationModalOpen) return;
                 var data = locationData[venueKey];
@@ -6472,37 +6494,6 @@
                 });
             }
 
-            function fallbackCopy(text, btn) {
-                var textarea = document.createElement('textarea');
-                textarea.value = text;
-                textarea.style.position = 'fixed';
-                textarea.style.opacity = '0';
-                textarea.style.left = '-9999px';
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    btn.classList.add('copied');
-                    var originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    setTimeout(function() {
-                        btn.classList.remove('copied');
-                        btn.innerHTML = originalText;
-                    }, 2200);
-                } catch (err) {
-                    alert('Could not copy address. Please copy it manually.');
-                }
-                document.body.removeChild(textarea);
-            }
-
-            function closeLocationModal() {
-                if (locationModalEl && locationModalEl.parentNode) {
-                    locationModalEl.parentNode.removeChild(locationModalEl);
-                }
-                locationModalEl = null;
-                locationModalOpen = false;
-            }
-
             function initModernLocations() {
                 document.querySelectorAll('.location-app').forEach(function(app) {
                     var venue = app.dataset.venue;
@@ -6569,6 +6560,20 @@
                     }, 500);
                 }
 
+                function closePaymentModal() {
+                    var modal = document.querySelector('.payment-modal-overlay');
+                    if (modal) modal.remove();
+                    paymentModalOpen = false;
+                    window.paymentModalOpen = false;
+                }
+
+                function handlePaymentSelect(type) {
+                    var webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
+                    var appType = type === 'venmo' ? 'venmo' : 'cashapp';
+                    openAppOrWeb(webUrl, appType);
+                    fadeOutWelcomeArray();
+                }
+
                 function showPaymentModal() {
                     if (document.querySelector('.payment-modal-overlay')) return;
                     cancelAutoDismiss();
@@ -6594,20 +6599,6 @@
                             restartAutoDismiss();
                         }
                     });
-                }
-
-                function closePaymentModal() {
-                    var modal = document.querySelector('.payment-modal-overlay');
-                    if (modal) modal.remove();
-                    paymentModalOpen = false;
-                    window.paymentModalOpen = false;
-                }
-
-                function handlePaymentSelect(type) {
-                    var webUrl = type === 'venmo' ? VENMO_URL : CASHAPP_URL;
-                    var appType = type === 'venmo' ? 'venmo' : 'cashapp';
-                    openAppOrWeb(webUrl, appType);
-                    fadeOutWelcomeArray();
                 }
 
                 var logo = document.querySelector('.logo');
@@ -6810,13 +6801,13 @@
                         var name1 = parts1 ? parts1[2] : classPatterns[0].name;
                         var level1 = "beginner",
                             levelText1 = "Beginner";
-                        if (name1.includes("Bachata Advanced Beginner")) {
+                        if (name1.indexOf("Bachata Advanced Beginner") !== -1) {
                             level1 = "bachata-level";
                             levelText1 = "Bachata";
-                        } else if (name1.includes("Bachata Sensual")) {
+                        } else if (name1.indexOf("Bachata Sensual") !== -1) {
                             level1 = "sensual";
                             levelText1 = "Sensual";
-                        } else if (name1.includes("Guided Practice")) {
+                        } else if (name1.indexOf("Guided Practice") !== -1) {
                             level1 = "practice";
                             levelText1 = "Practice";
                         }
@@ -6832,13 +6823,13 @@
                         var name2 = parts2 ? parts2[2] : classPatterns[1].name;
                         var level2 = "practice",
                             levelText2 = "Practice";
-                        if (name2.includes("Bachata Advanced Beginner")) {
+                        if (name2.indexOf("Bachata Advanced Beginner") !== -1) {
                             level2 = "bachata-level";
                             levelText2 = "Bachata";
-                        } else if (name2.includes("Bachata Sensual")) {
+                        } else if (name2.indexOf("Bachata Sensual") !== -1) {
                             level2 = "sensual";
                             levelText2 = "Sensual";
-                        } else if (name2.includes("Guided Practice")) {
+                        } else if (name2.indexOf("Guided Practice") !== -1) {
                             level2 = "practice";
                             levelText2 = "Practice";
                         }
@@ -6854,13 +6845,13 @@
                         var name3 = parts3 ? parts3[2] : classPatterns[2].name;
                         var level3 = "sensual",
                             levelText3 = "Sensual";
-                        if (name3.includes("Bachata Sensual")) {
+                        if (name3.indexOf("Bachata Sensual") !== -1) {
                             level3 = "sensual";
                             levelText3 = "Sensual";
-                        } else if (name3.includes("Bachata Advanced Beginner")) {
+                        } else if (name3.indexOf("Bachata Advanced Beginner") !== -1) {
                             level3 = "bachata-level";
                             levelText3 = "Bachata";
-                        } else if (name3.includes("Guided Practice")) {
+                        } else if (name3.indexOf("Guided Practice") !== -1) {
                             level3 = "practice";
                             levelText3 = "Practice";
                         }
@@ -6949,7 +6940,7 @@
                     document.querySelectorAll('.link-card').forEach(function(card) {
                         var list = card.querySelector('.schedule-list');
                         if (!list) return;
-                        var groups = Array.from(list.querySelectorAll('.schedule-day-group'));
+                        var groups = Array.prototype.slice.call(list.querySelectorAll('.schedule-day-group'));
                         if (groups.length > 1) {
                             var todayIdx = groups.findIndex(function(g) { return g.dataset.day === curDayName; });
                             if (todayIdx > 0) {
@@ -6968,9 +6959,9 @@
                         if (!map[s.locationId] || daysUntil < map[s.locationId].daysUntil) map[s
                             .locationId] = { daysUntil: daysUntil, schedule: s };
                     });
-                    var sorted = Object.values(map).sort(function(a, b) { return a.daysUntil - b.daysUntil; });
+                    var sorted = Object.keys(map).map(function(k) { return map[k]; }).sort(function(a, b) { return a.daysUntil - b.daysUntil; });
                     var grid = document.getElementById('schedule-grid');
-                    var cards = Array.from(grid.children);
+                    var cards = Array.prototype.slice.call(grid.children);
                     var ordered = sorted.map(function(s) {
                         return cards.find(function(c) { return c.id === s.schedule.locationId; });
                     });
@@ -7013,7 +7004,7 @@
                 function sortEventPills() {
                     var container = document.getElementById('welcome-pills-container');
                     if (!container) return;
-                    var pills = Array.from(container.querySelectorAll('.welcome-cta-pill'));
+                    var pills = Array.prototype.slice.call(container.querySelectorAll('.welcome-cta-pill'));
                     if (pills.length === 0) return;
                     document.querySelectorAll('.up-next-badge').forEach(function(el) { el.remove(); });
                     document.querySelectorAll('.week-badge').forEach(function(el) { el.remove(); });
@@ -7720,7 +7711,7 @@
                         'https://docs.google.com/forms/d/e/1FAIpQLSfwp1kG_AurSpyYoopY9MN_gD8jHlIsO7agz9awbeGcCiMdqw/viewform';
                     regForm.addEventListener('submit', function(e) {
                         e.preventDefault();
-                        var names = Array.from(participantContainer.querySelectorAll('.form-input')).map(
+                        var names = Array.prototype.slice.call(participantContainer.querySelectorAll('.form-input')).map(
                             function(i) { return i.value.trim(); }).filter(function(v) { return v; });
                         if (names.length === 0) {
                             alert(currentLanguage === 'es' ? 'Por favor ingresa al menos un nombre' :
