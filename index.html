@@ -1132,6 +1132,92 @@
             }
         }
 
+        /* ── Halloween seasonal theme (auto-applied only around Halloween) ── */
+        .welcome-cta-pill.halloween-mode {
+            border: 2px solid #fb923c;
+            background: linear-gradient(145deg, #fffbf4, #fff0dd);
+            box-shadow: 0 0 32px rgba(251, 146, 60, 0.14), 0 4px 18px rgba(251, 146, 60, 0.06);
+            overflow: visible;
+        }
+        .welcome-cta-pill.halloween-mode::before {
+            content: '🎃';
+            position: absolute;
+            top: -16px;
+            left: 14px;
+            font-size: 1.7rem;
+            line-height: 1;
+            z-index: 7;
+            filter: drop-shadow(0 3px 6px rgba(251, 146, 60, 0.28));
+            animation: halloween-float 3.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .welcome-cta-pill.halloween-mode::after {
+            content: '👻';
+            position: absolute;
+            top: -14px;
+            left: 54px;
+            font-size: 1.45rem;
+            line-height: 1;
+            z-index: 7;
+            opacity: 0.9;
+            animation: halloween-float 3.8s ease-in-out infinite 0.5s;
+            pointer-events: none;
+        }
+        .welcome-cta-pill.halloween-mode:hover {
+            border-color: #f97316;
+            background: #fffdf8;
+            box-shadow: 0 0 44px rgba(251, 146, 60, 0.22), 0 16px 40px rgba(251, 146, 60, 0.10);
+        }
+        .welcome-cta-pill.halloween-mode .pill-badge {
+            background: linear-gradient(135deg, #fb923c, #ea580c);
+            border-color: rgba(255, 255, 255, 0.30);
+            box-shadow: 0 2px 12px rgba(249, 115, 22, 0.35);
+        }
+        .welcome-cta-pill.halloween-mode .pill-main .event-name {
+            color: #9a3412;
+        }
+        @keyframes halloween-float {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50% { transform: translateY(-5px) rotate(4deg); }
+        }
+
+        @media (max-width: 850px) {
+            .welcome-cta-pill.halloween-mode::before {
+                font-size: 1.45rem;
+                top: -14px;
+                left: 12px;
+            }
+            .welcome-cta-pill.halloween-mode::after {
+                font-size: 1.25rem;
+                top: -12px;
+                left: 48px;
+            }
+        }
+        @media (max-width: 650px) {
+            .welcome-cta-pill.halloween-mode::before {
+                font-size: 1.25rem;
+                top: -13px;
+                left: 10px;
+            }
+            .welcome-cta-pill.halloween-mode::after {
+                font-size: 1.05rem;
+                top: -11px;
+                left: 40px;
+            }
+        }
+        @media (max-width: 460px) {
+            .welcome-cta-pill.halloween-mode::before {
+                font-size: 1.05rem;
+                top: -11px;
+                left: 8px;
+            }
+            .welcome-cta-pill.halloween-mode::after {
+                font-size: 0.9rem;
+                top: -9px;
+                left: 32px;
+            }
+        }
+
         .header-container {
             text-align: center;
             margin-bottom: var(--space-7);
@@ -5823,19 +5909,12 @@
             <div class="community-moved-section section-animate">
                 <div class="subtle-pills-label">Classes &amp; Social Dancing</div>
 
-                <!-- ══════════════════════════════════════════════════════════════
-                     WEEKLY LINK UPDATE — EVENT PILLS
-                     Update the href of each pill below every week.
-                     To flag an event as happening THIS WEEK only (extra week),
-                     add the attribute:  data-force-this-week="true"
-                     and remove it once the event has passed.
-                     ══════════════════════════════════════════════════════════════ -->
                 <div class="welcome-pills" id="welcome-pills-container">
 
                     <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/1750568266205376/" class="welcome-cta-pill" data-app="facebook" data-event-key="ardmore">
                         <span class="pill-badge saturday">Saturday</span>
                         <span class="pill-main">
-                            <span class="event-name">Ardmore Salsa Night • Sat 2nd &amp; 4th</span>
+                            <span class="event-name">Ardmore Salsa Night • 4th Saturday</span>
                             <span class="event-time"><span class="free-red">FREE before 9</span> • 9:15PM Lesson • <span class="dancing-time">10PM Dancing</span></span>
                         </span>
                         <span class="pill-styles">
@@ -5861,10 +5940,10 @@
                         </span>
                     </a>
 
-                    <a href="https://facebook.com/events/s/salsa-at-sor-ynez/1414717844130369/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri" data-force-this-week="true">
+                    <a href="https://facebook.com/events/s/salsa-at-sor-ynez-halloween-pa/1749862766090634/" class="welcome-cta-pill" data-app="facebook" data-event-key="sorynez-fri" data-force-this-week="true">
                         <span class="pill-badge friday">Friday</span>
                         <span class="pill-main">
-                            <span class="event-name">Sor Ynéz • Fri 2nd &amp; 4th</span>
+                            <span class="event-name">Sor Ynéz Halloween Party • Friday</span>
                             <span class="event-time"><span class="free-purple">FREE</span> • 6PM Music • 6:30PM Lesson • <span class="dancing-time">7:30PM Dancing</span></span>
                         </span>
                         <span class="pill-styles">
@@ -5876,10 +5955,10 @@
                         </span>
                     </a>
 
-                    <a href="https://facebook.com/events/s/salsa-libre-at-cuba-libre-phil/1394696008827470/" class="welcome-cta-pill" data-app="facebook" data-event-key="cubalibre">
+                    <a href="https://facebook.com/events/s/halloween-at-salsa-libre-thurs/987275220289123/" class="welcome-cta-pill" data-app="facebook" data-event-key="cubalibre">
                         <span class="pill-badge thursdays">Thursday</span>
                         <span class="pill-main">
-                            <span class="event-name">Salsa Libre at Cuba Libre • Weekly</span>
+                            <span class="event-name">Halloween at Salsa Libre • Thursday</span>
                             <span class="event-time"><span class="free-orange">FREE</span> • 9PM Lesson • <span class="dancing-time">10PM Dancing</span></span>
                         </span>
                         <span class="pill-styles">
@@ -5891,7 +5970,7 @@
                     </a>
 
                     <a href="https://maps.app.goo.gl/uwPwiVG6yWNsMKUs6?g_st=ic" class="welcome-cta-pill" data-app="google-maps" data-event-key="bomba">
-                        <span class="pill-badge special-date">Sat Oct 17</span>
+                        <span class="pill-badge special-date">3rd Sat</span>
                         <span class="pill-main">
                             <span class="event-name">Sabor de Salsa at Bomba ¡Tacos + Tequila!</span>
                             <span class="event-time">8PM Music • 8:30PM Salsa Class • <span class="dancing-time">Dancing till Midnight</span></span>
@@ -5906,7 +5985,6 @@
                     </a>
 
                 </div>
-                <!-- ══════════════════ END WEEKLY LINK UPDATE — EVENT PILLS ══════════════════ -->
 
                 <p class="welcome-pills-subheading">No partner needed • All levels welcome</p>
                 <p class="welcome-pills-cta">Join our dance community today and learn to dance — no experience needed.</p>
@@ -5950,7 +6028,7 @@
                         </div>
                     </div>
 
-                    <div class="location-app" data-venue="ardmore" tabindex="0" role="button" aria-label="Ardmore, 2nd and 4th Saturday">
+                    <div class="location-app" data-venue="ardmore" tabindex="0" role="button" aria-label="Ardmore, 4th Saturday">
                         <div class="location-app-icon loc-icon-ardmore">
                             <span class="icon-bg-shine"></span>
                             <i class="fas fa-directions"></i>
@@ -5959,7 +6037,7 @@
                         <span class="location-app-name">Ardmore</span>
                         <div class="location-app-schedule">
                             <span class="location-app-days biweekly"><span class="badge-dot gold"></span>Saturday</span>
-                            <span class="location-week-note">2nd &amp; 4th of month</span>
+                            <span class="location-week-note">4th of month</span>
                         </div>
                     </div>
 
@@ -6189,15 +6267,11 @@
 
             <h2 class="section-title" style="margin-bottom: var(--space-6);">Our Next Social Events</h2>
 
-            <!-- ══════════════════════════════════════════════════════════════
-                 WEEKLY LINK UPDATE — EVENT CAROUSEL
-                 Update the href of each slide below every week.
-                 ══════════════════════════════════════════════════════════════ -->
             <div class="announcement-carousel section-animate" id="events-carousel">
                 <div class="carousel-slides" id="carousel-slides">
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Ardmore Salsa Nights – 2nd &amp; 4th Saturday</h3>
+                            <h3 class="event-title">Ardmore Salsa Nights – 4th Saturday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE before 9 · 9:15pm Lesson · 10:00pm Dancing until 1am</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/kRUnNDkQM7vBHhB89?g_st=ic" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Buena Vista Restaurant, Ardmore, PA</a></div>
                             <a href="https://facebook.com/events/s/salsa-on-the-main-line-saturda/1750568266205376/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
@@ -6215,25 +6289,25 @@
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Sor Ynéz – Salsa Summer • 2nd &amp; 4th Friday</h3>
-                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 7pm Lesson · 8pm Dancing</div>
+                            <h3 class="event-title">Sor Ynéz Halloween Party • Friday</h3>
+                            <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE Patio Party · 6pm Music · 6:30pm Lesson · 7:30pm Dancing</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/WmyiQ2YYhu2moYyQ9?g_st=ic" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Sor Ynéz, Philadelphia</a></div>
-                            <a href="https://facebook.com/events/s/salsa-at-sor-ynez/1414717844130369/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez/1414717844130369/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/salsa-at-sor-ynez-halloween-pa/1749862766090634/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-at-sor-ynez-halloween-pa/1749862766090634/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Salsa Libre at Cuba Libre – Thu Weekly</h3>
+                            <h3 class="event-title">Halloween at Salsa Libre – Thursday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> FREE · 9pm Lesson · 10pm Dancing</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/voTCqTyDaWUyYGsD7?g_st=ic" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> Cuba Libre, Old City, PA</a></div>
-                            <a href="https://facebook.com/events/s/salsa-libre-at-cuba-libre-phil/1394696008827470/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
-                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/salsa-libre-at-cuba-libre-phil/1394696008827470/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
+                            <a href="https://facebook.com/events/s/halloween-at-salsa-libre-thurs/987275220289123/" class="event-cta-primary" data-app="facebook">JOIN EVENT</a>
+                            <div class="event-footer-minimal"><a href="https://facebook.com/events/s/halloween-at-salsa-libre-thurs/987275220289123/" class="add-calendar" data-app="facebook"><i class="far fa-calendar-plus"></i> Add to Calendar</a><span><i class="fas fa-user-friends"></i> No partner needed</span></div>
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="modern-event-card">
-                            <h3 class="event-title">Sabor de Salsa at Bomba ¡Tacos + Tequila! – Sat Oct 17</h3>
+                            <h3 class="event-title">Sabor de Salsa at Bomba ¡Tacos + Tequila! – 3rd Saturday</h3>
                             <div class="event-datetime"><i class="far fa-calendar-alt"></i> 8pm Music · 8:30pm Salsa Class · Dancing until Midnight</div>
                             <div class="event-venue"><a href="https://maps.app.goo.gl/uwPwiVG6yWNsMKUs6?g_st=ic" target="_blank" rel="noopener" class="address-link" data-app="google-maps"><i class="fas fa-location-dot"></i> 30 Liberty Blvd, Malvern, PA 19355</a></div>
                             <a href="https://maps.app.goo.gl/uwPwiVG6yWNsMKUs6?g_st=ic" class="event-cta-primary" data-app="google-maps">VIEW LOCATION</a>
@@ -6251,7 +6325,6 @@
                     <span class="carousel-indicator" data-slide="4"></span>
                 </div>
             </div>
-            <!-- ══════════════════ END WEEKLY LINK UPDATE — EVENT CAROUSEL ══════════════════ -->
 
             <hr class="section-separator" id="separator-8">
 
@@ -7165,21 +7238,13 @@
                     var now = new Date();
                     now.setHours(0, 0, 0, 0);
 
-                    // ─────────────────────────────────────────────────────────
-                    // WEEKLY LINK UPDATE — EVENT ROTATION SETTINGS
-                    // key   = data-event-key on the event pill
-                    //   day     : weekday the event happens
-                    //   pattern : 'every' | '1st&3rd' | '2nd&4th' | 'once'
-                    // Pills with data-force-this-week="true" are pushed to their
-                    // next weekday and shown with the "this week" badge.
-                    // ─────────────────────────────────────────────────────────
                     function parseEventKey(key) {
                         var map = {
-                            'ardmore': { day: 'Sat', pattern: '2nd&4th', label: 'Ardmore Salsa Nights' },
+                            'ardmore': { day: 'Sat', pattern: '4th', label: 'Ardmore Salsa Nights' },
                             'sorines-wed': { day: 'Wed', pattern: '1st&3rd', label: 'Sor Ynéz' },
                             'sorynez-fri': { day: 'Fri', pattern: '2nd&4th', label: 'Sor Ynéz' },
                             'cubalibre': { day: 'Thu', pattern: 'every', label: 'Salsa Libre at Cuba Libre' },
-                            'bomba': { day: 'Sat', pattern: 'once', label: 'Sabor de Salsa at Bomba' }
+                            'bomba': { day: 'Sat', pattern: '3rd', label: 'Sabor de Salsa at Bomba' }
                         };
                         return map[key] || null;
                     }
@@ -7197,14 +7262,6 @@
                         var dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
                         var targetDay = dayMap[dayName];
                         if (targetDay === undefined) return null;
-
-                        if (weekPattern === 'once') {
-                            for (var y = now.getFullYear(); y < now.getFullYear() + 10; y++) {
-                                var d = new Date(y, 9, 17);
-                                if (d.getDay() === 6 && d >= now) return d;
-                            }
-                            return null;
-                        }
 
                         var weekNumbers = [];
                         if (weekPattern === 'every') weekNumbers = [1, 2, 3, 4, 5];
@@ -7521,6 +7578,24 @@
                     renderVideos('all');
                 }
 
+                function isHalloweenSeason() {
+                    var now = new Date();
+                    var y = now.getFullYear();
+                    var start = new Date(y, 9, 17, 0, 0, 0);
+                    var end = new Date(y, 10, 2, 0, 0, 0);
+                    return now >= start && now < end;
+                }
+
+                function applyHalloweenTheme() {
+                    var inSeason = isHalloweenSeason();
+                    var halloweenKeys = ['sorynez-fri', 'cubalibre'];
+                    document.querySelectorAll('.welcome-cta-pill').forEach(function(pill) {
+                        var key = pill.getAttribute('data-event-key');
+                        if (halloweenKeys.indexOf(key) === -1) return;
+                        pill.classList.toggle('halloween-mode', inSeason);
+                    });
+                }
+
                 function initMainPage() {
                     if (mainInitialized) return;
                     mainInitialized = true;
@@ -7530,6 +7605,7 @@
                     initModernLocations();
 
                     sortEventPills();
+                    applyHalloweenTheme();
                     updateCTASection();
                     updateScheduleDisplay();
                     updateMonthPromo();
